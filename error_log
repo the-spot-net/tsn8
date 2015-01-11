@@ -1,0 +1,2 @@
+[11-Jan-2015 22:36:38 UTC] PHP Warning:  require(./includes/startup.php): failed to open stream: No such file or directory in /home/neo/public_html/phorums/common.php on line 23
+[11-Jan-2015 22:36:38 UTC] PHP Fatal error:  require(): Failed opening required './includes/startup.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/neo/public_html/phorums/common.php on line 23
