@@ -1,0 +1,40 @@
+<!-- INCLUDE myspot_header.html -->
+<table class="tsn8_myspot_content_wrapper tsn8_width_100">
+	<tr>
+		<td class="tsn8_myspot_left_sidebar tsn8_width_25">
+			 IF S_USER_LOGGED_IN
+			<div id="divMiniProfile" class="tsn8_myspot_module_wrapper">
+				<p class="align_center">Loading Profile...<br/>
+					<img src="{T_THEME_PATH}/images/tsn8/ajax-loader.gif"/>
+				</p>
+			</div>
+			<input type="hidden" id="login_status" value="1"/>
+			 ELSE
+			<input type="hidden" id="login_status" value="0"/>
+			 ENDIF
+			<div id="divMiniForumIndex" class="tsn8_myspot_module_wrapper">
+				<p class="align_center">Loading Forums...<br/>
+					<img src="{T_THEME_PATH}/images/tsn8/ajax-loader.gif"/>
+				</p>
+			</div>
+		</td>
+		<td class="tsn8_myspot_center_content tsn8_width_60">
+			<div id="divSpecialReport" class="tsn8_myspot_module_wrapper">
+				<p class="align_center">Loading tsn Special Report...<br/>
+					<img src="{T_THEME_PATH}/images/tsn8/ajax-loader.gif"/>
+				</p>
+			</div>
+			<div id="divNewPosts" class="tsn8_myspot_module_wrapper">
+				<p class="align_center">Loading the new posts since your last visit...<br/>
+					<img src="{T_THEME_PATH}/images/tsn8/ajax-loader.gif"/>
+				</p>
+			</div>
+		</td>
+		<td class="tsn8_myspot_right_sidebar tsn8_width_15"> 
+			<div id="divForumStats" class="tsn8_myspot_module_wrapper">
+				 INCLUDE modules/stats.html
+			</div>
+		</td>
+	</tr>
+</table>
+<!-- INCLUDE myspot_footer.html -->

@@ -1,0 +1,21 @@
+table.tsn8_myspot_content_wrapper {
+}
+
+table.tsn8_myspot_content_wrapper td {
+	vertical-align: top;
+}
+
+td.tsn8_myspot_left_sidebar {
+}
+
+td.tsn8_myspot_center_content {
+}
+
+td.tsn8_myspot_right_sidebar {
+}
+
+div.tsn8_myspot_module_wrapper {
+	display: block;
+	position: relative;
+	vertical-align: top;
+}

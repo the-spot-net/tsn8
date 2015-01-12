@@ -12,18 +12,10 @@
 * @ignore
 */
 define('IN_PHPBB', true);
-/*$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
-$phpEx = substr(strrchr(__FILE__, '.'), 1);
-include_once($phpbb_root_path . 'common.' . $phpEx);
 
-// Start session management
-$user->session_begin();
-$auth->acl($user->data);
-$user->setup('search');
-*/
 // Define initial vars
 $mode			= request_var('mode', '');
-$search_id		= 'newposts';
+$search_id		= 'unreadposts';
 $start			= max(request_var('start', 0), 0);
 $post_id		= request_var('p', 0);
 $topic_id		= request_var('t', 0);

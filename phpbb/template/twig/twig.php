@@ -101,7 +101,8 @@ class twig extends \phpbb\template\base
 			$this->extension_manager,
 			$loader,
 			array(
-				'cache'			=> (defined('IN_INSTALL')) ? false : $this->cachepath,
+//				'cache'			=> (defined('IN_INSTALL')) ? false : $this->cachepath,
+				'cache'			=> false,
 				'debug'			=> defined('DEBUG'),
 				'auto_reload'	=> (bool) $this->config['load_tplcompile'],
 				'autoescape'	=> false,
