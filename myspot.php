@@ -15,7 +15,6 @@ include($phpbb_root_path . 'common.' . $phpEx);
 $user->session_begin();
 $auth->acl($user->data);
 $user->setup('viewforum');
-$user->add_lang('tsn/myspot');
 
 //module imports
 //include_once($phpbb_root_path . 'modules/newposts.php');

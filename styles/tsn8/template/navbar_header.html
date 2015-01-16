@@ -92,7 +92,8 @@
 	<ul id="nav-breadcrumbs" class="linklist navlinks" role="menubar">
 		<!-- DEFINE $MICRODATA = ' itemtype="http://data-vocabulary.org/Breadcrumb" itemscope=""' -->
 		<!-- EVENT overall_header_breadcrumbs_before -->
-		<li class="small-icon icon-home breadcrumbs">
+		<li class="small-icon tsn8_icon_tsn breadcrumbs"><span class="crumb"><a href="{BOARD_URL}myspot.php" data-navbar-reference="myspot">{L_MYSPOT}</a></span></li>
+		<li class="small-icon breadcrumbs">
 			<!-- IF U_SITE_HOME --><span class="crumb"><a href="{U_SITE_HOME}"{$MICRODATA} data-navbar-reference="home">{L_SITE_HOME}</a></span><!-- ENDIF -->
 			<!-- EVENT overall_header_breadcrumb_prepend -->
 			<span class="crumb"><a href="{U_INDEX}" accesskey="h"{$MICRODATA} data-navbar-reference="index">{L_INDEX}</a></span>
