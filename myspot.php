@@ -25,5 +25,7 @@ $user->setup('viewforum');
 // display the page
 page_header($user->lang['INDEX'], true);
 $template->set_filenames(array('body' => 'myspot.html'));
-//make_jumpbox(append_sid("{$phpbb_root_path}viewforum.$phpEx"));
+$template->assign_vars(array(
+	'S_ALLOW_NEW_POSTS' => !empty($config['tsn8_activate_newposts']),
+));
 page_footer();
