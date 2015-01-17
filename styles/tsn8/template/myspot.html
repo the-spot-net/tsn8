@@ -5,7 +5,7 @@
 			<!-- IF S_USER_LOGGED_IN -->
 				<!-- IF S_ALLOW_MYSPOT_LOGIN -->
 			<div id="divMiniProfile" class="tsn8_myspot_module_wrapper">
-				<p class="align_center">Loading Profile...<br/>
+				<p class="tsn8_module_placeholder align_center">Loading Profile...<br/>
 					<img src="{T_THEME_PATH}/images/tsn8/ajax-loader.gif"/>
 				</p>
 			</div>
@@ -16,21 +16,23 @@
 			<!-- ENDIF -->
 			<!-- IF S_ALLOW_MINI_FORUMS -->
 			<div id="divMiniForumIndex" class="tsn8_myspot_module_wrapper">
-				<p class="align_center">Loading Forums...<br/>
+				<p class="tsn8_module_placeholder align_center">Loading Forums...<br/>
 					<img src="{T_THEME_PATH}/images/tsn8/ajax-loader.gif"/>
 				</p>
 			</div>
 			<!-- ENDIF -->
 		</td>
 		<td class="tsn8_myspot_content_wrapper_column tsn8_myspot_center_content tsn8_width_60">
+			<!-- IF S_ALLOW_SPECIAL_REPORT -->
 			<div id="divSpecialReport" class="tsn8_myspot_module_wrapper">
-				<p class="align_center">Loading tsn Special Report...<br/>
+				<p class="tsn8_module_placeholder align_center">Loading tsn Special Report...<br/>
 					<img src="{T_THEME_PATH}/images/tsn8/ajax-loader.gif"/>
 				</p>
 			</div>
+			<!-- ENDIF -->
 			<!-- IF S_ALLOW_NEW_POSTS -->
 			<div id="divNewPosts" class="tsn8_myspot_module_wrapper">
-				<p class="align_center">Loading the new posts since your last visit...<br/>
+				<p class="tsn8_module_placeholder align_center">Loading the new posts since your last visit...<br/>
 					<img src="{T_THEME_PATH}/images/tsn8/ajax-loader.gif"/>
 				</p>
 			</div>

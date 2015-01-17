@@ -23,11 +23,12 @@ $user->setup('viewforum');
 //include_once($phpbb_root_path . 'modules/mini-index.php');
 
 // display the page
-page_header($user->lang['INDEX'], true);
+page_header($user->lang['MYSPOT'], true);
 $template->set_filenames(array('body' => 'myspot.html'));
 $template->assign_vars(array(
-	'S_ALLOW_NEW_POSTS' => !empty($config['tsn8_activate_newposts']),
 	'S_ALLOW_MYSPOT_LOGIN' => !empty($config['tsn8_activate_myspot_login']),
 	'S_ALLOW_MINI_FORUMS' => !empty($config['tsn8_activate_mini_forums']),
+	'S_ALLOW_SPECIAL_REPORT' => !empty($config['tsn8_activate_special_report']),
+	'S_ALLOW_NEW_POSTS' => !empty($config['tsn8_activate_newposts']),
 ));
 page_footer();

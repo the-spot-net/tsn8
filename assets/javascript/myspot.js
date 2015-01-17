@@ -22,6 +22,10 @@ $(document).ready(function () {
 	if($('#divMiniForumIndex')) {
 		ajax_fetch_html('tsn/myspot/modules/mini_forums.php?', 'divMiniForumIndex', false);
 	}
+	// Get tsnSpecialReport, if the container div was drawn (extension-based setting)
+	if($('#divSpecialReport')) {
+		ajax_fetch_html('tsn/myspot/modules/special_report.php?', 'divSpecialReport', false);
+	}
 
 	// Get new posts, if the conainer div was drawn (extension-based setting)
 	if($('#divNewPosts')) {

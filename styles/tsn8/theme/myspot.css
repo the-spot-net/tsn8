@@ -11,9 +11,20 @@
 }
 
 .tsn8_myspot_center_content {
+	min-width: 500px;
+	max-width: 100%;
 }
 
 .tsn8_myspot_right_sidebar {
+}
+
+.tsn8_module_placeholder {
+	background-color: #fff;
+	border-radius: 5px;
+	padding: 0.5em;
+	margin: 0.5em;
+	border: 1px solid #d7e3f6;
+
 }
 
 /***** BEGIN Mini Forums Content ******/
@@ -64,6 +75,29 @@
 .tsn8_mini_forum_list_item {
 	padding-left: 45px;
 	line-height: 35px;
+}
+/* END Mini Forums content */
+
+/* BEGIN Special Report Content */
+/* TODO Change these classes */
+.tsn8_myspot_module_avatar,
+.tsn8_module_avatar {
+	display: block;
+	text-align: center;
+	float: left;
+	margin: 0 5px;
+}
+
+.tsn8_avatar_right {
+	position: absolute;
+	right: 5px;
+}
+
+.tsn8_myspot_special_report_body {
+	color: #333;
+	line-height: 20px;
+	padding: 3px;
+	font-size: 1.1em;
 }
 
 /***** BEGIN New Posts Content ******/

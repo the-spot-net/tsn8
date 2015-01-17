@@ -106,9 +106,27 @@ body {
 	white-space: nowrap;
 }
 
+.tsn8_module_subheader {
+	font-size: 1.5em;
+	color: #587eaa;
+	margin-bottom: 5px;
+	padding: 3px;
+	display: block;
+	font-weight: bold;
+}
+
 /* TODO Change these classes */
-.tsn8_myspot_module_footer, span.tsn8_viewtopic_post_footer,
-.tsn8_module_footer, span.tsn8_post_footer {
+.tsn8_myspot_module_content, .tsn8_myspot_module_stats,
+.tsn8_module_content {
+	padding: 5px;
+	font-size: 0.85em;
+	color: #333;
+	text-align: left;
+}
+
+/* TODO Change these classes */
+.tsn8_myspot_module_footer, .tsn8_viewtopic_post_footer,
+.tsn8_module_footer, .tsn8_post_footer {
 	position: relative;
 	border-top: 1px solid #d7e3f6;
 	display: block;
@@ -482,6 +500,10 @@ body {
 .tsn8_width_66, .tsn8_width_75, .tsn8_width_100 {
 	margin-left: 1%;
 	margin-right: 1%;
+}
+
+.tsn8_pad_right_120 {
+	padding-right: 120px;
 }
 
 /* END Container Styles */
