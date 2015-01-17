@@ -1,19 +1,14 @@
 <?php
 /**
-*
-* @package phpBB3
-* @version $Id: index.php,v 1.176 2007/10/05 14:30:06 acydburn Exp $
-* @copyright (c) 2005 phpBB Group
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
-*/
+ * Created by thepizzy.net
+ * User: @neotsn
+ * Date: 1/16/2015
+ * Time: 10:45 PM
+ */
 
 /**
-*/
-
-/**
-* @ignore
-*/
+ * @ignore
+ */
 define('IN_PHPBB', true);
 $phpbb_root_path = '../'; //(defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
@@ -86,8 +81,8 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 		WHERE user_birthday LIKE '" . $db->sql_escape(sprintf('%2d-%2d-', $now['mday'], $now['mon'])) . "%'
 			AND user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ')';
 	$result = $db->sql_query($sql);
-	
-$phpbb_root_path = '../phorums/'; //(defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
+
+	$phpbb_root_path = '../phorums/'; //(defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 	
 	while ($row = $db->sql_fetchrow($result))
 	{

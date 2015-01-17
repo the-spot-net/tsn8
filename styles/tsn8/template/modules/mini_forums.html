@@ -1,0 +1,77 @@
+<!-- IF not S_USER_LOGGED_IN and not S_IS_BOT -->
+<div class="tsn8_module_container">
+	<span class="tsn8_module_header">{L_WELCOME_VISITOR}</span>
+
+	<div class="tsn8_myspot_module_content">
+		<form method="post" action="{S_LOGIN_ACTION}" class="headerspace">
+			<fieldset class="tsn8_myspot_login_fields">
+				<p>
+					<label for="username" class="tsn8_font_color_med">{L_USERNAME}{L_COLON}</label>
+					<br/>
+					<input type="text" name="username" id="username" size="10" class="inputbox" title="{L_USERNAME}"/>
+				</p>
+
+				<p>
+					<label for="password" class="tsn8_font_color_med">{L_PASSWORD}{L_COLON}</label>
+					<br/>
+					<input type="password" name="password" id="password" size="10" class="inputbox" title="{L_PASSWORD}"/>
+					<!-- IF S_AUTOLOGIN_ENABLED -->
+					<br/>
+					<label for="autologin">
+						<span class="tsn8_hint tsn8_font_color_med">{L_LOG_ME_IN}</span> <input type="checkbox" name="autologin" id="autologin"/>
+					</label>
+					<!-- ENDIF -->
+				</p>
+				<input type="submit" name="login" value="{L_LOGIN}" class="tsn8_button_large"/>
+				{S_MYSPOT_LOGIN_REDIRECT}
+
+			</fieldset>
+		</form>
+
+	</div>
+	<span class="tsn8_module_footer tsn8_font_color_med">
+		<!-- IF U_SEND_PASSWORD -->
+		<a href="{U_SEND_PASSWORD}" class="tsn8_font_color_med">{L_FORGOT_PASS}</a>
+		<!-- ENDIF -->
+	</span>
+</div>
+<!-- ENDIF -->
+
+<div class="tsn8_module_container">
+	<span class="tsn8_module_header">{L_TSNFORUMS}</span>
+	<ul class="tsn8_mini_forum_list">
+		<!-- BEGIN forumrow -->
+		<!-- IF forumrow.S_IS_CAT -->
+		<li class="tsn8_mini_forum_list_category">
+			<a href="{forumrow.U_VIEWFORUM}" class="tsn8_mini_forum_category_name">{forumrow.FORUM_NAME}</a>
+		</li>
+		<!-- ELSEIF forumrow.S_IS_LINK -->
+		<li class="tsn8_mini_forum_list_link">
+			<dl class="icon {forumrow.FORUM_IMG_STYLE}">
+				<dt title="{forumrow.FORUM_FOLDER_IMG_ALT}" class="tsn8_mini_forum_list_item">
+					<a href="{forumrow.U_VIEWFORUM}" class="tsn8_mini_forum_forum_name">{forumrow.FORUM_NAME}</a>
+				</dt>
+			</dl>
+		</li>
+		<!-- ELSE -->
+		<!-- IF forumrow.S_NO_CAT -->
+		<li class="tsn8_mini_forum_list_category">
+			{L_FORUMS}
+		</li>
+		<!-- ENDIF -->
+		<li class="tsn8_mini_forum_list_forum">
+			<dl class="icon {forumrow.FORUM_IMG_STYLE}">
+				<dt title="{forumrow.FORUM_FOLDER_IMG_ALT}" class="tsn8_mini_forum_list_item">
+					<a href="{forumrow.U_VIEWFORUM}" class="tsn8_mini_forum_forum_name">{forumrow.FORUM_NAME}</a>
+				</dt>
+			</dl>
+		</li>
+		<!-- ENDIF -->
+		<!-- BEGINELSE -->
+		<li class="tsn8_mini_forum_list_forum">
+			{L_NO_FORUMS}
+		</li>
+		<!-- END forumrow -->
+	</ul>
+	<!--<span class="tsn8_module_footer tsn8_font_color_med">&nbsp;</span>-->
+</div>

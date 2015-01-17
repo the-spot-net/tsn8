@@ -18,6 +18,11 @@ $(document).ready(function () {
 	//// Get forum index
 	//ajax_fetch_html('module_mini_index.php?', 'divMiniForumIndex', false);
 
+	// Get mini forums, if the container div was drawn (extension-based setting)
+	if($('#divMiniForumIndex')) {
+		ajax_fetch_html('tsn/myspot/modules/mini_forums.php?', 'divMiniForumIndex', false);
+	}
+
 	// Get new posts, if the conainer div was drawn (extension-based setting)
 	if($('#divNewPosts')) {
 		ajax_fetch_html('tsn/myspot/modules/new_posts.php?', 'divNewPosts', true);
@@ -27,7 +32,7 @@ $(document).ready(function () {
 
 function ajax_fetch_html(url, elementid, refresh) {
 	$.ajax({
-		url: url + "sid=" +Math.random()
+		url: url // + "sid=" +Math.random()
 	}).done(function (data) {
 		$('#' + elementid).html(data);
 		if (refresh) {
