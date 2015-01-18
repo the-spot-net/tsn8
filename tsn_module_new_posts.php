@@ -1,6 +1,6 @@
 <?php
 /********************************************************************
- *    tsn/myspot/modules/new_posts.php
+ *    tsn/myspot/modules/tsn_module_new_posts.php
  *    By: Chris Chiles
  *    Date: 1/11/15
  *    Version: 8.00
@@ -11,7 +11,7 @@
  * @ignore
  */
 define('IN_PHPBB', true);
-$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : '../../../';
+$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 
@@ -649,10 +649,5 @@ if ($keywords || $author || $author_id || $search_id || $submit) {
 
 // Output the basic, empty page
 page_header($user->lang['MYSPOT']);
-//
-//$template->set_filenames(array(
-//        'body' => 'search_body.html')
-//);
-//make_jumpbox(append_sid("{$phpbb_root_path}viewforum.$phpEx"));
-//
+
 page_footer();

@@ -4193,13 +4193,15 @@ function obtain_users_online_string($online_users, $item_id = 0, $item = 'forum'
 {
 	global $config, $db, $user, $auth;
 
-	$user_online_link = $online_userlist = '';
+	// tsn8: add [[ $online_avatarlist = ]]
+	$online_userlist = $online_avatarlist = '';
 	// Need caps version of $item for language-strings
 	$item_caps = strtoupper($item);
 
 	if (sizeof($online_users['online_users']))
 	{
-		$sql = 'SELECT username, username_clean, user_id, user_type, user_allow_viewonline, user_colour
+		// tsn8: add [[ , user_avatar, user_avatar_type, user_avatar_width, user_avatar_height ]]
+		$sql = 'SELECT username, username_clean, user_id, user_type, user_allow_viewonline, user_colour, user_avatar, user_avatar_type, user_avatar_width, user_avatar_height
 				FROM ' . USERS_TABLE . '
 				WHERE ' . $db->sql_in_set('user_id', $online_users['online_users']) . '
 				ORDER BY username_clean ASC';
@@ -4219,6 +4221,13 @@ function obtain_users_online_string($online_users, $item_id = 0, $item = 'forum'
 				{
 					$user_online_link = get_username_string(($row['user_type'] <> USER_IGNORE) ? 'full' : 'no_profile', $row['user_id'], $row['username'], $row['user_colour']);
 					$online_userlist .= ($online_userlist != '') ? ', ' . $user_online_link : $user_online_link;
+					// tsn8: add [[ BEGIN ]]
+
+					$row['user_avatar_width'] = ($row['user_avatar_width'] >= 20) ? $row['user_avatar_width'] * 0.20 : $row['user_avatar_width'];
+					$row['user_avatar_height'] = ($row['user_avatar_height'] >= 20) ? $row['user_avatar_height'] * 0.20 : $row['user_avatar_height'];
+					$online_avatarlist .= phpbb_get_user_avatar($row);
+
+					// tsn8: add [[ END ]]
 				}
 			}
 		}
@@ -4259,6 +4268,8 @@ function obtain_users_online_string($online_users, $item_id = 0, $item = 'forum'
 	return array(
 		'online_userlist'	=> $online_userlist,
 		'l_online_users'	=> $l_online_users,
+		// tsn8: add [[ 'online_avatarlist' => $online_avatarlist, ]]
+		'online_avatarlist' => $online_avatarlist,
 	);
 }
 
@@ -4832,7 +4843,8 @@ function page_header($page_title = '', $display_online_list = false, $item_id = 
 	$s_last_visit = ($user->data['user_id'] != ANONYMOUS) ? $user->format_date($user->data['session_last_visit']) : '';
 
 	// Get users online list ... if required
-	$l_online_users = $online_userlist = $l_online_record = $l_online_time = '';
+	// tsn8: add [[ $online_avatarlist = $l_myspot_online_record = ]]
+	$l_online_users = $online_userlist = $l_online_record = $l_online_time = $online_avatarlist = $l_myspot_online_record ='';
 
 	if ($config['load_online'] && $config['load_online_time'] && $display_online_list)
 	{
@@ -4847,6 +4859,8 @@ function page_header($page_title = '', $display_online_list = false, $item_id = 
 
 		$l_online_users = $user_online_strings['l_online_users'];
 		$online_userlist = $user_online_strings['online_userlist'];
+		//tsn8: add [[ $online_avatarlist = $user_online_strings['online_avatarlist']; ]]
+		$online_avatarlist = $user_online_strings['online_avatarlist'];
 		$total_online_users = $online_users['total_online'];
 
 		if ($total_online_users > $config['record_online_users'])
@@ -4856,6 +4870,9 @@ function page_header($page_title = '', $display_online_list = false, $item_id = 
 		}
 
 		$l_online_record = $user->lang('RECORD_ONLINE_USERS', (int) $config['record_online_users'], $user->format_date($config['record_online_date'], false, true));
+		// tsn8: add [[ BEGIN ]]
+		$l_myspot_online_record = $user->lang('MYSPOT_RECORD_ONLINE_USERS', (int) $config['record_online_users'], $user->format_date($config['record_online_date'], false, true));
+		// tsn8: add [[ END ]]
 
 		$l_online_time = $user->lang('VIEW_ONLINE_TIMES', (int) $config['load_online_time']);
 	}
@@ -4972,7 +4989,11 @@ function page_header($page_title = '', $display_online_list = false, $item_id = 
 		'CURRENT_TIME'					=> sprintf($user->lang['CURRENT_TIME'], $user->format_date(time(), false, true)),
 		'TOTAL_USERS_ONLINE'			=> $l_online_users,
 		'LOGGED_IN_USER_LIST'			=> $online_userlist,
+		// tsn8: add [[ 'LOGGED_IN_AVATAR_LIST' => $online_avatarlist, ]]
+		'LOGGED_IN_AVATAR_LIST'         => $online_avatarlist,
 		'RECORD_USERS'					=> $l_online_record,
+		// tsn8: add [[ 'SHORT_RECORD_USERS' => $l_myspot_online_record, ]]
+		'SHORT_RECORD_USERS'            => $l_myspot_online_record,
 
 		'PRIVATE_MESSAGE_COUNT'			=> (!empty($user->data['user_unread_privmsg'])) ? $user->data['user_unread_privmsg'] : 0,
 		'CURRENT_USER_AVATAR'			=> phpbb_get_user_avatar($user->data),

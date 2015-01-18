@@ -12,11 +12,10 @@ header("Cache-Control: no-cache, must-revalidate");
 header("Pragma: no-cache");
 
 define('IN_PHPBB', true);
-$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : '../../../';
+$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
-//$phpbb_root_path = './phorums/';
 
 $user->session_begin();
 $auth->acl($user->data);
@@ -110,8 +109,6 @@ if (sizeof($used_words) > $allowed_words) {
 }
 $message = $excerpt;
 
-$phpbb_root_path = './';
-
 $template->assign_vars(array(
 	'I_AVATAR_IMG'       => $avatar_image,
 
@@ -119,7 +116,7 @@ $template->assign_vars(array(
 	'L_POST_AUTHOR'      => get_username_string('full', $news_info['topic_poster'], $news_info['username'], $news_info['user_colour']),
 	'L_POST_BODY'        => $message,
 	'L_POST_DATE'        => $user->format_date($news_info['topic_time']),
-	'L_POST_META'        => sprintf($user->lang['SPECIAL_REPORT_VIEWS_COMMENTS_COUNT'], $news_info['topic_views'], $news_info['topic_posts_approved']),
+	'L_POST_META'        => sprintf($user->lang['SPECIAL_REPORT_VIEWS_COMMENTS_COUNT'], $news_info['topic_views'], (int)$news_info['topic_posts_approved']-1),
 
 	'U_CONTINUE_READING' => append_sid("{$phpbb_root_path}viewtopic.$phpEx", "p=" . $news_info['post_id']),
 	'U_HEADLINE'         => append_sid("{$phpbb_root_path}viewtopic.$phpEx", "p=" . $news_info['post_id']),

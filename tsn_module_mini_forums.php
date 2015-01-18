@@ -10,61 +10,17 @@
  * @ignore
  */
 define('IN_PHPBB', true);
-$phpbb_root_path = '../../../'; //(defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
-//$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
-$phpEx = substr(strrchr(__FILE__, '.'), 1);
-include($phpbb_root_path . 'common.' . $phpEx);
-include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
-
-try {
+$phpEx = substr(strrchr(__FILE__, '.'), 1);
+include_once($phpbb_root_path . 'common.' . $phpEx);
+include_once($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 
 // Start session management
-	$user->session_begin();
-	$auth->acl($user->data);
-	$user->setup('viewforum');
-} catch (Exception $e) {
-	ob_clean();
-	echo $e->getMessage();
-	exit;
-}
+$user->session_begin();
+$auth->acl($user->data);
+$user->setup('viewforum');
 
-// Mark notifications read
-//if (($mark_notification = $request->variable('mark_notification', 0))) {
-//	if ($user->data['user_id'] == ANONYMOUS) {
-//		if ($request->is_ajax()) {
-//			trigger_error('LOGIN_REQUIRED');
-//		}
-//		login_box('', $user->lang['LOGIN_REQUIRED']);
-//	}
-//
-//	if (check_link_hash($request->variable('hash', ''), 'mark_notification_read')) {
-//		$phpbb_notifications = $phpbb_container->get('notification_manager');
-//
-//		$notification = $phpbb_notifications->load_notifications(array(
-//			'notification_id' => $mark_notification,
-//		));
-//
-//		if (isset($notification['notifications'][$mark_notification])) {
-//			$notification = $notification['notifications'][$mark_notification];
-//
-//			$notification->mark_read();
-//
-//			if ($request->is_ajax()) {
-//				$json_response = new \phpbb\json_response();
-//				$json_response->send(array(
-//					'success' => true,
-//				));
-//			}
-//
-//			if (($redirect = $request->variable('redirect', ''))) {
-//				redirect(append_sid($phpbb_root_path . $redirect));
-//			}
-//
-//			redirect($notification->get_redirect_url());
-//		}
-//	}
-//}
+$showOutput = request_var('s', 0);
 
 display_forums('', $config['load_moderators']);
 
@@ -126,8 +82,6 @@ if ($config['load_birthdays'] && $config['allow_birthdays'] && $auth->acl_gets('
 			AND u.user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ')';
 	$result = $db->sql_query($sql);
 
-	$phpbb_root_path = '../../../phorums/'; //(defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
-
 	while ($row = $db->sql_fetchrow($result)) {
 		$birthday_username = get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']);
 		$birthday_year = (int)substr($row['user_birthday'], -4);
@@ -146,11 +100,22 @@ if ($config['load_birthdays'] && $config['allow_birthdays'] && $auth->acl_gets('
 	$db->sql_freeresult($result);
 }
 
+$online_users = obtain_users_online();
+
 // Assign index specific vars
 $template->assign_vars(array(
 		'TOTAL_POSTS'             => $user->lang('TOTAL_POSTS_COUNT', (int)$config['num_posts']),
+		'TOTAL_FORUM_POSTS'       => (int)$config['num_posts'],
 		'TOTAL_TOPICS'            => $user->lang('TOTAL_TOPICS', (int)$config['num_topics']),
+		'TOTAL_FORUM_TOPICS'      => (int)$config['num_topics'],
 		'TOTAL_USERS'             => $user->lang('TOTAL_USERS', (int)$config['num_users']),
+		'TOTAL_FORUM_USERS'       => (int)$config['num_users'],
+
+		'TOTAL_USERS_VALUE'       => $online_users['total_online'],
+		'VISIBLE_USERS_VALUE'     => $online_users['visible_online'],
+		'HIDDEN_USERS_VALUE'      => $online_users['hidden_online'],
+		'GUEST_USERS_VALUE'       => $online_users['guests_online'],
+
 		'NEWEST_USER'             => $user->lang('NEWEST_USER', get_username_string('full', $config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'])),
 
 		'LEGEND'                  => $legend,
@@ -165,7 +130,7 @@ $template->assign_vars(array(
 		'U_SEND_PASSWORD'         => ($config['email_enable']) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=sendpassword') : '',
 		'S_DISPLAY_BIRTHDAY_LIST' => ($config['load_birthdays']) ? true : false,
 		'S_INDEX'                 => true,
-		'S_MYSPOT_LOGIN_REDIRECT' => '<input type="hidden" name="redirect" value="'.append_sid('./myspot.'.$phpEx, '', true, $user->session_id).'">',
+		'S_MYSPOT_LOGIN_REDIRECT' => '<input type="hidden" name="redirect" value="' . append_sid('./myspot.' . $phpEx, '', true, $user->session_id) . '">',
 
 		'U_MARK_FORUMS'           => ($user->data['is_registered'] || $config['load_anon_lastread']) ? append_sid("{$phpbb_root_path}index.$phpEx", 'hash=' . generate_link_hash('global') . '&amp;mark=forums&amp;mark_time=' . time()) : '',
 		'U_MCP'                   => ($auth->acl_get('m_') || $auth->acl_getf_global('m_')) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=main&amp;mode=front', true, $user->session_id) : ''
@@ -185,11 +150,13 @@ $vars = array('page_title');
 extract($phpbb_dispatcher->trigger_event('core.index_modify_page_title', compact($vars)));
 
 // Output page
-page_header($page_title, true);
+if ($showOutput) {
+	page_header($page_title, true);
 
-$template->set_filenames(array(
-		'body' => 'modules/mini_forums.html'
-	)
-);
+	$template->set_filenames(array(
+			'body' => 'modules/mini_forums.html'
+		)
+	);
 
-page_footer();
+	page_footer();
+}

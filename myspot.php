@@ -9,7 +9,7 @@
 define('IN_PHPBB', true);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
-include($phpbb_root_path . 'common.' . $phpEx);
+include_once($phpbb_root_path . 'common.' . $phpEx);
 
 // Start session management
 $user->session_begin();
@@ -20,15 +20,17 @@ $user->setup('viewforum');
 //include_once($phpbb_root_path . 'modules/newposts.php');
 //include_once(append_sid($phpbb_root_path . 'tsn/myspot/modules/new_posts.'.$phpEx));
 //include_once($phpbb_root_path . 'module_quickquips.php');
-//include_once($phpbb_root_path . 'modules/mini-index.php');
+include_once($phpbb_root_path . 'tsn_module_mini_forums.php');
 
 // display the page
 page_header($user->lang['MYSPOT'], true);
 $template->set_filenames(array('body' => 'myspot.html'));
 $template->assign_vars(array(
+	'S_ALLOW_MINI_PROFILE' => !empty($config['tsn8_activate_mini_profile']),
 	'S_ALLOW_MYSPOT_LOGIN' => !empty($config['tsn8_activate_myspot_login']),
 	'S_ALLOW_MINI_FORUMS' => !empty($config['tsn8_activate_mini_forums']),
 	'S_ALLOW_SPECIAL_REPORT' => !empty($config['tsn8_activate_special_report']),
 	'S_ALLOW_NEW_POSTS' => !empty($config['tsn8_activate_newposts']),
+	'S_USER_ID' => $user->data['user_id'],
 ));
 page_footer();

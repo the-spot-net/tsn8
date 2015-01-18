@@ -1,41 +1,41 @@
-<div class="tsn8_myspot_mini_profile_wrapper tsn8_myspot_wrapper">
-	<span class="tsn8_myspot_module_header">Hi there, {USERNAME}!</span>
+<div class="tsn8_module_container">
+	<span class="tsn8_module_header">Hi there, {USERNAME}!</span>
 	<!-- IF S_USER_INACTIVE -->
 	<span class="tsn8_error_message"><b>{L_USER_IS_INACTIVE}</b><br/>{L_INACTIVE_REASON}: {USER_INACTIVE_REASON}</span>
 	<!-- ENDIF -->
-	<div class="tsn8_myspot_module_content">
+	<div class="tsn8_module_content">
 		<!-- IF AVATAR_IMG -->
-		<span class="tsn8_myspot_module_avatar">
+		<span class="tsn8_module_avatar">
 			{AVATAR_IMG}
 			<!-- IF RANK_TITLE --><br/>{RANK_TITLE}<!-- ENDIF -->
 		</span>
 		<!-- ENDIF -->
-		<span class="tsn8_myspot_profile_info">
+		<span class="tsn8_myspot_profile_info tsn8_font_color_dark align_center">
 			<span class="tsn8_myspot_profile_label">{L_JOINED}</span><br/>
 			<span class="tsn8_myspot_profile_date">{JOINED}</span><br/><br/>
 			<span class="tsn8_myspot_profile_label">{L_VISITED}</span><br/>
-			<span class="tsn8_myspot_profile_date">{VISITED}</span><br/><br/>
+			<span class="tsn8_myspot_profile_date">{LAST_ACTIVE}</span><br/><br/>
 		</span>
 
-		<div class="tsn8_myspot_stat_wrapper">
-			<span class="tsn8_myspot_stat">
-				<span class="tsn8_myspot_stat_value">{POSTS}</span>
-				<span class="tsn8_myspot_stat_header">{L_TOTAL_POSTS}</span>
+		<div class="tsn8_stat_wrapper">
+			<span class="tsn8_stat">
+				<span class="tsn8_stat_value">{POSTS}</span>
+				<span class="tsn8_stat_label">{L_TOTAL_POSTS}</span>
 			</span>
 			<!-- IF POSTS_PCT -->
-			<span class="tsn8_myspot_stat">
-				<span class="tsn8_myspot_stat_value">{POSTS_PCT}</span>
-				<span class="tsn8_myspot_stat_header">Of Total</span>
+			<span class="tsn8_stat">
+				<span class="tsn8_stat_value">{POSTS_PCT_NUM}</span>
+				<span class="tsn8_stat_label">Of Total</span>
 			</span>
-			<span class="tsn8_myspot_stat">
-				<span class="tsn8_myspot_stat_value">{POSTS_DAY}</span>
-				<span class="tsn8_myspot_stat_header">Posts/Day</span>
+			<span class="tsn8_stat">
+				<span class="tsn8_stat_value">{POSTS_DAY_NUM}</span>
+				<span class="tsn8_stat_label">Posts/Day</span>
 			</span>
 			<!-- ENDIF -->
 			<span class="stretch"></span>
 		</div>
 	</div>
-	<span class="tsn8_myspot_module_footer">
+	<span class="tsn8_module_footer">
 		<!-- IF U_NOTES or U_WARN -->
 		{L_WARNINGS}: <b>{WARNINGS}</b> :: [ <a href="{U_NOTES}">{L_VIEW_NOTES}</a> ]
 		<!-- IF U_USER_ADMIN --><br/><!-- ENDIF -->

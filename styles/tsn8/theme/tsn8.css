@@ -119,7 +119,7 @@ body {
 .tsn8_myspot_module_content, .tsn8_myspot_module_stats,
 .tsn8_module_content {
 	padding: 5px;
-	font-size: 0.85em;
+	font-size: 1em;
 	color: #333;
 	text-align: left;
 }
@@ -136,6 +136,43 @@ body {
 }
 
 /***** END Page Content Structure ******/
+
+/* BEGIN Feature Content Structure */
+/* TODO Change these classes */
+.tsn8_myspot_stat,
+.tsn8_stat {
+	display: inline-block;
+	*display: inline;
+	zoom: 1;
+
+	min-width: 65px;
+	border: 1px solid #d7e3f6;
+	padding: 3px;
+	margin: 3px;
+	border-radius: 3px;
+}
+
+/* TODO Change these classes */
+.tsn8_myspot_stat_value,
+.tsn8_stat_value {
+	display: block;
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #333;
+	text-align: center;
+	padding: 5px 0;
+}
+
+/* TODO Change these classes */
+.tsn8_myspot_stat_header, .tsn8_topic_stat_header,
+.tsn8_stat_label {
+	display: block;
+	font-size: 0.9em;
+	color: #666;
+	text-align: center;
+}
+
+/* END Feature Content Structure */
 
 /***** BEGIN Icons *****/
 .tsn8_icon_joined {
@@ -439,6 +476,11 @@ body {
 	border-radius: 15px;
 }
 
+.tsn8_overflow_height_700 {
+	max-height: 700px;
+	overflow-y: auto;
+}
+
 .tsn8_border_light {
 	border-color: #d7e3f6;
 }
@@ -513,12 +555,25 @@ body {
 	font-size: 0.85em;
 }
 
+.tsn8_error_message {
+	border-radius: 5px;
+	background-color: lightcoral;
+	color: darkred;
+	border: 1px solid darkred;
+	padding: 3px;
+	display: block;
+	max-width: 200px;
+	margin: 5px auto;
+}
+
 .tsn8_font_color_light {
 	color: #d7e3f6;
 }
+
 .tsn8_font_color_med {
 	color: #587eaa;
 }
+
 .tsn8_font_color_dark {
 	color: #003366;
 }
@@ -547,4 +602,11 @@ body {
 .tsn8_button_large:hover {
 	background-color: #587eaa;
 	color: #d7e3f6;
+}
+
+hr.divider {
+	width: 75%;
+	margin: 3px auto;
+	color: #d7e3f6;
+	display: block;
 }
