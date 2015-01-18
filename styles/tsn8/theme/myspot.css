@@ -35,13 +35,13 @@
 	height: 125px;
 	vertical-align: middle;
 }
+
 /* END Mini Profile Content */
 
-/***** BEGIN Mini Forums Content ******/
+/* BEGIN Mini Forums Content */
 .tsn8_myspot_login_fields {
 	font-size: 1em;
 	color: #333;
-	text-align: center;
 	display: block;
 	vertical-align: middle;
 }
@@ -53,8 +53,7 @@
 
 .tsn8_mini_forum_list_category,
 .tsn8_mini_forum_list_link,
-.tsn8_mini_forum_list_forum
-{
+.tsn8_mini_forum_list_forum {
 	background: no-repeat 0 2px;
 	background-size: 36px 20px;
 	list-style: none;
@@ -86,14 +85,12 @@
 	padding-left: 45px;
 	line-height: 35px;
 }
+
 /* END Mini Forums content */
 
 /* BEGIN Special Report Content */
-/* TODO Change these classes */
-.tsn8_myspot_module_avatar,
 .tsn8_module_avatar {
 	display: block;
-	text-align: center;
 	float: left;
 	margin: 0 5px;
 }
@@ -110,13 +107,13 @@
 	font-size: 1.1em;
 }
 
-/***** BEGIN New Posts Content ******/
+/* END Special Report Content */
+
+/* BEGIN New Posts Content */
 .tsn8_myspot_mini_newposts_wrapper {
 
 }
 
-/* TODO Change these classes */
-.tsn8_myspot_stat_wrapper, .tsn8_myspot_newest_posts_cards_wrapper,
 .tsn8_stat_wrapper {
 	text-align: justify;
 	-ms-text-justify: distribute-all-lines;
@@ -134,16 +131,9 @@
 	margin: 3px 5px;
 }
 
-.tsn8_myspot_module_avatar {
-	display: block;
-	text-align: center;
-	float: left;
-	margin: 0 5px;
-}
-
 .tsn8_myspot_newest_post_title {
 	display: block;
-	padding: 3px; /* 125px 3px 3px;*/
+	padding: 3px;
 	font-size: 1em;
 	text-align: left;
 }
@@ -184,15 +174,18 @@
 .tsn8_myspot_online_user_avatars {
 	display: block;
 }
+
 .tsn8_myspot_userstatus_stats_record {
 	display: block;
 	padding: 3px 5px;
 	margin: 0 auto;
 }
+
 .tsn8_myspot_userstatus_stats_list {
 	list-style: none;
 	margin-left: 0;
 }
+
 .tsn8_myspot_userstatus_stats_item {
 	line-height: 20px;
 	text-align: right;
@@ -211,4 +204,5 @@
 	padding: 3px 5px;
 	margin: 0 auto;
 }
+
 /* END Stats Content */

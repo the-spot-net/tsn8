@@ -4,7 +4,7 @@ body {
 	margin: 0;
 }
 
-/***** BEGIN Header ******/
+/* BEGIN Header */
 .tsn8_page_wrapper {
 	position: relative;
 	display: block;
@@ -47,7 +47,7 @@ body {
 	padding: 5px;
 }
 
-/***** END Header ******/
+/* END Header */
 
 /* BEGIN Footer */
 .tsn8_footer_wrapper {
@@ -67,18 +67,14 @@ body {
 	text-align: center;
 }
 
-/***** BEGIN Page Content Structure *****/
+/* BEGIN Page Content Structure */
 
-/* TODO Change these classes */
-.tsn8_myspot_module_wrapper,
 .tsn8_module {
 	display: block;
 	position: relative;
 	vertical-align: top;
 }
 
-/* TODO Change these classes */
-.tsn8_myspot_wrapper, .tsn8_myspot_wrapper_med,
 .tsn8_module_container, .tsn8_module_container_med {
 	border-radius: 3px;
 	box-shadow: 0 1px 2px #ccc;
@@ -88,14 +84,10 @@ body {
 	margin: 5px 5px 10px;
 }
 
-/* TODO Change these classes */
-.tsn8_myspot_wrapper_med,
 .tsn8_module_container_med {
 	border: 1px solid #587eaa;
 }
 
-/* TODO Change these classes */
-.tsn8_myspot_module_header,
 .tsn8_module_header {
 	display: block;
 	font-size: 1.5em;
@@ -115,8 +107,6 @@ body {
 	font-weight: bold;
 }
 
-/* TODO Change these classes */
-.tsn8_myspot_module_content, .tsn8_myspot_module_stats,
 .tsn8_module_content {
 	padding: 5px;
 	font-size: 1em;
@@ -125,7 +115,7 @@ body {
 }
 
 /* TODO Change these classes */
-.tsn8_myspot_module_footer, .tsn8_viewtopic_post_footer,
+.tsn8_viewtopic_post_footer,
 .tsn8_module_footer, .tsn8_post_footer {
 	position: relative;
 	border-top: 1px solid #d7e3f6;
@@ -135,7 +125,7 @@ body {
 	padding-top: 3px;
 }
 
-/***** END Page Content Structure ******/
+/* END Page Content Structure */
 
 /* BEGIN Feature Content Structure */
 /* TODO Change these classes */
@@ -174,7 +164,7 @@ body {
 
 /* END Feature Content Structure */
 
-/***** BEGIN Icons *****/
+/* BEGIN Icons */
 .tsn8_icon_joined {
 	background-image: url('../theme/images/tsn8/clock_gray.png');
 }
@@ -465,7 +455,7 @@ body {
 
 }
 
-/***** END Icons *****/
+/* END Icons */
 
 /* BEGIN Container Styles */
 .tsn8_radius_3 {
