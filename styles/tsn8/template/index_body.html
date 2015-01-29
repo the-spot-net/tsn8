@@ -1,74 +1,55 @@
 <!-- INCLUDE overall_header.html -->
 
-<p class="{S_CONTENT_FLOW_END} responsive-center time<!-- IF S_USER_LOGGED_IN --> rightside<!-- ENDIF -->"><!-- IF S_USER_LOGGED_IN -->{LAST_VISIT_DATE}<!-- ELSE -->{CURRENT_TIME}<!-- ENDIF --></p>
-<!-- IF S_USER_LOGGED_IN --><p class="responsive-center time">{CURRENT_TIME}</p><!-- ENDIF -->
+<!-- IF not S_USER_LOGGED_IN and not S_IS_BOT -->
+<div class="tsn8_module_container">
+	<span class="tsn8_module_header">{L_WELCOME_VISITOR}</span>
+
+	<div class="tsn8_module_content">
+		<form method="post" action="{S_LOGIN_ACTION}" class="headerspace">
+			<fieldset class="tsn8_myspot_login_fields align_center quick-login">
+				<label for="username" class="tsn8_font_color_med">{L_USERNAME}{L_COLON}</label><input type="text" name="username" id="username" size="10" class="inputbox" title="{L_USERNAME}"/>
+				<label for="password" class="tsn8_font_color_med">{L_PASSWORD}{L_COLON}</label><input type="password" name="password" id="password" size="10" class="inputbox" title="{L_PASSWORD}"/>
+				<!-- IF S_AUTOLOGIN_ENABLED -->
+				<label for="autologin">
+					<span class="tsn8_hint tsn8_font_color_med">{L_LOG_ME_IN}</span> <input type="checkbox" name="autologin" id="autologin"/>
+				</label>
+				<!-- ENDIF -->
+				<br/>
+				<input type="submit" name="login" value="{L_LOGIN}" class="tsn8_button_large"/>
+				{S_MYSPOT_LOGIN_REDIRECT}
+			</fieldset>
+		</form>
+	</div>
+	<!-- IF U_SEND_PASSWORD -->
+	<span class="tsn8_module_footer tsn8_font_color_med">
+		<a href="{U_SEND_PASSWORD}" class="tsn8_font_color_med">{L_FORGOT_PASS}</a>
+	</span>
+	<!-- ENDIF -->
+</div>
+<!-- ENDIF -->
 
 <!-- EVENT index_body_markforums_before -->
+
 <!-- IF U_MARK_FORUMS -->
-	<div class="action-bar compact">
-		<a href="{U_MARK_FORUMS}" class="mark-read rightside" accesskey="m" data-ajax="mark_forums_read">{L_MARK_FORUMS_READ}</a>
-	</div>
+<div class="action-bar compact">
+	<a href="{U_MARK_FORUMS}" class="mark-read rightside" title="{L_MARK_FORUMS_READ}" accesskey="m" data-ajax="mark_forums_read"><span class="tsn8_icon tsn8_icon_markall"></span></a>
+</div>
 <!-- ENDIF -->
 <!-- EVENT index_body_markforums_after -->
 
-<!-- INCLUDE forumlist_body.html -->
+<table class="tsn8_myspot_content_wrapper tsn8_width_100">
+	<tr>
+		<td class="tsn8_myspot_content_wrapper_column tsn8_width_85">
+			<!-- INCLUDE forumlist_body.html -->
+		</td>
+		<td class="tsn8_myspot_content_wrapper_column tsn8_width_15">
+			<!-- EVENT index_body_stat_blocks_before -->
+			<!-- INCLUDE modules/myspot_stats.html -->
+			<!-- EVENT index_body_stat_blocks_after -->
+		</td>
+	</tr>
+</table>
 
 <!-- EVENT index_body_forumlist_body_after -->
-
-<!-- IF not S_USER_LOGGED_IN and not S_IS_BOT -->
-	<form method="post" action="{S_LOGIN_ACTION}" class="headerspace">
-	<h3><a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a><!-- IF S_REGISTER_ENABLED -->&nbsp; &bull; &nbsp;<a href="{U_REGISTER}">{L_REGISTER}</a><!-- ENDIF --></h3>
-		<fieldset class="quick-login">
-			<label for="username"><span>{L_USERNAME}{L_COLON}</span> <input type="text" name="username" id="username" size="10" class="inputbox" title="{L_USERNAME}" /></label>
-			<label for="password"><span>{L_PASSWORD}{L_COLON}</span> <input type="password" name="password" id="password" size="10" class="inputbox" title="{L_PASSWORD}" /></label>
-			<!-- IF U_SEND_PASSWORD -->
-				<a href="{U_SEND_PASSWORD}">{L_FORGOT_PASS}</a>
-			<!-- ENDIF -->
-			<!-- IF S_AUTOLOGIN_ENABLED -->
-				<span class="responsive-hide">|</span> <label for="autologin">{L_LOG_ME_IN} <input type="checkbox" name="autologin" id="autologin" /></label>
-			<!-- ENDIF -->
-			<input type="submit" name="login" value="{L_LOGIN}" class="button2" />
-			{S_LOGIN_REDIRECT}
-		</fieldset>
-	</form>
-<!-- ENDIF -->
-
-<!-- EVENT index_body_stat_blocks_before -->
-
-<!-- IF S_DISPLAY_ONLINE_LIST -->
-	<div class="stat-block online-list">
-		<!-- IF U_VIEWONLINE --><h3><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h3><!-- ELSE --><h3>{L_WHO_IS_ONLINE}</h3><!-- ENDIF -->
-		<p>
-			<!-- EVENT index_body_block_online_prepend -->
-			{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /> <br />{LOGGED_IN_USER_LIST}
-			<!-- IF LEGEND --><br /><em>{L_LEGEND}{L_COLON} {LEGEND}</em><!-- ENDIF -->
-			<!-- EVENT index_body_block_online_append -->
-		</p>
-	</div>
-<!-- ENDIF -->
-
-<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
-	<div class="stat-block birthday-list">
-		<h3>{L_BIRTHDAYS}</h3>
-		<p>
-			<!-- EVENT index_body_block_birthday_prepend -->
-			<!-- IF .birthdays -->{L_CONGRATULATIONS}{L_COLON} <strong><!-- BEGIN birthdays -->{birthdays.USERNAME}<!-- IF birthdays.AGE !== '' --> ({birthdays.AGE})<!-- ENDIF --><!-- IF not birthdays.S_LAST_ROW -->, <!-- ENDIF --><!-- END birthdays --></strong><!-- ELSE -->{L_NO_BIRTHDAYS}<!-- ENDIF -->
-			<!-- EVENT index_body_block_birthday_append -->
-		</p>
-	</div>
-<!-- ENDIF -->
-
-<!-- IF NEWEST_USER -->
-	<div class="stat-block statistics">
-		<h3>{L_STATISTICS}</h3>
-		<p>
-			<!-- EVENT index_body_block_stats_prepend -->
-			{TOTAL_POSTS} &bull; {TOTAL_TOPICS} &bull; {TOTAL_USERS} &bull; {NEWEST_USER}
-			<!-- EVENT index_body_block_stats_append -->
-		</p>
-	</div>
-<!-- ENDIF -->
-
-<!-- EVENT index_body_stat_blocks_after -->
 
 <!-- INCLUDE overall_footer.html -->

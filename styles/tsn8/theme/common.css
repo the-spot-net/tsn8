@@ -288,7 +288,7 @@ ul.linklist {
 ul.linklist > li {
 	float: left;
 	font-size: 1.1em;
-	line-height: 2.2em;
+	line-height: 1.5em; /* 2.2em */
 	list-style-type: none;
 	margin-right: 7px;
 	padding-top: 1px;

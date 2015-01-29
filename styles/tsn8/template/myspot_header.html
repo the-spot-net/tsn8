@@ -4,7 +4,13 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width"/>
 	{META}
-	<title><!-- IF UNREAD_NOTIFICATIONS_COUNT -->({UNREAD_NOTIFICATIONS_COUNT}) <!-- ENDIF --><!-- IF not S_VIEWTOPIC and not S_VIEWFORUM -->{SITENAME} - <!-- ENDIF --><!-- IF S_IN_MCP -->{L_MCP} - <!-- ELSEIF S_IN_UCP -->{L_UCP} - <!-- ENDIF -->{PAGE_TITLE}<!-- IF S_VIEWTOPIC or S_VIEWFORUM --> - {SITENAME}<!-- ENDIF --></title>
+	<title>
+		<!-- IF UNREAD_NOTIFICATIONS_COUNT -->({UNREAD_NOTIFICATIONS_COUNT}) <!-- ENDIF -->
+		<!-- IF not S_VIEWTOPIC and not S_VIEWFORUM -->{SITENAME} - <!-- ENDIF -->
+		<!-- IF S_IN_MCP -->{L_MCP} - <!-- ELSEIF S_IN_UCP -->{L_UCP} - <!-- ENDIF -->
+		{PAGE_TITLE}
+		<!-- IF S_VIEWTOPIC or S_VIEWFORUM --> - {SITENAME}<!-- ENDIF -->
+	</title>
 
 	<!-- IF S_ENABLE_FEEDS -->
 	<!-- IF S_ENABLE_FEEDS_OVERALL -->
@@ -85,16 +91,6 @@
 	<div class="tsn8_wrapper tsn8_top_menu_wrapper">
 		<!-- INCLUDE navbar_header.html -->
 	</div>
-	<!--<div class="headerbar">-->
-	<!--<div class="inner">-->
-	<!--<div id="site-description">-->
-	<!--<a id="logo" class="logo" href="&lt;!&ndash; IF U_SITE_HOME &ndash;&gt;{U_SITE_HOME}&lt;!&ndash; ELSE &ndash;&gt;{U_INDEX}&lt;!&ndash; ENDIF &ndash;&gt;" title="&lt;!&ndash; IF U_SITE_HOME &ndash;&gt;{L_SITE_HOME}&lt;!&ndash; ELSE &ndash;&gt;{L_INDEX}&lt;!&ndash; ENDIF &ndash;&gt;">{SITE_LOGO_IMG}</a>-->
-	<!--<h1>{SITENAME}</h1>-->
-	<!--<p>{SITE_DESCRIPTION}</p>-->
-	<!--<p class="skiplink"><a href="#start_here">{L_SKIP}</a></p>-->
-	<!--</div>-->
-	<!--</div>-->
-	<!--</div>-->
 
 	<!-- EVENT overall_header_page_body_before -->
 

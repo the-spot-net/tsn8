@@ -161,28 +161,43 @@ if ($config['load_birthdays'] && $config['allow_birthdays'] && $auth->acl_gets('
 	$db->sql_freeresult($result);
 }
 
+// tsn8: add [[ $online_users = obtain_users_online(); ]]
+$online_users = obtain_users_online();
+
 // Assign index specific vars
 $template->assign_vars(array(
-	'TOTAL_POSTS'	=> $user->lang('TOTAL_POSTS_COUNT', (int) $config['num_posts']),
-	'TOTAL_TOPICS'	=> $user->lang('TOTAL_TOPICS', (int) $config['num_topics']),
-	'TOTAL_USERS'	=> $user->lang('TOTAL_USERS', (int) $config['num_users']),
-	'NEWEST_USER'	=> $user->lang('NEWEST_USER', get_username_string('full', $config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'])),
+		'TOTAL_POSTS'             => $user->lang('TOTAL_POSTS_COUNT', (int)$config['num_posts']),
+		'TOTAL_TOPICS'            => $user->lang('TOTAL_TOPICS', (int)$config['num_topics']),
+		'TOTAL_USERS'             => $user->lang('TOTAL_USERS', (int)$config['num_users']),
 
-	'LEGEND'		=> $legend,
-	'BIRTHDAY_LIST'	=> (empty($birthday_list)) ? '' : implode($user->lang['COMMA_SEPARATOR'], $birthday_list),
+		// tsn8: add [[ BEGIN ]]
+		'TOTAL_FORUM_POSTS'       => (int)$config['num_posts'],
+		'TOTAL_FORUM_TOPICS'      => (int)$config['num_topics'],
+		'TOTAL_FORUM_USERS'       => (int)$config['num_users'],
+		'TOTAL_USERS_VALUE'       => $online_users['total_online'],
+		'VISIBLE_USERS_VALUE'     => $online_users['visible_online'],
+		'HIDDEN_USERS_VALUE'      => $online_users['hidden_online'],
+		'GUEST_USERS_VALUE'       => $online_users['guests_online'],
+		// tsn8: add [[ END ]]
 
-	'FORUM_IMG'				=> $user->img('forum_read', 'NO_UNREAD_POSTS'),
-	'FORUM_UNREAD_IMG'			=> $user->img('forum_unread', 'UNREAD_POSTS'),
-	'FORUM_LOCKED_IMG'		=> $user->img('forum_read_locked', 'NO_UNREAD_POSTS_LOCKED'),
-	'FORUM_UNREAD_LOCKED_IMG'	=> $user->img('forum_unread_locked', 'UNREAD_POSTS_LOCKED'),
+		'NEWEST_USER'             => $user->lang('NEWEST_USER', get_username_string('full', $config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'])),
 
-	'S_LOGIN_ACTION'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=login'),
-	'U_SEND_PASSWORD'           => ($config['email_enable']) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=sendpassword') : '',
-	'S_DISPLAY_BIRTHDAY_LIST'	=> ($config['load_birthdays']) ? true : false,
-	'S_INDEX'					=> true,
+		'LEGEND'                  => $legend,
+		'BIRTHDAY_LIST'           => (empty($birthday_list)) ? '' : implode($user->lang['COMMA_SEPARATOR'], $birthday_list),
 
-	'U_MARK_FORUMS'		=> ($user->data['is_registered'] || $config['load_anon_lastread']) ? append_sid("{$phpbb_root_path}index.$phpEx", 'hash=' . generate_link_hash('global') . '&amp;mark=forums&amp;mark_time=' . time()) : '',
-	'U_MCP'				=> ($auth->acl_get('m_') || $auth->acl_getf_global('m_')) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=main&amp;mode=front', true, $user->session_id) : '')
+		'FORUM_IMG'               => $user->img('forum_read', 'NO_UNREAD_POSTS'),
+		'FORUM_UNREAD_IMG'        => $user->img('forum_unread', 'UNREAD_POSTS'),
+		'FORUM_LOCKED_IMG'        => $user->img('forum_read_locked', 'NO_UNREAD_POSTS_LOCKED'),
+		'FORUM_UNREAD_LOCKED_IMG' => $user->img('forum_unread_locked', 'UNREAD_POSTS_LOCKED'),
+
+		'S_LOGIN_ACTION'          => append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=login'),
+		'U_SEND_PASSWORD'         => ($config['email_enable']) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=sendpassword') : '',
+		'S_DISPLAY_BIRTHDAY_LIST' => ($config['load_birthdays']) ? true : false,
+		'S_INDEX'                 => true,
+
+		'U_MARK_FORUMS'           => ($user->data['is_registered'] || $config['load_anon_lastread']) ? append_sid("{$phpbb_root_path}index.$phpEx", 'hash=' . generate_link_hash('global') . '&amp;mark=forums&amp;mark_time=' . time()) : '',
+		'U_MCP'                   => ($auth->acl_get('m_') || $auth->acl_getf_global('m_')) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=main&amp;mode=front', true, $user->session_id) : ''
+	)
 );
 
 $page_title = ($config['board_index_text'] !== '') ? $config['board_index_text'] : $user->lang['INDEX'];
