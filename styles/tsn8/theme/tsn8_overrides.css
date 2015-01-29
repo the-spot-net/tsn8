@@ -1,0 +1,94 @@
+a {
+	color: #587eaa;
+}
+
+a:hover {
+	color: #003366;
+	text-decoration: none;
+}
+.search-header {
+	box-shadow: 0 0 10px #587eaa;
+}
+.navbar {
+	background-color: #fff;
+	background-color: rgba(255, 255, 255, 0.8);
+	border: 1px solid #d7e3f6;
+	box-shadow: 0 1px 2px #ccc;
+}
+
+ul.navlinks {
+	border-top-color: #d7e3f6;
+}
+
+.action-bar {
+	margin: 0 20px;
+}
+
+.forabg {
+	background: white none;
+}
+
+.forabg .header a {
+	color: #587eaa;
+}
+
+.forumbg .header a:hover, .forabg .header a:hover, th a:hover {
+	color: #003366;
+}
+
+li.header dt, li.header dd {
+	text-transform: none;
+	font-family: Calibri, "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
+	font-weight: normal;
+	color: #587eaa;
+}
+
+ul.forums {
+	background: transparent none;
+}
+
+ul.topiclist li {
+	color: #587eaa;
+}
+
+li.row {
+	border: 1px solid #fff;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+li.row:hover {
+	background-color: #d7e3f6;
+	background-color: rgba(215, 227, 246, 0.3);
+	border: 1px solid #d7e3f6;
+	border-radius: 5px;
+}
+
+dl.icon dt .list-inner {
+	padding-left: 50px;
+}
+
+a.forumtitle {
+	font-family: Calibri, "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
+	font-weight: normal;
+	font-size: 1.3em;
+	font-style: normal;
+	display: inline-block;
+	margin-bottom: 5px;
+}
+
+a.forumtitle:hover {
+	text-decoration: none;
+}
+
+ul.topiclist li.row dt a.subforum {
+	display: inline-block;
+	padding: 3px 3px 3px 15px;
+	border-radius: 3px;
+	background-position: 3px 50%;
+}
+ul.topiclist li.row dt a.subforum:hover {
+	background-color: #587eaa;
+	color: #fff;
+	box-shadow: 0 1px 2px #ccc;
+}
