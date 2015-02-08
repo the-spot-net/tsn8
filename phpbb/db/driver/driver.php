@@ -896,7 +896,7 @@ abstract class driver implements driver_interface
 				echo '<!DOCTYPE html>
 					<html dir="ltr">
 					<head>
-						<meta charset="utf-8">
+						<meta charset="utf-8" />
 						<title>SQL Report</title>
 						<link href="' . htmlspecialchars($phpbb_path_helper->update_web_root_path($phpbb_root_path) . $phpbb_path_helper->get_adm_relative_path()) . 'style/admin.css" rel="stylesheet" type="text/css" media="screen" />
 					</head>
