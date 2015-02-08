@@ -619,3 +619,13 @@ hr.divider {
 	color: #d7e3f6;
 	display: block;
 }
+
+/* Forum Body Modification Styles */
+.tsn8_last_post_author_avatar {
+	height: 100%;
+	float: left;
+}
+
+.tsn8_last_post_author_avatar img {
+	vertical-align: middle;
+}

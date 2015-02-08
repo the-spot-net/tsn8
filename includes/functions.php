@@ -4227,6 +4227,7 @@ function obtain_users_online_string($online_users, $item_id = 0, $item = 'forum'
 					$online_userlist .= ($online_userlist != '') ? ', ' . $user_online_link : $user_online_link;
 					// tsn8: add [[ BEGIN ]]
 
+					$row['avatar_title'] = $row['username'];
 					$row['user_avatar_width'] = ($row['user_avatar_width'] >= 20) ? $row['user_avatar_width'] * 0.20 : $row['user_avatar_width'];
 					$row['user_avatar_height'] = ($row['user_avatar_height'] >= 20) ? $row['user_avatar_height'] * 0.20 : $row['user_avatar_height'];
 					$online_avatarlist .= phpbb_get_user_avatar($row);
@@ -4757,11 +4758,46 @@ function phpbb_get_avatar($row, $alt, $ignore_config = false)
 		$avatar_data['src'] = '';
 	}
 
+	// tsn8 add [[ BEGIN ]]
+	// file doesn't exist, pull default image, if remote...
+	if($row['avatar_type'] == 'avatar.driver.remote') {
+		// Test for image existance
+		$imgArray = @getimagesize($avatar_data['src']);
+		if(empty($imgArray[0])) {
+
+			// Set default image info; TODO Put this info in the database via extension
+			$row['avatar_type'] = 'avatar.driver.local';
+			$row['avatar'] = 'novelties/tsn_icon_avatar.png';
+			// Check for zero dimensions
+			$row['avatar_width'] = $row['avatar_width'] ?: 100;
+			$row['avatar_height'] = $row['avatar_height'] ?: 100;
+
+			// Run through the proper channels again with local file...
+			$driver = $phpbb_avatar_manager->get_driver($row['avatar_type'], $ignore_config);
+			if ($driver) {
+				$avatar_data = $driver->get_data($row, $ignore_config);
+			} else {
+				$avatar_data['src'] = '';
+			}
+
+			// Set all dimensions to the largest side;
+			// if via tsn8 extension it will have been scaled/resized to the max for the feature
+			// if otherwise, it will be default image size - for avatars that is 100x100
+			$avatar_data['width'] = $avatar_data['height'] = ($row['avatar_width'] >= $row['avatar_height']) ? $row['avatar_width'] : $row['avatar_height'];
+		}
+	}
+	// Set the title text...
+	$avatar_data['title'] = $row['avatar_title'];
+	// tsn8 add [[ END ]]
+
 	if (!empty($avatar_data['src']))
 	{
 		$html = '<img src="' . $avatar_data['src'] . '" ' .
 			($avatar_data['width'] ? ('width="' . $avatar_data['width'] . '" ') : '') .
 			($avatar_data['height'] ? ('height="' . $avatar_data['height'] . '" ') : '') .
+			// tsn8 add [[ BEGIN ]]
+			'title="' . (!empty($avatar_data['title']) ? $avatar_data['title'] : '') . '" ' .
+			// tsn8 add [[ END ]]
 			'alt="' . ((!empty($user->lang[$alt])) ? $user->lang[$alt] : $alt) . '" />';
 	}
 

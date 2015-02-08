@@ -46,3 +46,4 @@ store/*
 .idea/*
 
 config.php
+error_log
