@@ -1,3 +1,7 @@
+/*
+ * Forum Body - board index
+ */
+
 a {
 	color: #587eaa;
 }
@@ -91,4 +95,13 @@ ul.topiclist li.row dt a.subforum:hover {
 	background-color: #587eaa;
 	color: #fff;
 	box-shadow: 0 1px 2px #ccc;
+}
+
+
+/*
+ *	View Topic
+ */
+
+.postbody .content {
+	font-size: 1em;
 }
