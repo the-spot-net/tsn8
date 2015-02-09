@@ -10,9 +10,22 @@ a:hover {
 	color: #003366;
 	text-decoration: none;
 }
+
+select {
+	font-size: 0.8em;
+}
+
+input.button1, input.button2 {
+	font-size: 0.85em;
+}
+
 .search-header {
 	box-shadow: 0 0 10px #587eaa;
 }
+.search-header input {
+	font-size: 0.8em;
+}
+
 .navbar {
 	background-color: #fff;
 	background-color: rgba(255, 255, 255, 0.8);
@@ -25,22 +38,28 @@ ul.navlinks {
 }
 
 .action-bar {
-	margin: 0 20px;
+	margin: 0 1%;
+	font-size: 1em;
 }
 
-.forabg {
+.forabg,
+.forumbg {
 	background: white none;
 }
 
-.forabg .header a {
+.forabg .header a,
+.forumbg .header a {
 	color: #587eaa;
 }
 
-.forumbg .header a:hover, .forabg .header a:hover, th a:hover {
+.forumbg .header a:hover,
+.forabg .header a:hover,
+th a:hover {
 	color: #003366;
 }
 
-li.header dt, li.header dd {
+li.header dt,
+li.header dd {
 	text-transform: none;
 	font-family: Calibri, "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
 	font-weight: normal;
@@ -59,6 +78,7 @@ li.row {
 	border: 1px solid #fff;
 	padding-top: 5px;
 	padding-bottom: 5px;
+	border-radius: 5px;
 }
 
 li.row:hover {
@@ -91,6 +111,7 @@ ul.topiclist li.row dt a.subforum {
 	border-radius: 3px;
 	background-position: 3px 50%;
 }
+
 ul.topiclist li.row dt a.subforum:hover {
 	background-color: #587eaa;
 	color: #fff;
@@ -101,7 +122,50 @@ dd.lastpost img {
 	padding: 7px 3px 7px 0;
 }
 
+/*
+ *	View Forum
+ */
+.bg1 {
+	background-color: #fff;
+	/*background-color: rgba(215, 227, 246, 0.7);*/
+}
 
+.bg2 {
+	background-color: #fff;
+	/*background-color: rgba(215, 227, 246, 0.5);*/
+}
+
+.buttons {
+	margin-right: 1%;
+}
+
+.action-bar .search-box {
+	min-height: 30px;
+	padding: 3px 0;
+	font-size: 0.8em;
+}
+.pagination {
+	font-size: 1em;
+}
+.pagination li.active span {
+	background-color: #587eaa;
+	border-color: #587eaa;
+}
+
+.pagination li a {
+	background-color: #d7e3f6;
+	border-color: #d7e3f6;
+}
+
+.pagination li a, .pagination li span {
+	border-radius: 3px;
+	font-size: 1em;
+}
+
+.pagination li a:hover, .pagination .dropdown-visible a.dropdown-trigger, .nojs .pagination .dropdown-container:hover a.dropdown-trigger {
+	border-color: #587eaa;
+	background-color: #587eaa;
+}
 /*
  *	View Topic
  */

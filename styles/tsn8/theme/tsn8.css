@@ -79,7 +79,8 @@ body {
 
 .tsn8_module_container,
 .tsn8_module_container_med,
-.forabg {
+.forabg,
+.forumbg {
 	border-radius: 3px;
 	box-shadow: 0 1px 2px #ccc;
 	border: 1px solid #d7e3f6;
@@ -93,7 +94,8 @@ body {
 }
 
 .tsn8_module_header,
-.forabg .header {
+.forabg .header,
+.forumbg .header {
 	display: block;
 	font-size: 1.5em;
 	color: #587eaa;
@@ -180,7 +182,7 @@ body {
 	border: 0;
 	cursor: pointer;
 	display: inline-block;
-
+	vertical-align: middle;
 }
 
 .tsn8_icon:hover,
@@ -349,6 +351,10 @@ body {
 
 .tsn8_icon_tsn {
 	background-image: url('../theme/images/tsn8/tsn_logo.png');
+}
+
+.tsn8_icon_lock {
+	background: #660000 url('../theme/images/tsn8/lock_large.png');
 }
 
 .tsn8_icon_bold {
@@ -628,4 +634,8 @@ hr.divider {
 
 .tsn8_last_post_author_avatar img {
 	vertical-align: middle;
+}
+
+.tsn8_last_post_author_avatar a {
+	/*line-height: 25px;*/
 }
