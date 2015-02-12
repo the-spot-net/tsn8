@@ -22,6 +22,7 @@ input.button1, input.button2 {
 .search-header {
 	box-shadow: 0 0 10px #587eaa;
 }
+
 .search-header input {
 	font-size: 0.8em;
 }
@@ -136,17 +137,20 @@ dd.lastpost img {
 }
 
 .buttons {
-	margin-right: 1%;
+	margin-right: 1em;
 }
 
-.action-bar .search-box {
+.action-bar .search-box,
+.action-bar .topic-tools {
 	min-height: 30px;
 	padding: 3px 0;
 	font-size: 0.8em;
 }
+
 .pagination {
 	font-size: 1em;
 }
+
 .pagination li.active span {
 	background-color: #587eaa;
 	border-color: #587eaa;
@@ -166,9 +170,63 @@ dd.lastpost img {
 	border-color: #587eaa;
 	background-color: #587eaa;
 }
+
 /*
  *	View Topic
  */
+.topic-tools {
+	margin-left: 1em;
+}
+
+.inner {
+	position: relative;
+}
+
+.postprofile {
+	width: 22%;
+	text-align: center;
+	vertical-align: top;
+}
+
+.postprofile dd,
+.postprofile dt {
+	line-height: normal;
+}
+
+.postprofile dd {
+	overflow: visible;
+}
+
+.avatar-container {
+	width: 100%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.postprofile .avatar {
+	float: none;
+}
+
+.postprofile .avatar img {
+	display: inline-block;
+}
+
+.avatar img {
+	text-align: center;
+}
+
+.has-profile-rank, .no-profile-rank,
+.has-avatar, .no-avatar {
+	font-size: 1.2em;
+}
+
+.profile-contact {
+	white-space: nowrap;
+	overflow: visible;
+	display: inline-block;
+	text-overflow: ellipsis;
+	line-height: 1.2em;
+}
 
 .postbody .content {
 	font-size: 1em;
