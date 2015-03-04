@@ -4227,9 +4227,46 @@ function obtain_users_online_string($online_users, $item_id = 0, $item = 'forum'
 					$online_userlist .= ($online_userlist != '') ? ', ' . $user_online_link : $user_online_link;
 					// tsn8: add [[ BEGIN ]]
 
+					// Calculate the results of scaling...
+					$scale = 0.2;
+					$temp_scaled_width = (float)$row['user_avatar_width'] * $scale;
+					$temp_scaled_height = (float)$row['user_avatar_height'] * $scale;
+
+					// Avatars are assumed to be 100px by 100px
+					$control_scaled_side = (float)100 * $scale;
+
+					if ($temp_scaled_height && $temp_scaled_width) {
+
+						// Will scaling it cause one side to be bigger than the control?
+						$isScaledTooBig = ($temp_scaled_height > $control_scaled_side || $temp_scaled_width > $control_scaled_side);
+						// Will scaling it cause both sides to be smaller than the control?
+						$isScaledTooSmall = ($temp_scaled_height < $control_scaled_side && $temp_scaled_width < $control_scaled_side);
+
+						// The scaled dimensions are insufficient and need to be further scaled to a control...
+						if ($isScaledTooBig || $isScaledTooSmall) {
+							// If the width is largest, max it at the control width,
+							// and scale the height to match...
+							if ($temp_scaled_width >= $temp_scaled_height) {
+								$scaled_width = $control_scaled_side;
+								$scaled_height = ($temp_scaled_height * $control_scaled_side) / $temp_scaled_width;
+							} else {
+								// Height is largest, scale on the width to match
+								$scaled_height = $control_scaled_side;
+								$scaled_width = ($temp_scaled_width * $control_scaled_side) / $temp_scaled_height;
+							}
+						} else {
+							// Scaling resulted in sufficient dimensions, use them
+							$scaled_width = $temp_scaled_width;
+							$scaled_height = $temp_scaled_height;
+						}
+
+						$row['user_avatar_width'] = $scaled_width;
+						$row['user_avatar_height'] = $scaled_height;
+					} else {
+						$row['user_avatar_width'] = $control_scaled_side;
+						$row['user_avatar_height'] = $control_scaled_side;
+					}
 					$row['avatar_title'] = $row['username'];
-					$row['user_avatar_width'] = ($row['user_avatar_width'] >= 20) ? $row['user_avatar_width'] * 0.20 : $row['user_avatar_width'];
-					$row['user_avatar_height'] = ($row['user_avatar_height'] >= 20) ? $row['user_avatar_height'] * 0.20 : $row['user_avatar_height'];
 					$online_avatarlist .= phpbb_get_user_avatar($row);
 
 					// tsn8: add [[ END ]]
