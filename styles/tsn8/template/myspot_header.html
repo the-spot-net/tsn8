@@ -69,12 +69,12 @@
 <body id="phpbb" class="nojs notouch section-{SCRIPT_NAME} {S_CONTENT_DIRECTION} {BODY_CLASS}">
 
 <!-- EVENT overall_header_body_before -->
-<div class="tsn8_page_wrapper tsn8_width_100">
-	<a id="top" class="anchor" accesskey="t"></a>
+	<header id="page-header" class="tsn8_header">
+		<a id="top" class="anchor" accesskey="t"></a>
 
-	<div id="page-header" class="tsn8_wrapper tsn8_header_wrapper">
-		<span class="tsn8_header_image">
-			<!-- IF S_DISPLAY_SEARCH and not S_IN_SEARCH -->
+		<div class="tsn8_header_fade">
+			<div class="tsn8_header_image">
+				<!-- IF S_DISPLAY_SEARCH and not S_IN_SEARCH -->
 				<div id="search-box" class="search-box search-header">
 					<form action="{U_SEARCH}" method="get" id="search">
 						<fieldset>
@@ -86,17 +86,17 @@
 					</form>
 				</div>
 				<!-- ENDIF -->
-		</span>
-	</div>
-	<div class="tsn8_wrapper tsn8_top_menu_wrapper">
-		<!-- INCLUDE navbar_header.html -->
-	</div>
+			</div>
+		</div>
 
-	<!-- EVENT overall_header_page_body_before -->
+		<nav class="tsn8_nav">
+			<!-- INCLUDE navbar_header.html -->
+		</nav>
+	</header>
 
 	<a id="start_here" class="anchor"></a>
 
-	<div class="tsn8_wrapper tsn8_content_wrapper">
+	<section class="tsn8_section">
 		<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
 		<div id="information" class="rules">
 			<div class="inner">
@@ -106,3 +106,4 @@
 		<!-- ENDIF -->
 
 		<!-- EVENT overall_header_content_before -->
+		<div class="group">

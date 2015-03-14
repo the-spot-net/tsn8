@@ -1,48 +1,50 @@
-<!-- IF BIRTHDAY_LIST -->
-<div class="tsn8_module_container">
-	<span class="tsn8_module_header">{L_BIRTHDAYS}!</span>
+<div class="group">
+	<div class="gt-row">
+		<!-- IF BIRTHDAY_LIST -->
+		<div class="tsn8_module_container gt-columns gt-full">
+			<span class="tsn8_module_header">{L_BIRTHDAYS}!</span>
 
-	<div class="tsn8_module_content">
-		<span class="tsn8_myspot_userstatus_stats_record align_center">{L_HAPPY_BIRTHDAY_TO}<br/><b>{BIRTHDAY_LIST}</b></span>
-	</div>
-</div>
-<!-- ENDIF -->
+			<div class="tsn8_module_content">
+				<span class="tsn8_myspot_userstatus_stats_record align_center">{L_HAPPY_BIRTHDAY_TO}<br/><b>{BIRTHDAY_LIST}</b></span>
+			</div>
+		</div>
+		<!-- ENDIF -->
 
-<div class="tsn8_module_container">
-	<span class="tsn8_module_header">{L_ONLINE_NOW}</span>
+		<div class="tsn8_module_container gt-columns gt-third">
+			<span class="tsn8_module_header">{L_ONLINE_NOW}</span>
 
-	<div class="tsn8_module_content">
-		<span class="tsn8_myspot_online_user_avatars align_center">{LOGGED_IN_AVATAR_LIST}</span>
-		<hr class="divider" align="center"/>
-		<ul class="tsn8_myspot_userstatus_stats_list">
-			<li class="tsn8_myspot_userstatus_stats_item">
-				<span class="tsn8_myspot_userstatus_stats_label">{L_USERS_ONLINE}</span>
-				{TOTAL_USERS_VALUE}
-			</li>
-			<li class="tsn8_myspot_userstatus_stats_item">
-				<span class="tsn8_myspot_userstatus_stats_label">{L_VISIBLE}</span>
-				{VISIBLE_USERS_VALUE}
-			</li>
-			<li class="tsn8_myspot_userstatus_stats_item">
-				<span class="tsn8_myspot_userstatus_stats_label">{L_HIDDEN}</span>
-				{HIDDEN_USERS_VALUE}
-			</li>
-			<li class="tsn8_myspot_userstatus_stats_item">
-				<span class="tsn8_myspot_userstatus_stats_label">{L_GUESTS}</span>
-				{GUEST_USERS_VALUE}
-			</li>
-		</ul>
-		<hr class="divider" align="center"/>
-		<span class="tsn8_myspot_userstatus_stats_record">{L_MYSPOT_RECORD_USERS}:<br/>{SHORT_RECORD_USERS}</span>
-		<hr class="divider" align="center"/>
-		<span class="tsn8_myspot_userstatus_stats_record">{NEWEST_USER}</span>
-	</div>
-</div>
+			<div class="tsn8_module_content">
+				<span class="tsn8_myspot_online_user_avatars align_center">{LOGGED_IN_AVATAR_LIST}</span>
+				<hr class="divider" align="center"/>
+				<ul class="tsn8_myspot_userstatus_stats_list">
+					<li class="tsn8_myspot_userstatus_stats_item">
+						<span class="tsn8_myspot_userstatus_stats_label">{L_USERS_ONLINE}</span>
+						{TOTAL_USERS_VALUE}
+					</li>
+					<li class="tsn8_myspot_userstatus_stats_item">
+						<span class="tsn8_myspot_userstatus_stats_label">{L_VISIBLE}</span>
+						{VISIBLE_USERS_VALUE}
+					</li>
+					<li class="tsn8_myspot_userstatus_stats_item">
+						<span class="tsn8_myspot_userstatus_stats_label">{L_HIDDEN}</span>
+						{HIDDEN_USERS_VALUE}
+					</li>
+					<li class="tsn8_myspot_userstatus_stats_item">
+						<span class="tsn8_myspot_userstatus_stats_label">{L_GUESTS}</span>
+						{GUEST_USERS_VALUE}
+					</li>
+				</ul>
+				<hr class="divider" align="center"/>
+				<span class="tsn8_myspot_userstatus_stats_record">{L_MYSPOT_RECORD_USERS}:<br/>{SHORT_RECORD_USERS}</span>
+				<hr class="divider" align="center"/>
+				<span class="tsn8_myspot_userstatus_stats_record">{NEWEST_USER}</span>
+			</div>
+		</div>
 
-<div class="tsn8_module_container">
-	<span class="tsn8_module_header">{L_STATISTICS}</span>
+		<div class="tsn8_module_container gt-columns gt-third">
+			<span class="tsn8_module_header">{L_STATISTICS}</span>
 
-	<div class="tsn8_module_content align_center">
+			<div class="tsn8_module_content align_center">
 		<span class="tsn8_stat">
 			<span class="tsn8_stat_value">{TOTAL_FORUM_POSTS}</span>
 			<span class="tsn8_stat_label">{L_POSTS}</span>
@@ -56,12 +58,14 @@
 			<span class="tsn8_stat_label">{L_USERS}</span>
 		</span>
 
-	</div>
-</div>
-<div class="tsn8_module_container">
-	<span class="tsn8_module_header">{L_LEGEND}</span>
+			</div>
+		</div>
+		<div class="tsn8_module_container gt-columns gt-third">
+			<span class="tsn8_module_header">{L_LEGEND}</span>
 
-	<div class="tsn8_module_content align_center">
-		<span class="tsn8_myspot_userstatus_stats_record">{LEGEND}</span>
+			<div class="tsn8_module_content align_center">
+				<span class="tsn8_myspot_userstatus_stats_record">{LEGEND}</span>
+			</div>
+		</div>
 	</div>
 </div>

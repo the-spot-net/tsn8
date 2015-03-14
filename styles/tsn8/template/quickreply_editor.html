@@ -1,26 +1,27 @@
 <form method="post" action="{U_QR_ACTION}" id="qr_postform">
-<!-- EVENT quickreply_editor_panel_before -->
-	<div class="panel">
-		<div class="inner">
-				<h2 class="quickreply-title">{L_QUICKREPLY}</h2>
-				<fieldset class="fields1">
-					<dl style="clear: left;">
-						<dt><label for="subject">{L_SUBJECT}{L_COLON}</label></dt>
-						<dd><input type="text" name="subject" id="subject" size="45" maxlength="124" tabindex="2" value="{SUBJECT}" class="inputbox autowidth" /></dd>
-					</dl>
-				<!-- EVENT quickreply_editor_message_before -->
-				<div id="message-box">
-					<textarea style="height: 9em;" name="message" rows="7" cols="76" tabindex="3" class="inputbox"></textarea>
-				</div>
-				<!-- EVENT quickreply_editor_message_after -->
-				</fieldset>
-				<fieldset class="submit-buttons">
-					{S_FORM_TOKEN}
-					{QR_HIDDEN_FIELDS}
-					<input type="submit" accesskey="f" tabindex="6" name="preview" value="{L_FULL_EDITOR}" class="button2" id="qr_full_editor" />&nbsp;
-					<input type="submit" accesskey="s" tabindex="7" name="post" value="{L_SUBMIT}" class="button1" />&nbsp;
-				</fieldset>
-		</div>
+	<!-- EVENT quickreply_editor_panel_before -->
+	<div class="tsn8_module tsn8_module_container">
+		<span class="tsn8_module_header">{L_QUICKREPLY}</span>
+		<fieldset class="fields1">
+			<div class="tsn8_input_wrapper tsn8_width_100">
+				<!--<label for="subject" class="tsn8_input_label">{L_SUBJECT}{L_COLON}</label>-->
+				<input placeholder="{L_SUBJECT}" type="text" name="subject" id="subject" maxlength="124" tabindex="2" value="{SUBJECT}" class="inputbox autowidth tsn8_input_text tsn8_input_subject"/>
+			</div>
+			<!-- EVENT quickreply_editor_message_before -->
+			<div class="tsn8_input_wrapper tsn8_width_100" id="message-box">
+				<!--<label for="reply" class="tsn8_input_label">{L_REPLY}{L_COLON}</label>-->
+				<textarea id="reply" name="message" rows="7" cols="76" tabindex="3" class="inputbox tsn8_input_textarea"></textarea>
+			</div>
+			<!-- EVENT quickreply_editor_message_after -->
+		</fieldset>
+		<fieldset class="submit-buttons">
+			{S_FORM_TOKEN}
+			{QR_HIDDEN_FIELDS}
+			<span class="buttonset">
+				<input type="submit" accesskey="f" tabindex="6" name="preview" value="{L_FULL_EDITOR}" data-mod="tsn8_button" class="" id="qr_full_editor"/>
+				<input type="submit" accesskey="s" tabindex="7" name="post" data-mod="tsn8_button" value="{L_SUBMIT}" class=""/>
+			</span>
+		</fieldset>
 	</div>
-<!-- EVENT quickreply_editor_panel_after -->
+	<!-- EVENT quickreply_editor_panel_after -->
 </form>

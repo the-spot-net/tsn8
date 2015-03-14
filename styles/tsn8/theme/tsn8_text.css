@@ -1,0 +1,68 @@
+* {
+	font-family: Calibri, "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
+	font-size: 100%;
+}
+
+body {
+	font-size: 11pt;
+}
+
+/* Sizes */
+select,
+.search-header input,
+.action-bar .search-box,
+.action-bar .topic-tools,
+.tsn8_text_size1 {
+	font-size: 0.8em;
+}
+
+input.button1,
+input.button2,
+.tsn8_text_size2 {
+	font-size: 0.85em;
+}
+
+.tsn8_text_size3 {
+	font-size: 0.9em;
+}
+
+.pagination,
+.pagination li a,
+.pagination li span,
+.action-bar,
+.tsn8_text_size4 {
+	font-size: 1em;
+}
+
+.tsn8_text_size5 {
+	font-size: 1.1em;
+}
+
+.has-profile-rank,
+.no-profile-rank,
+.has-avatar,
+.no-avatar,
+.tsn8_text_size6 {
+	font-size: 1.2em;
+}
+
+a.forumtitle,
+.tsn8_text_size7 {
+	font-size: 1.3em;
+}
+
+/* Alignment */
+.align_center {
+	text-align: center;
+}
+
+/* Overrides */
+a.forumtitle {
+	font-family: Calibri, "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
+	font-weight: normal;
+	font-style: normal;
+}
+
+a.forumtitle:hover {
+	text-decoration: none;
+}

@@ -46,6 +46,12 @@
 		Original author:  @Neotsn ( http://twitter.com/neotsn )
 		Modified by:
 	-->
+	<!-- jQuery UI CSS -->
+	<link rel="stylesheet" href="{T_THEME_PATH}/jqueryui_custom/jquery-ui.min.css" type="text/css"/>
+	<link rel="stylesheet" href="{T_THEME_PATH}/jqueryui_custom/jquery-ui.structure.css" type="text/css"/>
+	<link rel="stylesheet" href="{T_THEME_PATH}/jqueryui_custom/jquery-ui.theme.css" type="text/css"/>
+	<!-- jQuery Colorpicker CSS -->
+	<link rel="stylesheet" media="screen" type="text/css" href="{T_THEME_PATH}/colorpicker/colorpicker.css"/>
 
 	<link href="{T_THEME_PATH}/print.css?assets_version={T_ASSETS_VERSION}" rel="stylesheet" type="text/css" media="print" title="printonly"/>
 	<!-- IF S_ALLOW_CDN -->
@@ -77,35 +83,37 @@
 <body id="phpbb" class="nojs notouch section-{SCRIPT_NAME} {S_CONTENT_DIRECTION} {BODY_CLASS}">
 
 <!-- EVENT overall_header_body_before -->
+	<header id="page-header" class="tsn8_header">
+		<a id="top" class="anchor" accesskey="t"></a>
 
-<div class="tsn8_page_wrapper tsn8_width_100">
-	<a id="top" class="anchor" accesskey="t"></a>
-
-	<div id="page-header" class="tsn8_wrapper tsn8_header_wrapper">
-		<span class="tsn8_header_image">
-			<!-- IF S_DISPLAY_SEARCH and not S_IN_SEARCH -->
-			<div id="search-box" class="search-box search-header">
-				<form action="{U_SEARCH}" method="get" id="search">
-					<fieldset>
-						<input name="keywords" id="keywords" type="search" maxlength="128" title="{L_SEARCH_KEYWORDS}" class="inputbox search tiny" size="20" value="{SEARCH_WORDS}" placeholder="{L_SEARCH_MINI}"/>
-						<button class="button icon-button search-icon" type="submit" title="{L_SEARCH}">{L_SEARCH}</button>
-						<a href="{U_SEARCH}" class="button icon-button search-adv-icon" title="{L_SEARCH_ADV}">{L_SEARCH_ADV}</a>
-						{S_SEARCH_HIDDEN_FIELDS}
-					</fieldset>
-				</form>
+		<div class="tsn8_header_fade">
+			<div class="tsn8_header_image">
+				<!-- IF S_DISPLAY_SEARCH and not S_IN_SEARCH -->
+				<div id="search-box" class="search-box search-header">
+					<form action="{U_SEARCH}" method="get" id="search">
+						<fieldset>
+							<input name="keywords" id="keywords" type="search" maxlength="128" title="{L_SEARCH_KEYWORDS}" class="inputbox search tiny" size="20" value="{SEARCH_WORDS}" placeholder="{L_SEARCH_MINI}"/>
+							<button class="button icon-button search-icon" type="submit" title="{L_SEARCH}">{L_SEARCH}</button>
+							<a href="{U_SEARCH}" class="button icon-button search-adv-icon" title="{L_SEARCH_ADV}">{L_SEARCH_ADV}</a>
+							{S_SEARCH_HIDDEN_FIELDS}
+						</fieldset>
+					</form>
+				</div>
+				<!-- ENDIF -->
 			</div>
-			<!-- ENDIF -->
-		</span>
-	</div>
-	<div class="tsn8_wrapper tsn8_top_menu_wrapper">
-		<!-- INCLUDE navbar_header.html -->
-	</div>
+		</div>
+
+		<nav class="tsn8_nav">
+			<!-- INCLUDE navbar_header.html -->
+		</nav>
+	</header>
 
 	<!-- EVENT overall_header_page_body_before -->
 
 	<a id="start_here" class="anchor"></a>
 
-	<div class="tsn8_wrapper tsn8_content_wrapper">
+	<section class="tsn8_section">
+
 		<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
 		<div id="information" class="rules">
 			<div class="inner">
@@ -115,3 +123,4 @@
 		<!-- ENDIF -->
 
 		<!-- EVENT overall_header_content_before -->
+		<div class="group">

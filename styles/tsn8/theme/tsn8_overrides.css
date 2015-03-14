@@ -39,7 +39,8 @@ ul.navlinks {
 }
 
 .action-bar {
-	margin: 0 1%;
+	margin: 0 -0.75em;
+	padding: 0 0.75em;
 	font-size: 1em;
 }
 
@@ -73,6 +74,10 @@ ul.forums {
 
 ul.topiclist li {
 	color: #587eaa;
+}
+
+ul.topiclist dfn {
+	left:-1999px;
 }
 
 li.row {
@@ -117,10 +122,6 @@ ul.topiclist li.row dt a.subforum:hover {
 	background-color: #587eaa;
 	color: #fff;
 	box-shadow: 0 1px 2px #ccc;
-}
-
-dd.lastpost img {
-	padding: 7px 3px 7px 0;
 }
 
 /*
@@ -174,6 +175,7 @@ dd.lastpost img {
 /*
  *	View Topic
  */
+
 fieldset.polls dd div {
 	font-size: 1em;
 	font-weight: normal;
@@ -195,9 +197,7 @@ fieldset.polls dd div {
 }
 
 .postprofile {
-	max-width: 200px;
 	min-width: 175px;
-	width: auto;
 	position: absolute;
 	text-align: center;
 	vertical-align: top;
@@ -246,7 +246,6 @@ fieldset.polls dd div {
 }
 
 .postbody {
-	width: auto;
 	margin-right: 200px;
 	min-height: 220px;
 }
