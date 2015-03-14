@@ -1,55 +1,59 @@
 <!-- INCLUDE overall_header.html -->
 
 <!-- IF not S_USER_LOGGED_IN and not S_IS_BOT -->
-<div class="tsn8_module_container">
-	<span class="tsn8_module_header">{L_WELCOME_VISITOR}</span>
+<div class="tsn8_module_container gm-row gt-row gd-row">
+	<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+		<span class="tsn8_module_header">{L_WELCOME_VISITOR}</span>
 
-	<div class="tsn8_module_content">
-		<form method="post" action="{S_LOGIN_ACTION}" class="headerspace">
-			<fieldset class="tsn8_myspot_login_fields align_center quick-login">
-				<label for="username" class="tsn8_font_color_med">{L_USERNAME}{L_COLON}</label><input type="text" name="username" id="username" size="10" class="inputbox" title="{L_USERNAME}"/>
-				<label for="password" class="tsn8_font_color_med">{L_PASSWORD}{L_COLON}</label><input type="password" name="password" id="password" size="10" class="inputbox" title="{L_PASSWORD}"/>
-				<!-- IF S_AUTOLOGIN_ENABLED -->
-				<label for="autologin">
-					<span class="tsn8_text_size1 tsn8_font_color_med">{L_LOG_ME_IN}</span> <input type="checkbox" name="autologin" id="autologin"/>
-				</label>
-				<!-- ENDIF -->
-				<br/>
-				<input type="submit" name="login" value="{L_LOGIN}" class="tsn8_button_large"/>
-				{S_MYSPOT_LOGIN_REDIRECT}
-			</fieldset>
-		</form>
+		<div class="tsn8_module_content">
+			<form method="post" action="{S_LOGIN_ACTION}" class="headerspace">
+				<fieldset class="tsn8_myspot_login_fields align_center quick-login">
+					<label for="username" class="tsn8_font_color_med">{L_USERNAME}{L_COLON}</label><input type="text" name="username" id="username" size="10" class="inputbox" title="{L_USERNAME}"/>
+					<label for="password" class="tsn8_font_color_med">{L_PASSWORD}{L_COLON}</label><input type="password" name="password" id="password" size="10" class="inputbox" title="{L_PASSWORD}"/>
+					<!-- IF S_AUTOLOGIN_ENABLED -->
+					<label for="autologin">
+						<span class="tsn8_text_size1 tsn8_font_color_med">{L_LOG_ME_IN}</span> <input type="checkbox" name="autologin" id="autologin"/>
+					</label>
+					<!-- ENDIF -->
+					<br/>
+					<input type="submit" name="login" value="{L_LOGIN}" class="tsn8_button_large"/>
+					{S_MYSPOT_LOGIN_REDIRECT}
+				</fieldset>
+			</form>
+		</div>
+		<!-- IF U_SEND_PASSWORD -->
+		<span class="tsn8_module_footer tsn8_font_color_med">
+			<a href="{U_SEND_PASSWORD}" class="tsn8_font_color_med">{L_FORGOT_PASS}</a>
+		</span>
+		<!-- ENDIF -->
 	</div>
-	<!-- IF U_SEND_PASSWORD -->
-	<span class="tsn8_module_footer tsn8_font_color_med">
-		<a href="{U_SEND_PASSWORD}" class="tsn8_font_color_med">{L_FORGOT_PASS}</a>
-	</span>
-	<!-- ENDIF -->
 </div>
 <!-- ENDIF -->
 
 <!-- EVENT index_body_markforums_before -->
 
 <!-- IF U_MARK_FORUMS -->
-<div class="action-bar compact">
-	<a href="{U_MARK_FORUMS}" class="mark-read rightside" title="{L_MARK_FORUMS_READ}" accesskey="m" data-ajax="mark_forums_read"><span class="tsn8_icon tsn8_icon_markall"></span></a>
+<div class="gm-row gt-row gd-row">
+	<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-custom-85">
+		<div class="action-bar compact">
+			<a href="{U_MARK_FORUMS}" class="mark-read rightside" title="{L_MARK_FORUMS_READ}" accesskey="m" data-ajax="mark_forums_read"><span class="tsn8_icon tsn8_icon_markall"></span></a>
+		</div>
+	</div>
+	<div class="gd-columns gd-custom-15 responsive-hide"></div>
 </div>
 <!-- ENDIF -->
 <!-- EVENT index_body_markforums_after -->
 
-<table class="tsn8_myspot_content_wrapper tsn8_width_100">
-	<tr>
-		<td class="tsn8_myspot_content_wrapper_column tsn8_width_85">
-			<!-- INCLUDE forumlist_body.html -->
-		</td>
-		<td class="tsn8_myspot_content_wrapper_column tsn8_width_15">
-			<!-- EVENT index_body_stat_blocks_before -->
-			<!-- INCLUDE modules/myspot_stats.html -->
-			<!-- EVENT index_body_stat_blocks_after -->
-		</td>
-	</tr>
-</table>
-
+<div class="gm-row gt-row gd-row">
+	<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-custom-85">
+		<!-- INCLUDE forumlist_body.html -->
+	</div>
+	<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-custom-15">
+		<!-- EVENT index_body_stat_blocks_before -->
+		<!-- INCLUDE modules/myspot_stats.html -->
+		<!-- EVENT index_body_stat_blocks_after -->
+	</div>
+</div>
 <!-- EVENT index_body_forumlist_body_after -->
 
 <!-- INCLUDE overall_footer.html -->

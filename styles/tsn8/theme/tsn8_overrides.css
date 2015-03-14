@@ -94,6 +94,10 @@ li.row:hover {
 	border-radius: 5px;
 }
 
+li.row:hover dd {
+	border-left-color: #d7e3f6;
+}
+
 dl.icon dt .list-inner {
 	padding-left: 50px;
 }
@@ -170,6 +174,22 @@ ul.topiclist li.row dt a.subforum:hover {
 .pagination li a:hover, .pagination .dropdown-visible a.dropdown-trigger, .nojs .pagination .dropdown-container:hover a.dropdown-trigger {
 	border-color: #587eaa;
 	background-color: #587eaa;
+}
+
+.forum-title,
+.topic-title {
+	margin:0;
+	border-bottom: 1px solid #d7e3f6;
+
+}
+
+.display-options {
+	font-size: 1em;
+}
+
+.display-options select {
+	border-radius: 3px;
+	border-color: #C7C3BF;
 }
 
 /*

@@ -71,7 +71,6 @@
 <!-- EVENT overall_header_body_before -->
 	<header id="page-header" class="tsn8_header">
 		<a id="top" class="anchor" accesskey="t"></a>
-
 		<div class="tsn8_header_fade">
 			<div class="tsn8_header_image">
 				<!-- IF S_DISPLAY_SEARCH and not S_IN_SEARCH -->
@@ -97,13 +96,15 @@
 	<a id="start_here" class="anchor"></a>
 
 	<section class="tsn8_section">
-		<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
-		<div id="information" class="rules">
-			<div class="inner">
-				<strong>{L_INFORMATION}{L_COLON}</strong> {L_BOARD_DISABLED}
-			</div>
-		</div>
-		<!-- ENDIF -->
-
-		<!-- EVENT overall_header_content_before -->
 		<div class="group">
+			<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
+			<div class="gm-row gt-row gd-row">
+				<div id="information" class="rules gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+					<div class="inner">
+						<strong>{L_INFORMATION}{L_COLON}</strong> {L_BOARD_DISABLED}
+					</div>
+				</div>
+			</div>
+			<!-- ENDIF -->
+
+			<!-- EVENT overall_header_content_before -->
