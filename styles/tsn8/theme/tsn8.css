@@ -16,6 +16,7 @@ body {
 	margin: 0;
 	background: #fff url('./images/tsn8/tsnlogo-watermark.png') no-repeat fixed 15% 0;
 	background-size: contain;
+	overflow-x: hidden;
 }
 
 header, footer, section, nav {
@@ -534,8 +535,15 @@ header, footer, section, nav {
 	border-color: #003366;
 }
 
+.align_left {
+	text-align: left;
+}
+
 .align_center {
 	text-align: center;
+}
+.align_right {
+	text-align: right;
 }
 
 .tsn8_width_10 {
@@ -652,7 +660,6 @@ input.button2,
 .tsn8_button_large {
 	margin: 0.5em auto;
 	padding: 0.25em 0.5em;
-	width: 90%;
 	border-radius: 5px;
 	box-shadow: 0 1px 2px #999;
 	background-color: #003366;
@@ -727,23 +734,13 @@ label {
 	line-height: 1.2em;
 	padding: 3px;
 	border-radius: 3px;
-	margin-left: 5px;
 }
 
-/*.tsn8_input_text:hover,*/
-/*.tsn8_input_text:focus {*/
-/*border: 1px solid #ccc;*/
-/*}*/
-
-#message-box textarea,
 .tsn8_input_textarea {
 	width: auto;
 	border: 1px solid #ccc;
 	border-radius: 3px;
-	/*line-height: 1.1em;*/
 	font-size: 1em;
-	padding: 3px 5px;
-	margin-left: 5px;
 	max-height: 9em;
 }
 

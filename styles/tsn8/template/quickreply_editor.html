@@ -1,27 +1,40 @@
-<form method="post" action="{U_QR_ACTION}" id="qr_postform">
-	<!-- EVENT quickreply_editor_panel_before -->
-	<div class="tsn8_module tsn8_module_container">
-		<span class="tsn8_module_header">{L_QUICKREPLY}</span>
-		<fieldset class="fields1">
-			<div class="tsn8_input_wrapper tsn8_width_100">
-				<!--<label for="subject" class="tsn8_input_label">{L_SUBJECT}{L_COLON}</label>-->
-				<input placeholder="{L_SUBJECT}" type="text" name="subject" id="subject" maxlength="124" tabindex="2" value="{SUBJECT}" class="inputbox autowidth tsn8_input_text tsn8_input_subject"/>
+<div class="gm-row gt-row gd-row">
+	<div class="gm-columns gm-full gt-columns gt-full gd-columns gd-full">
+		<form method="post" action="{U_QR_ACTION}" id="qr_postform">
+			<!-- EVENT quickreply_editor_panel_before -->
+			<div class="tsn8_module tsn8_module_container">
+				<span class="tsn8_module_header">{L_QUICKREPLY}</span>
+				<fieldset class="fields1 group">
+					<div class="gm-row gt-row gd-row">
+						<div class="gm-columns gm-full gt-columns gt-full gd-columns gd-full">
+							<label for="subject" class="input-label">{L_SUBJECT}{L_COLON}<br/>
+								<input placeholder="{L_SUBJECT}" type="text" name="subject" id="subject" maxlength="124" tabindex="2" value="{SUBJECT}" class="inputbox autowidth tsn8_input_text tsn8_input_subject"/>
+								<br /><small class="hint">Only edit this if you want</small>
+							</label>
+						</div>
+					</div>
+					<div class="gm-row gt-row gd-row">
+						<div class="gm-columns gm-full gt-columns gt-full gd-columns gd-full">
+							<!-- EVENT quickreply_editor_message_before -->
+							<label for="reply" class="input-label">{L_MESSAGE}{L_COLON}<br/>
+								<textarea id="reply" name="message" rows="7" cols="76" tabindex="3" class="inputbox tsn8_input_textarea"></textarea>
+								<br/><small class="hint">60,000 character maximum</small>
+							</label>
+							<!-- EVENT quickreply_editor_message_after -->
+						</div>
+					</div>
+					<div class="gm-row gt-row gd-row">
+						<div class="gm-columns gm-full gt-columns gt-full gd-columns gd-full align_center">
+							{S_FORM_TOKEN}
+							{QR_HIDDEN_FIELDS}
+							<input type="submit" accesskey="f" tabindex="6" name="preview" value="{L_FULL_EDITOR}" class="tsn8_button_large gt-1of5 gd-1of5" id="qr_full_editor"/>
+							<input type="submit" accesskey="s" tabindex="7" name="post" value="{L_SUBMIT}" class="tsn8_button_large gt-1of5 gd-1of5"/>
+						</div>
+					</div>
+				</fieldset>
 			</div>
-			<!-- EVENT quickreply_editor_message_before -->
-			<div class="tsn8_input_wrapper tsn8_width_100" id="message-box">
-				<!--<label for="reply" class="tsn8_input_label">{L_REPLY}{L_COLON}</label>-->
-				<textarea id="reply" name="message" rows="7" cols="76" tabindex="3" class="inputbox tsn8_input_textarea"></textarea>
-			</div>
-			<!-- EVENT quickreply_editor_message_after -->
-		</fieldset>
-		<fieldset class="submit-buttons">
-			{S_FORM_TOKEN}
-			{QR_HIDDEN_FIELDS}
-			<span class="buttonset">
-				<input type="submit" accesskey="f" tabindex="6" name="preview" value="{L_FULL_EDITOR}" data-mod="tsn8_button" class="" id="qr_full_editor"/>
-				<input type="submit" accesskey="s" tabindex="7" name="post" data-mod="tsn8_button" value="{L_SUBMIT}" class=""/>
-			</span>
-		</fieldset>
+			<!-- EVENT quickreply_editor_panel_after -->
+		</form>
 	</div>
-	<!-- EVENT quickreply_editor_panel_after -->
-</form>
+</div>
+

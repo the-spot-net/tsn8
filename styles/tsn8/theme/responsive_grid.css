@@ -1,5 +1,109 @@
+/* Inputs */
+input, textarea {
+	width: 100%;
+	font-size: 1em;
+	padding: .3125em .25em;
+	background: #fff;
+	border: .0625em solid #a9a6a7;
+	outline: 0;
+	font-family: "Calibri", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
+	-webkit-border-radius: .125em;
+	-moz-border-radius: .125em;
+	-o-border-radius: .125em;
+	border-radius: .125em;
+	-webkit-box-shadow: inset 0 .0625em .125em #cfcdcd;
+	-moz-box-shadow: inset 0 .0625em .125em #cfcdcd;
+	-o-box-shadow: inset 0 .0625em .125em #cfcdcd;
+	box-shadow: inset 0 .0625em .125em #cfcdcd
+}
+.input-label {
+	font-weight: bold;
+	font-family: "Calibri", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+	margin-left: 0.25em;
+	margin-right: 0.25em;
+	text-transform: none;
+}
+
+input:hover, textarea:hover, input:focus, textarea:focus, input:active, textarea:active, input.is-current, textarea.is-current {
+	border-color: #434142;
+	z-index: 1;
+	-webkit-box-shadow: 0 .0625em .25em #cfcdcd;
+	-moz-box-shadow: 0 .0625em .25em #cfcdcd;
+	-o-box-shadow: 0 .0625em .25em #cfcdcd;
+	box-shadow: 0 .0625em .25em #cfcdcd
+}
+
+input[type="checkbox"], input[type="radio"] {
+	width: auto
+}
+
+input[type="checkbox"] .lte7, input[type="radio"] .lte7 {
+	width: 13px
+}
+
+textarea {
+	height: 5em
+}
+
+select {
+	font-size: .8125em
+}
+
+.input-xxxs {
+	width: 1.875em
+}
+
+.input-xxs {
+	width: 3.125em
+}
+
+.input-xs {
+	width: 6.25em
+}
+
+.input-s {
+	width: 10.9375em
+}
+
+.input-m {
+	width: 15.625em
+}
+
+.input-l {
+	width: 21.875em;
+	max-width: 100%
+}
+
+.input-label {
+	display: block;
+	margin-top: .9375em
+}
+
+.input-label input, .input-label textarea, .input-label select {
+	margin-top: .3125em;
+	margin-bottom: .3125em
+}
+
+.input-label .hint {
+	font-weight: normal;
+	color: #a9a6a7;
+	font-family: "Calibri", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
+	margin-top: .3125em;
+	font-size: 0.75em;
+	text-transform: none;
+}
+
+legend {
+	padding-bottom: .625em
+}
+
+legend.input-label {
+	padding-bottom: .3125em
+}
+
+/* Grid */
 .group {
-	zoom: 1
+	zoom: 1;
 }
 
 .group:before, .group:after {
@@ -138,6 +242,9 @@
 	.gm-third {
 		width: 33.333333333333336%
 	}
+	.gm-hide {
+		display: none;
+	}
 }
 
 @media only screen and (min-width: 48em) and (max-width: 61.9375em) {
@@ -262,6 +369,10 @@
 
 	.gt-clear {
 		clear: both
+	}
+
+	.gt-hide {
+		display: none;
 	}
 }
 
@@ -431,6 +542,10 @@
 
 	.gd-custom-85 {
 		width: 85%;
+	}
+
+	.gd-hide {
+		display: none;
 	}
 
 }
