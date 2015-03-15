@@ -153,8 +153,8 @@ ul.topiclist li.row dt a.subforum:hover {
 	margin-left: 0.25em;
 }
 
-.dropdown-container {
-	padding-top: 3px;
+.action-bar .dropdown-container {
+	margin-top: 3px;
 }
 
 .pagination {
@@ -315,7 +315,7 @@ fieldset.polls dl.poll_total_votes dd.resultbar {
 
 .has-profile .post-buttons {
 	clear: right;
-	position: static;
+	position: relative;
 }
 
 @media only screen and (max-width: 700px), only screen and (max-device-width: 700px) {

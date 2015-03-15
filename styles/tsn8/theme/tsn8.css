@@ -728,7 +728,6 @@ label {
 }
 
 .tsn8_input_text {
-	width: auto;
 	border: 1px solid #ccc;
 	font-size: 1.1em;
 	line-height: 1.2em;
@@ -737,11 +736,15 @@ label {
 }
 
 .tsn8_input_textarea {
-	width: auto;
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	font-size: 1em;
 	max-height: 9em;
+}
+
+.tsn8_input_text:hover,
+.tsn8_input_textarea:hover {
+	border: 1px solid #587eaa;
 }
 
 /* Sizing overrides for Inputs */

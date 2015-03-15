@@ -34,7 +34,8 @@ function ajax_fetch_html(url, elementid, refresh) {
 	$.ajax({
 		url: url
 	}).done(function (data) {
-		$('#' + elementid).html(data);
+		var destination = $('#' + elementid);
+		destination.html(data);
 		if (refresh) {
 			setTimeout(function () {
 				ajax_fetch_html(url, elementid, refresh);
