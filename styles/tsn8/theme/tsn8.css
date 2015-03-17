@@ -81,7 +81,7 @@ header, footer, section, nav {
 	width: auto;
 }
 
-.panel,
+/*.panel,*/
 .tsn8_module_container,
 .tsn8_module_container_clear,
 .tsn8_module_container_med,
@@ -643,6 +643,7 @@ header, footer, section, nav {
 }
 
 /* BEGIN Input Styling */
+input.button1,
 input.button2,
 .tsn8_button {
 	padding-left: 0.5em;
@@ -656,6 +657,7 @@ input.button2,
 	font-size: 1em;
 	height: 1.5em;
 	vertical-align: middle;
+	font-weight: normal;
 }
 .tsn8_button_large {
 	margin: 0.5em auto;
@@ -668,6 +670,7 @@ input.button2,
 	font-size: 1.1em;
 	border: 0;
 }
+input.button1:hover,
 input.button2:hover,
 .tsn8_button:hover,
 .tsn8_button_large:hover {
@@ -759,4 +762,22 @@ label {
 	font-size: 1.3em;
 	font-weight: bold;
 	line-height: 1.5em;
+}
+
+/* Create Post Page */
+.tsn8_information_message {
+	border-radius: 5px;
+	box-shadow: 0 1px 2px #666;
+	background-color: #d7e3f6;
+	padding: 0.25em;
+	margin: 0.25em;
+}
+.tsn8_information_message h3 {
+	border-bottom: 1px solid #587eaa;
+	color: #003366;
+	text-transform: capitalize;
+}
+.tsn8_information_message h3,
+.tsn8_information_message p {
+	margin: 0.25em;
 }

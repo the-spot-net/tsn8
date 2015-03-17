@@ -19,6 +19,11 @@ input.button1, input.button2 {
 	font-size: 0.85em;
 }
 
+.panel {
+	/*background-color: #d7e3f6;*/
+	box-shadow: 0 1px 2px #666;
+}
+
 .search-header {
 	box-shadow: 0 0 10px #587eaa;
 }
@@ -182,7 +187,8 @@ ul.topiclist li.row dt a.subforum:hover {
 }
 
 .forum-title,
-.topic-title {
+.topic-title,
+.posting-title {
 	margin: 0;
 	border-bottom: 1px solid #d7e3f6;
 }
@@ -199,7 +205,9 @@ ul.topiclist li.row dt a.subforum:hover {
 /*
  *	View Topic
  */
-
+fieldset.polls dt {
+	/*width: auto;*/
+}
 fieldset.polls dd div {
 	font-size: 0.75em;
 	font-weight: normal;
@@ -215,16 +223,33 @@ fieldset.polls dl.poll_total_votes dd.resultbar {
 }
 
 .pollbar1,
-.pollbar2 {
+.rtl .pollbar1,
+.pollbar2,
+.rtl .pollbar2,
+.pollbar3,
+.rtl .pollbar3,
+.pollbar4,
+.rtl .pollbar4,
+.pollbar5,
+.rtl .pollbar5 {
 	border-radius: 5px;
-	background-color: #003366;
+	background-color: #587eaa;
 	border: 0 solid transparent;
 	box-shadow: 0 1px 2px #999;
 	font-size: 1em;
 }
 
-.pollbar1 {
-	background-color: #587eaa;
+fieldset.polls dl {
+	border-top-color: #DCDEE2;
+	color: #666666;
+}
+
+fieldset.polls dl.voted {
+	color: #000000;
+}
+
+fieldset.polls dd div {
+	color: #FFFFFF;
 }
 
 .topic-tools {
@@ -300,6 +325,10 @@ fieldset.polls dl.poll_total_votes dd.resultbar {
 
 .has-profile .postbody h3 {
 	margin-right: 0;
+}
+
+.postbody h3 img {
+	vertical-align: middle;
 }
 
 .hasjs .postbody .post-buttons {
