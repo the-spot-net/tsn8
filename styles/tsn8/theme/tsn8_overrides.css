@@ -20,7 +20,7 @@ input.button1, input.button2 {
 }
 
 .panel {
-	/*background-color: #d7e3f6;*/
+	background-color: rgba(215, 227, 246, 0.3);
 	box-shadow: 0 1px 2px #666;
 }
 
@@ -123,7 +123,7 @@ a.forumtitle:hover {
 ul.topiclist li.row dt a.subforum {
 	display: inline-block;
 	padding: 3px 3px 3px 15px;
-	border-radius: 3px;
+	border-radius: 5px;
 	background-position: 3px 50%;
 }
 
@@ -177,7 +177,7 @@ ul.topiclist li.row dt a.subforum:hover {
 }
 
 .pagination li a, .pagination li span {
-	border-radius: 3px;
+	border-radius: 5px;
 	font-size: 1em;
 }
 
@@ -198,7 +198,7 @@ ul.topiclist li.row dt a.subforum:hover {
 }
 
 .display-options select {
-	border-radius: 3px;
+	border-radius: 5px;
 	border-color: #C7C3BF;
 }
 
@@ -208,9 +208,17 @@ ul.topiclist li.row dt a.subforum:hover {
 fieldset.polls dt {
 	/*width: auto;*/
 }
+
 fieldset.polls dd div {
 	font-size: 0.75em;
 	font-weight: normal;
+}
+
+fieldset dl.poll_vote dd.resultbar {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
 }
 
 fieldset.polls dl.poll_total_votes dd.resultbar {
@@ -239,8 +247,12 @@ fieldset.polls dl.poll_total_votes dd.resultbar {
 	font-size: 1em;
 }
 
+.most-votes .resultbar div {
+	background-color: #003366;
+}
+
 fieldset.polls dl {
-	border-top-color: #DCDEE2;
+	border-top-color: #fff;
 	color: #666666;
 }
 
@@ -378,7 +390,7 @@ p.author a {
 }
 
 textarea.inputbox {
-	width: 100%;
+	width: auto;
 }
 
 .online-list h3 {
@@ -387,4 +399,75 @@ textarea.inputbox {
 
 .online-list p {
 	margin-bottom: 0.25em;
+}
+
+/* Post Reply */
+fieldset.fields1 dl dt,
+fieldset.fields1 dl dt label {
+	width: auto;
+	font-size: 1.3rem;
+	color: #587eaa;
+	margin: 0.25em 0.5em;
+	float: none;
+	font-weight: normal;
+}
+
+fieldset.fields1 dl dt label {
+	margin: 0;
+}
+
+fieldset.fields1 dl dd {
+	margin-left: 0.5em;
+	width: auto;
+	display: block;
+}
+
+/********* Color Picker **********/
+.colorpicker_submit {
+	background: transparent url('images/tsn8/check_green.png') no-repeat center center;
+	background-size: cover;
+	border-radius: 15px;
+	cursor: pointer;
+}
+
+.colorpicker_focus {
+	background-position: center center;
+}
+
+/******************** jQuery UI ************************/
+.ui-button-text-only .ui-button-text,
+input.ui-button {
+	padding: 0.25rem 0.5rem;
+	width: auto;
+}
+
+.ui-selectmenu-button {
+	margin-bottom: -0.55em;
+}
+
+.ui-selectmenu-button span.ui-icon {
+	right: 0.25rem;
+}
+
+.ui-selectmenu-button span.ui-selectmenu-text {
+	padding: 0.15rem 0.5rem;
+	width: auto;
+}
+
+.ui-buttonset .ui-button {
+	margin-bottom: 0.25em;
+}
+
+#format-buttons {
+	margin: 0.25em 0 0.25em 0.5em;
+}
+
+#message-box {
+	width: 100%;
+	margin: 0 -0.5em 0 -.25em;
+	padding: 0 0.5em;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
 }

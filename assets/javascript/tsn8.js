@@ -1,14 +1,50 @@
 $(document).ready(function () {
 	// Implement jQuery UI Buttons & Button Sets
 	$(function () {
-		$('button[data-mod*="tsn8_button"], input[data-mod*="tsn8_button"]')//', input[type=submit]')
-			.attr('data-mod', 'tsn8_button')
+		$('.buttonset').buttonset();
+		$('[data-mod="tsn8_button"]')
 			.removeClass('button2')
 			.removeClass('button1')
+			.css({'width': 'auto'})
 			.button({
 				text: false
 			});
-		$(".buttonset").buttonset();
+		$('.button2, .button1')
+			.removeClass('button2')
+			.removeClass('button1')
+			.css({'width': 'auto'})
+			.button();
+		$('select').selectmenu();
+
+		// For posting pages
+		$('#font_select').selectmenu({
+			change: function (event, ui) {
+				var value = $(this).val();
+				bbfontstyle('[size=' + value + ']', '[/size]');
+			}
+		});
+
+		$('#foreground').ColorPicker({
+			onSubmit: function (hsb, hex, rgb, el) {
+				bbfontstyle('[color=#' + hex + ']', '[/color]');
+				$(el).ColorPickerHide();
+			}
+		});
+
+		$("#smiley_menu").on('click', function (e) {
+			e.preventDefault();
+			$("#tsn8_newpost_smiley_wrapper").fadeToggle();
+		});
+
+		$("#tsn8_newpost_smiley_wrapper").on('mouseleave', function () {
+			$(this).fadeOut();
+		});
+
+		$('.tsn8_icon_smiley').on('click', function () {
+			var code = $(this).attr('data-code');
+			insert_text(code, true);
+			$('#tsn8_newpost_smiley_wrapper').fadeOut();
+		});
 	});
 });
 

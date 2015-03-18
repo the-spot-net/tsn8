@@ -88,7 +88,7 @@ header, footer, section, nav {
 .forabg,
 .forumbg,
 .post {
-	border-radius: 3px;
+	border-radius: 5px;
 	box-shadow: 0 1px 2px #ccc;
 	border: 1px solid #d7e3f6;
 	background-color: #fff;
@@ -106,6 +106,7 @@ header, footer, section, nav {
 	border: 1px solid #587eaa;
 }
 
+h3,
 .quickreply-title,
 .tsn8_module_header,
 .forabg .header,
@@ -117,6 +118,9 @@ header, footer, section, nav {
 	margin-bottom: 5px;
 	border-bottom: 1px solid #d7e3f6;
 	white-space: nowrap;
+	font-weight: normal;
+	margin-top: 0;
+	text-transform: capitalize;
 }
 
 .tsn8_module_subheader {
@@ -164,7 +168,7 @@ header, footer, section, nav {
 	border: 1px solid #d7e3f6;
 	padding: 3px;
 	margin: 3px;
-	border-radius: 3px;
+	border-radius: 5px;
 }
 
 .tsn8_myspot_stat_value, /* TODO Remove this class */
@@ -236,99 +240,99 @@ header, footer, section, nav {
 }
 
 .tsn8_icon_joined {
-	background-image: url('../theme/images/tsn8/clock_gray.png');
+	background-image: url('images/tsn8/clock_gray.png');
 }
 
 .tsn8_icon_joined:hover {
-	background-image: url('../theme/images/tsn8/clock_color.png');
+	background-image: url('images/tsn8/clock_color.png');
 }
 
 .tsn8_icon_geo {
-	background-image: url('../theme/images/tsn8/geo_gray.png');
+	background-image: url('images/tsn8/geo_gray.png');
 }
 
 .tsn8_icon_geo:hover {
-	background-image: url('../theme/images/tsn8/geo.png');
+	background-image: url('images/tsn8/geo.png');
 }
 
 .tsn8_icon_online {
-	background-image: url('../theme/images/tsn8/chat.png');
+	background-image: url('images/tsn8/chat.png');
 	background-color: #006600;
 	border-radius: 15px;
 }
 
 .tsn8_icon_offline {
-	background-image: url('../theme/images/tsn8/chat.png');
+	background-image: url('images/tsn8/chat.png');
 	background-color: #ccc;
 	border-radius: 15px;
 }
 
 .tsn8_icon_profile {
-	background-image: url('../theme/images/tsn8/profile_gray.png');
+	background-image: url('images/tsn8/profile_gray.png');
 }
 
 .tsn8_icon_profile:hover {
-	background-image: url('../theme/images/tsn8/profile.png');
+	background-image: url('images/tsn8/profile.png');
 }
 
 .tsn8_icon_email {
-	background-image: url('../theme/images/tsn8/email.png');
+	background-image: url('images/tsn8/email.png');
 }
 
 .tsn8_icon_subscribe {
-	background-image: url('../theme/images/tsn8/subscribe.png');
+	background-image: url('images/tsn8/subscribe.png');
 }
 
 .tsn8_icon_bookmark {
-	background-image: url('../theme/images/tsn8/reminder.png');
+	background-image: url('images/tsn8/reminder.png');
 }
 
 .tsn8_icon_print {
-	background-image: url('../theme/images/tsn8/print.png');
+	background-image: url('images/tsn8/print.png');
 }
 
 .tsn8_icon_attach {
-	background-image: url('../theme/images/tsn8/attach.png');
+	background-image: url('images/tsn8/attach.png');
 }
 
 .tsn8_icon_bump {
-	background-image: url('../theme/images/tsn8/bump.png');
+	background-image: url('images/tsn8/bump.png');
 }
 
 .tsn8_icon_newtopic {
-	background-image: url('../theme/images/tsn8/add_large.png');
+	background-image: url('images/tsn8/add_large.png');
 }
 
 .tsn8_icon_addreply {
-	background-image: url('../theme/images/tsn8/reply_large.png');
+	background-image: url('images/tsn8/reply_large.png');
 }
 
 .tsn8_icon_report {
-	background-image: url('../theme/images/tsn8/spam.png');
+	background-image: url('images/tsn8/spam.png');
 }
 
 .tsn8_icon_info {
-	background-image: url('../theme/images/tsn8/help.png');
+	background-image: url('images/tsn8/help.png');
 }
 
 .tsn8_icon_top {
-	background-image: url('../theme/images/tsn8/top_large.png');
+	background-image: url('images/tsn8/top_large.png');
 }
 
 .tsn8_icon_quote {
-	background-image: url('../theme/images/tsn8/quote_large.png');
+	background-image: url('images/tsn8/quote_large.png');
 }
 
 .tsn8_icon_edit {
-	background-image: url('../theme/images/tsn8/compose_large.png');
+	background-image: url('images/tsn8/compose_large.png');
 }
 
 .tsn8_icon_warn {
-	background-image: url('../theme/images/tsn8/warn.png');
+	background-image: url('images/tsn8/warn.png');
 }
 
 .tsn8_icon_trash {
-	background-image: url('../theme/images/tsn8/trash_gray.png');
+	background-image: url('images/tsn8/trash_gray.png');
 }
 
 .tsn8_icon_markall {
@@ -336,45 +340,50 @@ header, footer, section, nav {
 }
 
 .tsn8_icon_lastpost {
-	background-image: url('../theme/images/tsn8/lastpost.png');
+	background-image: url('images/tsn8/lastpost.png');
 }
 
 .tsn8_icon_previous {
-	background-image: url('../theme/images/tsn8/previous.png');
+	background-image: url('images/tsn8/previous.png');
 }
 
 .tsn8_icon_next {
-	background-image: url('../theme/images/tsn8/next.png');
+	background-image: url('images/tsn8/next.png');
 }
 
 .tsn8_icon_send {
-	background-image: url('../theme/images/tsn8/send.png');
+	background-image: url('images/tsn8/send.png');
 }
 
 .tsn8_icon_search {
-	background-image: url('../theme/images/tsn8/search.png');
+	background-image: url('images/tsn8/search.png');
+}
+.tsn8_icon_emoticon {
+	background-image: url('images/icon_smile.gif');
+	background-size: 15px 15px;
+	height: 15px;
 }
 
 .tsn8_icon_check {
-	background-image: url('../theme/images/tsn8/check_green.png');
+	background-image: url('images/tsn8/check_green.png');
 }
 
 .tsn8_icon_x {
-	background-image: url('../theme/images/tsn8/close_white.png');
+	background-image: url('images/tsn8/close_white.png');
 	background-color: #660000;
 }
 
 .tsn8_icon_format_toolbar {
-	background-image: url('../theme/images/tsn8/html_editor.png');
+	background-image: url('images/tsn8/html_editor.png');
 	background-position-y: 0;
 }
 
 .tsn8_icon_tsn {
-	background-image: url('../theme/images/tsn8/tsn_logo.png');
+	background-image: url('images/tsn8/tsn_logo.png');
 }
 
 .tsn8_icon_lock {
-	background-image: url('../theme/images/tsn8/lock_large.png');
+	background-image: url('images/tsn8/lock_large.png');
 	background-color: #660000;
 }
 
@@ -430,10 +439,6 @@ header, footer, section, nav {
 	background-position-x: -84px;
 }
 
-.tsn8_icon_emoticon {
-	background-position-x: -357px;
-}
-
 .tsn8_icon_newtopic,
 .tsn8_icon_addreply,
 .tsn8_icon_large:hover {
@@ -462,13 +467,13 @@ header, footer, section, nav {
 
 .tsn8_icon_sprite {
 	background-size: auto;
-	background: no-repeat center center;
+	background-repeat: no-repeat;
 }
 
 .tsn8_icon_smiley {
 	padding: 2px;
 	margin: 3px;
-	border-radius: 3px;
+	border-radius: 5px;
 	display: inline-block;
 	text-align: center;
 	width: auto;
@@ -508,14 +513,6 @@ header, footer, section, nav {
 	margin-left: auto;
 	margin-right: auto;
 	clear: both;
-}
-
-.tsn8_radius_3 {
-	border-radius: 3px;
-}
-
-.tsn8_radius_15 {
-	border-radius: 15px;
 }
 
 .tsn8_overflow_height_700 {
@@ -650,8 +647,8 @@ input.button2,
 	padding-right: 0.5em;
 	border-radius: 0.25em;
 	box-shadow: 0 1px 2px #999;
-	background: #003366;
-	color: #d7e3f6;
+	background: #d7e3f6;
+	color: #587eaa;
 	text-align: center;
 	border: 0;
 	font-size: 1em;
@@ -664,8 +661,8 @@ input.button2,
 	padding: 0.25em 0.5em;
 	border-radius: 5px;
 	box-shadow: 0 1px 2px #999;
-	background-color: #003366;
-	color: #d7e3f6;
+	background-color: #d7e3f6;
+	color: #587eaa;
 	text-align: center;
 	font-size: 1.1em;
 	border: 0;
@@ -675,7 +672,7 @@ input.button2:hover,
 .tsn8_button:hover,
 .tsn8_button_large:hover {
 	background: #587eaa;
-	color: #d7e3f6;
+	color: #003366;
 	border: 0;
 }
 
@@ -716,6 +713,10 @@ label {
 	font-family: Calibri, "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
 }
 
+input[type="radio"] {
+	box-shadow: none;
+}
+
 .tsn8_input_wrapper {
 	margin: 0 -0.75em;
 	padding: 5px 0.75em;
@@ -735,12 +736,12 @@ label {
 	font-size: 1.1em;
 	line-height: 1.2em;
 	padding: 3px;
-	border-radius: 3px;
+	border-radius: 5px;
 }
 
 .tsn8_input_textarea {
 	border: 1px solid #ccc;
-	border-radius: 3px;
+	border-radius: 5px;
 	font-size: 1em;
 	max-height: 9em;
 }
@@ -767,8 +768,9 @@ label {
 /* Create Post Page */
 .tsn8_information_message {
 	border-radius: 5px;
-	box-shadow: 0 1px 2px #666;
+	border: 1px solid #d7e3f6;
 	background-color: #d7e3f6;
+	background-color: rgba(215, 227, 246, 0.3);
 	padding: 0.25em;
 	margin: 0.25em;
 }
@@ -780,4 +782,22 @@ label {
 .tsn8_information_message h3,
 .tsn8_information_message p {
 	margin: 0.25em;
+}
+
+.tsn8_smiley_toolbar_container {
+	position: relative;
+}
+.tsn8_newpost_smiley_wrapper {
+	position: absolute;
+	top: 1.7em;
+	right: 0;
+	z-index: 100;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+	box-shadow: 0 1px 2px #ccc;
+	background-color: #fff;
+	width: 300px;
+	text-align: center;
+	font-size: 0.9em;
+	padding: 5px;
 }

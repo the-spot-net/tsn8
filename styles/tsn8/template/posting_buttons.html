@@ -1,5 +1,5 @@
 
-<script type="text/javascript">
+<script>
 // <![CDATA[
 	var form_name = 'postform';
 	var text_name = <!-- IF $SIG_EDIT -->'signature'<!-- ELSE -->'message'<!-- ENDIF -->;
@@ -7,8 +7,8 @@
 	var upload = false;
 
 	// Define the bbCode tags
-	var bbcode = new Array();
-	var bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote]','[code]','[/code]','[list]','[/list]','[list=]','[/list]','[img]','[/img]','[url]','[/url]','[flash=]', '[/flash]','[size=]','[/size]'<!-- BEGIN custom_tags -->, {custom_tags.BBCODE_NAME}<!-- END custom_tags -->);
+	var bbcode = [];
+	var bbtags = ['[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote]','[code]','[/code]','[list]','[/list]','[list=]','[/list]','[img]','[/img]','[url]','[/url]','[flash=]', '[/flash]','[size=]','[/size]'<!-- BEGIN custom_tags -->, {custom_tags.BBCODE_NAME}<!-- END custom_tags -->];
 	var imageTag = false;
 
 	// Helpline messages
@@ -32,19 +32,10 @@
 		<!-- END custom_tags -->
 	}
 
-	function change_palette()
-	{
+	function change_palette() {
 		phpbb.toggleDisplay('colour_palette');
 		e = document.getElementById('colour_palette');
-
-		if (e.style.display == 'block')
-		{
-			document.getElementById('bbpalette').value = '{LA_FONT_COLOR_HIDE}';
-		}
-		else
-		{
-			document.getElementById('bbpalette').value = '{LA_FONT_COLOR}';
-		}
+		document.getElementById('bbpalette').value = (e.style.display == 'block') ? '{LA_FONT_COLOR_HIDE}' : '{LA_FONT_COLOR}';
 	}
 
 // ]]>
@@ -61,16 +52,34 @@
 
 <!-- EVENT posting_editor_buttons_before -->
 <div id="format-buttons">
-	<input type="button" class="button2 bbcode-b" accesskey="b" name="addbbcode0" value=" B " style="font-weight:bold; width: 30px" onclick="bbstyle(0)" title="{L_BBCODE_B_HELP}" />
-	<input type="button" class="button2 bbcode-i" accesskey="i" name="addbbcode2" value=" i " style="font-style:italic; width: 30px" onclick="bbstyle(2)" title="{L_BBCODE_I_HELP}" />
-	<input type="button" class="button2 bbcode-u" accesskey="u" name="addbbcode4" value=" u " style="text-decoration: underline; width: 30px" onclick="bbstyle(4)" title="{L_BBCODE_U_HELP}" />
+	<span class="buttonset">
+		<input type="button" class="button2 bbcode-b" accesskey="b" name="addbbcode0" value=" B " style="font-weight:bold; width: 30px" onclick="bbstyle(0)" title="{L_BBCODE_B_HELP}"/>
+		<input type="button" class="button2 bbcode-i" accesskey="i" name="addbbcode2" value=" i " style="font-style:italic; width: 30px" onclick="bbstyle(2)" title="{L_BBCODE_I_HELP}"/>
+		<input type="button" class="button2 bbcode-u" accesskey="u" name="addbbcode4" value=" u " style="text-decoration: underline; width: 30px" onclick="bbstyle(4)" title="{L_BBCODE_U_HELP}"/>
+	</span>
+	<!--<select name="addbbcode20" class="bbcode-size" onchange="bbfontstyle('[size=' + this.form.addbbcode20.options[this.form.addbbcode20.selectedIndex].value + ']', '[/size]');this.form.addbbcode20.selectedIndex = 2;" title="{L_BBCODE_F_HELP}">-->
+	<select name="addbbcode20" class="bbcode-size" id="font_select" title="{L_BBCODE_F_HELP}">
+		<option value="50">{L_FONT_TINY}</option>
+		<option value="85">{L_FONT_SMALL}</option>
+		<option value="100" selected="selected">{L_FONT_NORMAL}</option>
+		<!-- IF not MAX_FONT_SIZE or MAX_FONT_SIZE >= 150 -->
+		<option value="150">{L_FONT_LARGE}</option>
+		<!-- IF not MAX_FONT_SIZE or MAX_FONT_SIZE >= 200 -->
+		<option value="200">{L_FONT_HUGE}</option>
+		<!-- ENDIF -->
+		<!-- ENDIF -->
+	</select>
 	<!-- IF S_BBCODE_QUOTE -->
+	<span class="buttonset">
 		<input type="button" class="button2 bbcode-quote" accesskey="q" name="addbbcode6" value="Quote" style="width: 50px" onclick="bbstyle(6)" title="{L_BBCODE_Q_HELP}" />
+	</span>
 	<!-- ENDIF -->
-	<input type="button" class="button2 bbcode-code" accesskey="c" name="addbbcode8" value="Code" style="width: 40px" onclick="bbstyle(8)" title="{L_BBCODE_C_HELP}" />
-	<input type="button" class="button2 bbcode-list" accesskey="l" name="addbbcode10" value="List" style="width: 40px" onclick="bbstyle(10)" title="{L_BBCODE_L_HELP}" />
-	<input type="button" class="button2 bbcode-list-" accesskey="o" name="addbbcode12" value="List=" style="width: 40px" onclick="bbstyle(12)" title="{L_BBCODE_O_HELP}" />
-	<input type="button" class="button2 bbcode-asterisk" accesskey="y" name="addlistitem" value="[*]" style="width: 40px" onclick="bbstyle(-1)" title="{L_BBCODE_LISTITEM_HELP}" />
+	<span class="buttonset">
+		<input type="button" class="button2 bbcode-code" accesskey="c" name="addbbcode8" value="Code" style="width: 40px" onclick="bbstyle(8)" title="{L_BBCODE_C_HELP}" />
+		<input type="button" class="button2 bbcode-list" accesskey="l" name="addbbcode10" value="List" style="width: 40px" onclick="bbstyle(10)" title="{L_BBCODE_L_HELP}" />
+		<input type="button" class="button2 bbcode-list-" accesskey="o" name="addbbcode12" value="List=" style="width: 40px" onclick="bbstyle(12)" title="{L_BBCODE_O_HELP}" />
+		<input type="button" class="button2 bbcode-asterisk" accesskey="y" name="addlistitem" value="[*]" style="width: 40px" onclick="bbstyle(-1)" title="{L_BBCODE_LISTITEM_HELP}" />
+
 	<!-- IF S_BBCODE_IMG -->
 		<input type="button" class="button2 bbcode-img" accesskey="p" name="addbbcode14" value="Img" style="width: 40px" onclick="bbstyle(14)" title="{L_BBCODE_P_HELP}" />
 	<!-- ENDIF -->
@@ -80,24 +89,40 @@
 	<!-- IF S_BBCODE_FLASH -->
 		<input type="button" class="button2 bbcode-flash" accesskey="d" name="addbbcode18" value="Flash" onclick="bbstyle(18)" title="{L_BBCODE_D_HELP}" />
 	<!-- ENDIF -->
-	<select name="addbbcode20" class="bbcode-size" onchange="bbfontstyle('[size=' + this.form.addbbcode20.options[this.form.addbbcode20.selectedIndex].value + ']', '[/size]');this.form.addbbcode20.selectedIndex = 2;" title="{L_BBCODE_F_HELP}">
-		<option value="50">{L_FONT_TINY}</option>
-		<option value="85">{L_FONT_SMALL}</option>
-		<option value="100" selected="selected">{L_FONT_NORMAL}</option>
-		<!-- IF not MAX_FONT_SIZE or MAX_FONT_SIZE >= 150 -->
-			<option value="150">{L_FONT_LARGE}</option>
-			<!-- IF not MAX_FONT_SIZE or MAX_FONT_SIZE >= 200 -->
-				<option value="200">{L_FONT_HUGE}</option>
-			<!-- ENDIF -->
-		<!-- ENDIF -->
-	</select>
-	<input type="button" class="button2 bbcode-color" name="bbpalette" id="bbpalette" value="{L_FONT_COLOR}" onclick="change_palette();" title="{L_BBCODE_S_HELP}" />
+	</span>
 
+	<span class="buttonset">
+		<input type="button" class="button2 bbcode-color" name="bbpalette" id="foreground" value="{L_FONT_COLOR}"  title="{L_BBCODE_S_HELP}" />
+	</span>
 	<!-- EVENT posting_editor_buttons_custom_tags_before -->
 
+	<span class="buttonset">
 	<!-- BEGIN custom_tags -->
 		<input type="button" class="button2 bbcode-{custom_tags.BBCODE_TAG_CLEAN}" name="addbbcode{custom_tags.BBCODE_ID}" value="{custom_tags.BBCODE_TAG}" onclick="bbstyle({custom_tags.BBCODE_ID})" title="{custom_tags.BBCODE_HELPLINE}" />
 	<!-- END custom_tags -->
+	</span>
+
+	<!-- IF S_SMILIES_ALLOWED and .smiley -->
+	<span class="buttonset">
+		<button class="button2" id="smiley_menu" accesskey="m" name="showsmileymenu">
+			<!--<img src="./images/smilies/icon_smile.gif" width="15" height="15" />-->
+			<span class="tsn8_icon_mini_nohover tsn8_icon_emoticon"></span>
+		</button>
+	</span>
+	<span class="tsn8_smiley_toolbar_container">
+		<div id="tsn8_newpost_smiley_wrapper" class="tsn8_newpost_smiley_wrapper" style="display: none;">
+			<!-- BEGIN smiley -->
+			<span class="tsn8_icon_smiley" data-code="{smiley.A_SMILEY_CODE}">
+				<img src="{smiley.SMILEY_IMG}" width="{smiley.SMILEY_WIDTH}" height="{smiley.SMILEY_HEIGHT}" alt="{smiley.SMILEY_CODE}" title="{smiley.SMILEY_DESC}"/>
+			</span>
+			<!-- END smiley -->
+			<!-- IF S_SHOW_SMILEY_LINK and S_SMILIES_ALLOWED-->
+			<br/><a href="{U_MORE_SMILIES}" onclick="popup(this.href, 750, 350, '_phpbbsmilies'); return false;">{L_MORE_SMILIES}</a>
+			<!-- ENDIF -->
+		</div>
+	</span>
+	<!-- ENDIF -->
 </div>
 <!-- EVENT posting_editor_buttons_after -->
 <!-- ENDIF -->
+

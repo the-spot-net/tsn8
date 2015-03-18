@@ -25,7 +25,7 @@ input, textarea {
 }
 
 input:hover, textarea:hover, input:focus, textarea:focus, input:active, textarea:active, input.is-current, textarea.is-current {
-	border-color: #434142;
+	border-color: #587eaa;
 	z-index: 1;
 	-webkit-box-shadow: 0 .0625em .25em #cfcdcd;
 	-moz-box-shadow: 0 .0625em .25em #cfcdcd;
@@ -420,6 +420,9 @@ legend.input-label {
 		width: 8.333333333333332%
 	}
 
+	.gd-1of10 {
+		width: 10%;
+	}
 	.gd-2of12 {
 		width: 16.666666666666664%
 	}

@@ -236,13 +236,13 @@ fieldset.submit-buttons input {
 }
 
 #message-box textarea {
-	font-family: "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
+	/*font-family: "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;*/
 	width: 450px;
 	height: 270px;
 	min-width: 100%;
 	max-width: 100%;
-	font-size: 1.2em;
-	resize: vertical;
+	/*font-size: 1.2em;*/
+	/*resize: vertical;*/
 }
 
 /* Emoticons panel */
@@ -258,23 +258,23 @@ fieldset.submit-buttons input {
 /* Input field styles
 ---------------------------------------- */
 .inputbox {
-	border: 1px solid transparent;
-	padding: 2px;
+	/*border: 1px solid transparent;*/
+	/*padding: 2px;*/
 }
 
 .inputbox:hover, .inputbox:focus {
-	border: 1px solid transparent;
-	outline-style: none;
+	/*border: 1px solid transparent;*/
+	/*outline-style: none;*/
 }
 
-input.inputbox	{ width: 85%; }
+/*input.inputbox	{ width: 85%; }*/
 input.medium	{ width: 50%; }
 input.narrow	{ width: 25%; }
 input.tiny	{ width: 150px; }
 
-textarea.inputbox {
-	width: 85%;
-}
+/*textarea.inputbox {*/
+	/*width: 85%;*/
+/*}*/
 
 .autowidth {
 	width: auto !important;
