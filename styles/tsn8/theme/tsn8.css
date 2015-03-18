@@ -120,6 +120,8 @@ h3,
 	white-space: nowrap;
 	font-weight: normal;
 	margin-top: 0;
+}
+h3 {
 	text-transform: capitalize;
 }
 
@@ -656,21 +658,10 @@ input.button2,
 	vertical-align: middle;
 	font-weight: normal;
 }
-.tsn8_button_large {
-	margin: 0.5em auto;
-	padding: 0.25em 0.5em;
-	border-radius: 5px;
-	box-shadow: 0 1px 2px #999;
-	background-color: #d7e3f6;
-	color: #587eaa;
-	text-align: center;
-	font-size: 1.1em;
-	border: 0;
-}
+
 input.button1:hover,
 input.button2:hover,
-.tsn8_button:hover,
-.tsn8_button_large:hover {
+.tsn8_button:hover {
 	background: #587eaa;
 	color: #003366;
 	border: 0;
