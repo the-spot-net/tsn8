@@ -20,7 +20,7 @@ input.button1, input.button2 {
 }
 
 .panel {
-	background-color: rgba(215, 227, 246, 0.3);
+	background-color: rgba(215, 227, 246, 0.5);
 	box-shadow: 0 1px 2px #666;
 }
 
@@ -41,6 +41,18 @@ input.button1, input.button2 {
 
 ul.navlinks {
 	border-top-color: #d7e3f6;
+}
+
+.inputbox {
+	border: 1px solid #B4BAC0;
+}
+
+fieldset.quick-login {
+	margin-top: 0;
+}
+
+fieldset.quick-login input.inputbox {
+	width: 100%;
 }
 
 .action-bar {
@@ -332,7 +344,7 @@ fieldset.polls dd div {
 
 .postbody .content {
 	font-size: 1em;
-	padding: 0 5px 1px;
+	/*padding: 0 5px 1px;*/
 }
 
 .has-profile .postbody h3 {
@@ -376,26 +388,26 @@ fieldset.polls dd div {
 	border-bottom: 1px solid #d7e3f6;
 }
 
-.postbody h3 {
-	margin-left: 5px;
-}
+/*.postbody h3 {*/
+	/*margin-left: 5px;*/
+/*}*/
 
 p.author {
-	margin-left: 5px;
-	font-size: 0.8em;
+	/*margin-left: 5px;*/
+	font-size: 0.8rem;
 }
 
 p.author a {
-	font-size: 100%;
+	font-size: 1em;
 }
 
 textarea.inputbox {
 	width: auto;
 }
 
-.online-list h3 {
-	margin-top: 0.25em;
-}
+/*.online-list h3 {*/
+	/*margin-top: 0.25em;*/
+/*}*/
 
 .online-list p {
 	margin-bottom: 0.25em;

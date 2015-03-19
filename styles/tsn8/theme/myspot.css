@@ -46,6 +46,8 @@
 	color: #333;
 	display: block;
 	vertical-align: middle;
+	margin: 0 auto;
+	width: 75%;
 }
 
 .tsn8_mini_forum_list {

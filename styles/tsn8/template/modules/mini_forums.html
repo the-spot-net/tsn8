@@ -3,28 +3,24 @@
 	<span class="tsn8_module_header">{L_WELCOME_VISITOR}</span>
 
 	<div class="tsn8_module_content">
-		<form method="post" action="{S_LOGIN_ACTION}" class="headerspace">
+		<form method="post" action="{S_LOGIN_ACTION}">
 			<fieldset class="tsn8_myspot_login_fields align_center">
-				<p>
-					<label for="username" class="tsn8_font_color_med">{L_USERNAME}{L_COLON}</label>
-					<br/>
+				<label for="username" class="tsn8_font_color_med input-label">
+					{L_USERNAME}<br />
 					<input type="text" name="username" id="username" size="10" class="inputbox" title="{L_USERNAME}"/>
-				</p>
-
-				<p>
-					<label for="password" class="tsn8_font_color_med">{L_PASSWORD}{L_COLON}</label>
-					<br/>
+				</label>
+				<label for="password" class="tsn8_font_color_med input-label">
+					{L_PASSWORD}<br />
 					<input type="password" name="password" id="password" size="10" class="inputbox" title="{L_PASSWORD}"/>
-					<!-- IF S_AUTOLOGIN_ENABLED -->
-					<br/>
-					<label for="autologin">
-						<span class="tsn8_text_size1 tsn8_font_color_med">{L_LOG_ME_IN}</span> <input type="checkbox" name="autologin" id="autologin"/>
-					</label>
-					<!-- ENDIF -->
-				</p>
-				<input type="submit" name="login" value="{L_LOGIN}" data-mod="tsn8_button" class="button1 gt-8of9 gd-7of9"/>
+				</label>
+				<Br />
+				<input type="submit" name="login" value="{L_LOGIN}" role="button" class="ui-button ui-widget ui-state-default ui-corner-all" />
 				{S_MYSPOT_LOGIN_REDIRECT}
-
+				<!-- IF S_AUTOLOGIN_ENABLED -->
+				<label for="autologin" class="input-label">
+					<span class="tsn8_text_size1 tsn8_font_color_med">{L_LOG_ME_IN}</span> <input type="checkbox" name="autologin" id="autologin"/>
+				</label>
+				<!-- ENDIF -->
 			</fieldset>
 		</form>
 

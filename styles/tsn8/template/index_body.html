@@ -1,31 +1,50 @@
 <!-- INCLUDE overall_header.html -->
 
 <!-- IF not S_USER_LOGGED_IN and not S_IS_BOT -->
-<div class="tsn8_module_container gm-row gt-row gd-row">
+<div class="gm-row gt-row gd-row">
 	<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
-		<span class="tsn8_module_header">{L_WELCOME_VISITOR}</span>
+		<div class="panel">
+			<span class="tsn8_module_header">{L_WELCOME_VISITOR}</span>
 
-		<div class="tsn8_module_content">
-			<form method="post" action="{S_LOGIN_ACTION}" class="headerspace">
-				<fieldset class="tsn8_myspot_login_fields align_center quick-login">
-					<label for="username" class="tsn8_font_color_med">{L_USERNAME}{L_COLON}</label><input type="text" name="username" id="username" size="10" class="inputbox" title="{L_USERNAME}"/>
-					<label for="password" class="tsn8_font_color_med">{L_PASSWORD}{L_COLON}</label><input type="password" name="password" id="password" size="10" class="inputbox" title="{L_PASSWORD}"/>
-					<!-- IF S_AUTOLOGIN_ENABLED -->
-					<label for="autologin">
-						<span class="tsn8_text_size1 tsn8_font_color_med">{L_LOG_ME_IN}</span> <input type="checkbox" name="autologin" id="autologin"/>
-					</label>
-					<!-- ENDIF -->
-					<br/>
-					<input type="submit" name="login" value="{L_LOGIN}" data-mod="tsn8_button" class="button1 gt-1of5 gd-1of5"/>
-					{S_MYSPOT_LOGIN_REDIRECT}
-				</fieldset>
-			</form>
-		</div>
-		<!-- IF U_SEND_PASSWORD -->
+			<div class="tsn8_module_content">
+				<form method="post" action="{S_LOGIN_ACTION}" class="">
+					<fieldset class="tsn8_myspot_login_fields align_center quick-login">
+						<div class="group">
+							<div class="gm-row gt-row gd-row">
+								<div class="gt-columns gd-columns gt-quarter gd-quarter">&nbsp;</div>
+								<div class="gm-columnns gt-columns gd-columns gm-full gd-half gd-half align_center">
+									<label for="username" class="tsn8_font_color_med input-label" style="display: inline-block;">{L_USERNAME}<br/>
+										<input type="text" name="username" id="username" class="inputbox" title="{L_USERNAME}"/>
+									</label>
+									<label for="password" class="tsn8_font_color_med input-label" style="display: inline-block;">{L_PASSWORD}<br/>
+										<input type="password" name="password" id="password" class="inputbox" title="{L_PASSWORD}"/>
+									</label>
+									<input type="submit" name="login" value="{L_LOGIN}" data-mod="tsn8_button" class="button1" style="display: inline;"/>
+									{S_MYSPOT_LOGIN_REDIRECT}
+								</div>
+								<div class="gt-columns gd-columns gt-quarter gd-quarter">&nbsp;</div>
+							</div>
+							<!-- IF S_AUTOLOGIN_ENABLED -->
+							<div class="gm-row gt-row gd-row">
+								<div class="gt-columns gd-columns gt-quarter gd-quarter">&nbsp;</div>
+								<div class="gt-columns gd-columns gt-half gd-half align_center">
+									<label for="autologin" class="input-label">
+										<span class="tsn8_text_size3 tsn8_font_color_med">{L_LOG_ME_IN}<input type="checkbox" name="autologin" id="autologin"/></span>
+									</label>
+								</div>
+								<div class="gt-columns gd-columns gt-quarter gd-quarter">&nbsp;</div>
+							</div>
+							<!-- ENDIF -->
+						</div>
+					</fieldset>
+				</form>
+			</div>
+			<!-- IF U_SEND_PASSWORD -->
 		<span class="tsn8_module_footer tsn8_font_color_med">
 			<a href="{U_SEND_PASSWORD}" class="tsn8_font_color_med">{L_FORGOT_PASS}</a>
 		</span>
-		<!-- ENDIF -->
+			<!-- ENDIF -->
+		</div>
 	</div>
 </div>
 <!-- ENDIF -->

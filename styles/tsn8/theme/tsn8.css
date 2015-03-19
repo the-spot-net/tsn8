@@ -5,7 +5,8 @@
 
 [class*="gd-"],
 [class*="gm-"],
-[class*="gt-"] {
+[class*="gt-"],
+input, textarea {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-ms-box-sizing: border-box;
@@ -121,6 +122,15 @@ h3,
 	font-weight: normal;
 	margin-top: 0;
 }
+
+.panel .tsn8_module_header {
+	border-color: rgba(88, 126, 170, 0.5);
+}
+
+.panel .tsn8_module_footer {
+	border-color: rgba(255, 255, 255, 0.5);
+}
+
 h3 {
 	text-transform: capitalize;
 }
@@ -687,6 +697,11 @@ hr.divider {
 
 .tsn8_last_post_author_avatar a {
 	/*line-height: 25px;*/
+}
+
+.lastpost .tsn8_last_post_author_info {
+	margin-left: -30px;
+	padding-left: 65px;
 }
 
 /* View Topic Modification Styles */
