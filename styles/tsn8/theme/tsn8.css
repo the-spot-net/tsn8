@@ -807,3 +807,7 @@ input[type="radio"] {
 	font-size: 0.9em;
 	padding: 5px;
 }
+
+.tsn8_ui-inline-icon {
+	display: inline-block;
+}

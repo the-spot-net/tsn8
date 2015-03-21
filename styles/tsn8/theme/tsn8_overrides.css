@@ -22,7 +22,7 @@ input.button1, input.button2 {
 .panel {
 	background-color: rgba(215, 227, 246, 0.5);
 	/*border: 1px solid #d7e3f6;*/
-	box-shadow: 0 2px 2px #ccc;
+	/*box-shadow: 0 2px 2px #ccc;*/
 }
 
 .search-header {
@@ -463,7 +463,6 @@ input.ui-button {
 
 .ui-selectmenu-button {
 	margin-bottom: -0.5em;
-	margin-bottom: -0.5em;
 }
 
 .ui-selectmenu-button span.ui-icon {
@@ -493,14 +492,22 @@ input.ui-button {
 	box-sizing: border-box;
 }
 
+#navigation a,
 #tabs .tab > a {
 	background: #d7e3f6;
 	color: #587eaa;
 }
 
+#navigation a:hover,
 #tabs .tab > a:hover {
 	background: #587eaa;
 	color: #d7e3f6;
+}
+
+#navigation a,
+#navigation a:hover {
+	/*border-right: 1px solid #587eaa;*/
+	border-radius: 5px;
 }
 
 #tabs .activetab > a, #tabs .activetab > a:hover {
@@ -517,4 +524,13 @@ input.ui-button {
 	border-bottom: 0;
 	box-shadow: 0 1px 1px #F2F9FF inset;
 	color: #003366;
+}
+
+#navigation #active-subsection a,
+#navigation #active-subsection a:hover {
+	background: #f9f9f9;
+	color: #003366;
+	border: 0;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
 }
