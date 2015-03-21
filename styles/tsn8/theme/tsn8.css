@@ -132,7 +132,7 @@ h3,
 }
 
 h3 {
-	text-transform: capitalize;
+	text-transform: none;
 }
 
 .tsn8_module_subheader {
@@ -783,7 +783,7 @@ input[type="radio"] {
 .tsn8_information_message h3 {
 	border-bottom: 1px solid #587eaa;
 	color: #003366;
-	text-transform: capitalize;
+	/*text-transform: capitalize;*/
 }
 .tsn8_information_message h3,
 .tsn8_information_message p {

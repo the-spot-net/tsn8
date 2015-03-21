@@ -21,7 +21,8 @@ input.button1, input.button2 {
 
 .panel {
 	background-color: rgba(215, 227, 246, 0.5);
-	box-shadow: 0 1px 2px #666;
+	/*border: 1px solid #d7e3f6;*/
+	box-shadow: 0 2px 2px #ccc;
 }
 
 .search-header {
@@ -389,7 +390,7 @@ fieldset.polls dd div {
 }
 
 /*.postbody h3 {*/
-	/*margin-left: 5px;*/
+/*margin-left: 5px;*/
 /*}*/
 
 p.author {
@@ -406,7 +407,7 @@ textarea.inputbox {
 }
 
 /*.online-list h3 {*/
-	/*margin-top: 0.25em;*/
+/*margin-top: 0.25em;*/
 /*}*/
 
 .online-list p {
@@ -414,6 +415,7 @@ textarea.inputbox {
 }
 
 /* Post Reply */
+.tsn8_options_label,
 fieldset.fields1 dl dt,
 fieldset.fields1 dl dt label {
 	width: auto;
@@ -422,6 +424,12 @@ fieldset.fields1 dl dt label {
 	margin: 0.25em 0.5em;
 	float: none;
 	font-weight: normal;
+}
+
+.tsn8_options_label {
+	line-height: 26px;
+	vertical-align: middle;
+	display: block;
 }
 
 fieldset.fields1 dl dt label {
@@ -454,7 +462,8 @@ input.ui-button {
 }
 
 .ui-selectmenu-button {
-	margin-bottom: -0.55em;
+	margin-bottom: -0.5em;
+	margin-bottom: -0.5em;
 }
 
 .ui-selectmenu-button span.ui-icon {
@@ -468,6 +477,7 @@ input.ui-button {
 
 .ui-buttonset .ui-button {
 	margin-bottom: 0.25em;
+	line-height: 20px;
 }
 
 #format-buttons {
@@ -476,10 +486,35 @@ input.ui-button {
 
 #message-box {
 	width: 100%;
-	margin: 0 -0.5em 0 -.25em;
 	padding: 0 0.5em;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-ms-box-sizing: border-box;
 	box-sizing: border-box;
+}
+
+#tabs .tab > a {
+	background: #d7e3f6;
+	color: #587eaa;
+}
+
+#tabs .tab > a:hover {
+	background: #587eaa;
+	color: #d7e3f6;
+}
+
+#tabs .activetab > a, #tabs .activetab > a:hover {
+	background: #d7e3f6;
+	background: rgba(215, 227, 246, 0.5);
+	/*background: -moz-linear-gradient(top, #E2F2FF 0%, #d7e3ft 50%);*/
+	/*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #E2F2FF), color-stop(100%, #CADCEB));*/
+	/*background: -webkit-linear-gradient(top, #E2F2FF 0%, #CADCEB 100%);*/
+	/*background: -o-linear-gradient(top, #E2F2FF 0%, #CADCEB 100%);*/
+	/*background: -ms-linear-gradient(top, #E2F2FF 0%, #CADCEB 100%);*/
+	/*background: linear-gradient(to bottom, #E2F2FF 0%, #CADCEB 100%);*/
+	/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E2F2FF', endColorstr='#CADCEB', GradientType=0 );*/
+	border-color: #d7e3f6;
+	border-bottom: 0;
+	box-shadow: 0 1px 1px #F2F9FF inset;
+	color: #003366;
 }
