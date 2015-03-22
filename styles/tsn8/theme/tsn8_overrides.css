@@ -534,3 +534,7 @@ input.ui-button {
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
 }
+
+#topicreview {
+	overflow-x:hidden;
+}

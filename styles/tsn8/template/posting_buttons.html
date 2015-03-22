@@ -90,21 +90,9 @@
 		<input type="button" class="button2 bbcode-flash" accesskey="d" name="addbbcode18" value="Flash" onclick="bbstyle(18)" title="{L_BBCODE_D_HELP}" />
 	<!-- ENDIF -->
 	</span>
-
-	<span class="buttonset">
-		<input type="button" class="button2 bbcode-color" name="bbpalette" id="foreground" value="{L_FONT_COLOR}"  title="{L_BBCODE_S_HELP}" />
-	</span>
-	<!-- EVENT posting_editor_buttons_custom_tags_before -->
-
-	<span class="buttonset">
-	<!-- BEGIN custom_tags -->
-		<input type="button" class="button2 bbcode-{custom_tags.BBCODE_TAG_CLEAN}" name="addbbcode{custom_tags.BBCODE_ID}" value="{custom_tags.BBCODE_TAG}" onclick="bbstyle({custom_tags.BBCODE_ID})" title="{custom_tags.BBCODE_HELPLINE}" />
-	<!-- END custom_tags -->
-	</span>
-
 	<!-- IF S_SMILIES_ALLOWED and .smiley -->
 	<span class="buttonset">
-		<button class="button2" id="smiley_menu" accesskey="m" name="showsmileymenu">
+		<button class="button1" id="smiley_menu" accesskey="m" name="showsmileymenu">
 			<!--<img src="./images/smilies/icon_smile.gif" width="15" height="15" />-->
 			<span class="tsn8_icon_mini_nohover tsn8_icon_emoticon"></span>
 		</button>
@@ -122,6 +110,16 @@
 		</div>
 	</span>
 	<!-- ENDIF -->
+	<span class="buttonset">
+		<input type="button" class="button2 bbcode-color" name="bbpalette" id="foreground" value="{L_FONT_COLOR}"  title="{L_BBCODE_S_HELP}" />
+	</span>
+	<!-- EVENT posting_editor_buttons_custom_tags_before -->
+
+	<span class="buttonset">
+	<!-- BEGIN custom_tags -->
+		<input type="button" class="button2 bbcode-{custom_tags.BBCODE_TAG_CLEAN}" name="addbbcode{custom_tags.BBCODE_ID}" value="{custom_tags.BBCODE_TAG}" onclick="bbstyle({custom_tags.BBCODE_ID})" title="{custom_tags.BBCODE_HELPLINE}" />
+	<!-- END custom_tags -->
+	</span>
 </div>
 <!-- EVENT posting_editor_buttons_after -->
 <!-- ENDIF -->
