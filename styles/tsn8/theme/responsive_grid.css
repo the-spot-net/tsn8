@@ -200,6 +200,10 @@ legend.input-label {
 		z-index: 2
 	}
 
+	.gm-align-center {
+		text-align: center;
+	}
+
 	.gm-row {
 		margin-left: -.75em;
 		margin-right: -.75em
@@ -285,6 +289,10 @@ legend.input-label {
 
 	.gt-1of7 {
 		width: 14.285714%
+	}
+
+	.gt-1of8 {
+		width: 12.5%;
 	}
 
 	.gt-1of9 {

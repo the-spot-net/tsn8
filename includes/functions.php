@@ -4796,33 +4796,35 @@ function phpbb_get_avatar($row, $alt, $ignore_config = false)
 	}
 
 	// tsn8 add [[ BEGIN ]]
-	// file doesn't exist, pull default image, if remote...
-	if($row['avatar_type'] == 'avatar.driver.remote') {
+	$imgArray = array();
+	// check for remote file...
+	if ($row['avatar_type'] == 'avatar.driver.remote') {
 		// Test for image existance
 		$imgArray = @getimagesize($avatar_data['src']);
-		if(empty($imgArray[0])) {
-
-			// Set default image info; TODO Put this info in the database via extension
-			$row['avatar_type'] = 'avatar.driver.local';
-			$row['avatar'] = 'novelties/tsn_icon_avatar.png';
-			// Check for zero dimensions
-			$row['avatar_width'] = $row['avatar_width'] ?: 100;
-			$row['avatar_height'] = $row['avatar_height'] ?: 100;
-
-			// Run through the proper channels again with local file...
-			$driver = $phpbb_avatar_manager->get_driver($row['avatar_type'], $ignore_config);
-			if ($driver) {
-				$avatar_data = $driver->get_data($row, $ignore_config);
-			} else {
-				$avatar_data['src'] = '';
-			}
-
-			// Set all dimensions to the largest side;
-			// if via tsn8 extension it will have been scaled/resized to the max for the feature
-			// if otherwise, it will be default image size - for avatars that is 100x100
-			$avatar_data['width'] = $avatar_data['height'] = ($row['avatar_width'] >= $row['avatar_height']) ? $row['avatar_width'] : $row['avatar_height'];
-		}
 	}
+
+	// If remote doesn't exist, or no avatar for user, get default
+	if (($row['avatar_type'] == 'avatar.driver.remote' && empty($imgArray[0])) || empty($avatar_data['src'])) {
+		// Set default image info; TODO Put this info in the database via extension
+		$row['avatar_type'] = 'avatar.driver.local';
+		$row['avatar'] = 'novelties/tsn_icon_avatar.png';
+		$row['avatar_width'] = $row['avatar_width'] ?: 100;
+		$row['avatar_height'] = $row['avatar_height'] ?: 100;
+
+		// Run through the proper channels again with local file...
+		$driver = $phpbb_avatar_manager->get_driver($row['avatar_type'], $ignore_config);
+		if ($driver) {
+			$avatar_data = $driver->get_data($row, $ignore_config);
+		} else {
+			$avatar_data['src'] = '';
+		}
+
+		// Set all dimensions to the largest side;
+		// if via tsn8 extension it will have been scaled/resized to the max for the feature
+		// if otherwise, it will be default image size - for avatars that is 100x100
+		$avatar_data['width'] = $avatar_data['height'] = ($row['avatar_width'] >= $row['avatar_height']) ? $row['avatar_width'] : $row['avatar_height'];
+	}
+
 	// Set the title text...
 	$avatar_data['title'] = $row['avatar_title'];
 	// tsn8 add [[ END ]]
