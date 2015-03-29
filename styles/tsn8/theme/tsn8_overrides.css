@@ -21,8 +21,8 @@ input.button1, input.button2 {
 
 .panel {
 	background-color: rgba(215, 227, 246, 0.5);
-	/*border: 1px solid #d7e3f6;*/
-	/*box-shadow: 0 2px 2px #ccc;*/
+	border: 1px solid #d7e3f6;
+	box-shadow: 0 2px 2px #ccc;
 }
 
 .search-header {
