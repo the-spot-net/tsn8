@@ -538,3 +538,9 @@ input.ui-button {
 #topicreview {
 	overflow-x:hidden;
 }
+
+blockquote {
+	background-color: rgba(215, 227, 246, 0.31);
+	border-color: #d7e3f6;
+	border-radius: 0.5em;
+}

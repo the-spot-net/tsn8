@@ -12,18 +12,30 @@
 
 <!-- ENDIF -->
 
-	<!-- IF S_SHOW_GROUP -->
+<!-- IF S_SHOW_GROUP -->
 		<h2 class="group-title"<!-- IF GROUP_COLOR --> style="color:#{GROUP_COLOR};"<!-- ENDIF -->>{GROUP_NAME}</h2>
 		<p>{GROUP_DESC} {GROUP_TYPE}</p>
 		<p>
-			<!-- IF AVATAR_IMG -->{AVATAR_IMG}<!-- ENDIF -->
-			<!-- IF RANK_IMG -->{RANK_IMG}<!-- ENDIF -->
-			<!-- IF GROUP_RANK -->{GROUP_RANK}<!-- ENDIF -->
+	<!-- IF AVATAR_IMG -->{AVATAR_IMG}<!-- ENDIF -->
+	<!-- IF RANK_IMG -->{RANK_IMG}<!-- ENDIF -->
+	<!-- IF GROUP_RANK -->{GROUP_RANK}<!-- ENDIF -->
 		</p>
-	<!-- ELSE -->
+<!-- ELSE -->
 		<h2 class="solo">{PAGE_TITLE}<!-- IF SEARCH_WORDS -->{L_COLON} <a href="{U_SEARCH_WORDS}">{SEARCH_WORDS}</a><!-- ENDIF --></h2>
 
 		<div class="action-bar top">
+			<div class="member-search panel" style="margin-right: 0.25em;">
+				<!-- IF S_LEADERS_SET or not S_SHOW_GROUP or not .memberrow -->
+				{L_SORT_BY}{L_COLON}
+				<span class="name" data-dfn="{L_RANK}{L_COMMA_SEPARATOR}<!-- IF S_SHOW_GROUP and .memberrow -->{L_GROUP_LEADER}<!-- ELSE -->{L_USERNAME}<!-- ENDIF -->">
+					<span class="rank-img"><a href="{U_SORT_RANK}">{L_RANK}</a></span>&nbsp;|&nbsp;
+					<a href="{U_SORT_USERNAME}"><!-- IF S_SHOW_GROUP and .memberrow -->{L_GROUP_LEADER}<!-- ELSE -->{L_USERNAME}<!-- ENDIF --></a>&nbsp;|&nbsp;
+					<a href="{U_SORT_POSTS}#memberlist">{L_POSTS}</a>&nbsp;|&nbsp;
+					<a href="{U_SORT_JOINED}#memberlist">{L_JOINED}</a>&nbsp;|&nbsp;
+					<!-- IF U_SORT_ACTIVE --><a href="{U_SORT_ACTIVE}#memberlist">{L_LAST_ACTIVE}</a><!-- ENDIF -->
+				</span>
+				<!-- ENDIF -->
+			</div>
 			<div class="member-search panel">
 				<!-- IF U_FIND_MEMBER and not S_SEARCH_USER --><a href="{U_FIND_MEMBER}" id="member_search" data-alt-text="{LA_HIDE_MEMBER_SEARCH}">{L_FIND_USERNAME}</a> &bull; <!-- ELSEIF S_SEARCH_USER and U_HIDE_FIND_MEMBER and not S_IN_SEARCH_POPUP --><a href="{U_HIDE_FIND_MEMBER}" id="member_search" data-alt-text="{LA_FIND_USERNAME}">{L_HIDE_MEMBER_SEARCH}</a> &bull; <!-- ENDIF -->
 				<strong>
@@ -32,92 +44,102 @@
 				<!-- END first_char -->
 				</strong>
 			</div>
-		
+
 			<div class="pagination">
 				{TOTAL_USERS}
-				<!-- IF .pagination --> 
+				<!-- IF .pagination -->
 					<!-- INCLUDE pagination.html -->
-				<!-- ELSE --> 
+				<!-- ELSE -->
 					 &bull; {PAGE_NUMBER}
 				<!-- ENDIF -->
 			</div>
 		</div>
-	<!-- ENDIF -->
-
-	<!-- IF S_LEADERS_SET or not S_SHOW_GROUP or not .memberrow -->
-	<div class="forumbg forumbg-table">
-		<div class="inner">
-
-		<table class="table1" id="memberlist">
-		<thead>
-		<tr>
-			<th class="name" data-dfn="{L_RANK}{L_COMMA_SEPARATOR}<!-- IF S_SHOW_GROUP and .memberrow -->{L_GROUP_LEADER}<!-- ELSE -->{L_USERNAME}<!-- ENDIF -->"><span class="rank-img"><a href="{U_SORT_RANK}">{L_RANK}</a></span><a href="{U_SORT_USERNAME}"><!-- IF S_SHOW_GROUP and .memberrow -->{L_GROUP_LEADER}<!-- ELSE -->{L_USERNAME}<!-- ENDIF --></a></th>
-			<th class="posts"><a href="{U_SORT_POSTS}#memberlist">{L_POSTS}</a></th>
-			<th class="info"><!-- BEGIN custom_fields --><!-- IF not custom_fields.S_FIRST_ROW -->{L_COMMA_SEPARATOR} <!-- ENDIF -->{custom_fields.PROFILE_FIELD_NAME}<!-- END custom_fields --></th>
-			<th class="joined"><a href="{U_SORT_JOINED}#memberlist">{L_JOINED}</a></th>
-			<!-- IF U_SORT_ACTIVE --><th class="active"><a href="{U_SORT_ACTIVE}#memberlist">{L_LAST_ACTIVE}</a></th><!-- ENDIF -->
-		</tr>
-		</thead>
-		<tbody>
-	<!-- ENDIF -->
-		<!-- BEGIN memberrow -->
-			<!-- IF S_SHOW_GROUP -->
-				<!-- IF not memberrow.S_GROUP_LEADER and not $S_MEMBER_HEADER -->
-				<!-- IF S_LEADERS_SET and memberrow.S_FIRST_ROW -->
-				<tr class="bg1">
-					<td colspan="<!-- IF U_SORT_ACTIVE -->5<!-- ELSE -->4<!-- ENDIF -->">&nbsp;</td>
-				</tr>
-				<!-- ENDIF -->
-<!-- IF S_LEADERS_SET -->
-		</tbody>
-		</table>
-
-	</div>
-</div>
 <!-- ENDIF -->
-<div class="forumbg forumbg-table">
-	<div class="inner">
 
-	<table class="table1">
-	<thead>
-	<tr>
-	<!-- IF not S_LEADERS_SET -->
-		<th class="name" data-dfn="{L_RANK}{L_COMMA_SEPARATOR}{L_USERNAME}"><span class="rank-img"><a href="{U_SORT_RANK}">{L_RANK}</a></span><a href="{U_SORT_USERNAME}"><!-- IF S_SHOW_GROUP -->{L_GROUP_MEMBERS}<!-- ELSE -->{L_USERNAME}<!-- ENDIF --></a></th>
-			<th class="posts"><a href="{U_SORT_POSTS}#memberlist">{L_POSTS}</a></th>
-			<th class="info"><!-- BEGIN custom_fields --><!-- IF not custom_fields.S_FIRST_ROW -->{L_COMMA_SEPARATOR} <!-- ENDIF -->{custom_fields.PROFILE_FIELD_NAME}<!-- END custom_fields --></th>
-			<th class="joined"><a href="{U_SORT_JOINED}#memberlist">{L_JOINED}</a></th>
-			<!-- IF U_SORT_ACTIVE --><th class="active"><a href="{U_SORT_ACTIVE}#memberlist">{L_LAST_ACTIVE}</a></th><!-- ENDIF -->
-	<!-- ELSEIF S_SHOW_GROUP -->
-		<th class="name">{L_GROUP_MEMBERS}</th>
-		<th class="posts">{L_POSTS}</th>
-		<th class="info"><!-- BEGIN custom_fields --><!-- IF not custom_fields.S_FIRST_ROW -->{L_COMMA_SEPARATOR} <!-- ENDIF -->{custom_fields.PROFILE_FIELD_NAME}<!-- END custom_fields --></th>
-		<th class="joined">{L_JOINED}</th>
-		<!-- IF U_SORT_ACTIVE --><th class="active">{L_LAST_ACTIVE}</th><!-- ENDIF -->
-	<!-- ENDIF -->
-	</tr>
-	</thead>
-	<tbody>
+		<div class="group panel">
+			<!-- DEFINE $CARD_COUNT = 0 -->
+			<div class="gm-row gt-row gd-row">
+			<!-- BEGIN memberrow -->
+				<!-- IF S_SHOW_GROUP -->
+					<!-- IF not memberrow.S_GROUP_LEADER and not $S_MEMBER_HEADER -->
+						<!-- IF S_LEADERS_SET and memberrow.S_FIRST_ROW -->
+				<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+					<span class="tsn8_module_header">{L_GROUP_LEADERS}</span>
+				</div>
+						<!-- ENDIF -->
+						<!-- IF S_LEADERS_SET -->
+			</div>
+			<div class="gm-row gt-row gd-row">
+						<!-- ENDIF -->
+
+						<!-- IF S_SHOW_GROUP -->
+						<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+							<span class="tsn8_module_header">{L_GROUP_MEMBERS}</span>
+						</div>
+						<!-- ENDIF -->
 					<!-- DEFINE $S_MEMBER_HEADER = 1 -->
+					<!-- ENDIF -->
 				<!-- ENDIF -->
-			<!-- ENDIF -->
 
-	<tr class="<!-- IF memberrow.S_ROW_COUNT is even -->bg1<!-- ELSE -->bg2<!-- ENDIF -->">
-		<td><!-- IF memberrow.RANK_IMG --><span class="rank-img">{memberrow.RANK_IMG}</span><!-- ELSE --><span class="rank-img">{memberrow.RANK_TITLE}</span><!-- ENDIF --><!-- IF S_IN_SEARCH_POPUP and not S_SELECT_SINGLE --><input type="checkbox" name="user" value="{memberrow.USERNAME}" /> <!-- ENDIF --><!-- EVENT memberlist_body_username_prepend -->{memberrow.USERNAME_FULL}<!-- EVENT memberlist_body_username_append --><!-- IF S_IN_SEARCH_POPUP --><br />[&nbsp;<a href="#" onclick="insert_single_user('#results', '{memberrow.A_USERNAME}'); return false;">{L_SELECT}</a>&nbsp;]<!-- ENDIF --></td>
-		<td class="posts"><!-- IF memberrow.POSTS and S_DISPLAY_SEARCH --><a href="{memberrow.U_SEARCH_USER}" title="{L_SEARCH_USER_POSTS}">{memberrow.POSTS}</a><!-- ELSE -->{memberrow.POSTS}<!-- ENDIF --></td>
-		<td class="info"><!-- BEGIN custom_fields --><div>{memberrow.custom_fields.PROFILE_FIELD_VALUE}</div><!-- BEGINELSE -->&nbsp;<!-- END custom_fields --></td>
-		<td>{memberrow.JOINED}</td>
-		<!-- IF S_VIEWONLINE --><td>{memberrow.LAST_ACTIVE}&nbsp;</td><!-- ENDIF -->
-	</tr>
+				<div class="gm-columns gt-columns gd-columns gm-full gt-third gd-1of5 align_center" style="display: table; border-spacing: 0.25em .125em;">
+					<div class="tsn8_module_container" style="display: table-cell;">
+						<div class="group">
+							<div class="gm-row gt-row gd-row">
+								<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full align_center">
+									<!-- IF S_IN_SEARCH_POPUP --><br />[&nbsp;<a href="#" onclick="insert_single_user('#results', '{memberrow.A_USERNAME}'); return false;">{L_SELECT}</a>&nbsp;]<!-- ENDIF -->
+									<div class="tsn8_profile_avatar"><span class="tsn8_profile_avatar_helper"></span>{memberrow.AVATAR_IMG}</div>
+								</div>
+							</div>
+							<div class="gm-row gt-row gd-row">
+								<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full align_center">
+									<span class="tsn8_memberlist_username">
+									<!-- IF S_IN_SEARCH_POPUP and not S_SELECT_SINGLE --><input type="checkbox" name="user" value="{memberrow.USERNAME}" /> <!-- ENDIF -->
+									<!-- EVENT memberlist_body_username_prepend -->{memberrow.USERNAME_FULL}<!-- EVENT memberlist_body_username_append -->
+									</span>
+								</div>
+							</div>
+							<div class="gm-row gt-row gd-row">
+								<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full align_center">
+									<span class="tsn8_memberlist_usertitle">{memberrow.RANK_TITLE}</span>
+								</div>
+							</div>
+							<div class="gm-row gt-row gd-row">
+								<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+									<div class="tsn8_memberlist_postcount">
+									<!-- IF memberrow.POSTS and S_DISPLAY_SEARCH -->
+										<a href="{memberrow.U_SEARCH_USER}" title="{L_SEARCH_USER_POSTS}"><strong>{L_POSTS}{L_COLON}</strong> {memberrow.POSTS}</a>
+									<!-- ELSE -->
+										<span><strong>{L_POSTS}{L_COLON}</strong> {memberrow.POSTS}</span>
+									<!-- ENDIF -->
+									</div>
+								</div>
+							</div>
+							<div class="gm-row gt-row gd-row">
+								<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full align_center">
+									<div class="tsn8_profile_icon_container">
+										<!-- IF memberrow.POSTS and S_DISPLAY_SEARCH -->
+										<a href="{memberrow.U_SEARCH_USER}" class="tsn8_profile_icon tsn8_profile_icon_phpbb_posts" title="{L_SEARCH_USER_POSTS}"></a>
+										<!-- ELSE -->
+										<div class="tsn8_profile_icon tsn8_profile_icon_phpbb_posts" title="{L_SEARCH_USER_POSTS}"></div>
+										<!-- ENDIF -->
+										<!-- BEGIN custom_fields -->
+										<a href="{memberrow.custom_fields.PROFILE_FIELD_VALUE_RAW}" class="tsn8_profile_icon tsn8_profile_icon_{memberrow.custom_fields.PROFILE_FIELD_IDENT}" title="{memberrow.custom_fields.PROFILE_FIELD_NAME}"></a>
+										<!-- END custom_fields -->
+										<a class="tsn8_profile_icon tsn8_profile_icon_phpbb_joined" title="{L_JOINED}{L_COLON} {memberrow.JOINED}"></a>
+										<!-- IF S_VIEWONLINE --><a class="tsn8_profile_icon tsn8_profile_icon_phpbb_last_seen" title="{L_LAST_ACTIVE}{L_COLON} {memberrow.LAST_ACTIVE}"></a><!-- ENDIF -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 		<!-- BEGINELSE -->
-	<tr class="bg1">
-		<td colspan="<!-- IF S_VIEWONLINE -->5<!-- ELSE -->4<!-- ENDIF -->">{L_NO_MEMBERS}</td>
-	</tr>
+				<div class="gm-columns gt-columns gd-columns gm-half gt-1of5 gd-1of5 align_center">
+					{L_NO_MEMBERS}
+				</div>
 		<!-- END memberrow -->
-	</tbody>
-	</table>
-
+		</div> <!-- Close the row -->
 	</div>
-</div>
 
 <!-- IF S_IN_SEARCH_POPUP and not S_SELECT_SINGLE -->
 <fieldset class="display-actions">
@@ -144,9 +166,9 @@
 <div class="action-bar bottom">
 	<div class="pagination">
 		{TOTAL_USERS}
-		<!-- IF .pagination --> 
+		<!-- IF .pagination -->
 			<!-- INCLUDE pagination.html -->
-		<!-- ELSE --> 
+		<!-- ELSE -->
 			 &bull; {PAGE_NUMBER}
 		<!-- ENDIF -->
 	</div>

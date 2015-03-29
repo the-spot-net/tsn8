@@ -410,10 +410,6 @@
 <!-- EVENT viewtopic_body_postrow_post_after -->
 <!-- END postrow -->
 
-<!-- IF S_QUICK_REPLY -->
-<!-- INCLUDE quickreply_editor.html -->
-<!-- ENDIF -->
-
 <!-- IF S_NUM_POSTS > 1 or .pagination -->
 <div class="gm-row gt-row gd-row">
 	<div class="gm-columns gm-full gt-columns gt-full gd-columns gd-full">
@@ -479,6 +475,10 @@
 		</div>
 	</div>
 </div>
+
+<!-- IF S_QUICK_REPLY -->
+<!-- INCLUDE quickreply_editor.html -->
+<!-- ENDIF -->
 
 <!-- EVENT viewtopic_body_footer_before -->
 <!-- INCLUDE jumpbox.html -->

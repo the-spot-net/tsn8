@@ -4826,7 +4826,7 @@ function phpbb_get_avatar($row, $alt, $ignore_config = false)
 	}
 
 	// Set the title text...
-	$avatar_data['title'] = $row['avatar_title'];
+	$avatar_data['title'] = (!empty($row['avatar_title'])) ? $row['avatar_title'] : '';
 	// tsn8 add [[ END ]]
 
 	if (!empty($avatar_data['src']))
