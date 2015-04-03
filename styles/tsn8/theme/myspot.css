@@ -107,9 +107,20 @@
 
 .tsn8_myspot_special_report_body {
 	color: #333;
-	line-height: 20px;
-	padding: 3px;
-	font-size: 1.1em;
+	line-height: 1.1rem;
+	padding: 0.25em;
+	font-size: 1rem;
+}
+
+.tsn8_myspot_special_report_body ul,
+.tsn8_myspot_special_report_body ol {
+	margin: 1em auto 1em 3em;
+}
+
+.tsn8_myspot_special_report_body ul li,
+.tsn8_myspot_special_report_body ol li {
+	line-height: 1.4rem;
+	font-size: 1rem;
 }
 
 /* END Special Report Content */

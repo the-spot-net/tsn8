@@ -117,7 +117,7 @@
 							<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
 								<div class="tsn8_profile_data_container">
 									<div class="tsn8_profile_data_icon tsn8_profile_icon_phpbb_inactive_user" title="{L_USER_IS_INACTIVE}"></div>
-									<div class="tsn8_profile_data_large">USER_INACTIVE_REASON</div>
+									<div class="tsn8_profile_data_large">{USER_INACTIVE_REASON}</div>
 								</div>
 							</div>
 						</div>
@@ -191,60 +191,94 @@
 				</div>
 			</div>
 		</div>
+		<!-- EVENT memberlist_view_user_statistics_before -->
 		<div class="gm-row gt-row gd-row">
 			<div class="gm-hide gt-columns gt-1of8 gd-columns gd-quarter">&nbsp;</div>
 			<div class="gm-columns gt-columns gd-columns gm-full gt-three-quarters gd-half">
 				<div class="tsn8_module tsn8_module_container">
 					<div class="group">
-						<span class="tsn8_module_header align_center">{L_USER_FORUM}</span>
-
-						<!--<div class="group">-->
-							<!--<div class="gm-row gt-row gd-row">-->
-								<!--<div class="gm-columns gt-columns gd-columns gm-full gt-half gd-half align_center">-->
-									<!--<span class="tsn8_width_25">{L_JOINED}</span><br/>-->
-									<!--<span class="tsn8_width_75">{JOINED}</span>-->
-								<!--</div>-->
-								<!--<div class="gm-columns gt-columns gd-columns gm-full gt-half gd-half align_center">-->
-									<!--<span class="tsn8_width_25">{L_LAST_ACTIVE}</span><br/>-->
-									<!--<span class="tsn8_width_75">{LAST_ACTIVE}</span>-->
-								<!--</div>-->
-							<!--</div>-->
-						<!--</div>-->
-						<dl class="details">
-							<!-- EVENT memberlist_view_user_statistics_before -->
-							<dt>{L_JOINED}{L_COLON}</dt>
-							<dd>{JOINED}</dd>
-							<dt>{L_LAST_ACTIVE}{L_COLON}</dt>
-							<dd>{LAST_ACTIVE}</dd>
+						<div class="gm-row gt-row gd-row">
+							<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+								<span class="tsn8_module_header align_center">{L_USER_FORUM}</span>
+							</div>
+						</div>
+						<div class="gm-row gt-row gd-row">
+							<div class="gm-columns gt-columns gd-columns gm-full gt-half gd-half">
+								<div class="tsn8_profile_data_container">
+									<div class="tsn8_profile_data_icon tsn8_profile_icon_phpbb_joined" title="{L_JOINED}"></div>
+									<div class="tsn8_profile_data">{JOINED}</div>
+								</div>
+							</div>
+							<div class="gm-columns gt-columns gd-columns gm-full gt-half gd-half">
+								<div class="tsn8_profile_data_container">
+									<div class="tsn8_profile_data_icon tsn8_profile_icon_phpbb_last_seen" title="{L_LAST_ACTIVE}"></div>
+									<div class="tsn8_profile_data">{LAST_ACTIVE}</div>
+								</div>
+							</div>
+						</div>
+						<div class="gm-row gt-row gd-row">
 							<!-- IF S_WARNINGS -->
-							<dt>{L_WARNINGS}{L_COLON}</dt>
-							<dd>
-								<strong>{WARNINGS}</strong><!-- IF U_NOTES or U_WARN --> [ <!-- IF U_NOTES --><a href="{U_NOTES}">{L_VIEW_NOTES}</a><!-- ENDIF --> <!-- IF U_WARN --><!-- IF U_NOTES --> | <!-- ENDIF --><a href="{U_WARN}">{L_WARN_USER}</a><!-- ENDIF --> ]<!-- ENDIF -->
-							</dd>
+							<div class="gm-columns gt-columns gd-columns gm-full gt-half gd-half">
+								<div class="tsn8_profile_data_container">
+									<div class="tsn8_profile_data_icon tsn8_profile_icon_phpbb_warning" title="{L_WARNINGS}"></div>
+									<div class="tsn8_profile_data_large">
+										{WARNINGS}
+										<div class="tsn8_profile_data_small"><!-- IF U_NOTES or U_WARN -->[ <!-- IF U_NOTES --><a href="{U_NOTES}">{L_VIEW_NOTES}</a><!-- ENDIF --> <!-- IF U_WARN --><!-- IF U_NOTES --> | <!-- ENDIF --><a href="{U_WARN}">{L_WARN_USER}</a><!-- ENDIF --> ]<!-- ENDIF --></div>
+									</div>
+								</div>
+							</div>
 							<!-- ENDIF -->
-							<dt>{L_TOTAL_POSTS}{L_COLON}</dt>
-							<dd>{POSTS} <!-- IF S_DISPLAY_SEARCH -->|
-								<strong><a href="{U_SEARCH_USER}">{L_SEARCH_USER_POSTS}</a></strong><!-- ENDIF -->
-								<!-- IF POSTS_PCT --><br/>({POSTS_PCT} / {POSTS_DAY})<!-- ENDIF -->
-								<!-- IF POSTS_IN_QUEUE and U_MCP_QUEUE -->
-								<br/>(<a href="{U_MCP_QUEUE}">{L_POSTS_IN_QUEUE}</a>)<!-- ELSEIF POSTS_IN_QUEUE -->
-								<br/>({L_POSTS_IN_QUEUE})<!-- ENDIF -->
-							</dd>
-							<!-- IF S_SHOW_ACTIVITY and POSTS -->
-							<dt>{L_ACTIVE_IN_FORUM}{L_COLON}</dt>
-							<dd><!-- IF ACTIVE_FORUM != '' --><strong><a href="{U_ACTIVE_FORUM}">{ACTIVE_FORUM}</a></strong><br/>({ACTIVE_FORUM_POSTS} / {ACTIVE_FORUM_PCT})<!-- ELSE --> - <!-- ENDIF -->
-							</dd>
-							<dt>{L_ACTIVE_IN_TOPIC}{L_COLON}</dt>
-							<dd><!-- IF ACTIVE_TOPIC != '' --><strong><a href="{U_ACTIVE_TOPIC}">{ACTIVE_TOPIC}</a></strong><br/>({ACTIVE_TOPIC_POSTS} / {ACTIVE_TOPIC_PCT})<!-- ELSE --> - <!-- ENDIF -->
-							</dd>
-							<!-- ENDIF -->
-							<!-- EVENT memberlist_view_user_statistics_after -->
-						</dl>
+							<div class="gm-columns gt-columns gd-columns gm-full gt-half gd-half">
+								<div class="tsn8_profile_data_container">
+									<a href="{U_SEARCH_USER}" class="tsn8_profile_data_icon tsn8_profile_icon_phpbb_posts" title="{L_TOTAL_POSTS}"></a>
+
+									<div class="tsn8_profile_data_large">
+										<!-- IF S_DISPLAY_SEARCH --><a href="{U_SEARCH_USER}"><!-- ENDIF -->{POSTS}<!-- IF S_DISPLAY_SEARCH --></a><!-- ENDIF -->
+										<div class="tsn8_profile_data_small">
+											<!-- IF POSTS_PCT -->({POSTS_PCT} / {POSTS_DAY})<!-- ENDIF -->
+											<!-- IF POSTS_IN_QUEUE and U_MCP_QUEUE -->
+											<br/>(<a href="{U_MCP_QUEUE}">{L_POSTS_IN_QUEUE}</a>)<!-- ELSEIF POSTS_IN_QUEUE -->
+											<br/>({L_POSTS_IN_QUEUE})<!-- ENDIF -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- IF S_SHOW_ACTIVITY and POSTS -->
+						<hr class="dashed"/>
+						<div class="gm-row gt-row gd-row">
+							<div class="gm-columns gt-columns gd-columns gm-full gt-half gd-half">
+								<div class="tsn8_profile_data_container">
+									<div class="tsn8_profile_data_icon tsn8_profile_icon_phpbb_forum" title="{L_ACTIVE_IN_FORUM}"></div>
+									<div class="tsn8_profile_data">
+										<!-- IF ACTIVE_FORUM != '' -->
+										<strong><a href="{U_ACTIVE_FORUM}">{ACTIVE_FORUM}</a></strong>
+
+										<div class="tsn8_profile_data_small">({ACTIVE_FORUM_POSTS} / {ACTIVE_FORUM_PCT})</div>
+										<!-- ELSE --> - <!-- ENDIF -->
+									</div>
+								</div>
+							</div>
+							<div class="gm-columns gt-columns gd-columns gm-full gt-half gd-half">
+								<div class="tsn8_profile_data_container">
+									<div class="tsn8_profile_data_icon tsn8_profile_icon_phpbb_topic" title="{L_ACTIVE_IN_TOPIC}"></div>
+									<div class="tsn8_profile_data">
+										<!-- IF ACTIVE_TOPIC != '' -->
+										<strong><a href="{U_ACTIVE_TOPIC}">{ACTIVE_TOPIC}</a></strong>
+
+										<div class="tsn8_profile_data_small">({ACTIVE_TOPIC_POSTS} / {ACTIVE_TOPIC_PCT})</div>
+										<!-- ELSE --> - <!-- ENDIF -->
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ENDIF -->
 					</div>
 				</div>
 			</div>
 			<div class="gm-hide gt-columns gt-1of8 gd-columns gd-quarter">&nbsp;</div>
 		</div>
+		<!-- EVENT memberlist_view_user_statistics_after -->
 		<!-- IF SIGNATURE -->
 		<div class="gm-row gt-row gd-row">
 			<div class="gm-hide gt-columns gt-1of8 gd-columns gd-quarter">&nbsp;</div>

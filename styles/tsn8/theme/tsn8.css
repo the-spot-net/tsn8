@@ -923,21 +923,24 @@ a.tsn8_profile_data_icon:hover {
 
 .tsn8_profile_data_large,
 .tsn8_profile_data,
+.tsn8_profile_data_small,
 .tsn8_profile_data_nowrap {
-	font-size: 1em;
+	font-size: 1rem;
 	margin: 0.25em;
 	min-height: 32px;
 	vertical-align: middle;
 	display: table-cell;
 }
-
+.tsn8_profile_data_small {
+	font-size: 0.85rem;
+}
 .tsn8_profile_data_nowrap {
 	white-space: nowrap;
 	padding-top: 0.5em;
 }
 
 .tsn8_profile_data_large {
-	font-size: 1.3em;
+	font-size: 1.3rem;
 }
 
 .tsn8_profile_icon_container {
@@ -1031,6 +1034,15 @@ a.tsn8_profile_data_icon:hover {
 }
 .tsn8_profile_icon_phpbb_joined {
 	background: url('images/tsn8/profile_register.png') no-repeat center center;
+}
+.tsn8_profile_icon_phpbb_forum {
+	background: url('images/tsn8/profile_forum.png') no-repeat center center;
+}
+.tsn8_profile_icon_phpbb_topic {
+	background: url('images/tsn8/profile_topic.png') no-repeat center center;
+}
+.tsn8_profile_icon_phpbb_warning {
+	background: url('images/tsn8/profile_warning.png') no-repeat center center;
 }
 
 

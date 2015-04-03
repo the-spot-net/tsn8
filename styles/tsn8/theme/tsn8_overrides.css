@@ -348,6 +348,20 @@ fieldset.polls dd div {
 	/*padding: 0 5px 1px;*/
 }
 
+.content span, .content p {
+	font-size: 1rem;
+	line-height: 1.2rem;
+}
+.content ol, .content ul {
+	font-size: 1rem;
+	line-height: 1.4rem;
+	margin: 1em auto 1em 3em;
+}
+
+.postlink {
+	font-size: 1rem;
+}
+
 .has-profile .postbody h3 {
 	margin-right: 0;
 }
@@ -536,7 +550,7 @@ input.ui-button {
 }
 
 #topicreview {
-	overflow-x:hidden;
+	overflow-x: hidden;
 }
 
 blockquote {
