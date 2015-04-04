@@ -18,6 +18,7 @@ body {
 	background: #fff url('./images/tsn8/tsnlogo-watermark.png') no-repeat fixed 15% 0;
 	background-size: contain;
 	overflow-x: hidden;
+	min-height: 100%;
 }
 
 header, footer, section, nav {

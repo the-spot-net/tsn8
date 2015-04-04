@@ -1,182 +1,207 @@
+
+
+
+
 <!-- IF S_IN_SEARCH_POPUP -->
 	<!-- INCLUDE simple_header.html -->
-	<!-- INCLUDE memberlist_search.html -->
-	<form method="post" id="results" action="{S_MODE_ACTION}" onsubmit="insert_marked_users('#results', this.user); return false;" data-form-name="{S_FORM_NAME}" data-field-name="{S_FIELD_NAME}">
+	<div class="group">
+		<div class="gm-row gt-row gd-row">
+			<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+				<!-- INCLUDE memberlist_search.html -->
+				<form method="post" id="results" action="{S_MODE_ACTION}" onsubmit="insert_marked_users('#results', this.user); return false;" data-form-name="{S_FORM_NAME}" data-field-name="{S_FIELD_NAME}">
 
 <!-- ELSE -->
 	<!-- INCLUDE overall_header.html -->
-	<div class="panel" id="memberlist_search"<!-- IF not S_SEARCH_USER --> style="display: none;"<!-- ENDIF -->>
-	<!-- INCLUDE memberlist_search.html -->
-	</div>
-	<form method="post" action="{S_MODE_ACTION}">
-
-<!-- ENDIF -->
-
-<!-- IF S_SHOW_GROUP -->
-		<h2 class="group-title"<!-- IF GROUP_COLOR --> style="color:#{GROUP_COLOR};"<!-- ENDIF -->>{GROUP_NAME}</h2>
-		<p>{GROUP_DESC} {GROUP_TYPE}</p>
-		<p>
-	<!-- IF AVATAR_IMG -->{AVATAR_IMG}<!-- ENDIF -->
-	<!-- IF RANK_IMG -->{RANK_IMG}<!-- ENDIF -->
-	<!-- IF GROUP_RANK -->{GROUP_RANK}<!-- ENDIF -->
-		</p>
-<!-- ELSE -->
-		<h2 class="solo">{PAGE_TITLE}<!-- IF SEARCH_WORDS -->{L_COLON} <a href="{U_SEARCH_WORDS}">{SEARCH_WORDS}</a><!-- ENDIF --></h2>
-
-		<div class="action-bar top">
-			<div class="member-search panel" style="margin-right: 0.25em;">
-				<!-- IF S_LEADERS_SET or not S_SHOW_GROUP or not .memberrow -->
-				{L_SORT_BY}{L_COLON}
-				<span class="name" data-dfn="{L_RANK}{L_COMMA_SEPARATOR}<!-- IF S_SHOW_GROUP and .memberrow -->{L_GROUP_LEADER}<!-- ELSE -->{L_USERNAME}<!-- ENDIF -->">
-					<span class="rank-img"><a href="{U_SORT_RANK}">{L_RANK}</a></span>&nbsp;|&nbsp;
-					<a href="{U_SORT_USERNAME}"><!-- IF S_SHOW_GROUP and .memberrow -->{L_GROUP_LEADER}<!-- ELSE -->{L_USERNAME}<!-- ENDIF --></a>&nbsp;|&nbsp;
-					<a href="{U_SORT_POSTS}#memberlist">{L_POSTS}</a>&nbsp;|&nbsp;
-					<a href="{U_SORT_JOINED}#memberlist">{L_JOINED}</a>&nbsp;|&nbsp;
-					<!-- IF U_SORT_ACTIVE --><a href="{U_SORT_ACTIVE}#memberlist">{L_LAST_ACTIVE}</a><!-- ENDIF -->
-				</span>
-				<!-- ENDIF -->
-			</div>
-			<div class="member-search panel">
-				<!-- IF U_FIND_MEMBER and not S_SEARCH_USER --><a href="{U_FIND_MEMBER}" id="member_search" data-alt-text="{LA_HIDE_MEMBER_SEARCH}">{L_FIND_USERNAME}</a> &bull; <!-- ELSEIF S_SEARCH_USER and U_HIDE_FIND_MEMBER and not S_IN_SEARCH_POPUP --><a href="{U_HIDE_FIND_MEMBER}" id="member_search" data-alt-text="{LA_FIND_USERNAME}">{L_HIDE_MEMBER_SEARCH}</a> &bull; <!-- ENDIF -->
-				<strong>
-				<!-- BEGIN first_char -->
-					<a href="{first_char.U_SORT}">{first_char.DESC}</a>&nbsp;
-				<!-- END first_char -->
-				</strong>
-			</div>
-
-			<div class="pagination">
-				{TOTAL_USERS}
-				<!-- IF .pagination -->
-					<!-- INCLUDE pagination.html -->
-				<!-- ELSE -->
-					 &bull; {PAGE_NUMBER}
-				<!-- ENDIF -->
-			</div>
-		</div>
-<!-- ENDIF -->
-
-		<div class="group panel">
-			<!-- DEFINE $CARD_COUNT = 0 -->
-			<div class="gm-row gt-row gd-row">
-			<!-- BEGIN memberrow -->
-				<!-- IF S_SHOW_GROUP -->
-					<!-- IF not memberrow.S_GROUP_LEADER and not $S_MEMBER_HEADER -->
-						<!-- IF S_LEADERS_SET and memberrow.S_FIRST_ROW -->
-				<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
-					<span class="tsn8_module_header">{L_GROUP_LEADERS}</span>
+	<div class="group">
+		<div class="gm-row gt-row gd-row">
+			<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+				<div class="panel" id="memberlist_search"<!-- IF not S_SEARCH_USER --> style="display: none;"<!-- ENDIF -->>
+				<!-- INCLUDE memberlist_search.html -->
 				</div>
-						<!-- ENDIF -->
-						<!-- IF S_LEADERS_SET -->
-			</div>
-			<div class="gm-row gt-row gd-row">
-						<!-- ENDIF -->
+				<form method="post" action="{S_MODE_ACTION}">
 
-						<!-- IF S_SHOW_GROUP -->
-						<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
-							<span class="tsn8_module_header">{L_GROUP_MEMBERS}</span>
+<!-- ENDIF -->
+
+					<div class="group">
+			<!-- IF S_SHOW_GROUP -->
+						<div class="gm-row gt-row gd-row">
+							<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+								<h2 class="group-title"<!-- IF GROUP_COLOR --> style="color:#{GROUP_COLOR};"<!-- ENDIF -->>{GROUP_NAME}</h2>
+								<p>{GROUP_DESC} {GROUP_TYPE}</p>
+								<!--<p>-->
+									<!--&lt;!&ndash; IF AVATAR_IMG &ndash;&gt;{AVATAR_IMG}&lt;!&ndash; ENDIF &ndash;&gt;-->
+									<!--&lt;!&ndash; IF RANK_IMG &ndash;&gt;{RANK_IMG}&lt;!&ndash; ENDIF &ndash;&gt;-->
+									<!--&lt;!&ndash; IF GROUP_RANK &ndash;&gt;{GROUP_RANK}&lt;!&ndash; ENDIF &ndash;&gt;-->
+								<!--</p>-->
+							</div>
 						</div>
-						<!-- ENDIF -->
-					<!-- DEFINE $S_MEMBER_HEADER = 1 -->
-					<!-- ENDIF -->
-				<!-- ENDIF -->
+			<!-- ELSE -->
+						<div class="gm-row gt-row gd-row">
+							<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+								<h2 class="solo">{PAGE_TITLE}<!-- IF SEARCH_WORDS -->{L_COLON} <a href="{U_SEARCH_WORDS}">{SEARCH_WORDS}</a><!-- ENDIF --></h2>
+							</div>
+						</div>
+						<div class="gm-row gt-row gd-row">
+							<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
 
-				<div class="gm-columns gt-columns gd-columns gm-full gt-third gd-1of5 align_center" style="display: table; border-spacing: 0.25em .125em;">
-					<div class="tsn8_module_container" style="display: table-cell;">
-						<div class="group">
-							<div class="gm-row gt-row gd-row">
-								<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full align_center">
-									<!-- IF S_IN_SEARCH_POPUP --><br />[&nbsp;<a href="#" onclick="insert_single_user('#results', '{memberrow.A_USERNAME}'); return false;">{L_SELECT}</a>&nbsp;]<!-- ENDIF -->
-									<div class="tsn8_profile_avatar"><span class="tsn8_profile_avatar_helper"></span>{memberrow.AVATAR_IMG}</div>
-								</div>
-							</div>
-							<div class="gm-row gt-row gd-row">
-								<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full align_center">
-									<span class="tsn8_memberlist_username">
-									<!-- IF S_IN_SEARCH_POPUP and not S_SELECT_SINGLE --><input type="checkbox" name="user" value="{memberrow.USERNAME}" /> <!-- ENDIF -->
-									<!-- EVENT memberlist_body_username_prepend -->{memberrow.USERNAME_FULL}<!-- EVENT memberlist_body_username_append -->
-									</span>
-								</div>
-							</div>
-							<div class="gm-row gt-row gd-row">
-								<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full align_center">
-									<span class="tsn8_memberlist_usertitle">{memberrow.RANK_TITLE}</span>
-								</div>
-							</div>
-							<div class="gm-row gt-row gd-row">
-								<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
-									<div class="tsn8_memberlist_postcount">
-									<!-- IF memberrow.POSTS and S_DISPLAY_SEARCH -->
-										<a href="{memberrow.U_SEARCH_USER}" title="{L_SEARCH_USER_POSTS}"><strong>{L_POSTS}{L_COLON}</strong> {memberrow.POSTS}</a>
-									<!-- ELSE -->
-										<span><strong>{L_POSTS}{L_COLON}</strong> {memberrow.POSTS}</span>
-									<!-- ENDIF -->
-									</div>
-								</div>
-							</div>
-							<div class="gm-row gt-row gd-row">
-								<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full align_center">
-									<div class="tsn8_profile_icon_container">
-										<!-- IF memberrow.POSTS and S_DISPLAY_SEARCH -->
-										<a href="{memberrow.U_SEARCH_USER}" class="tsn8_profile_icon tsn8_profile_icon_phpbb_posts" title="{L_SEARCH_USER_POSTS}"></a>
-										<!-- ELSE -->
-										<div class="tsn8_profile_icon tsn8_profile_icon_phpbb_posts" title="{L_SEARCH_USER_POSTS}"></div>
+								<div class="action-bar top">
+									<div class="member-search panel" style="margin-right: 0.25em;">
+										<!-- IF S_LEADERS_SET or not S_SHOW_GROUP or not .memberrow -->
+										{L_SORT_BY}{L_COLON}
+										<span class="name" data-dfn="{L_RANK}{L_COMMA_SEPARATOR}<!-- IF S_SHOW_GROUP and .memberrow -->{L_GROUP_LEADER}<!-- ELSE -->{L_USERNAME}<!-- ENDIF -->">
+											<span class="rank-img"><a href="{U_SORT_RANK}">{L_RANK}</a></span>&nbsp;|&nbsp;
+											<a href="{U_SORT_USERNAME}"><!-- IF S_SHOW_GROUP and .memberrow -->{L_GROUP_LEADER}<!-- ELSE -->{L_USERNAME}<!-- ENDIF --></a>&nbsp;|&nbsp;
+											<a href="{U_SORT_POSTS}#memberlist">{L_POSTS}</a>&nbsp;|&nbsp;
+											<a href="{U_SORT_JOINED}#memberlist">{L_JOINED}</a>&nbsp;|&nbsp;
+											<!-- IF U_SORT_ACTIVE --><a href="{U_SORT_ACTIVE}#memberlist">{L_LAST_ACTIVE}</a><!-- ENDIF -->
+										</span>
 										<!-- ENDIF -->
-										<!-- BEGIN custom_fields -->
-										<a href="{memberrow.custom_fields.PROFILE_FIELD_VALUE_RAW}" class="tsn8_profile_icon tsn8_profile_icon_{memberrow.custom_fields.PROFILE_FIELD_IDENT}" title="{memberrow.custom_fields.PROFILE_FIELD_NAME}"></a>
-										<!-- END custom_fields -->
-										<a class="tsn8_profile_icon tsn8_profile_icon_phpbb_joined" title="{L_JOINED}{L_COLON} {memberrow.JOINED}"></a>
-										<!-- IF S_VIEWONLINE --><a class="tsn8_profile_icon tsn8_profile_icon_phpbb_last_seen" title="{L_LAST_ACTIVE}{L_COLON} {memberrow.LAST_ACTIVE}"></a><!-- ENDIF -->
 									</div>
+									<div class="member-search panel">
+										<!-- IF U_FIND_MEMBER and not S_SEARCH_USER --><a href="{U_FIND_MEMBER}" id="member_search" data-alt-text="{LA_HIDE_MEMBER_SEARCH}">{L_FIND_USERNAME}</a> &bull; <!-- ELSEIF S_SEARCH_USER and U_HIDE_FIND_MEMBER and not S_IN_SEARCH_POPUP --><a href="{U_HIDE_FIND_MEMBER}" id="member_search" data-alt-text="{LA_FIND_USERNAME}">{L_HIDE_MEMBER_SEARCH}</a> &bull; <!-- ENDIF -->
+										<strong>
+										<!-- BEGIN first_char -->
+											<a href="{first_char.U_SORT}">{first_char.DESC}</a>&nbsp;
+										<!-- END first_char -->
+										</strong>
+									</div>
+
+									<div class="pagination">
+										{TOTAL_USERS}
+										<!-- IF .pagination -->
+											<!-- INCLUDE pagination.html -->
+										<!-- ELSE -->
+											 &bull; {PAGE_NUMBER}
+										<!-- ENDIF -->
+									</div>
+								</div>
+							</div>
+						</div>
+			<!-- ENDIF -->
+						<div class="gm-row gt-row gd-row">
+							<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+								<div class="panel">
+									<div class="group">
+										<!-- DEFINE $CARD_COUNT = 0 -->
+										<div class="gm-row gt-row gd-row">
+										<!-- BEGIN memberrow -->
+											<!-- IF S_SHOW_GROUP -->
+												<!-- IF S_LEADERS_SET and memberrow.S_FIRST_ROW -->
+											<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+												<span class="tsn8_module_header">{L_GROUP_LEADERS}</span>
+											</div>
+										</div>
+										<div class="gm-row gt-row gd-row">
+												<!-- ENDIF -->
+												<!-- IF not memberrow.S_GROUP_LEADER and not $S_MEMBER_HEADER -->
+													<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+														<span class="tsn8_module_header">{L_GROUP_MEMBERS}</span>
+													</div>
+												<!-- DEFINE $S_MEMBER_HEADER = 1 -->
+												<!-- ENDIF -->
+											<!-- ENDIF -->
+
+											<div class="gm-columns gt-columns gd-columns gm-full gt-third gd-1of5 align_center" style="display: table; border-spacing: 0.25em .125em;">
+												<div class="tsn8_module_container" style="display: table-cell;">
+													<div class="group">
+														<div class="gm-row gt-row gd-row">
+															<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full align_center">
+																<!-- IF S_IN_SEARCH_POPUP --><br />[&nbsp;<a href="#" onclick="insert_single_user('#results', '{memberrow.A_USERNAME}'); return false;">{L_SELECT}</a>&nbsp;]<!-- ENDIF -->
+																<div class="tsn8_profile_avatar"><span class="tsn8_profile_avatar_helper"></span>{memberrow.AVATAR_IMG}</div>
+															</div>
+														</div>
+														<div class="gm-row gt-row gd-row">
+															<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full align_center">
+																<span class="tsn8_memberlist_username">
+																<!-- IF S_IN_SEARCH_POPUP and not S_SELECT_SINGLE --><input type="checkbox" name="user" value="{memberrow.USERNAME}" /> <!-- ENDIF -->
+																<!-- EVENT memberlist_body_username_prepend -->{memberrow.USERNAME_FULL}<!-- EVENT memberlist_body_username_append -->
+																</span>
+															</div>
+														</div>
+														<div class="gm-row gt-row gd-row">
+															<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full align_center">
+																<span class="tsn8_memberlist_usertitle">{memberrow.RANK_TITLE}</span>
+															</div>
+														</div>
+														<div class="gm-row gt-row gd-row">
+															<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+																<div class="tsn8_memberlist_postcount">
+																<!-- IF memberrow.POSTS and S_DISPLAY_SEARCH -->
+																	<a href="{memberrow.U_SEARCH_USER}" title="{L_SEARCH_USER_POSTS}"><strong>{L_POSTS}{L_COLON}</strong> {memberrow.POSTS}</a>
+																<!-- ELSE -->
+																	<span><strong>{L_POSTS}{L_COLON}</strong> {memberrow.POSTS}</span>
+																<!-- ENDIF -->
+																</div>
+															</div>
+														</div>
+														<div class="gm-row gt-row gd-row">
+															<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full align_center">
+																<div class="tsn8_profile_icon_container">
+																	<!-- IF memberrow.POSTS and S_DISPLAY_SEARCH -->
+																	<a href="{memberrow.U_SEARCH_USER}" class="tsn8_profile_icon tsn8_profile_icon_phpbb_posts" title="{L_SEARCH_USER_POSTS}"></a>
+																	<!-- ELSE -->
+																	<div class="tsn8_profile_icon tsn8_profile_icon_phpbb_posts" title="{L_SEARCH_USER_POSTS}"></div>
+																	<!-- ENDIF -->
+																	<!-- BEGIN custom_fields -->
+																	<a href="{memberrow.custom_fields.PROFILE_FIELD_VALUE_RAW}" class="tsn8_profile_icon tsn8_profile_icon_{memberrow.custom_fields.PROFILE_FIELD_IDENT}" title="{memberrow.custom_fields.PROFILE_FIELD_NAME}"></a>
+																	<!-- END custom_fields -->
+																	<a class="tsn8_profile_icon tsn8_profile_icon_phpbb_joined" title="{L_JOINED}{L_COLON} {memberrow.JOINED}"></a>
+																	<!-- IF S_VIEWONLINE --><a class="tsn8_profile_icon tsn8_profile_icon_phpbb_last_seen" title="{L_LAST_ACTIVE}{L_COLON} {memberrow.LAST_ACTIVE}"></a><!-- ENDIF -->
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+									<!-- BEGINELSE -->
+											<div class="gm-columns gt-columns gd-columns gm-half gt-1of5 gd-1of5 align_center">
+												{L_NO_MEMBERS}
+											</div>
+									<!-- END memberrow -->
+									</div> <!-- Close the row -->
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-		<!-- BEGINELSE -->
-				<div class="gm-columns gt-columns gd-columns gm-half gt-1of5 gd-1of5 align_center">
-					{L_NO_MEMBERS}
-				</div>
-		<!-- END memberrow -->
-		</div> <!-- Close the row -->
+
+			<!-- IF S_IN_SEARCH_POPUP and not S_SELECT_SINGLE -->
+			<fieldset class="display-actions">
+				<input type="submit" name="submit" value="{L_SELECT_MARKED}" class="button2" />
+				<div><a href="#" onclick="marklist('results', 'user', true); return false;">{L_MARK_ALL}</a> &bull; <a href="#" onclick="marklist('results', 'user', false); return false;">{L_UNMARK_ALL}</a></div>
+			</fieldset>
+			<!-- ENDIF -->
+
+			<!-- IF S_IN_SEARCH_POPUP -->
+			</form>
+			<form method="post" id="sort-results" action="{S_MODE_ACTION}">
+			<!-- ENDIF -->
+
+			<!-- IF S_IN_SEARCH_POPUP and not S_SEARCH_USER -->
+			<fieldset class="display-options">
+				<label for="sk">{L_SELECT_SORT_METHOD}{L_COLON} <select name="sk" id="sk">{S_MODE_SELECT}</select></label>
+				<label for="sd">{L_ORDER} <select name="sd" id="sd">{S_ORDER_SELECT}</select></label>
+				<input type="submit" name="sort" value="{L_SUBMIT}" class="button2" />
+			</fieldset>
+			<!-- ENDIF -->
+
+			</form>
+		</div>
+	</div>
+	<div class="action-bar bottom">
+		<div class="pagination">
+			{TOTAL_USERS}
+			<!-- IF .pagination -->
+				<!-- INCLUDE pagination.html -->
+			<!-- ELSE -->
+				 &bull; {PAGE_NUMBER}
+			<!-- ENDIF -->
+		</div>
 	</div>
 
-<!-- IF S_IN_SEARCH_POPUP and not S_SELECT_SINGLE -->
-<fieldset class="display-actions">
-	<input type="submit" name="submit" value="{L_SELECT_MARKED}" class="button2" />
-	<div><a href="#" onclick="marklist('results', 'user', true); return false;">{L_MARK_ALL}</a> &bull; <a href="#" onclick="marklist('results', 'user', false); return false;">{L_UNMARK_ALL}</a></div>
-</fieldset>
-<!-- ENDIF -->
-
-<!-- IF S_IN_SEARCH_POPUP -->
-</form>
-<form method="post" id="sort-results" action="{S_MODE_ACTION}">
-<!-- ENDIF -->
-
-<!-- IF S_IN_SEARCH_POPUP and not S_SEARCH_USER -->
-<fieldset class="display-options">
-	<label for="sk">{L_SELECT_SORT_METHOD}{L_COLON} <select name="sk" id="sk">{S_MODE_SELECT}</select></label>
-	<label for="sd">{L_ORDER} <select name="sd" id="sd">{S_ORDER_SELECT}</select></label>
-	<input type="submit" name="sort" value="{L_SUBMIT}" class="button2" />
-</fieldset>
-<!-- ENDIF -->
-
-</form>
-
-<div class="action-bar bottom">
-	<div class="pagination">
-		{TOTAL_USERS}
-		<!-- IF .pagination -->
-			<!-- INCLUDE pagination.html -->
-		<!-- ELSE -->
-			 &bull; {PAGE_NUMBER}
-		<!-- ENDIF -->
-	</div>
 </div>
-
 <!-- IF S_IN_SEARCH_POPUP -->
 	<!-- INCLUDE simple_footer.html -->
 <!-- ELSE -->
-	<!-- INCLUDE jumpbox.html -->
 	<!-- INCLUDE overall_footer.html -->
 <!-- ENDIF -->

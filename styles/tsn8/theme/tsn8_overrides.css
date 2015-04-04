@@ -58,8 +58,8 @@ fieldset.quick-login input.inputbox {
 
 .action-bar {
 	font-size: 1em;
-	padding-left: 0.25em;
-	padding-right: 0.2em;
+	/*padding-left: 0.25em;*/
+	/*padding-right: 0.2em;*/
 }
 
 .forabg,
@@ -352,6 +352,7 @@ fieldset.polls dd div {
 	font-size: 1rem;
 	line-height: 1.2rem;
 }
+
 .content ol, .content ul {
 	font-size: 1rem;
 	line-height: 1.4rem;
@@ -557,4 +558,36 @@ blockquote {
 	background-color: rgba(215, 227, 246, 0.31);
 	border-color: #d7e3f6;
 	border-radius: 0.5em;
+}
+
+table.table1 thead th {
+	font-size: 1.3em;
+	border-bottom: 1px solid #d7e3f6;
+}
+
+table.table1 tbody tr {
+	border: 1px solid transparent;
+	border-radius: 5px;
+}
+
+table.table1 tbody tr:hover,
+table.table1 tbody tr.hover {
+	border-radius: 5px;
+	background: #d7e3f6;
+	background: rgba(215, 227, 246, 0.5);
+	border: 1px solid #d7e3f6;
+}
+
+table.table1 tbody td {
+	border: 0 transparent;
+	padding: 0.25em;
+	color: #587eaa;
+}
+
+table.table1 thead th,
+.forumbg .header a,
+.forabg .header a,
+th a {
+	color: #587eaa;
+	text-transform: capitalize;
 }
