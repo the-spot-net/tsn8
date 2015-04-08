@@ -484,8 +484,8 @@ fieldset.polls dd.resultbar, fieldset.polls dd.poll_option_percent {
 }
 
 .has-profile .post-buttons {
-	right: 20px;
-	top: 15px;
+	/*right: 20px;*/
+	/*top: 15px;*/
 }
 
 .online {
