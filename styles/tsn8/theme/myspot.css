@@ -42,7 +42,7 @@
 
 /* BEGIN Mini Forums Content */
 .tsn8_myspot_login_fields {
-	font-size: 1em;
+	font-size: 1rem;
 	color: #333;
 	display: block;
 	vertical-align: middle;
@@ -52,7 +52,7 @@
 
 .tsn8_mini_forum_list {
 	margin-left: 0;
-	font-size: 0.9em;
+	font-size: 0.9rem;
 }
 
 .tsn8_mini_forum_list_category,
@@ -76,13 +76,13 @@
 	color: #587eaa;
 	font-weight: bold;
 	font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-	font-size: 1.2em;
+	font-size: 1rem;
 }
 
 .tsn8_mini_forum_forum_name {
 	color: #587eaa;
 	font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-	font-size: 1.1em;
+	font-size: 0.9rem;
 }
 
 .tsn8_mini_forum_list_item {
@@ -107,9 +107,9 @@
 
 .tsn8_myspot_special_report_body {
 	color: #333;
-	line-height: 1.1rem;
+	line-height: 1.1em;
 	padding: 0.25em;
-	font-size: 1rem;
+	font-size: 1em;
 }
 
 .tsn8_myspot_special_report_body ul,
@@ -150,13 +150,13 @@
 .tsn8_myspot_newest_post_title {
 	display: block;
 	padding: 3px;
-	font-size: 1em;
+	font-size: 1rem;
 	text-align: left;
 }
 
 .tsn8_myspot_newest_post_subtitle {
 	border-bottom: 1px dotted #d7e3f6;
-	font-size: 0.75em;
+	font-size: 0.75rem;
 	color: #587eaa;
 	font-style: italic;
 	display: block;
@@ -171,7 +171,7 @@
 .tsn8_myspot_newest_post_message {
 	display: block;
 	padding: 3px;
-	font-size: 0.9em;
+	font-size: 0.9rem;
 	vertical-align: top;
 	text-align: left;
 	min-height: 40px;
@@ -181,7 +181,7 @@
 .tsn8_myspot_no_posts_message {
 	display: block;
 	text-align: center;
-	font-size: 1em;
+	font-size: 1rem;
 }
 
 /* END New Posts Content */

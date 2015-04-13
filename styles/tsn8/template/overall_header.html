@@ -11,6 +11,11 @@
 		{PAGE_TITLE}
 		<!-- IF S_VIEWTOPIC or S_VIEWFORUM --> - {SITENAME}<!-- ENDIF -->
 	</title>
+	<meta property="og:url" content="<!-- IF U_CANONICAL -->{U_CANONICAL}<!-- ELSE -->https://the-spot.net<!-- ENDIF -->"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:title" content="{SITENAME}"/>
+	<meta property="og:description" content="{PAGE_TITLE}"/>
+	<meta property="og:image" content="https://the-spot.net/img/media/email-header.png"/>
 
 	<!-- IF S_ENABLE_FEEDS -->
 	<!-- IF S_ENABLE_FEEDS_OVERALL -->
