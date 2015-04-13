@@ -1,10 +1,11 @@
 <div class="navbar">
 	<div class="inner">
 
-	<ul id="nav-footer" class="linklist bulletin" role="menubar">
+	<ul id="nav-breadcrumbs" class="linklist" role="menubar">
 		<li class="small-icon tsn8_icon_tsn breadcrumbs"><span class="crumb"><a href="{BOARD_URL}myspot.php" data-navbar-reference="myspot">{L_MYSPOT}</a>&nbsp;&nbsp;&bull;</span></li>
-		<li class="small-icon icon-home breadcrumbs">
-			<!-- IF U_SITE_HOME --><span class="crumb"><a href="{U_SITE_HOME}" data-navbar-reference="home">{L_SITE_HOME}</a></span><!-- ENDIF -->
+		<li class="breadcrumbs tsn8_breadcrumb_flush"><span class="crumb"><a href="/tsn" data-navbar-reference="tsnBlog">{L_TSNBLOG}</a>&nbsp;&nbsp;&bull;</span></li>
+		<li class="breadcrumbs tsn8_breadcrumb_flush">
+			<!-- IF U_SITE_HOME --><span class="crumb"><a href="{U_SITE_HOME}" {$MICRODATA} data-navbar-reference="home">{L_SITE_HOME}</a></span><!-- ENDIF -->
 			<!-- EVENT overall_footer_breadcrumb_prepend -->
 			<span class="crumb"><a href="{U_INDEX}" data-navbar-reference="index">{L_INDEX}</a></span>
 			<!-- EVENT overall_footer_breadcrumb_append -->

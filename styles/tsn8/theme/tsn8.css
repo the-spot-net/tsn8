@@ -43,6 +43,9 @@ header, footer, section, nav {
 	background-size: contain;
 	height: 125px;
 }
+li.tsn8_breadcrumb_flush span:first-child > a {
+	padding-left: 0;
+}
 
 /* END Header */
 
