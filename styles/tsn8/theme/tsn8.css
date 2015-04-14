@@ -320,7 +320,8 @@ h3 {
 }
 
 .tsn8_icon_addreply {
-	background-image: url('images/tsn8/reply_large.png');
+	/*background-image: url('images/tsn8/reply_large.png');*/
+	background-image: url('images/tsn8/compose_large.png');
 }
 
 .tsn8_icon_report {
