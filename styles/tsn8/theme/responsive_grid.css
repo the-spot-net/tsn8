@@ -249,6 +249,10 @@ legend.input-label {
 	.gm-hide {
 		display: none;
 	}
+
+	.gmh-50px {
+		height: 50px;
+	}
 }
 
 @media only screen and (min-width: 48em) and (max-width: 61.9375em) {
@@ -381,6 +385,10 @@ legend.input-label {
 
 	.gt-hide {
 		display: none;
+	}
+
+	.gth-85px {
+		height: 85px;
 	}
 }
 
@@ -557,6 +565,10 @@ legend.input-label {
 
 	.gd-hide {
 		display: none;
+	}
+
+	.gdh-125px {
+		height: 125px;
 	}
 
 }

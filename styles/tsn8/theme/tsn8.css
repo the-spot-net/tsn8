@@ -41,7 +41,9 @@ header, footer, section, nav {
 .tsn8_header_image {
 	background: url('./images/tsn8/header-logotext.png') no-repeat center left;
 	background-size: contain;
-	height: 125px;
+	max-height: 125px;
+	min-height: 50px;
+	display: block;
 }
 li.tsn8_breadcrumb_flush span:first-child > a {
 	padding-left: 0;
