@@ -90,7 +90,7 @@ $avatar_info = array(
 $avatar_image = preg_replace('/(\.\.\/)+?/', './', phpbb_get_user_avatar($avatar_info));
 
 // Prepare the Message Subject
-$subject = censor_text($news_info['post_subject']);
+$subject = censor_text($news_info['topic_title']);
 
 // Prepare the Message Excerpt
 // 50 words, no bbcode, no spaces
