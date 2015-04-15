@@ -191,6 +191,10 @@
 	display: block;
 }
 
+.tsn8_myspot_online_user_avatars img {
+	padding: 1px;
+}
+
 .tsn8_myspot_userstatus_stats_record {
 	display: block;
 	padding: 3px 5px;
