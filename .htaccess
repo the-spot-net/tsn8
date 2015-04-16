@@ -74,6 +74,28 @@ RewriteRule ^(.*)$ app.php [QSA,L]
 	</IfModule>
 </IfModule>
 
+## ENABLE KEEP-ALIVE ##
+<ifModule mod_headers.c>
+	Header set Connection keep-alive
+</ifModule>
+## ENABLE KEEP-ALIVE ##
+
+## EXPIRES CACHING ##
+<IfModule mod_expires.c>
+	ExpiresActive On
+	ExpiresByType image/jpg "access plus 1 week"
+	ExpiresByType image/jpeg "access plus 1 week"
+	ExpiresByType image/gif "access plus 1 week"
+	ExpiresByType image/png "access plus 1 week"
+	ExpiresByType text/css "access plus 1 day"
+	ExpiresByType application/pdf "access plus 1 month"
+	ExpiresByType text/x-javascript "access plus 1 day"
+	ExpiresByType application/x-shockwave-flash "access plus 1 month"
+	ExpiresByType image/x-icon "access plus 1 year"
+	ExpiresDefault "access plus 1 day"
+</IfModule>
+## EXPIRES CACHING ##
+
 # Custom Mods - Force HTTPS
 RewriteCond %{HTTPS} !on
 RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
