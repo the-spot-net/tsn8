@@ -193,6 +193,7 @@
 
 .tsn8_myspot_online_user_avatars img {
 	padding: 1px;
+	vertical-align: middle;
 }
 
 .tsn8_myspot_userstatus_stats_record {
