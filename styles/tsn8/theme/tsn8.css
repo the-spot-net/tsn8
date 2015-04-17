@@ -701,15 +701,12 @@ hr.divider {
 .tsn8_last_post_author_avatar {
 	height: 100%;
 	float: left;
+	z-index: 2;
 }
 
 .tsn8_last_post_author_avatar img {
 	vertical-align: middle;
 	margin-right: 5px;
-}
-
-.tsn8_last_post_author_avatar a {
-	/*line-height: 25px;*/
 }
 
 .lastpost .tsn8_last_post_author_info {

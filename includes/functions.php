@@ -4187,13 +4187,16 @@ function obtain_users_online($item_id = 0, $item = 'forum')
 }
 
 /**
-* Uses the result of obtain_users_online to generate a localized, readable representation.
-* @param mixed $online_users result of obtain_users_online - array with user_id lists for total, hidden and visible users, and statistics
-* @param int $item_id Indicate that the data is limited to one item and not global
-* @param string $item The name of the item which is stored in the session table as session_{$item}_id
-* @return array An array containing the string for output to the template
-*/
-function obtain_users_online_string($online_users, $item_id = 0, $item = 'forum')
+ * Uses the result of obtain_users_online to generate a localized, readable representation.
+ *
+ * @param mixed  $online_users result of obtain_users_online - array with user_id lists for total, hidden and visible users, and statistics
+ * @param int    $item_id      Indicate that the data is limited to one item and not global
+ * @param string $item         The name of the item which is stored in the session table as session_{$item}_id
+ * @param bool   $add_link     tsn8: Add link to avatars, conditionally
+ *
+ * @return array An array containing the string for output to the template
+ */
+function obtain_users_online_string($online_users, $item_id = 0, $item = 'forum', $add_link=false)
 {
 	global $config, $db, $user, $auth;
 
@@ -4267,7 +4270,7 @@ function obtain_users_online_string($online_users, $item_id = 0, $item = 'forum'
 						$row['user_avatar_height'] = $control_scaled_side;
 					}
 					$row['avatar_title'] = $row['username'];
-					$online_avatarlist .= phpbb_get_user_avatar($row);
+					$online_avatarlist .= phpbb_get_user_avatar($row, 'USER_AVATAR', false, $add_link);
 
 					// tsn8: add [[ END ]]
 				}
@@ -4721,45 +4724,52 @@ function phpbb_build_hidden_fields_for_query_params($request, $exclude = null)
 }
 
 /**
-* Get user avatar
-*
-* @param array $user_row Row from the users table
-* @param string $alt Optional language string for alt tag within image, can be a language key or text
-* @param bool $ignore_config Ignores the config-setting, to be still able to view the avatar in the UCP
-*
-* @return string Avatar html
-*/
-function phpbb_get_user_avatar($user_row, $alt = 'USER_AVATAR', $ignore_config = false)
+ * Get user avatar
+ *
+ * @param array  $user_row      Row from the users table
+ * @param string $alt           Optional language string for alt tag within image, can be a language key or text
+ * @param bool   $ignore_config Ignores the config-setting, to be still able to view the avatar in the UCP
+ *
+ * @param bool   $add_link tsn8: Add Link, conditionally
+ *
+ * @return string Avatar html
+ */
+function phpbb_get_user_avatar($user_row, $alt = 'USER_AVATAR', $ignore_config = false, $add_link = false)
 {
 	$row = \phpbb\avatar\manager::clean_row($user_row, 'user');
-	return phpbb_get_avatar($row, $alt, $ignore_config);
+	return phpbb_get_avatar($row, $alt, $ignore_config, $add_link);
 }
 
 /**
-* Get group avatar
-*
-* @param array $group_row Row from the groups table
-* @param string $alt Optional language string for alt tag within image, can be a language key or text
-* @param bool $ignore_config Ignores the config-setting, to be still able to view the avatar in the UCP
-*
-* @return string Avatar html
-*/
-function phpbb_get_group_avatar($user_row, $alt = 'GROUP_AVATAR', $ignore_config = false)
+ * Get group avatar
+ *
+ * @param        $user_row
+ * @param string $alt           Optional language string for alt tag within image, can be a language key or text
+ * @param bool   $ignore_config Ignores the config-setting, to be still able to view the avatar in the UCP
+ *
+ * @param bool   $add_link tsn8: Add Link, conditionally
+ *
+ * @return string Avatar html
+ * @internal param array $group_row Row from the groups table
+ */
+function phpbb_get_group_avatar($user_row, $alt = 'GROUP_AVATAR', $ignore_config = false, $add_link=false)
 {
 	$row = \phpbb\avatar\manager::clean_row($user_row, 'group');
-	return phpbb_get_avatar($row, $alt, $ignore_config);
+	return phpbb_get_avatar($row, $alt, $ignore_config, $add_link);
 }
 
 /**
-* Get avatar
-*
-* @param array $row Row cleaned by \phpbb\avatar\manager::clean_row
-* @param string $alt Optional language string for alt tag within image, can be a language key or text
-* @param bool $ignore_config Ignores the config-setting, to be still able to view the avatar in the UCP
-*
-* @return string Avatar html
-*/
-function phpbb_get_avatar($row, $alt, $ignore_config = false)
+ * Get avatar
+ *
+ * @param array  $row           Row cleaned by \phpbb\avatar\manager::clean_row
+ * @param string $alt           Optional language string for alt tag within image, can be a language key or text
+ * @param bool   $ignore_config Ignores the config-setting, to be still able to view the avatar in the UCP
+ *
+ * @param bool   $add_link tsn8: Add link to avatar, conditionally
+ *
+ * @return string Avatar html
+ */
+function phpbb_get_avatar($row, $alt, $ignore_config = false, $add_link=false)
 {
 	global $user, $config, $cache, $phpbb_root_path, $phpEx;
 	global $request;
@@ -4839,6 +4849,10 @@ function phpbb_get_avatar($row, $alt, $ignore_config = false)
 			// tsn8 add [[ END ]]
 			'alt="' . ((!empty($user->lang[$alt])) ? $user->lang[$alt] : $alt) . '" />';
 	}
+
+    if(!empty($html) && !empty($row['id']) && $add_link) {
+        $html = '<a href="'.append_sid("memberlist.$phpEx", "mode=viewprofile&u=".$row['id']).'" />'.$html.'</a>';
+    }
 
 	return $html;
 }
@@ -4934,7 +4948,7 @@ function page_header($page_title = '', $display_online_list = false, $item_id = 
 		$item_id = max($item_id, 0);
 
 		$online_users = obtain_users_online($item_id, $item);
-		$user_online_strings = obtain_users_online_string($online_users, $item_id, $item);
+		$user_online_strings = obtain_users_online_string($online_users, $item_id, $item, true);
 
 		$l_online_users = $user_online_strings['l_online_users'];
 		$online_userlist = $user_online_strings['online_userlist'];
