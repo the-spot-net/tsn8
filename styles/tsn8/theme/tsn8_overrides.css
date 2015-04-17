@@ -116,6 +116,10 @@ li.row:hover dd {
 	border-left-color: #d7e3f6;
 }
 
+.row .pagination {
+	z-index: 2;
+}
+
 dl.icon dt .list-inner {
 	padding-left: 50px;
 }
