@@ -126,7 +126,7 @@ $lang = array_merge($lang, array(
 	'BOARD_BAN_PERM'		=> 'You have been <strong>permanently</strong> banned from this board.<br /><br />Please contact the %2$sBoard Administrator%3$s for more information.',
 	'BOARD_BAN_REASON'		=> 'Reason given for ban: <strong>%s</strong>',
 	'BOARD_BAN_TIME'		=> 'You have been banned from this board until <strong>%1$s</strong>.<br /><br />Please contact the %2$sBoard Administrator%3$s for more information.',
-	'BOARD_DISABLE'			=> 'Sorry but this board is currently unavailable.',
+	'BOARD_DISABLE'			=> 'Sorry but we are currently undergoing some maintenance. Follow us on twitter for updates: <a href="//twitter.com/thespotnet">@thespotnet</a>',
 	'BOARD_DISABLED'		=> 'This board is currently disabled.',
 	'BOARD_UNAVAILABLE'		=> 'Sorry but the board is temporarily unavailable, please try again in a few minutes.',
 	'BROWSING_FORUM'		=> 'Users browsing this forum: %1$s',
