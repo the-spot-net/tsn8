@@ -257,6 +257,14 @@ h3 {
 	border-radius: 24px;
 }
 
+
+.tsn8_icon_gotopost {
+	background-image: url('images/tsn8/gotopost.png');
+}
+.tsn8_icon_gotonew {
+	background-image: url('images/tsn8/gotonew.png');
+}
+
 .tsn8_icon_joined {
 	background-image: url('images/tsn8/clock_gray.png');
 }

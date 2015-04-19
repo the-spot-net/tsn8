@@ -315,6 +315,10 @@ legend.input-label {
 		width: 33.33333333333333%
 	}
 
+	.gt-4of5 {
+		width: 80%;
+	}
+
 	.gt-4of9 {
 		width: 44.44444444444444%
 	}
