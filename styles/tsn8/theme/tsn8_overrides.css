@@ -592,3 +592,7 @@ th a {
 	color: #587eaa;
 	text-transform: capitalize;
 }
+
+.dropdown-extended {
+	z-index: 5;
+}
