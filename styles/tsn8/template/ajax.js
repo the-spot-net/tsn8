@@ -376,10 +376,10 @@ $('#member_search').click(function () {
 /**
 * Automatically resize textarea
 */
-$(function() {
-	phpbb.resizeTextArea($('textarea:not(#message-box textarea, .no-auto-resize)'), {minHeight: 75, maxHeight: 250});
-	phpbb.resizeTextArea($('#message-box textarea'));
-});
+//$(function() {
+	//phpbb.resizeTextArea($('textarea:not(#message-box textarea, .no-auto-resize)'), {minHeight: 75, maxHeight: 250});
+	//phpbb.resizeTextArea($('#message-box textarea'));
+//});
 
 
 })(jQuery); // Avoid conflicts with other libraries
