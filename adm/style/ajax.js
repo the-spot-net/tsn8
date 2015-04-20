@@ -81,9 +81,9 @@ $('[data-ajax]').each(function() {
 /**
 * Automatically resize textarea
 */
-$(function() {
-	phpbb.resizeTextArea($('textarea:not(.no-auto-resize)'), {minHeight: 75});
-});
+//$(function() {
+	//phpbb.resizeTextArea($('textarea:not(.no-auto-resize)'), {minHeight: 75});
+//});
 
 
 })(jQuery); // Avoid conflicts with other libraries
