@@ -50,3 +50,4 @@ error_log
 images/resources
 ext/*
 .htaccess
+cache
