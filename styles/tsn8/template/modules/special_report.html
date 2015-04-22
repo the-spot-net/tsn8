@@ -1,20 +1,22 @@
-<div class="tsn8_module_container">
-	<div>
-		<span class="tsn8_module_avatar align_center tsn8_avatar_right">{I_AVATAR_IMG}</span>
-		<span class="tsn8_module_header">{L_TSNSPECIALREPORT}</span>
-	</div>
-	<div class="tsn8_module_content tsn8_pad_right_120">
+<div class="tsn8_module<!-- IF NOT S_UNREAD_TOPIC -->gm-hide<!-- ENDIF -->">
+	<div class="tsn8_module_container">
 		<div>
-			<a href="{U_HEADLINE}" class="tsn8_module_subheader">"{L_HEADLINE}"</a>
+			<span class="tsn8_module_avatar align_center tsn8_avatar_right">{I_AVATAR_IMG}</span>
+			<span class="tsn8_module_header">{L_TSNSPECIALREPORT}</span>
 		</div>
+		<div class="tsn8_module_content tsn8_pad_right_120">
+			<div>
+				<a href="{U_HEADLINE}" class="tsn8_module_subheader">"{L_HEADLINE}"</a>
+			</div>
 
-		<div class="tsn8_myspot_special_report_body">
-			{L_POST_BODY} &nbsp;<strong><a href="{U_CONTINUE_READING}">{L_CONTINUE_READING}...</a></strong>
+			<div class="tsn8_myspot_special_report_body">
+				{L_POST_BODY} &nbsp;<strong><a href="{U_CONTINUE_READING}">{L_CONTINUE_READING}...</a></strong>
+			</div>
 		</div>
-	</div>
-	<div class="tsn8_module_footer">
-		{L_POST_BY_AUTHOR}: <a href="{U_USER_PROFILE}">{L_POST_AUTHOR}</a> {L_ON} {L_POST_DATE}
-		<br/>
-		{L_POST_META}
+		<div class="tsn8_module_footer">
+			{L_POST_BY_AUTHOR}: <a href="{U_USER_PROFILE}">{L_POST_AUTHOR}</a> {L_ON} {L_POST_DATE}
+			<br/>
+			{L_POST_META}
+		</div>
 	</div>
 </div>
