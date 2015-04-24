@@ -6,7 +6,7 @@
 [class*="gd-"],
 [class*="gm-"],
 [class*="gt-"],
-input, textarea {
+input, textarea, header, footer, section, nav {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-ms-box-sizing: border-box;
@@ -29,10 +29,6 @@ header, footer, section, nav {
 }
 
 /* BEGIN Header */
-.tsn8_header {
-	/*padding: 0 0.75em;*/
-}
-
 .tsn8_header_fade {
 	background: url('./images/tsn8/header-background.png') no-repeat bottom center;
 	background-size: contain;
@@ -45,8 +41,80 @@ header, footer, section, nav {
 	min-height: 50px;
 	display: block;
 }
+
+/* Fix breadcrumb icon on first element */
 li.tsn8_breadcrumb_flush span:first-child > a {
 	padding-left: 0;
+}
+
+/* Mobile Header Avatar */
+.tsn8_mobile_header_avatar {
+	height: 48px;
+	vertical-align: middle;
+	text-align: center;
+	display: block;
+}
+
+.rtl .tsn8_mobile_header_avatar span:after {
+	float: left;
+	padding-left: 0;
+	padding-right: 2px;
+}
+
+.tsn8_mobile_header_avatar:hover {
+	text-decoration: none;
+}
+
+.tsn8_mobile_header_avatar img {
+	max-height: 38px;
+	vertical-align: middle;
+	width: auto;
+}
+
+/* Fixes header-avatar aspect-ratio */
+.tsn8_mobile_header_avatar img {
+	height: 38px \9;
+}
+
+/* Sticky Nav */
+.tsn8_mobile_nav,
+.tsn8_mobile_nav_scrolled {
+	position: relative;
+}
+
+.tsn8_mobile_nav {
+	margin: 0;
+	padding: 0.25em 0;
+	box-shadow: 0 2px 3px #666;
+	background-color: #d7e3f6;
+	z-index: 150;
+}
+
+.tsn8_mobile_nav_scrolled {
+	position: fixed;
+	width: 100%;
+	top: 0;
+}
+
+#quick-links a.mobile-responsive-menu-link:before {
+	font-size: 30px;
+	line-height: 30px;
+}
+
+.tsn8_mobile_dropdown {
+	position: absolute;
+	top: 38px;
+	z-index: 2;
+	border: 1px solid transparent;
+	border-radius: 5px;
+	padding: 9px 0 0;
+}
+
+.tsn8_mobile_dropdown .pointer {
+	right: auto;
+	left: 15px;
+	top: 0;
+	z-index: 3;
 }
 
 /* END Header */
@@ -82,7 +150,6 @@ li.tsn8_breadcrumb_flush span:first-child > a {
 
 .panel,
 .tsn8_module {
-	display: block;
 	position: relative;
 	vertical-align: top;
 	width: auto;
@@ -250,17 +317,28 @@ h3 {
 	margin: 0 2px;
 }
 
-.tsn8_icon_large {
+.tsn8_icon_large,
+.tsn8_icon_large_nohover {
 	width: 48px;
 	height: 48px;
 	background-size: 40px 40px;
 	border-radius: 24px;
 }
 
+.tsn8_text_icon strong {
+	font-weight: normal;
+	vertical-align: middle;
+	font-size: 1.2rem;
+	display: block;
+	line-height: 48px;
+	text-align: center;
+	width: 100%;
+}
 
 .tsn8_icon_gotopost {
 	background-image: url('images/tsn8/gotopost.png');
 }
+
 .tsn8_icon_gotonew {
 	background-image: url('images/tsn8/gotonew.png');
 }
@@ -394,6 +472,38 @@ h3 {
 
 .tsn8_icon_check {
 	background-image: url('images/tsn8/check_green.png');
+}
+
+.tsn8_icon_power {
+	background-image: url('images/tsn8/power_large.png');
+}
+
+.tsn8_icon_register {
+	background-image: url('images/tsn8/register_large.png')
+}
+
+.tsn8_icon_unread_mail {
+	background-image: url('images/tsn8/unread_mail.png');
+}
+
+.tsn8_icon_notification {
+	background-image: url('images/tsn8/notification.png');
+}
+
+.tsn8_icon_notification_light {
+	background-image: url('images/tsn8/notification_light.png');
+}
+
+.tsn8_icon_home {
+	background-image: url('images/tsn8/home.png');
+}
+
+.tsn8_icon_mail {
+	background-image: url('images/tsn8/mail.png');
+}
+
+.tsn8_icon_mobile_menu {
+	background-image: url('images/tsn8/mobile_menu.png');
 }
 
 .tsn8_icon_x {
@@ -943,9 +1053,11 @@ a.tsn8_profile_data_icon:hover {
 	vertical-align: middle;
 	display: table-cell;
 }
+
 .tsn8_profile_data_small {
 	font-size: 0.85rem;
 }
+
 .tsn8_profile_data_nowrap {
 	white-space: nowrap;
 	padding-top: 0.5em;
@@ -1023,41 +1135,50 @@ a.tsn8_profile_data_icon:hover {
 .tsn8_profile_icon_phpbb_location {
 	background: url('images/tsn8/profile_location.png') no-repeat center center;
 }
+
 .tsn8_profile_icon_phpbb_add_friend {
 	background: url('images/tsn8/profile_add_friend.png') no-repeat center center;
 }
+
 .tsn8_profile_icon_phpbb_remove_friend {
 	background: url('images/tsn8/profile_remove_friend.png') no-repeat center center;
 }
+
 .tsn8_profile_icon_phpbb_add_foe {
 	background: url('images/tsn8/profile_add_foe.png') no-repeat center center;
 }
+
 .tsn8_profile_icon_phpbb_remove_foe {
 	background: url('images/tsn8/profile_remove_foe.png') no-repeat center center;
 }
+
 .tsn8_profile_icon_phpbb_inactive_user {
 	background: url('images/tsn8/profile_inactiveuser.png') no-repeat center center;
 }
+
 .tsn8_profile_icon_phpbb_posts {
 	background: url('images/tsn8/profile_posts.png') no-repeat center center;
 }
+
 .tsn8_profile_icon_phpbb_last_seen {
 	background: url('images/tsn8/profile_last_seen.png') no-repeat center center;
 }
+
 .tsn8_profile_icon_phpbb_joined {
 	background: url('images/tsn8/profile_register.png') no-repeat center center;
 }
+
 .tsn8_profile_icon_phpbb_forum {
 	background: url('images/tsn8/profile_forum.png') no-repeat center center;
 }
+
 .tsn8_profile_icon_phpbb_topic {
 	background: url('images/tsn8/profile_topic.png') no-repeat center center;
 }
+
 .tsn8_profile_icon_phpbb_warning {
 	background: url('images/tsn8/profile_warning.png') no-repeat center center;
 }
-
-
 
 /* Member List */
 .tsn8_memberlist_username {

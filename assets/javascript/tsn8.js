@@ -76,6 +76,19 @@ $(document).ready(function () {
 			$('#tsn8_newpost_smiley_wrapper').fadeOut();
 		});
 
+		// mobile sticky nav
+		var mn = $(".tsn8_mobile_nav"),
+			mns = "tsn8_mobile_nav_scrolled",
+			hdr = $('header').height();
+
+		$(window).scroll(function () {
+			if ($(this).scrollTop() > 50) {
+				mn.addClass(mns);
+			} else {
+				mn.removeClass(mns);
+			}
+		});
+
 	});
 });
 

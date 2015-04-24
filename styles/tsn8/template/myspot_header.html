@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}">
 <head>
-	<meta charset="utf-8" />
+	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	{META}
 	<title>
@@ -77,42 +77,40 @@
 </head>
 <body id="phpbb" class="nojs notouch section-{SCRIPT_NAME} {S_CONTENT_DIRECTION} {BODY_CLASS}">
 <!-- EVENT overall_header_body_before -->
-	<header id="page-header" class="tsn8_header">
-		<a id="top" class="anchor" accesskey="t"></a>
-		<div class="tsn8_header_fade">
-			<div class="tsn8_header_image gdh-125px gth-85px gmh-50px">
-				<!-- IF S_DISPLAY_SEARCH and not S_IN_SEARCH -->
-				<div id="search-box" class="search-box search-header">
-					<form action="{U_SEARCH}" method="get" id="search">
-						<fieldset>
-							<input name="keywords" id="keywords" type="search" maxlength="128" title="{L_SEARCH_KEYWORDS}" class="inputbox search tiny" size="20" value="{SEARCH_WORDS}" placeholder="{L_SEARCH_MINI}"/>
-							<button class="button icon-button search-icon" type="submit" title="{L_SEARCH}">{L_SEARCH}</button>
-							<a href="{U_SEARCH}" class="button icon-button search-adv-icon" title="{L_SEARCH_ADV}">{L_SEARCH_ADV}</a>
-							{S_SEARCH_HIDDEN_FIELDS}
-						</fieldset>
-					</form>
-				</div>
-				<!-- ENDIF -->
-			</div>
-		</div>
+<header id="page-header" class="tsn8_header">
+	<a id="top" class="anchor" accesskey="t"></a>
 
-		<nav class="tsn8_nav">
-			<!-- INCLUDE navbar_header.html -->
-		</nav>
-	</header>
-
-	<a id="start_here" class="anchor"></a>
-
-	<section class="tsn8_section">
-		<div class="group">
-			<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
-			<div class="gm-row gt-row gd-row">
-				<div id="information" class="rules gm-columns gt-columns gd-columns gm-full gt-full gd-full">
-					<div class="inner">
-						<strong>{L_INFORMATION}{L_COLON}</strong> {L_BOARD_DISABLED}
-					</div>
-				</div>
+	<div class="tsn8_header_fade">
+		<div class="tsn8_header_image gdh-125px gth-85px gmh-50px">
+			<!-- IF S_DISPLAY_SEARCH and not S_IN_SEARCH -->
+			<div id="search-box" class="search-box search-header">
+				<form action="{U_SEARCH}" method="get" id="search">
+					<fieldset>
+						<input name="keywords" id="keywords" type="search" maxlength="128" title="{L_SEARCH_KEYWORDS}" class="inputbox search tiny" size="20" value="{SEARCH_WORDS}" placeholder="{L_SEARCH_MINI}"/>
+						<button class="button icon-button search-icon" type="submit" title="{L_SEARCH}">{L_SEARCH}</button>
+						<a href="{U_SEARCH}" class="button icon-button search-adv-icon" title="{L_SEARCH_ADV}">{L_SEARCH_ADV}</a>
+						{S_SEARCH_HIDDEN_FIELDS}
+					</fieldset>
+				</form>
 			</div>
 			<!-- ENDIF -->
+		</div>
+	</div>
+</header>
+<!-- INCLUDE navbar_header.html -->
 
-			<!-- EVENT overall_header_content_before -->
+<a id="start_here" class="anchor"></a>
+
+<section class="tsn8_section">
+	<div class="group">
+		<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
+		<div class="gm-row gt-row gd-row">
+			<div id="information" class="rules gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+				<div class="inner">
+					<strong>{L_INFORMATION}{L_COLON}</strong> {L_BOARD_DISABLED}
+				</div>
+			</div>
+		</div>
+		<!-- ENDIF -->
+
+		<!-- EVENT overall_header_content_before -->
