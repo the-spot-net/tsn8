@@ -146,14 +146,14 @@
 }
 
 /*.tsn8_myspot_avatar_background {*/
-	/*position: absolute;*/
-	/*right: -50px;*/
-	/*top: 15%;*/
+/*position: absolute;*/
+/*right: -50px;*/
+/*top: 15%;*/
 /*}*/
 /*.tsn8_myspot_avatar_background img {*/
-	/*max-width: 150px;*/
-	/*max-height: 150px;*/
-	/*opacity: 1;*/
+/*max-width: 150px;*/
+/*max-height: 150px;*/
+/*opacity: 1;*/
 /*}*/
 
 .tsn8_myspot_newest_post {
@@ -184,6 +184,7 @@
 	font-style: italic;
 	display: block;
 	margin-bottom: 3px;
+	margin-left: 0.25em;
 	/*background-color: rgba(255, 255, 255, 0.9);*/
 }
 
@@ -194,12 +195,12 @@
 
 .tsn8_myspot_newest_post_message {
 	display: block;
-	padding: 3px;
 	font-size: 0.9rem;
 	vertical-align: top;
 	text-align: left;
 	min-height: 40px;
 	line-height: 20px;
+	padding: 0.5rem 3px 3px;
 }
 
 .tsn8_myspot_no_posts_message {
@@ -251,7 +252,6 @@
 }
 
 /* END Stats Content */
-
 
 /** Mobile My Spot Classes */
 

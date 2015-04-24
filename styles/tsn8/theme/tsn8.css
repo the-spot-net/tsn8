@@ -1161,3 +1161,8 @@ a.tsn8_profile_data_icon:hover {
 	margin: 0.125em 0.25em;
 	width: auto;
 }
+
+.tsn8_float_wrapper {
+	overflow: auto;
+	width: auto;
+}
