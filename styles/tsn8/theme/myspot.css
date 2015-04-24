@@ -105,6 +105,15 @@
 	right: 5px;
 }
 
+.tsn8_myspot_special_report_author {
+	margin-left: 0.25em;
+	padding-left: 0.5em;
+	margin-bottom: 0.5em;
+	font-size: 0.9em;
+	font-style: italic;
+	color: #587eaa;
+}
+
 .tsn8_myspot_special_report_body {
 	color: #333;
 	line-height: 1.1em;

@@ -185,6 +185,8 @@ h3,
 	white-space: nowrap;
 	font-weight: normal;
 	margin-top: 0;
+	overflow: auto;
+	width: auto;
 }
 
 h3,
@@ -209,7 +211,7 @@ h3 {
 .tsn8_module_subheader {
 	font-size: 1.5em;
 	color: #587eaa;
-	margin-bottom: 5px;
+	/*margin-bottom: 5px;*/
 	padding: 3px;
 	display: block;
 	font-weight: bold;
@@ -228,6 +230,8 @@ h3 {
 	font-size: 0.8em;
 	text-align: center;
 	padding-top: 3px;
+	overflow: auto;
+	width: auto;
 }
 
 .tsn8_viewtopic_meta_container {
@@ -642,6 +646,7 @@ h3 {
 	/*margin-left: auto;*/
 	/*margin-right: 0;*/
 	float: right;
+	/*clear:left;*/
 }
 
 .tsn8_float_left {
@@ -689,66 +694,8 @@ h3 {
 	text-align: right;
 }
 
-.tsn8_width_10 {
-	width: 10%;
-}
-
-.tsn8_width_15 {
-	max-width: 15%;
-}
-
-.tsn8_width_20 {
-	width: 20%;
-}
-
-.tsn8_width_25 {
-	width: 25%;
-}
-
-.tsn8_width_33 {
-	width: 33.3333333333334%;
-}
-
-.tsn8_width_50 {
-	width: 50%;
-}
-
-.tsn8_width_60 {
-	width: 60%;
-}
-
-.tsn8_width_66 {
-	width: 66.6666666666667%;
-}
-
-.tsn8_width_75 {
-	width: 75%;
-}
-
-.tsn8_width_85 {
-	width: 85%;
-}
-
-.tsn8_width_100 {
-	width: 100%;
-}
-
-.tsn8_width_10,
-.tsn8_width_15,
-.tsn8_width_20,
-.tsn8_width_25,
-.tsn8_width_33,
-.tsn8_width_50,
-.tsn8_width_60,
-.tsn8_width_66,
-.tsn8_width_75,
-.tsn8_width_85,
-.tsn8_width_100 {
-
-}
-
-.tsn8_pad_right_120 {
-	padding-right: 120px;
+.tsn8_pad_right_110 {
+	padding-right: 110px;
 }
 
 /* END Container Styles */

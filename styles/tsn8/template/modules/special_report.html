@@ -1,22 +1,32 @@
-<div class="tsn8_module <!-- IF S_UNREAD_TOPIC --><!-- ELSE -->gm-hide<!-- ENDIF -->">
-	<div class="tsn8_module_container">
-		<div>
-			<span class="tsn8_module_avatar align_center tsn8_avatar_right">{I_AVATAR_IMG}</span>
-			<div class="tsn8_module_header">{L_TSNSPECIALREPORT}</div>
-		</div>
-		<div class="tsn8_module_content tsn8_pad_right_120">
-			<div>
-				<a href="{U_HEADLINE}" class="tsn8_module_subheader">"{L_HEADLINE}"</a>
-			</div>
+<div class="group">
+	<div class="gm-row gt-row gd-row">
+		<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+			<div class="tsn8_module <!-- IF not S_UNREAD_TOPIC -->gm-hide<!-- ENDIF -->">
+				<div class="tsn8_module_container">
+					<div>
+						<span class="tsn8_module_avatar align_center tsn8_avatar_right">{I_AVATAR_IMG}</span>
+						<div class="tsn8_module_header">{L_TSNSPECIALREPORT}</div>
+					</div>
+					<div class="tsn8_module_content">
+						<div>
+							<a href="{U_HEADLINE}" class="tsn8_module_subheader tsn8_pad_right_110">"{L_HEADLINE}"</a>
 
-			<div class="tsn8_myspot_special_report_body">
-				{L_POST_BODY} &nbsp;<strong><a href="{U_CONTINUE_READING}">{L_CONTINUE_READING}...</a></strong>
+							<div class="tsn8_myspot_special_report_author">{L_POST_BY_AUTHOR}: <a href="{U_USER_PROFILE}">{L_POST_AUTHOR}</a> {L_ON} {L_POST_DATE}</div>
+						</div>
+
+						<div class="tsn8_myspot_special_report_body <!-- IF not S_UNREAD_TOPIC -->hidden<!-- ENDIF -->">
+							{L_POST_BODY} &nbsp;<strong><a href="{U_CONTINUE_READING}">{L_CONTINUE_READING}...</a></strong>
+						</div>
+					</div>
+					<div class="tsn8_module_footer">
+						{L_POST_META}
+						<span class="gm-hide tsn8_float_right">
+							<span class="tsn8_expand tsn8_icon_nohover <!-- IF S_UNREAD_TOPIC -->tsn8_icon_expand_up<!-- ELSE -->tsn8_icon_expand_down<!-- ENDIF -->" data-expand-target="tsn8_myspot_special_report_body"></span>
+						</span>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="tsn8_module_footer">
-			{L_POST_BY_AUTHOR}: <a href="{U_USER_PROFILE}">{L_POST_AUTHOR}</a> {L_ON} {L_POST_DATE}
-			<br/>
-			{L_POST_META}
 		</div>
 	</div>
 </div>
+

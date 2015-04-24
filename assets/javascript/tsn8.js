@@ -81,7 +81,7 @@ $(document).ready(function () {
 			mns = "tsn8_mobile_nav_scrolled";
 
 		$(window).scroll(function () {
-			if ($(this).scrollTop() > 50) {
+			if ($(this).scrollTop() >= 50) {
 				mn.addClass(mns);
 			} else {
 				mn.removeClass(mns);
