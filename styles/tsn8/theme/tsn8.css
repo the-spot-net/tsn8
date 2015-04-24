@@ -130,14 +130,6 @@ li.tsn8_breadcrumb_flush span:first-child > a {
 
 /* END Nav */
 
-/* TODO Remove */
-.tsn8_wrapper {
-	position: relative;
-	display: block;
-	max-width: 1250px;
-	margin: 0 auto;
-}
-
 /* BEGIN Footer */
 .tsn8_footer {
 	background: url('./images/tsn8/footer-background.png') no-repeat top center;
@@ -185,7 +177,6 @@ h3,
 .tsn8_module_header,
 .forabg .header,
 .forumbg .header {
-	display: block;
 	font-size: 1.5em;
 	color: #587eaa;
 	padding: 5px;
@@ -194,6 +185,13 @@ h3,
 	white-space: nowrap;
 	font-weight: normal;
 	margin-top: 0;
+}
+
+h3,
+.quickreply-title,
+.forabg .header,
+.forumbg .header {
+	display: block;
 }
 
 .panel .tsn8_module_header {
@@ -224,12 +222,9 @@ h3 {
 	text-align: left;
 }
 
-.tsn8_viewtopic_post_footer, /* TODO Remove this class */
-.tsn8_module_footer,
-.tsn8_post_footer {
+.tsn8_module_footer {
 	position: relative;
 	border-top: 1px solid #d7e3f6;
-	display: block;
 	font-size: 0.8em;
 	text-align: center;
 	padding-top: 3px;
@@ -243,7 +238,6 @@ h3 {
 /* END Page Content Structure */
 
 /* BEGIN Feature Content Structure */
-.tsn8_myspot_stat, /* TODO Remove this class */
 .tsn8_stat {
 	display: inline-block;
 	*display: inline;
@@ -256,7 +250,6 @@ h3 {
 	border-radius: 5px;
 }
 
-.tsn8_myspot_stat_value, /* TODO Remove this class */
 .tsn8_stat_value {
 	display: block;
 	font-size: 1.5em;
@@ -266,8 +259,6 @@ h3 {
 	padding: 5px 0;
 }
 
-.tsn8_myspot_stat_header, /* TODO Remove this class */
-.tsn8_topic_stat_header, /* TODO Remove this class */
 .tsn8_stat_label {
 	display: block;
 	font-size: 0.9em;
@@ -333,6 +324,18 @@ h3 {
 	line-height: 48px;
 	text-align: center;
 	width: 100%;
+}
+
+.tsn8_icon_expand_down {
+	background-image: url('images/tsn8/expand_down_large_blue.png');
+}
+
+.tsn8_icon_expand_up {
+	background-image: url('images/tsn8/expand_up_large_blue.png');
+}
+
+.tsn8_icon_right_round_blue {
+	background-image: url('images/tsn8/right_round_blue_arrow.png');
 }
 
 .tsn8_icon_gotopost {

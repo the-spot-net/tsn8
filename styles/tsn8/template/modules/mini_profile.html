@@ -1,5 +1,5 @@
 <div class="tsn8_module_container">
-	<span class="tsn8_module_header">Hi there, {USERNAME}!</span>
+	<div class="tsn8_module_header">Hi there, {USERNAME}!</div>
 	<!-- IF S_USER_INACTIVE -->
 	<span class="tsn8_error_message"><b>{L_USER_IS_INACTIVE}</b><br/>{L_INACTIVE_REASON}: {USER_INACTIVE_REASON}</span>
 	<!-- ENDIF -->
@@ -35,7 +35,7 @@
 			<span class="stretch"></span>
 		</div>
 	</div>
-	<span class="tsn8_module_footer">
+	<div class="tsn8_module_footer">
 		<!-- IF U_NOTES or U_WARN -->
 		{L_WARNINGS}: <b>{WARNINGS}</b> :: [ <a href="{U_NOTES}">{L_VIEW_NOTES}</a> ]
 		<!-- IF U_USER_ADMIN --><br/><!-- ENDIF -->
@@ -43,5 +43,5 @@
 		<!-- IF U_USER_ADMIN -->
 		[ <a href="{U_USER_ADMIN}">{L_USER_ADMIN}</a> ]
 		<!-- ENDIF -->
-	</span>
+	</div>
 </div>

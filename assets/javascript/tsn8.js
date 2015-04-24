@@ -78,8 +78,7 @@ $(document).ready(function () {
 
 		// mobile sticky nav
 		var mn = $(".tsn8_mobile_nav"),
-			mns = "tsn8_mobile_nav_scrolled",
-			hdr = $('header').height();
+			mns = "tsn8_mobile_nav_scrolled";
 
 		$(window).scroll(function () {
 			if ($(this).scrollTop() > 50) {
@@ -88,6 +87,12 @@ $(document).ready(function () {
 				mn.removeClass(mns);
 			}
 		});
+
+		$(document).on('click', '.tsn8_expand', function() {
+			var targetClass = $(this).attr('data-expand-target');
+			$('.'+targetClass).slideToggle();
+			$(this).toggleClass('tsn8_icon_expand_down').toggleClass('tsn8_icon_expand_up');
+		})
 
 	});
 });

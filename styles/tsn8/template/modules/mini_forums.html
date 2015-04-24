@@ -1,73 +1,113 @@
-<!-- IF not S_USER_LOGGED_IN and not S_IS_BOT -->
-<div class="tsn8_module_container">
-	<span class="tsn8_module_header">{L_WELCOME_VISITOR}</span>
+<div class="group">
+	<!-- IF not S_USER_LOGGED_IN and not S_IS_BOT -->
+	<div class="gm-row gt-row gd-row">
+		<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+			<div class="tsn8_module_container">
+				<div class="tsn8_module_header">{L_WELCOME_VISITOR}</div>
 
-	<div class="tsn8_module_content">
-		<form method="post" action="{S_LOGIN_ACTION}">
-			<fieldset class="tsn8_myspot_login_fields align_center">
-				<label for="username" class="tsn8_font_color_med input-label">
-					{L_USERNAME}<br />
-					<input type="text" name="username" id="username" size="10" class="inputbox" title="{L_USERNAME}"/>
-				</label>
-				<label for="password" class="tsn8_font_color_med input-label">
-					{L_PASSWORD}<br />
-					<input type="password" name="password" id="password" size="10" class="inputbox" title="{L_PASSWORD}"/>
-				</label>
-				<Br />
-				<input type="submit" name="login" value="{L_LOGIN}" role="button" class="ui-button ui-widget ui-state-default ui-corner-all" />
-				{S_MYSPOT_LOGIN_REDIRECT}
-				<!-- IF S_AUTOLOGIN_ENABLED -->
-				<label for="autologin" class="input-label">
-					<span class="tsn8_text_size1 tsn8_font_color_med">{L_LOG_ME_IN}</span> <input type="checkbox" name="autologin" id="autologin"/>
-				</label>
-				<!-- ENDIF -->
-			</fieldset>
-		</form>
-
+				<div class="tsn8_module_content">
+					<form method="post" action="{S_LOGIN_ACTION}">
+						<div class="group">
+							<div class="gm-row gt-row gd-row">
+								<div class="gm-columns gt-columns gd-columns gm-1of5 gt-1of5 gd-1of5">&nbsp;</div>
+								<div class="gm-columns gt-columns gd-columns gm-3of5 gt-3of5 gd-3of5 align_center">
+									<label for="username" class="tsn8_font_color_med input-label">{L_USERNAME}</label>
+								</div>
+								<div class="gm-columns gt-columns gd-columns gm-1of5 gt-1of5 gd-1of5">&nbsp;</div>
+							</div>
+							<div class="gm-row gt-row gd-row">
+								<div class="gm-columns gt-columns gd-columns gm-1of5 gt-1of5 gd-1of5">&nbsp;</div>
+								<div class="gm-columns gt-columns gd-columns gm-3of5 gt-3of5 gd-3of5 align_center">
+									<input type="text" name="username" id="username" size="10" class="inputbox" title="{L_USERNAME}"/>
+								</div>
+								<div class="gm-columns gt-columns gd-columns gm-1of5 gt-1of5 gd-1of5">&nbsp;</div>
+							</div>
+							<div class="gm-row gt-row gd-row">
+								<div class="gm-columns gt-columns gd-columns gm-1of5 gt-1of5 gd-1of5">&nbsp;</div>
+								<div class="gm-columns gt-columns gd-columns gm-3of5 gt-3of5 gd-3of5 align_center">
+									<label for="password" class="tsn8_font_color_med input-label">{L_PASSWORD}</label>
+								</div>
+								<div class="gm-columns gt-columns gd-columns gm-1of5 gt-1of5 gd-1of5">&nbsp;</div>
+							</div>
+							<div class="gm-row gt-row gd-row">
+								<div class="gm-columns gt-columns gd-columns gm-1of5 gt-1of5 gd-1of5">&nbsp;</div>
+								<div class="gm-columns gt-columns gd-columns gm-3of5 gt-3of5 gd-3of5 align_center">
+									<input type="password" name="password" id="password" size="10" class="inputbox" title="{L_PASSWORD}"/>
+								</div>
+								<div class="gm-columns gt-columns gd-columns gm-1of5 gt-1of5 gd-1of5">
+									<input type="submit" name="login" value="" role="button" class="tsn8_icon tsn8_icon_right_round_blue" style="border:0 transparent;"/>
+									{S_MYSPOT_LOGIN_REDIRECT}
+								</div>
+							</div>
+							<!-- IF S_AUTOLOGIN_ENABLED -->
+							<div class="gm-row gt-row gd-row">
+								<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full align_center">
+									<label for="autologin" class="input-label">
+										<span class="tsn8_text_size1 tsn8_font_color_med">{L_LOG_ME_IN}</span> <input type="checkbox" name="autologin" id="autologin"/>
+									</label>
+								</div>
+							</div>
+							<!-- ENDIF -->
+							<div class="gm-row gt-row gd-row">
+								<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full align_center">&nbsp;</div>
+							</div>
+						</div>
+					</form>
+					<div class="tsn8_module_footer tsn8_font_color_med">
+						<!-- IF U_SEND_PASSWORD -->
+						<a href="{U_SEND_PASSWORD}" class="tsn8_font_color_med">{L_FORGOT_PASS}</a>
+						<!-- ENDIF -->
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	<span class="tsn8_module_footer tsn8_font_color_med">
-		<!-- IF U_SEND_PASSWORD -->
-		<a href="{U_SEND_PASSWORD}" class="tsn8_font_color_med">{L_FORGOT_PASS}</a>
-		<!-- ENDIF -->
-	</span>
+	<!-- ENDIF -->
+	<div class="gm-row gt-row gd-row">
+		<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+			<div class="tsn8_module_container">
+				<div class="tsn8_module_header">
+					<strong></strong><a href="{U_INDEX}">{L_TSNFORUMS}</a>
+					<span class="gt-hide gd-hide tsn8_float_right"><span data-expand-target="tsn8_mini_forum_list" class="tsn8_expand tsn8_icon_nohover tsn8_icon_expand_down"></span></span>
+					<span class="tsn8_float_right gm-hide"><span data-expand-target="tsn8_mini_forum_list" class="tsn8_expand tsn8_icon_nohover tsn8_icon_expand_up "></span></span>
+				</div>
+				<ul class="tsn8_mini_forum_list gm-hide">
+					<!-- BEGIN forumrow -->
+					<!-- IF forumrow.S_IS_CAT -->
+					<li class="tsn8_mini_forum_list_category">
+						<a href="{forumrow.U_VIEWFORUM}" class="tsn8_mini_forum_category_name">{forumrow.FORUM_NAME}</a>
+					</li>
+					<!-- ELSEIF forumrow.S_IS_LINK -->
+					<li class="tsn8_mini_forum_list_link">
+						<dl class="icon {forumrow.FORUM_IMG_STYLE}">
+							<dt title="{forumrow.FORUM_FOLDER_IMG_ALT}" class="tsn8_mini_forum_list_item">
+								<a href="{forumrow.U_VIEWFORUM}" class="tsn8_mini_forum_forum_name">{forumrow.FORUM_NAME}</a>
+							</dt>
+						</dl>
+					</li>
+					<!-- ELSE -->
+					<!-- IF forumrow.S_NO_CAT -->
+					<li class="tsn8_mini_forum_list_category">
+						{L_FORUMS}
+					</li>
+					<!-- ENDIF -->
+					<li class="tsn8_mini_forum_list_forum">
+						<dl class="icon {forumrow.FORUM_IMG_STYLE}">
+							<dt title="{forumrow.FORUM_FOLDER_IMG_ALT}" class="tsn8_mini_forum_list_item">
+								<a href="{forumrow.U_VIEWFORUM}" class="tsn8_mini_forum_forum_name">{forumrow.FORUM_NAME}</a>
+							</dt>
+						</dl>
+					</li>
+					<!-- ENDIF -->
+					<!-- BEGINELSE -->
+					<li class="tsn8_mini_forum_list_forum">
+						{L_NO_FORUMS}
+					</li>
+					<!-- END forumrow -->
+				</ul>
+				<!--<span class="tsn8_module_footer tsn8_font_color_med">&nbsp;</span>-->
+			</div>
+		</div>
+	</div>
 </div>
-<!-- ENDIF -->
 
-<div class="tsn8_module_container">
-	<span class="tsn8_module_header">{L_TSNFORUMS}</span>
-	<ul class="tsn8_mini_forum_list">
-		<!-- BEGIN forumrow -->
-		<!-- IF forumrow.S_IS_CAT -->
-		<li class="tsn8_mini_forum_list_category">
-			<a href="{forumrow.U_VIEWFORUM}" class="tsn8_mini_forum_category_name">{forumrow.FORUM_NAME}</a>
-		</li>
-		<!-- ELSEIF forumrow.S_IS_LINK -->
-		<li class="tsn8_mini_forum_list_link">
-			<dl class="icon {forumrow.FORUM_IMG_STYLE}">
-				<dt title="{forumrow.FORUM_FOLDER_IMG_ALT}" class="tsn8_mini_forum_list_item">
-					<a href="{forumrow.U_VIEWFORUM}" class="tsn8_mini_forum_forum_name">{forumrow.FORUM_NAME}</a>
-				</dt>
-			</dl>
-		</li>
-		<!-- ELSE -->
-		<!-- IF forumrow.S_NO_CAT -->
-		<li class="tsn8_mini_forum_list_category">
-			{L_FORUMS}
-		</li>
-		<!-- ENDIF -->
-		<li class="tsn8_mini_forum_list_forum">
-			<dl class="icon {forumrow.FORUM_IMG_STYLE}">
-				<dt title="{forumrow.FORUM_FOLDER_IMG_ALT}" class="tsn8_mini_forum_list_item">
-					<a href="{forumrow.U_VIEWFORUM}" class="tsn8_mini_forum_forum_name">{forumrow.FORUM_NAME}</a>
-				</dt>
-			</dl>
-		</li>
-		<!-- ENDIF -->
-		<!-- BEGINELSE -->
-		<li class="tsn8_mini_forum_list_forum">
-			{L_NO_FORUMS}
-		</li>
-		<!-- END forumrow -->
-	</ul>
-	<!--<span class="tsn8_module_footer tsn8_font_color_med">&nbsp;</span>-->
-</div>

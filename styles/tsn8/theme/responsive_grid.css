@@ -303,6 +303,10 @@ legend.input-label {
 		padding-right: 0.5em
 	}
 
+	.gt-1of5 {
+		width: 20%;
+	}
+
 	.gt-1of7 {
 		width: 14.285714%
 	}
