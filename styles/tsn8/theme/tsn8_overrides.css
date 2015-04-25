@@ -615,3 +615,9 @@ li.breadcrumbs span:first-child > a {
 	margin-right: -500px;
 	margin-left: -22px;
 }
+
+#search-box {
+	position: absolute;
+	right:0;
+	z-index: 3;
+}
