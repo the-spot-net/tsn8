@@ -41,7 +41,8 @@
 				</div>
 			</div>
 			<!-- ENDIF -->
-			<!-- IF S_ALLOW_NEW_POSTS -->
+			<!-- IF not S_IS_BOT and S_ALLOW_NEW_POSTS -->
+				<!-- IF S_USER_LOGGED_IN -->
 			<div id="divNewPosts">
 				<div class="tsn8_module">
 					<p class="tsn8_module_placeholder align_center">Loading the new posts since your last visit...<br/>
@@ -49,6 +50,15 @@
 					</p>
 				</div>
 			</div>
+				<!-- ELSE -->
+			<div id="divActivePosts">
+				<div class="tsn8_module">
+					<p class="tsn8_module_placeholder align_center">Loading the active topics...<br/>
+						<img src="{T_THEME_PATH}/images/tsn8/ajax-loader.gif"/>
+					</p>
+				</div>
+			</div>
+				<!-- ENDIF -->
 			<!-- ENDIF -->
 		</div>
 	</div>
