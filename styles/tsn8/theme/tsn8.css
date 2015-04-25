@@ -15,7 +15,7 @@ input, textarea, header, footer, section, nav {
 
 body {
 	margin: 0;
-	background: #fff url('./images/tsn8/tsnlogo-watermark.png') no-repeat fixed 15% 0;
+	background: #fff url('./images/tsn8/tsnlogo-watermark.png') no-repeat fixed center center;
 	background-size: contain;
 	overflow-x: hidden;
 	min-height: 100%;
