@@ -212,7 +212,8 @@ if ($keywords || $author || $author_id || $search_id || $submit) {
         $sort_key = 't';
         $sort_dir = 'd';
         $sort_days = request_var('st', 7);
-        $sort_by_sql['t'] = 't.topic_last_post_time';
+//        $sort_by_sql['t'] = 't.topic_last_post_time';
+        $sort_by_sql['t'] = 't.topic_time';
 
         gen_sort_selects($limit_days, $sort_by_text, $sort_days, $sort_key, $sort_dir, $s_limit_days, $s_sort_key,
             $s_sort_dir, $u_sort_param);
