@@ -242,6 +242,13 @@ h3 {
 /* END Page Content Structure */
 
 /* BEGIN Feature Content Structure */
+.tsn8_stat_border {
+	border: 1px solid #d7e3f6;
+	padding: 3px;
+	border-radius: 5px;
+	margin-bottom: 0.25em;
+}
+
 .tsn8_stat {
 	display: inline-block;
 	*display: inline;

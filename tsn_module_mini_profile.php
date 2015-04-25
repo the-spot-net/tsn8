@@ -242,7 +242,7 @@ $template->assign_vars(array(
 	'POSTS_DAY'            => $user->lang('POST_DAY', $posts_per_day),
 	'POSTS_PCT'            => $user->lang('POST_PCT', $percentage),
 	'POSTS_DAY_NUM'            => number_format($posts_per_day, 2),
-	'POSTS_PCT_NUM'            => number_format($percentage, 2) . '%',
+	'POSTS_PCT_NUM'            => number_format($percentage, 2),
 
 	'SIGNATURE'            => $member['user_sig'],
 	'POSTS_IN_QUEUE'       => $member['posts_in_queue'],
