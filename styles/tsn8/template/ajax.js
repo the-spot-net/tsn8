@@ -110,6 +110,10 @@ phpbb.addAjaxCallback('notification.mark_read', function(res) {
 	if (typeof res.success !== 'undefined') {
 		var unreadCount = Number($('#notification_list_button strong').html()) - 1;
 		phpbb.markNotifications($(this).parent('li.bg2'), unreadCount);
+		// tsn8 BEGIN add
+		unreadCount = Number($('#mobile_notification_list_button').find('strong').html()) - 1;
+		phpbb.markNotifications($(this).parent('li.bg2'), unreadCount);
+		// tsn8 END add
 	}
 });
 
@@ -376,10 +380,10 @@ $('#member_search').click(function () {
 /**
 * Automatically resize textarea
 */
-$(function() {
-	phpbb.resizeTextArea($('textarea:not(#message-box textarea, .no-auto-resize)'), {minHeight: 75, maxHeight: 250});
-	phpbb.resizeTextArea($('#message-box textarea'));
-});
+//$(function() {
+	//phpbb.resizeTextArea($('textarea:not(#message-box textarea, .no-auto-resize)'), {minHeight: 75, maxHeight: 250});
+	//phpbb.resizeTextArea($('#message-box textarea'));
+//});
 
 
 })(jQuery); // Avoid conflicts with other libraries

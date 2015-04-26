@@ -1,33 +1,64 @@
-<div class="tsn8_myspot_mini_newposts_wrapper tsn8_module_container">
-	<span class="tsn8_module_header">{L_SINCE_YOUR_LAST_VISIT}</span>
-
-	<div class="tsn8_stat_wrapper tsn8_overflow_height_700 tsn8_width_100">
-		<!-- IF S_SHOW_TOPICS -->
-		<!-- BEGIN searchresults -->
-				<span class="tsn8_myspot_newest_post">
-					<span class="tsn8_module_avatar" style="float: right; margin-right: 5px;">{searchresults.LAST_POST_AUTHOR_AVATAR}</span>
-					<span class="tsn8_myspot_newest_post_title">
-						<!-- IF searchresults.S_UNREAD_TOPIC --><a href="{searchresults.U_NEWEST_POST}">{NEWEST_POST_IMG}</a><!-- ENDIF -->
-						{topicrow.ATTACH_ICON_IMG}  <a href="{searchresults.U_VIEW_TOPIC}">{searchresults.TOPIC_TITLE}</a>
-					</span>
-					<span class="tsn8_myspot_newest_post_subtitle">
-						<!-- IF searchresults.S_TOPIC_GLOBAL -->{L_GLOBAL}<!-- ELSE -->{L_IN} <a href="{searchresults.U_VIEW_FORUM}">{searchresults.FORUM_TITLE}</a><!-- ENDIF -->
-						<!-- IF searchresults.PAGINATION --> [ {GOTO_PAGE_IMG}{L_GOTO_PAGE}: {searchresults.PAGINATION} ] <!-- ENDIF -->
-					</span>
-					<span class="tsn8_myspot_newest_post_message">
-						<!-- IF searchresults.S_TOPIC_UNAPPROVED or searchresults.S_POSTS_UNAPPROVED --><a href="{searchresults.U_MCP_QUEUE}">{searchresults.UNAPPROVED_IMG}</a>&nbsp;<!-- ENDIF -->
-						<!-- IF searchresults.S_TOPIC_REPORTED --><a href="{searchresults.U_MCP_REPORT}">{REPORTED_IMG}</a>&nbsp;<!-- ENDIF -->
-						{searchresults.LAST_POST_TEXT}&nbsp;<a href="{searchresults.U_LAST_POST}">{L_CONTINUE_READING}</a>
-					</span>
-					<span class="tsn8_module_footer">{L_BY}: {searchresults.LAST_POST_AUTHOR_FULL} on {searchresults.LAST_POST_TIME} <a href="{searchresults.U_LAST_POST}">{LAST_POST_IMG}</a><br/></span>
-				</span>
-		<!-- BEGINELSE -->
-			<span class="tsn8_myspot_no_posts_message">
-				{L_NOTHING_SINCE_LAST_VISIT}<br/>
-				<a href="./index.php">{L_START_THE_CONVERSATION}</a>
-			</span>
-		<!-- END searchresults -->
-		<!-- ENDIF -->
-		<span class="stretch"></span>
+<div class="group">
+	<div class="gm-row gt-row gd-row">
+		<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+			<div class="tsn8_myspot_mini_newposts_wrapper tsn8_module_container group">
+				<div class="gm-row gt-row gd-row">
+					<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+						<div class="tsn8_module_header">{L_SINCE_YOUR_LAST_VISIT}</div>
+					</div>
+				</div>
+				<div class="gm-row gt-row gd-row">
+					<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+						<div class="tsn8_overflow_height_700 group" style="overflow-x: hidden;">
+							<!-- IF S_SHOW_TOPICS -->
+							<!-- BEGIN searchresults -->
+							<div class="gm-row gt-row gd-row">
+								<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+									<div class="tsn8_myspot_newest_post">
+										<div class="tsn8_module_avatar tsn8_avatar_right">{searchresults.LAST_POST_AUTHOR_AVATAR}</div>
+										<div class="group">
+											<div class="gm-row gt-row gd-row">
+												<div class="gm-columns gt-columns gd-columns gm-full gt-6of7 gd-6of7">
+													<div class="tsn8_myspot_newest_post_title">
+														<!-- IF searchresults.S_UNREAD_TOPIC --><a href="{searchresults.U_NEWEST_POST}" title="{L_VIEW_NEWEST_POST}" class="tsn8_icon_mini_nohover tsn8_icon_gotonew"></a><!-- ENDIF -->
+														<a href="{searchresults.U_VIEW_TOPIC}">{searchresults.TOPIC_TITLE}</a>
+													</div>
+												</div>
+											</div>
+											<div class="gm-row gt-row gd-row">
+												<div class="gm-columns gt-columns gd-columns gm-full gt-6of7 gd-6of7">
+													<div class="tsn8_myspot_newest_post_subtitle">
+														{L_BY}: {searchresults.LAST_POST_AUTHOR_FULL}, {searchresults.LAST_POST_TIME} <span class="gt-hide gd-hide"><br/></span><!-- IF searchresults.S_TOPIC_GLOBAL --> :: {L_GLOBAL}<!-- ELSE -->{L_IN} <a href="{searchresults.U_VIEW_FORUM}">{searchresults.FORUM_TITLE}</a><!-- ENDIF -->
+													</div>
+												</div>
+											</div>
+											<div class="gm-row gt-row gd-row">
+												<div class="gm-columns gt-columns gd-columns gm-full gt-6of7 gd-6of7">
+													<div class="tsn8_myspot_newest_post_message">
+														<!-- IF searchresults.S_TOPIC_UNAPPROVED or searchresults.S_POSTS_UNAPPROVED --><a href="{searchresults.U_MCP_QUEUE}">{searchresults.UNAPPROVED_IMG}</a>&nbsp;<!-- ENDIF -->
+														<!-- IF searchresults.S_TOPIC_REPORTED --><a href="{searchresults.U_MCP_REPORT}">{REPORTED_IMG}</a>&nbsp;<!-- ENDIF -->
+														{searchresults.LAST_POST_TEXT}&nbsp;<a href="{searchresults.U_LAST_POST}" title="{L_VIEW_LATEST_POST}">{L_CONTINUE_READING} {LAST_POST_IMG}</a>
+													</div>
+												</div>
+											</div>
+											<div class="gm-columns gt-columns gd-columns gm-hide gt-1of7 gd-1of7">
+												&nbsp;
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- BEGINELSE -->
+							<span class="tsn8_myspot_no_posts_message">
+								{L_NOTHING_SINCE_LAST_VISIT}<br/>
+								<a href="./index.php">{L_START_THE_CONVERSATION}</a>
+							</span>
+							<!-- END searchresults -->
+							<!-- ENDIF -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

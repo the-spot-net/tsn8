@@ -457,7 +457,8 @@ function parseDocument($container) {
 	/**
 	* Responsive link lists
 	*/
-	$container.find('.linklist:not(.navlinks, [data-skip-responsive]), .postbody .post-buttons:not([data-skip-responsive])').each(function() {
+	//$container.find('.linklist:not(.navlinks, [data-skip-responsive]), .postbody .post-buttons:not([data-skip-responsive])').each(function() {
+	$container.find('.linklist:not(.navlinks, [data-skip-responsive])').each(function() {
 		var $this = $(this),
 			filterSkip = '.breadcrumbs, [data-skip-responsive]',
 			filterLast = '.edit-icon, .quote-icon, [data-last-responsive]',

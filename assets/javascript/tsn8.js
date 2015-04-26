@@ -76,6 +76,24 @@ $(document).ready(function () {
 			$('#tsn8_newpost_smiley_wrapper').fadeOut();
 		});
 
+		// mobile sticky nav
+		var mn = $(".tsn8_mobile_nav"),
+			mns = "tsn8_mobile_nav_scrolled";
+
+		$(window).scroll(function () {
+			if ($(this).scrollTop() >= 50) {
+				mn.addClass(mns);
+			} else {
+				mn.removeClass(mns);
+			}
+		});
+
+		$(document).on('click', '.tsn8_expand', function() {
+			var targetClass = $(this).attr('data-expand-target');
+			$('.'+targetClass).slideToggle();
+			$(this).toggleClass('tsn8_icon_expand_down').toggleClass('tsn8_icon_expand_up');
+		})
+
 	});
 });
 

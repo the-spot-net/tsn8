@@ -68,7 +68,7 @@
 					<dd class="posts">{forumrow.POSTS} <dfn>{L_POSTS}</dfn></dd>
 					<dd class="lastpost">
 						<!-- IF forumrow.LAST_POST_TIME -->
-						<span class="tsn8_last_post_author_avatar">{forumrow.LAST_POSTER_AVATAR}</span>
+						<a href="{forumrow.U_LAST_POSTER_LINK}" class="tsn8_last_post_author_avatar">{forumrow.LAST_POSTER_AVATAR}</a>
 						<!-- ENDIF -->
 						<span class="tsn8_last_post_author_info">
 						<!-- IF forumrow.U_UNAPPROVED_TOPICS -->
@@ -82,8 +82,9 @@
 								<!-- EVENT forumlist_body_last_post_title_prepend -->
 								&nbsp;<a href="{forumrow.U_LAST_POST}" title="{forumrow.LAST_POST_SUBJECT}" class="lastsubject">{forumrow.LAST_POST_SUBJECT_TRUNCATED}</a> <br />
 							<!-- ENDIF -->
-							<!-- IF not S_IS_BOT --><!--<a href="{forumrow.U_LAST_POST}">{LAST_POST_IMG}</a> <br />--><!-- ENDIF -->
-							&nbsp;{forumrow.LAST_POST_TIME}
+							<!-- IF not S_IS_BOT -->
+							&nbsp;<a href="{forumrow.U_LAST_POST}">{forumrow.LAST_POST_TIME} {LAST_POST_IMG}</a>
+							<!-- ENDIF -->
 						<!-- ELSE -->
 							{L_NO_POSTS}<br />&nbsp;
 						<!-- ENDIF -->

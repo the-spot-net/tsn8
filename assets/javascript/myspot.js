@@ -28,6 +28,10 @@ $(document).ready(function () {
 		ajax_fetch_html('tsn_module_new_posts.php', 'divNewPosts', true);
 	}
 
+	if($('#divActivePosts')) {
+		ajax_fetch_html('tsn_module_active_posts.php', 'divActivePosts', true);
+	}
+
 });
 
 function ajax_fetch_html(url, elementid, refresh) {

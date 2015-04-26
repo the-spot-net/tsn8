@@ -105,6 +105,15 @@
 	right: 5px;
 }
 
+.tsn8_myspot_special_report_author {
+	margin-left: 0.25em;
+	padding-left: 0.5em;
+	margin-bottom: 0.5em;
+	font-size: 0.9em;
+	font-style: italic;
+	color: #587eaa;
+}
+
 .tsn8_myspot_special_report_body {
 	color: #333;
 	line-height: 1.1em;
@@ -126,15 +135,6 @@
 /* END Special Report Content */
 
 /* BEGIN New Posts Content */
-.tsn8_myspot_mini_newposts_wrapper {
-
-}
-
-.tsn8_stat_wrapper {
-	text-align: justify;
-	-ms-text-justify: distribute-all-lines;
-	text-justify: distribute-all-lines;
-}
 
 .tsn8_myspot_newest_post {
 	vertical-align: top;
@@ -145,22 +145,28 @@
 	box-shadow: 0 1px 2px #ddd;
 	padding: 5px;
 	margin: 3px 5px;
+	overflow: hidden;
 }
 
 .tsn8_myspot_newest_post_title {
+	border-bottom: 1px solid #d7e3f6;
 	display: block;
 	padding: 3px;
-	font-size: 1rem;
+	margin-bottom: 3px;
+	font-size: 1.2rem;
 	text-align: left;
+	vertical-align: middle;
+	margin-right: 90px;
 }
 
 .tsn8_myspot_newest_post_subtitle {
-	border-bottom: 1px dotted #d7e3f6;
 	font-size: 0.75rem;
 	color: #587eaa;
 	font-style: italic;
 	display: block;
-	margin-bottom: 5px;
+	margin-bottom: 3px;
+	margin-left: 0.25em;
+	/*background-color: rgba(255, 255, 255, 0.9);*/
 }
 
 .tsn8_myspot_newest_post_subtitle a {
@@ -170,12 +176,12 @@
 
 .tsn8_myspot_newest_post_message {
 	display: block;
-	padding: 3px;
 	font-size: 0.9rem;
 	vertical-align: top;
 	text-align: left;
 	min-height: 40px;
 	line-height: 20px;
+	padding: 0.5rem 3px 3px;
 }
 
 .tsn8_myspot_no_posts_message {
@@ -189,6 +195,11 @@
 /* BEGIN Stats Content */
 .tsn8_myspot_online_user_avatars {
 	display: block;
+}
+
+.tsn8_myspot_online_user_avatars img {
+	padding: 1px;
+	vertical-align: middle;
 }
 
 .tsn8_myspot_userstatus_stats_record {
@@ -222,3 +233,6 @@
 }
 
 /* END Stats Content */
+
+/** Mobile My Spot Classes */
+

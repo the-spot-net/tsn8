@@ -394,17 +394,6 @@ if ($keywords || $author || $author_id || $search_id || $submit) {
 			}
 		}
 		unset($forums);
-//
-//		if ($hilit) {
-//			// Remove bad highlights
-//			$hilit_array = array_filter(explode('|', $hilit), 'strlen');
-//			foreach ($hilit_array as $key => $value) {
-//				$hilit_array[$key] = phpbb_clean_search_string($value);
-//				$hilit_array[$key] = str_replace('\*', '\w*?', preg_quote($hilit_array[$key], '#'));
-//				$hilit_array[$key] = preg_replace('#(^|\s)\\\\w\*\?(\s|$)#', '$1\w+?$2', $hilit_array[$key]);
-//			}
-//			$hilit = implode('|', $hilit_array);
-//		}
 
 		/**
 		 * Modify the rowset data

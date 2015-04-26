@@ -116,6 +116,10 @@ li.row:hover dd {
 	border-left-color: #d7e3f6;
 }
 
+.row .pagination {
+	z-index: 2;
+}
+
 dl.icon dt .list-inner {
 	padding-left: 50px;
 }
@@ -587,4 +591,33 @@ table.table1 thead th,
 th a {
 	color: #587eaa;
 	text-transform: capitalize;
+}
+
+.dropdown-extended {
+	z-index: 5;
+}
+
+li.breadcrumbs span:first-child > a {
+	padding-left: 0;
+}
+.tsn8_mobile_quick_links a.responsive-menu-link {
+	height: 48px;
+}
+
+.tsn8_mobile_notification_list {
+	position: absolute;
+	left: 50%;
+	top: 38px;
+	z-index: 2;
+	border: 1px solid transparent;
+	border-radius: 5px;
+	padding: 9px 0 0;
+	margin-right: -500px;
+	margin-left: -22px;
+}
+
+#search-box {
+	position: absolute;
+	right:0;
+	z-index: 3;
 }

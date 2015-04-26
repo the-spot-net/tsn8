@@ -5,10 +5,12 @@
 		<div class="tsn8_myspot_content_wrapper_column">
 			<!-- IF S_USER_LOGGED_IN -->
 			<!-- IF S_ALLOW_MINI_PROFILE -->
-			<div id="divMiniProfile" class="tsn8_module">
-				<p class="tsn8_module_placeholder align_center">Loading Profile...<br/>
-					<img src="{T_THEME_PATH}/images/tsn8/ajax-loader.gif"/>
-				</p>
+			<div id="divMiniProfile" class="gm-hide">
+				<div class="tsn8_module">
+					<p class="tsn8_module_placeholder align_center">Loading Profile...<br/>
+						<img src="{T_THEME_PATH}/images/tsn8/ajax-loader.gif"/>
+					</p>
+				</div>
 			</div>
 			<!-- ENDIF -->
 			<input type="hidden" id="login_status" value="1"/>
@@ -18,10 +20,12 @@
 			<input type="hidden" id="login_userid" value="0"/>
 			<!-- ENDIF -->
 			<!-- IF S_ALLOW_MINI_FORUMS -->
-			<div id="divMiniForumIndex" class="tsn8_module">
-				<p class="tsn8_module_placeholder align_center">Loading Forums...<br/>
-					<img src="{T_THEME_PATH}/images/tsn8/ajax-loader.gif"/>
-				</p>
+			<div id="divMiniForumIndex">
+				<div class="tsn8_module">
+					<p class="tsn8_module_placeholder align_center">Loading Forums...<br/>
+						<img src="{T_THEME_PATH}/images/tsn8/ajax-loader.gif"/>
+					</p>
+				</div>
 			</div>
 			<!-- ENDIF -->
 		</div>
@@ -29,25 +33,41 @@
 	<div class="gm-columns gt-columns gd-columns gm-full gt-two-thirds gd-6of10">
 		<div class="tsn8_myspot_content_wrapper_column ">
 			<!-- IF S_ALLOW_SPECIAL_REPORT -->
-			<div id="divSpecialReport" class="tsn8_module">
-				<p class="tsn8_module_placeholder align_center">Loading tsn Special Report...<br/>
-					<img src="{T_THEME_PATH}/images/tsn8/ajax-loader.gif"/>
-				</p>
+			<div id="divSpecialReport">
+				<div class="tsn8_module">
+					<p class="tsn8_module_placeholder align_center">Loading tsn Special Report...<br/>
+						<img src="{T_THEME_PATH}/images/tsn8/ajax-loader.gif"/>
+					</p>
+				</div>
 			</div>
 			<!-- ENDIF -->
-			<!-- IF S_ALLOW_NEW_POSTS -->
-			<div id="divNewPosts" class="tsn8_module">
-				<p class="tsn8_module_placeholder align_center">Loading the new posts since your last visit...<br/>
-					<img src="{T_THEME_PATH}/images/tsn8/ajax-loader.gif"/>
-				</p>
+			<!-- IF not S_IS_BOT and S_ALLOW_NEW_POSTS -->
+				<!-- IF S_USER_LOGGED_IN -->
+			<div id="divNewPosts">
+				<div class="tsn8_module">
+					<p class="tsn8_module_placeholder align_center">Loading the new posts since your last visit...<br/>
+						<img src="{T_THEME_PATH}/images/tsn8/ajax-loader.gif"/>
+					</p>
+				</div>
 			</div>
+				<!-- ELSE -->
+			<div id="divActivePosts">
+				<div class="tsn8_module">
+					<p class="tsn8_module_placeholder align_center">Loading the active topics...<br/>
+						<img src="{T_THEME_PATH}/images/tsn8/ajax-loader.gif"/>
+					</p>
+				</div>
+			</div>
+				<!-- ENDIF -->
 			<!-- ENDIF -->
 		</div>
 	</div>
 	<div class="gm-columns gt-columns gd-columns gm-full gt-two-thirds gd-custom-15">
 		<div class="tsn8_myspot_content_wrapper_column">
-			<div id="divForumStats" class="tsn8_module">
-				<!-- INCLUDE modules/myspot_stats.html -->
+			<div id="divForumStats">
+				<div class="tsn8_module">
+					<!-- INCLUDE modules/myspot_stats.html -->
+				</div>
 			</div>
 		</div>
 	</div>

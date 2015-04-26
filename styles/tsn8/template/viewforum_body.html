@@ -34,7 +34,7 @@
 <div class="gm-row gt-row gd-row">
 	<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
 		<div class="action-bar compact">
-			<a href="{U_MARK_FORUMS}" class="tsn8_icon tsn8_icon_markall mark rightside" accesskey="m" title="{L_MARK_TOPICS_READ}" data-ajax="mark_topics_read"></a>
+			<a href="{U_MARK_TOPICS}" class="tsn8_icon tsn8_icon_markall mark rightside" accesskey="m" title="{L_MARK_TOPICS_READ}" data-ajax="mark_topics_read"></a>
 		</div>
 	</div>
 </div>
@@ -79,7 +79,7 @@
 				<!-- ELSE -->
 				&bull; {PAGE_NUMBER}
 				<!-- ENDIF -->
-				<!-- IF not S_IS_BOT and U_MARK_TOPICS and .topicrow -->&bull; <a href="{U_MARK_FORUMS}" class="tsn8_icon tsn8_icon_markall mark" accesskey="m" title="{L_MARK_TOPICS_READ}" data-ajax="mark_topics_read"></a><!-- ENDIF -->
+				<!-- IF not S_IS_BOT and U_MARK_TOPICS and .topicrow -->&bull; <a href="{U_MARK_TOPICS}" class="tsn8_icon tsn8_icon_markall mark" accesskey="m" title="{L_MARK_TOPICS_READ}" data-ajax="mark_topics_read"></a><!-- ENDIF -->
 			</div>
 
 		</div>
@@ -220,7 +220,7 @@
 							<dd class="posts">{topicrow.REPLIES} <dfn>{L_REPLIES}</dfn></dd>
 							<dd class="views">{topicrow.VIEWS} <dfn>{L_VIEWS}</dfn></dd>
 							<dd class="lastpost">
-								<span class="tsn8_last_post_author_avatar">{topicrow.LAST_POST_AUTHOR_AVATAR}</span>
+								<a href="{U_LAST_POST_AUTHOR_LINK}" class="tsn8_last_post_author_avatar">{topicrow.LAST_POST_AUTHOR_AVATAR}</a>
 								<span>
 									<dfn>{L_LAST_POST} </dfn>
 									{L_POST_BY_AUTHOR} {topicrow.LAST_POST_AUTHOR_FULL} <!-- IF not S_IS_BOT --><a href="{topicrow.U_LAST_POST}" title="{L_GO}">{LAST_POST_IMG}</a> <!-- ENDIF -->
@@ -289,7 +289,7 @@
 				<!-- ELSE -->
 				&bull; {PAGE_NUMBER}
 				<!-- ENDIF -->
-				<!-- IF not S_IS_BOT and U_MARK_TOPICS and .topicrow -->&bull; <a href="{U_MARK_FORUMS}" class="tsn8_icon tsn8_icon_markall" title="{L_MARK_TOPICS_READ}" data-ajax="mark_topics_read"></a><!-- ENDIF -->
+				<!-- IF not S_IS_BOT and U_MARK_TOPICS and .topicrow -->&bull; <a href="{U_MARK_TOPICS}" class="tsn8_icon tsn8_icon_markall" title="{L_MARK_TOPICS_READ}" data-ajax="mark_topics_read"></a><!-- ENDIF -->
 			</div>
 		</div>
 	</div>
