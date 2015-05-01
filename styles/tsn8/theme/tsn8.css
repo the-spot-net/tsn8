@@ -1037,6 +1037,10 @@ a.tsn8_profile_data_icon:hover {
 	text-align: center;
 }
 
+.tsn8_profile_icon_phpbb_instagram {
+	background: url('images/tsn8/profile_instagram.png') no-repeat center center;
+}
+
 .tsn8_profile_icon_phpbb_website {
 	background: url('images/tsn8/profile_mouse.png') no-repeat center center;
 }
