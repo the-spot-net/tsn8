@@ -1150,9 +1150,42 @@ function phpbb_timezone_select($template, $user, $default = '', $truncate = fals
 function markread($mode, $forum_id = false, $topic_id = false, $post_time = 0, $user_id = 0)
 {
 	global $db, $user, $config;
-	global $request, $phpbb_container;
+	global $request, $phpbb_container, $phpbb_dispatcher;
 
 	$post_time = ($post_time === 0 || $post_time > time()) ? time() : (int) $post_time;
+
+	$should_markread = true;
+
+	/**
+	 * This event is used for performing actions directly before marking forums,
+	 * topics or posts as read.
+	 * 
+	 * It is also possible to prevent the marking. For that, the $should_markread parameter
+	 * should be set to FALSE.
+	 *
+	 * @event core.markread_before
+	 * @var	string	mode				Variable containing marking mode value
+	 * @var	mixed	forum_id			Variable containing forum id, or false
+	 * @var	mixed	topic_id			Variable containing topic id, or false
+	 * @var	int		post_time			Variable containing post time
+	 * @var	int		user_id				Variable containing the user id
+	 * @var	bool	should_markread		Flag indicating if the markread should be done or not.
+	 * @since 3.1.4-RC1
+	 */
+	$vars = array(
+		'mode',
+		'forum_id',
+		'topic_id',
+		'post_time',
+		'user_id',
+		'should_markread',
+	);
+	extract($phpbb_dispatcher->trigger_event('core.markread_before', compact($vars)));
+
+	if (!$should_markread)
+	{
+		return;
+	}
 
 	if ($mode == 'all')
 	{
@@ -1648,6 +1681,7 @@ function get_complete_topic_tracking($forum_id, $topic_ids, $global_announce_lis
 function get_unread_topics($user_id = false, $sql_extra = '', $sql_sort = '', $sql_limit = 1001, $sql_limit_offset = 0)
 {
 	global $config, $db, $user;
+	global $phpbb_dispatcher;
 
 	$user_id = ($user_id === false) ? (int) $user->data['user_id'] : (int) $user_id;
 
@@ -1690,6 +1724,24 @@ function get_unread_topics($user_id = false, $sql_extra = '', $sql_sort = '', $s
 				$sql_extra
 				$sql_sort",
 		);
+
+		/**
+		 * Change SQL query for fetching unread topics data
+		 *
+		 * @event core.get_unread_topics_modify_sql
+		 * @var array     sql_array    Fully assembled SQL query with keys SELECT, FROM, LEFT_JOIN, WHERE
+		 * @var int       last_mark    User's last_mark time
+		 * @var string    sql_extra    Extra WHERE SQL statement
+		 * @var string    sql_sort     ORDER BY SQL sorting statement
+		 * @since 3.1.4-RC1
+		 */
+		$vars = array(
+			'sql_array',
+			'last_mark',
+			'sql_extra',
+			'sql_sort',
+		);
+		extract($phpbb_dispatcher->trigger_event('core.get_unread_topics_modify_sql', compact($vars)));
 
 		$sql = $db->sql_build_query('SELECT', $sql_array);
 		$result = $db->sql_query_limit($sql, $sql_limit, $sql_limit_offset);
@@ -2257,7 +2309,7 @@ function redirect($url, $return = false, $disable_cd_check = false)
 		// Attention: only able to redirect within the same domain if $disable_cd_check is false (yourdomain.com -> www.yourdomain.com will not work)
 		if (!$disable_cd_check && $url_parts['host'] !== $user->host)
 		{
-			$url = generate_board_url();
+			trigger_error('INSECURE_REDIRECT', E_USER_ERROR);
 		}
 	}
 	else if ($url[0] == '/')
@@ -2295,7 +2347,7 @@ function redirect($url, $return = false, $disable_cd_check = false)
 	// Clean URL and check if we go outside the forum directory
 	$url = $phpbb_path_helper->clean_url($url);
 
-	if (!$disable_cd_check && strpos($url, generate_board_url(true)) === false)
+	if (!$disable_cd_check && strpos($url, generate_board_url(true) . '/') !== 0)
 	{
 		trigger_error('INSECURE_REDIRECT', E_USER_ERROR);
 	}
@@ -2492,13 +2544,19 @@ function phpbb_request_http_version()
 {
 	global $request;
 
+	$version = '';
 	if ($request && $request->server('SERVER_PROTOCOL'))
 	{
-		return $request->server('SERVER_PROTOCOL');
+		$version = $request->server('SERVER_PROTOCOL');
 	}
 	else if (isset($_SERVER['SERVER_PROTOCOL']))
 	{
-		return $_SERVER['SERVER_PROTOCOL'];
+		$version = $_SERVER['SERVER_PROTOCOL'];
+	}
+
+	if (!empty($version) && is_string($version) && preg_match('#^HTTP/[0-9]\.[0-9]$#', $version))
+	{
+		return $version;
 	}
 
 	return 'HTTP/1.0';
@@ -2868,19 +2926,6 @@ function login_box($redirect = '', $l_explain = '', $l_success = '', $admin = fa
 		// Special cases... determine
 		switch ($result['status'])
 		{
-			case LOGIN_ERROR_ATTEMPTS:
-
-				$captcha = $phpbb_container->get('captcha.factory')->get_instance($config['captcha_plugin']);
-				$captcha->init(CONFIRM_LOGIN);
-				// $captcha->reset();
-
-				$template->assign_vars(array(
-					'CAPTCHA_TEMPLATE'			=> $captcha->get_template(),
-				));
-
-				$err = $user->lang[$result['error_msg']];
-			break;
-
 			case LOGIN_ERROR_PASSWORD_CONVERT:
 				$err = sprintf(
 					$user->lang[$result['error_msg']],
@@ -2890,6 +2935,17 @@ function login_box($redirect = '', $l_explain = '', $l_success = '', $admin = fa
 					'</a>'
 				);
 			break;
+
+			case LOGIN_ERROR_ATTEMPTS:
+
+				$captcha = $phpbb_container->get('captcha.factory')->get_instance($config['captcha_plugin']);
+				$captcha->init(CONFIRM_LOGIN);
+				// $captcha->reset();
+
+				$template->assign_vars(array(
+					'CAPTCHA_TEMPLATE'			=> $captcha->get_template(),
+				));
+			// no break;
 
 			// Username, password, etc...
 			default:
@@ -3295,7 +3351,7 @@ function get_preg_expression($mode)
 		case 'email':
 			// Regex written by James Watts and Francisco Jose Martin Moreno
 			// http://fightingforalostcause.net/misc/2006/compare-email-regex.php
-			return '([\w\!\#$\%\&\'\*\+\-\/\=\?\^\`{\|\}\~]+\.)*(?:[\w\!\#$\%\'\*\+\-\/\=\?\^\`{\|\}\~]|&amp;)+@((((([a-z0-9]{1}[a-z0-9\-]{0,62}[a-z0-9]{1})|[a-z])\.)+[a-z]{2,63})|(\d{1,3}\.){3}\d{1,3}(\:\d{1,5})?)';
+			return '((?:[\w\!\#$\%\&\'\*\+\-\/\=\?\^\`{\|\}\~]+\.)*(?:[\w\!\#$\%\'\*\+\-\/\=\?\^\`{\|\}\~]|&amp;)+)@((((([a-z0-9]{1}[a-z0-9\-]{0,62}[a-z0-9]{1})|[a-z])\.)+[a-z]{2,63})|(\d{1,3}\.){3}\d{1,3}(\:\d{1,5})?)';
 		break;
 
 		case 'bbcode_htm':
@@ -4187,21 +4243,21 @@ function obtain_users_online($item_id = 0, $item = 'forum')
 }
 
 /**
- * Uses the result of obtain_users_online to generate a localized, readable representation.
+* Uses the result of obtain_users_online to generate a localized, readable representation.
  *
  * @param mixed  $online_users result of obtain_users_online - array with user_id lists for total, hidden and visible users, and statistics
  * @param int    $item_id      Indicate that the data is limited to one item and not global
  * @param string $item         The name of the item which is stored in the session table as session_{$item}_id
  * @param bool   $add_link     tsn8: Add link to avatars, conditionally
  *
- * @return array An array containing the string for output to the template
- */
+* @return array An array containing the string for output to the template
+*/
 function obtain_users_online_string($online_users, $item_id = 0, $item = 'forum', $add_link=false)
 {
-	global $config, $db, $user, $auth;
+	global $config, $db, $user, $auth, $phpbb_dispatcher;
 
-	// tsn8: add [[ $online_avatarlist = ]]
-	$online_userlist = $online_avatarlist = '';
+	$guests_online = $hidden_online = $l_online_users = $online_userlist = $visible_online = '';
+	$user_online_link = $rowset = array();
 	// Need caps version of $item for language-strings
 	$item_caps = strtoupper($item);
 
@@ -4212,9 +4268,28 @@ function obtain_users_online_string($online_users, $item_id = 0, $item = 'forum'
 				FROM ' . USERS_TABLE . '
 				WHERE ' . $db->sql_in_set('user_id', $online_users['online_users']) . '
 				ORDER BY username_clean ASC';
-		$result = $db->sql_query($sql);
 
-		while ($row = $db->sql_fetchrow($result))
+		/**
+		* Modify SQL query to obtain online users data
+		*
+		* @event core.obtain_users_online_string_sql
+		* @var	array	online_users	Array with online users data
+		*								from obtain_users_online()
+		* @var	int		item_id			Restrict online users to item id
+		* @var	string	item			Restrict online users to a certain
+		*								session item, e.g. forum for
+		*								session_forum_id
+		* @var	string	sql				SQL query to obtain users online data
+		* @since 3.1.4-RC1
+		*/
+		$vars = array('online_users', 'item_id', 'item', 'sql');
+		extract($phpbb_dispatcher->trigger_event('core.obtain_users_online_string_sql', compact($vars)));
+
+		$result = $db->sql_query($sql);
+		$rowset = $db->sql_fetchrowset($result);
+		$db->sql_freeresult($result);
+
+		foreach ($rowset as $row)
 		{
 			// User is logged in and therefore not a guest
 			if ($row['user_id'] != ANONYMOUS)
@@ -4226,8 +4301,7 @@ function obtain_users_online_string($online_users, $item_id = 0, $item = 'forum'
 
 				if (!isset($online_users['hidden_users'][$row['user_id']]) || $auth->acl_get('u_viewonline'))
 				{
-					$user_online_link = get_username_string(($row['user_type'] <> USER_IGNORE) ? 'full' : 'no_profile', $row['user_id'], $row['username'], $row['user_colour']);
-					$online_userlist .= ($online_userlist != '') ? ', ' . $user_online_link : $user_online_link;
+					$user_online_link[$row['user_id']] = get_username_string(($row['user_type'] <> USER_IGNORE) ? 'full' : 'no_profile', $row['user_id'], $row['username'], $row['user_colour']);
 					// tsn8: add [[ BEGIN ]]
 
 					// Calculate the results of scaling...
@@ -4276,8 +4350,8 @@ function obtain_users_online_string($online_users, $item_id = 0, $item = 'forum'
 				}
 			}
 		}
-		$db->sql_freeresult($result);
 	}
+	$online_userlist = implode(', ', $user_online_link);
 
 	if (!$online_userlist)
 	{
@@ -4309,6 +4383,33 @@ function obtain_users_online_string($online_users, $item_id = 0, $item = 'forum'
 	{
 		$l_online_users = $user->lang('ONLINE_USERS_TOTAL', (int) $online_users['total_online'], $visible_online, $hidden_online);
 	}
+
+	/**
+	* Modify online userlist data
+	*
+	* @event core.obtain_users_online_string_modify
+	* @var	array	online_users		Array with online users data
+	*									from obtain_users_online()
+	* @var	int		item_id				Restrict online users to item id
+	* @var	string	item				Restrict online users to a certain
+	*									session item, e.g. forum for
+	*									session_forum_id
+	* @var	array	rowset				Array with online users data
+	* @var	array	user_online_link	Array with online users items (usernames)
+	* @var	string	online_userlist		String containing users online list
+	* @var	string	l_online_users		String with total online users count info
+	* @since 3.1.4-RC1
+	*/
+	$vars = array(
+		'online_users',
+		'item_id',
+		'item',
+		'rowset',
+		'user_online_link',
+		'online_userlist',
+		'l_online_users',
+	);
+	extract($phpbb_dispatcher->trigger_event('core.obtain_users_online_string_modify', compact($vars)));
 
 	return array(
 		'online_userlist'	=> $online_userlist,
@@ -4724,16 +4825,16 @@ function phpbb_build_hidden_fields_for_query_params($request, $exclude = null)
 }
 
 /**
- * Get user avatar
- *
+* Get user avatar
+*
  * @param array  $user_row      Row from the users table
  * @param string $alt           Optional language string for alt tag within image, can be a language key or text
  * @param bool   $ignore_config Ignores the config-setting, to be still able to view the avatar in the UCP
  *
  * @param bool   $add_link tsn8: Add Link, conditionally
- *
- * @return string Avatar html
- */
+*
+* @return string Avatar html
+*/
 function phpbb_get_user_avatar($user_row, $alt = 'USER_AVATAR', $ignore_config = false, $add_link = false)
 {
 	$row = \phpbb\avatar\manager::clean_row($user_row, 'user');
@@ -4741,17 +4842,17 @@ function phpbb_get_user_avatar($user_row, $alt = 'USER_AVATAR', $ignore_config =
 }
 
 /**
- * Get group avatar
- *
+* Get group avatar
+*
  * @param        $user_row
  * @param string $alt           Optional language string for alt tag within image, can be a language key or text
  * @param bool   $ignore_config Ignores the config-setting, to be still able to view the avatar in the UCP
  *
  * @param bool   $add_link tsn8: Add Link, conditionally
- *
- * @return string Avatar html
+*
+* @return string Avatar html
  * @internal param array $group_row Row from the groups table
- */
+*/
 function phpbb_get_group_avatar($user_row, $alt = 'GROUP_AVATAR', $ignore_config = false, $add_link=false)
 {
 	$row = \phpbb\avatar\manager::clean_row($user_row, 'group');
@@ -4759,16 +4860,16 @@ function phpbb_get_group_avatar($user_row, $alt = 'GROUP_AVATAR', $ignore_config
 }
 
 /**
- * Get avatar
- *
+* Get avatar
+*
  * @param array  $row           Row cleaned by \phpbb\avatar\manager::clean_row
  * @param string $alt           Optional language string for alt tag within image, can be a language key or text
  * @param bool   $ignore_config Ignores the config-setting, to be still able to view the avatar in the UCP
  *
  * @param bool   $add_link tsn8: Add link to avatar, conditionally
- *
- * @return string Avatar html
- */
+*
+* @return string Avatar html
+*/
 function phpbb_get_avatar($row, $alt, $ignore_config = false, $add_link=false)
 {
 	global $user, $config, $cache, $phpbb_root_path, $phpEx;
@@ -4852,7 +4953,7 @@ function phpbb_get_avatar($row, $alt, $ignore_config = false, $add_link=false)
 
     if(!empty($html) && !empty($row['id']) && $add_link) {
         $html = '<a href="'.append_sid("memberlist.$phpEx", "mode=viewprofile&u=".$row['id']).'" />'.$html.'</a>';
-    }
+	}
 
 	return $html;
 }

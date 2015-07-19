@@ -555,7 +555,9 @@ input.ui-button {
 	overflow-x: hidden;
 }
 
-blockquote {
+blockquote,
+blockquote blockquote,
+blockquote blockquote blockquote {
 	background-color: rgba(215, 227, 246, 0.31);
 	border-color: #d7e3f6;
 	border-radius: 0.5em;
@@ -600,6 +602,7 @@ th a {
 li.breadcrumbs span:first-child > a {
 	padding-left: 0;
 }
+
 .tsn8_mobile_quick_links a.responsive-menu-link {
 	height: 48px;
 }
@@ -618,6 +621,6 @@ li.breadcrumbs span:first-child > a {
 
 #search-box {
 	position: absolute;
-	right:0;
+	right: 0;
 	z-index: 3;
 }
