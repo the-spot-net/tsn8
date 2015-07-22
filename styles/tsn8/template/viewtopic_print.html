@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}">
 <head>
-<meta charset="utf-8" />
-<meta name="robots" content="noindex" />
-{META}
-<title>{SITENAME} &bull; {PAGE_TITLE}</title>
+	<meta charset="utf-8" />
+	<meta name="robots" content="noindex" />
+	{META}
+	<title>{SITENAME} &bull; {PAGE_TITLE}</title>
 
-<link href="{T_THEME_PATH}/print.css" rel="stylesheet" type="text/css" />
-<!-- EVENT viewtopic_print_head_append -->
+	<link href="{T_THEME_PATH}/print.css" rel="stylesheet">
+	<!-- EVENT viewtopic_print_head_append -->
 </head>
 <body id="phpbb">
 <div id="wrap">
@@ -24,13 +24,13 @@
 	<div id="page-body">
 		<div class="page-number">{PAGE_NUMBER}</div>
 		<!-- BEGIN postrow -->
-			<div class="post">
-				<h3>{postrow.POST_SUBJECT}</h3>
-				<div class="date">{L_POSTED}{L_COLON} <strong>{postrow.POST_DATE}</strong></div>
-				<div class="author">{L_POST_BY_AUTHOR} <strong>{postrow.POST_AUTHOR}</strong></div>
-				<div class="content">{postrow.MESSAGE}</div>
-			</div>
-			<hr />
+		<div class="post">
+			<h3>{postrow.POST_SUBJECT}</h3>
+			<div class="date">{L_POSTED}{L_COLON} <strong>{postrow.POST_DATE}</strong></div>
+			<div class="author">{L_POST_BY_AUTHOR} <strong>{postrow.POST_AUTHOR}</strong></div>
+			<div class="content">{postrow.MESSAGE}</div>
+		</div>
+		<hr />
 		<!-- END postrow -->
 	</div>
 
