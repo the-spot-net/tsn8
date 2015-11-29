@@ -229,14 +229,14 @@
 						<ul id="nav-breadcrumbs" class="linklist navlinks" role="menubar">
 							<!-- DEFINE $MICRODATA = ' itemtype="http://data-vocabulary.org/Breadcrumb" itemscope=""' -->
 							<!-- EVENT overall_header_breadcrumbs_before -->
-							<li class="breadcrumbs"><span class="crumb"><a href="{BOARD_URL}myspot.php" data-navbar-reference="myspot"><span class="tsn8_icon_mini_nohover tsn8_icon_tsn"></span>{L_MYSPOT}</a>&nbsp;&nbsp;&bull;</span></li>
+							<li class="breadcrumbs"><span class="crumb"{$MICRODATA}><a href="{BOARD_URL}myspot.php" data-navbar-reference="myspot" itemprop="url"><span class="tsn8_icon_mini_nohover tsn8_icon_tsn"></span><span itemprop="title">{L_MYSPOT}</span></a>&nbsp;&nbsp;&bull;</span></li>
 							<li class="breadcrumbs tsn8_breadcrumb_flush">
-								<!-- IF U_SITE_HOME --><span class="crumb"><a href="{U_SITE_HOME}" {$MICRODATA} data-navbar-reference="home">{L_SITE_HOME}</a></span><!-- ENDIF -->
+								<!-- IF U_SITE_HOME --><span class="crumb"{$MICRODATA}><a href="{U_SITE_HOME}" data-navbar-reference="home" itemprop="url"><span itemprop="title">{L_SITE_HOME}</span></a></span><!-- ENDIF -->
 								<!-- EVENT overall_header_breadcrumb_prepend -->
-								<span class="crumb"><a href="{U_INDEX}" accesskey="h" {$MICRODATA} data-navbar-reference="index">{L_INDEX}</a></span>
+								<span class="crumb"{$MICRODATA}><a href="{U_INDEX}" accesskey="h" data-navbar-reference="index" itemprop="url"><span itemprop="title">{L_INDEX}</span></a></span>
 								<!-- BEGIN navlinks -->
 								<!-- EVENT overall_header_navlink_prepend -->
-								<span class="crumb"><a href="{navlinks.U_VIEW_FORUM}" {$MICRODATA}<!-- IF navlinks.MICRODATA --> {navlinks.MICRODATA}<!-- ENDIF -->>{navlinks.FORUM_NAME}</a></span>
+								<span class="crumb"{$MICRODATA}<!-- IF navlinks.MICRODATA --> {navlinks.MICRODATA}<!-- ENDIF -->><a href="{navlinks.U_VIEW_FORUM}" itemprop="url"><span itemprop="title">{navlinks.FORUM_NAME}</span></a></span>
 								<!-- EVENT overall_header_navlink_append -->
 								<!-- END navlinks -->
 								<!-- EVENT overall_header_breadcrumb_append -->
