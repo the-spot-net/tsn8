@@ -29,7 +29,7 @@ $(document).ready(function () {
 	}
 
 	if($('#divActivePosts')) {
-		ajax_fetch_html('tsn_module_active_posts.php', 'divActivePosts', true);
+		ajax_fetch_html('tsn_module_active_posts.php?st=8', 'divActivePosts', true);
 	}
 
 });

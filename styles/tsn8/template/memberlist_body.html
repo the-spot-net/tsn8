@@ -1,7 +1,3 @@
-
-
-
-
 <!-- IF S_IN_SEARCH_POPUP -->
 	<!-- INCLUDE simple_header.html -->
 	<div class="group">
@@ -120,7 +116,8 @@
 														</div>
 														<div class="gm-row gt-row gd-row">
 															<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full align_center">
-																<span class="tsn8_memberlist_usertitle">{memberrow.RANK_TITLE}</span>
+																<span class="tsn8_memberlist_usertitle"><!-- EVENT memberlist_body_rank_prepend -->{memberrow.RANK_TITLE}<!-- EVENT memberlist_body_rank_append --></span>
+																<!-- IF memberrow.RANK_IMG --><!--{memberrow.RANK_IMG}--><!-- ELSE --><!--{memberrow.RANK_TITLE}--><!-- ENDIF -->
 															</div>
 														</div>
 														<div class="gm-row gt-row gd-row">
