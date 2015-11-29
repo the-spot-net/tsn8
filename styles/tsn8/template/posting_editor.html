@@ -106,6 +106,7 @@
 			<fieldset class="submit-buttons">
 				{S_HIDDEN_ADDRESS_FIELD}
 				{S_HIDDEN_FIELDS}
+				<!-- EVENT posting_editor_submit_buttons -->
 				<!-- IF S_EDIT_DRAFT or S_DISPLAY_REVIEW -->
 				<span class="buttonset">
 				<!-- IF S_EDIT_DRAFT --><input type="button" role="button" class="button1" value="{L_BACK_TO_DRAFTS}" onclick="window.location.href='{S_UCP_ACTION}'"/><!-- ENDIF -->
@@ -145,6 +146,7 @@
 				<a href="#tabs" data-subpanel="poll-panel" role="tab" aria-controls="poll-panel">{L_ADD_POLL}</a>
 			</li>
 			<!-- ENDIF -->
+			<!-- EVENT posting_editor_add_panel_tab -->
 		</ul>
 	</div>
 	<!-- ENDIF -->

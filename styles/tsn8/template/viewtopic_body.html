@@ -33,6 +33,8 @@
 	</div>
 </div>
 
+<!-- EVENT viewtopic_body_poll_before -->
+
 <!-- IF S_HAS_POLL -->
 <div class="gm-row gt-row gd-row">
 	<div class="gm-columns gm-full gt-columns gt-full gd-columns gd-full ">
@@ -99,6 +101,8 @@
 
 <hr/>
 <!-- ENDIF -->
+
+<!-- EVENT viewtopic_body_poll_after -->
 
 <div class="gm-row gt-row gd-row">
 	<div class="gm-columns gm-full gt-columns gt-full gd-columns gd-full">
@@ -181,8 +185,10 @@
 											<!-- EVENT viewtopic_body_postrow_post_details_after -->
 										</div>
 										<div class="gm-columns gm-full gt-columns gt-third gd-columns gd-quarter align_center">
+											<!-- DEFINE $SHOW_POST_BUTTONS = (postrow.U_EDIT or postrow.U_DELETE or postrow.U_REPORT or postrow.U_WARN or postrow.U_INFO or postrow.U_QUOTE) -->
 											<!-- EVENT viewtopic_body_post_buttons_list_before -->
 											<!-- IF not S_IS_BOT -->
+											<!-- IF $SHOW_POST_BUTTONS -->
 											<!-- IF postrow.U_EDIT or postrow.U_DELETE or postrow.U_REPORT or postrow.U_WARN or postrow.U_INFO or postrow.U_QUOTE -->
 											<ul class="post-buttons">
 												<!-- EVENT viewtopic_body_post_buttons_before -->
@@ -218,6 +224,7 @@
 												<!-- ENDIF -->
 												<!-- EVENT viewtopic_body_post_buttons_after -->
 											</ul>
+											<!-- ENDIF -->
 											<!-- ENDIF -->
 											<!-- ENDIF -->
 											<!-- EVENT viewtopic_body_post_buttons_list_after -->
@@ -336,10 +343,12 @@
 						<!-- EVENT viewtopic_body_post_author_after -->
 						</dt>
 
+						<!-- EVENT viewtopic_body_postrow_rank_before -->
 						<!-- IF postrow.RANK_TITLE or postrow.RANK_IMG -->
 						<dd class="profile-rank">{postrow.RANK_TITLE}</dd>
 						<!--<dd class="profile-rank">{postrow.RANK_TITLE}&lt;!&ndash; IF postrow.RANK_TITLE and postrow.RANK_IMG &ndash;&gt;<br />&lt;!&ndash; ENDIF &ndash;&gt;{postrow.RANK_IMG}</dd>-->
 						<!-- ENDIF -->
+						<!-- EVENT viewtopic_body_postrow_rank_after -->
 
 						<!-- EVENT viewtopic_body_contact_fields_before -->
 						<dd class="tsn8_viewtopic_authorcard_icons">
@@ -447,6 +456,7 @@
 			</div>
 
 			<!-- INCLUDE viewtopic_topic_tools.html -->
+			<!-- EVENT viewtopic_dropdown_top_custom -->
 
 			<!-- IF .quickmod -->
 			<div class="dropdown-container dropdown-container-{S_CONTENT_FLOW_BEGIN} dropdown-up dropdown-{S_CONTENT_FLOW_END} dropdown-button-control" id="quickmod">
@@ -465,6 +475,8 @@
 				</div>
 			</div>
 			<!-- ENDIF -->
+
+			<!-- EVENT viewtopic_dropdown_bottom_custom -->
 
 			<!-- IF .pagination or TOTAL_POSTS -->
 			<div class="pagination">
