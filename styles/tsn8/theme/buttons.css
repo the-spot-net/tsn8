@@ -12,7 +12,7 @@
 	border-radius: 4px;
 	background: transparent none 0 0 repeat-x;
 	padding: 2px 8px;
-	font-family: "Open Sans", "Droid Sans", Verdana, Arial, Helvetica;
+	font-family: "Open Sans", "Droid Sans", Verdana, Arial, Helvetica, sans-serif;
 	position: relative;
 	text-decoration: none !important;
 	outline-style: none !important;
