@@ -4260,7 +4260,8 @@ function obtain_users_online_string($online_users, $item_id = 0, $item = 'forum'
 {
 	global $config, $db, $user, $auth, $phpbb_dispatcher;
 
-	$guests_online = $hidden_online = $l_online_users = $online_userlist = $visible_online = '';
+	// tsn8: add [[ $online_avatarlist ]]
+	$guests_online = $hidden_online = $l_online_users = $online_userlist = $online_avatarlist = $visible_online = '';
 	$user_online_link = $rowset = array();
 	// Need caps version of $item for language-strings
 	$item_caps = strtoupper($item);
@@ -4862,16 +4863,17 @@ function phpbb_get_group_avatar($user_row, $alt = 'GROUP_AVATAR', $ignore_config
 }
 
 /**
-* Get avatar
-*
-* @param array $row Row cleaned by \phpbb\avatar\manager::clean_row
-* @param string $alt Optional language string for alt tag within image, can be a language key or text
-* @param bool $ignore_config Ignores the config-setting, to be still able to view the avatar in the UCP
-* @param bool $lazy If true, will be lazy loaded (requires JS)
-*
-* @return string Avatar html
-*/
-function phpbb_get_avatar($row, $alt, $ignore_config = false, $lazy = false)
+ * Get avatar
+ *
+ * @param array  $row           Row cleaned by \phpbb\avatar\manager::clean_row
+ * @param string $alt           Optional language string for alt tag within image, can be a language key or text
+ * @param bool   $ignore_config Ignores the config-setting, to be still able to view the avatar in the UCP
+ * @param bool   $lazy          If true, will be lazy loaded (requires JS)
+ * @param bool   $add_link      tsn8: Add link to avatar, conditionally
+ *
+ * @return string Avatar html
+ */
+function phpbb_get_avatar($row, $alt, $ignore_config = false, $lazy = false, $add_link = false)
 {
 	global $user, $config, $cache, $phpbb_root_path, $phpEx;
 	global $request;
