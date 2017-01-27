@@ -1,8 +1,10 @@
 <?php
+
 namespace OAuth\Common\Storage;
 
 use OAuth\Common\Token\TokenInterface;
 use OAuth\Common\Storage\Exception\TokenNotFoundException;
+use OAuth\Common\Storage\Exception\AuthorizationStateNotFoundException;
 
 /**
  * Stores a token in a PHP session.
@@ -10,55 +12,71 @@ use OAuth\Common\Storage\Exception\TokenNotFoundException;
 class Session implements TokenStorageInterface
 {
     /**
+     * @var bool
+     */
+    protected $startSession;
+
+    /**
      * @var string
      */
     protected $sessionVariableName;
 
     /**
+     * @var string
+     */
+    protected $stateVariableName;
+
+    /**
      * @param bool $startSession Whether or not to start the session upon construction.
      * @param string $sessionVariableName the variable name to use within the _SESSION superglobal
+     * @param string $stateVariableName
      */
-    public function __construct($startSession = true, $sessionVariableName = 'lusitanian_oauth_token')
-    {
-        if( $startSession && !isset($_SESSION)) {
+    public function __construct(
+        $startSession = true,
+        $sessionVariableName = 'lusitanian-oauth-token',
+        $stateVariableName = 'lusitanian-oauth-state'
+    ) {
+        if ($startSession && !$this->sessionHasStarted()) {
             session_start();
         }
 
+        $this->startSession = $startSession;
         $this->sessionVariableName = $sessionVariableName;
-        if (!isset($_SESSION[$sessionVariableName]))
-        {
+        $this->stateVariableName = $stateVariableName;
+        if (!isset($_SESSION[$sessionVariableName])) {
             $_SESSION[$sessionVariableName] = array();
+        }
+        if (!isset($_SESSION[$stateVariableName])) {
+            $_SESSION[$stateVariableName] = array();
         }
     }
 
     /**
-     * @return \OAuth\Common\Token\TokenInterface
-     * @throws TokenNotFoundException
+     * {@inheritDoc}
      */
     public function retrieveAccessToken($service)
     {
-        if ($this->hasAccessToken($service))
-        {
-            return $_SESSION[$this->sessionVariableName][$service];
+        if ($this->hasAccessToken($service)) {
+            return unserialize($_SESSION[$this->sessionVariableName][$service]);
         }
 
         throw new TokenNotFoundException('Token not found in session, are you sure you stored it?');
     }
 
     /**
-     * @param \OAuth\Common\Token\TokenInterface $token
+     * {@inheritDoc}
      */
     public function storeAccessToken($service, TokenInterface $token)
     {
-        if (isset($_SESSION[$this->sessionVariableName]) &&
-            is_array($_SESSION[$this->sessionVariableName]))
-        {
-            $_SESSION[$this->sessionVariableName][$service] = $token;
-        }
-        else
-        {
+        $serializedToken = serialize($token);
+
+        if (isset($_SESSION[$this->sessionVariableName])
+            && is_array($_SESSION[$this->sessionVariableName])
+        ) {
+            $_SESSION[$this->sessionVariableName][$service] = $serializedToken;
+        } else {
             $_SESSION[$this->sessionVariableName] = array(
-                $service => $token,
+                $service => $serializedToken,
             );
         }
 
@@ -67,15 +85,15 @@ class Session implements TokenStorageInterface
     }
 
     /**
-    * @return bool
-    */
+     * {@inheritDoc}
+     */
     public function hasAccessToken($service)
     {
         return isset($_SESSION[$this->sessionVariableName], $_SESSION[$this->sessionVariableName][$service]);
     }
 
     /**
-     * Delete the user's token. Aka, log out.
+     * {@inheritDoc}
      */
     public function clearToken($service)
     {
@@ -88,8 +106,7 @@ class Session implements TokenStorageInterface
     }
 
     /**
-     * Delete *ALL* user tokens. Use with care. Most of the time you will likely
-     * want to use clearToken() instead.
+     * {@inheritDoc}
      */
     public function clearAllTokens()
     {
@@ -99,8 +116,89 @@ class Session implements TokenStorageInterface
         return $this;
     }
 
-    public function  __destruct()
+    /**
+     * {@inheritDoc}
+     */
+    public function storeAuthorizationState($service, $state)
     {
-        session_write_close();
+        if (isset($_SESSION[$this->stateVariableName])
+            && is_array($_SESSION[$this->stateVariableName])
+        ) {
+            $_SESSION[$this->stateVariableName][$service] = $state;
+        } else {
+            $_SESSION[$this->stateVariableName] = array(
+                $service => $state,
+            );
+        }
+
+        // allow chaining
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function hasAuthorizationState($service)
+    {
+        return isset($_SESSION[$this->stateVariableName], $_SESSION[$this->stateVariableName][$service]);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function retrieveAuthorizationState($service)
+    {
+        if ($this->hasAuthorizationState($service)) {
+            return $_SESSION[$this->stateVariableName][$service];
+        }
+
+        throw new AuthorizationStateNotFoundException('State not found in session, are you sure you stored it?');
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function clearAuthorizationState($service)
+    {
+        if (array_key_exists($service, $_SESSION[$this->stateVariableName])) {
+            unset($_SESSION[$this->stateVariableName][$service]);
+        }
+
+        // allow chaining
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function clearAllAuthorizationStates()
+    {
+        unset($_SESSION[$this->stateVariableName]);
+
+        // allow chaining
+        return $this;
+    }
+
+    public function __destruct()
+    {
+        if ($this->startSession) {
+            session_write_close();
+        }
+    }
+
+    /**
+     * Determine if the session has started.
+     * @url http://stackoverflow.com/a/18542272/1470961
+     * @return bool
+     */
+    protected function sessionHasStarted()
+    {
+        // For more modern PHP versions we use a more reliable method.
+        if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
+            return session_status() != PHP_SESSION_NONE;
+        }
+
+        // Below PHP 5.4 we should test for the current session ID.
+        return session_id() !== '';
     }
 }
