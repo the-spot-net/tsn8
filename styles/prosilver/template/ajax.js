@@ -87,7 +87,7 @@ phpbb.addAjaxCallback('mark_topics_read', function(res, updateTopicLinks) {
 	});
 
 	// Remove link to first unread post
-	$('a').has('span.icon_topic_newest').remove();
+	$('a.unread').has('.icon-red').remove();
 
 	// Update mark topics read links
 	if (updateTopicLinks) {
@@ -132,9 +132,10 @@ phpbb.markNotifications = function($popup, unreadCount) {
 
 	// Update the unread count.
 	$('strong', '#notification_list_button').html(unreadCount);
-	// Remove the Mark all read link if there are no unread notifications.
+	// Remove the Mark all read link and hide notification count if there are no unread notifications.
 	if (!unreadCount) {
 		$('#mark_all_notifications').remove();
+		$('#notification_list_button > strong').addClass('hidden');
 	}
 
 	// Update page title
@@ -242,7 +243,14 @@ phpbb.addAjaxCallback('vote_poll', function(res) {
 			var mostVoted = (res.vote_counts[optionId] === mostVotes);
 			var percent = (!res.total_votes) ? 0 : Math.round((res.vote_counts[optionId] / res.total_votes) * 100);
 			var percentRel = (mostVotes === 0) ? 0 : Math.round((res.vote_counts[optionId] / mostVotes) * 100);
+			var altText;
 
+			altText = $this.attr('data-alt-text');
+			if (voted) {
+				$this.attr('title', $.trim(altText));
+			} else {
+				$this.attr('title', '');
+			};
 			$this.toggleClass('voted', voted);
 			$this.toggleClass('most-votes', mostVoted);
 
