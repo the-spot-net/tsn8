@@ -31,31 +31,36 @@ class acp_inactive
 
 	function main($id, $mode)
 	{
-		global $config, $db, $user, $auth, $template, $phpbb_container;
-		global $phpbb_root_path, $phpbb_admin_path, $phpEx, $table_prefix;
+		global $config, $db, $user, $auth, $template, $phpbb_container, $phpbb_log, $request;
+		global $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
-		include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
+		if (!function_exists('user_active_flip'))
+		{
+			include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
+		}
 
 		$user->add_lang('memberlist');
 
-		$action = request_var('action', '');
-		$mark	= (isset($_REQUEST['mark'])) ? request_var('mark', array(0)) : array();
-		$start	= request_var('start', 0);
+		$action = $request->variable('action', '');
+		$mark	= (isset($_REQUEST['mark'])) ? $request->variable('mark', array(0)) : array();
+		$start	= $request->variable('start', 0);
 		$submit = isset($_POST['submit']);
 
 		// Sort keys
-		$sort_days	= request_var('st', 0);
-		$sort_key	= request_var('sk', 'i');
-		$sort_dir	= request_var('sd', 'd');
+		$sort_days	= $request->variable('st', 0);
+		$sort_key	= $request->variable('sk', 'i');
+		$sort_dir	= $request->variable('sd', 'd');
 
 		$form_key = 'acp_inactive';
 		add_form_key($form_key);
+
+		/* @var $pagination \phpbb\pagination */
 		$pagination = $phpbb_container->get('pagination');
 
 		// We build the sort key and per page settings here, because they may be needed later
 
 		// Number of entries to display
-		$per_page = request_var('users_per_page', (int) $config['topics_per_page']);
+		$per_page = $request->variable('users_per_page', (int) $config['topics_per_page']);
 
 		// Sorting
 		$limit_days = array(0 => $user->lang['ALL_ENTRIES'], 1 => $user->lang['1_DAY'], 7 => $user->lang['7_DAYS'], 14 => $user->lang['2_WEEKS'], 30 => $user->lang['1_MONTH'], 90 => $user->lang['3_MONTHS'], 180 => $user->lang['6_MONTHS'], 365 => $user->lang['1_YEAR']);
@@ -109,7 +114,10 @@ class acp_inactive
 
 						if ($config['require_activation'] == USER_ACTIVATION_ADMIN && !empty($inactive_users))
 						{
-							include_once($phpbb_root_path . 'includes/functions_messenger.' . $phpEx);
+							if (!class_exists('messenger'))
+							{
+								include($phpbb_root_path . 'includes/functions_messenger.' . $phpEx);
+							}
 
 							$messenger = new messenger(false);
 
@@ -135,8 +143,10 @@ class acp_inactive
 						{
 							foreach ($inactive_users as $row)
 							{
-								add_log('admin', 'LOG_USER_ACTIVE', $row['username']);
-								add_log('user', $row['user_id'], 'LOG_USER_ACTIVE_USER');
+								$phpbb_log->add('admin', $user->data['user_id'], $user->ip, 'LOG_USER_ACTIVE', false, array($row['username']));
+								$phpbb_log->add('user', $user->data['user_id'], $user->ip, 'LOG_USER_ACTIVE_USER', false, array(
+									'reportee_id' => $row['user_id']
+								));
 							}
 
 							trigger_error(sprintf($user->lang['LOG_INACTIVE_ACTIVATE'], implode($user->lang['COMMA_SEPARATOR'], $user_affected) . ' ' . adm_back_link($this->u_action)));
@@ -154,12 +164,13 @@ class acp_inactive
 						{
 							if (!$auth->acl_get('a_userdel'))
 							{
+								send_status_line(403, 'Forbidden');
 								trigger_error($user->lang['NO_AUTH_OPERATION'] . adm_back_link($this->u_action), E_USER_WARNING);
 							}
 
 							user_delete('retain', $mark, true);
 
-							add_log('admin', 'LOG_INACTIVE_' . strtoupper($action), implode(', ', $user_affected));
+							$phpbb_log->add('admin', $user->data['user_id'], $user->ip, 'LOG_INACTIVE_' . strtoupper($action), false, array(implode(', ', $user_affected)));
 
 							trigger_error(sprintf($user->lang['LOG_INACTIVE_DELETE'], implode($user->lang['COMMA_SEPARATOR'], $user_affected) . ' ' . adm_back_link($this->u_action)));
 						}
@@ -196,7 +207,10 @@ class acp_inactive
 					if ($row = $db->sql_fetchrow($result))
 					{
 						// Send the messages
-						include_once($phpbb_root_path . 'includes/functions_messenger.' . $phpEx);
+						if (!class_exists('messenger'))
+						{
+							include($phpbb_root_path . 'includes/functions_messenger.' . $phpEx);
+						}
 
 						$messenger = new messenger();
 						$usernames = $user_ids = array();
@@ -231,7 +245,7 @@ class acp_inactive
 							WHERE ' . $db->sql_in_set('user_id', $user_ids);
 						$db->sql_query($sql);
 
-						add_log('admin', 'LOG_INACTIVE_REMIND', implode(', ', $usernames));
+						$phpbb_log->add('admin', $user->data['user_id'], $user->ip, 'LOG_INACTIVE_REMIND', false, array(implode(', ', $usernames)));
 
 						trigger_error(sprintf($user->lang['LOG_INACTIVE_REMIND'], implode($user->lang['COMMA_SEPARATOR'], $usernames) . ' ' . adm_back_link($this->u_action)));
 					}
@@ -271,9 +285,10 @@ class acp_inactive
 
 				'REMINDED_EXPLAIN'	=> $user->lang('USER_LAST_REMINDED', (int) $row['user_reminded'], $user->format_date($row['user_reminded_time'])),
 
-				'USERNAME_FULL'		=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour'], false, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=users&amp;mode=overview')),
+				'USERNAME_FULL'		=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour'], false, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=users&amp;mode=overview&amp;redirect=acp_inactive')),
 				'USERNAME'			=> get_username_string('username', $row['user_id'], $row['username'], $row['user_colour']),
 				'USER_COLOR'		=> get_username_string('colour', $row['user_id'], $row['username'], $row['user_colour']),
+				'USER_EMAIL'		=> $row['user_email'],
 
 				'U_USER_ADMIN'	=> append_sid("{$phpbb_admin_path}index.$phpEx", "i=users&amp;mode=overview&amp;u={$row['user_id']}"),
 				'U_SEARCH_USER'	=> ($auth->acl_get('u_search')) ? append_sid("{$phpbb_root_path}search.$phpEx", "author_id={$row['user_id']}&amp;sr=posts") : '',

@@ -27,7 +27,10 @@ phpbb.isTouch = (window && typeof window.ontouchstart !== 'undefined');
  */
 phpbb.loadingIndicator = function() {
 	if (!$loadingIndicator) {
-		$loadingIndicator = $('<div />', { id: 'loading_indicator' });
+		$loadingIndicator = $('<div />', { 
+			id: 'loading_indicator', 
+			class: 'loading_indicator', 
+		});
 		$loadingIndicator.appendTo('#page-footer');
 	}
 
@@ -303,6 +306,10 @@ phpbb.ajaxify = function(options) {
 					alert = phpbb.alert(res.MESSAGE_TITLE, res.MESSAGE_TEXT);
 				} else {
 					$dark.fadeOut(phpbb.alertTime);
+
+					if ($loadingIndicator) {
+						$loadingIndicator.fadeOut(phpbb.alertTime);
+					}
 				}
 
 				if (typeof phpbb.ajaxCallbacks[callback] === 'function') {
@@ -954,12 +961,6 @@ phpbb.addAjaxCallback('toggle_link', function() {
 	$anchor.each(function() {
 		var $this = $(this);
 
-		// Toggle link text
-		toggleText = $this.attr('data-toggle-text');
-		$this.attr('data-toggle-text', $this.text());
-		$this.attr('title', $.trim(toggleText));
-		$this.text(toggleText);
-
 		// Toggle link url
 		toggleUrl = $this.attr('data-toggle-url');
 		$this.attr('data-toggle-url', $this.attr('href'));
@@ -967,8 +968,14 @@ phpbb.addAjaxCallback('toggle_link', function() {
 
 		// Toggle class of link parent
 		toggleClass = $this.attr('data-toggle-class');
-		$this.attr('data-toggle-class', $this.parent().attr('class'));
-		$this.parent().attr('class', toggleClass);
+		$this.attr('data-toggle-class', $this.children().attr('class'));
+		$this.children('.icon').attr('class', toggleClass);
+
+		// Toggle link text
+		toggleText = $this.attr('data-toggle-text');
+		$this.attr('data-toggle-text', $this.children('span').text());
+		$this.attr('title', $.trim(toggleText));
+		$this.children('span').text(toggleText);
 	});
 });
 
@@ -1025,7 +1032,7 @@ phpbb.resizeTextArea = function($items, options) {
 
 	function autoResize(item) {
 		function setHeight(height) {
-			height += parseInt($item.css('height'), 10) - $item.height();
+			height += parseInt($item.css('height'), 10) - $item.innerHeight();
 			$item
 				.css({ height: height + 'px', resize: 'none' })
 				.addClass('auto-resized');
@@ -1044,7 +1051,7 @@ phpbb.resizeTextArea = function($items, options) {
 				configuration.maxHeight
 			),
 			$item = $(item),
-			height = parseInt($item.height(), 10),
+			height = parseInt($item.innerHeight(), 10),
 			scrollHeight = (item.scrollHeight) ? item.scrollHeight : 0;
 
 		if (height < 0) {
@@ -1534,6 +1541,13 @@ phpbb.toggleSelectSettings = function(el) {
 		var $this = $(this),
 			$setting = $($this.data('toggle-setting'));
 		$setting.toggle($this.is(':selected'));
+
+		// Disable any input elements that are not visible right now
+		if ($this.is(':selected')) {
+			$($this.data('toggle-setting') + ' input').prop('disabled', false);
+		} else {
+			$($this.data('toggle-setting') + ' input').prop('disabled', true);
+		}
 	});
 };
 

@@ -24,9 +24,9 @@ if (!defined('IN_PHPBB'))
 */
 function mcp_front_view($id, $mode, $action)
 {
-	global $phpEx, $phpbb_root_path, $config;
+	global $phpEx, $phpbb_root_path;
 	global $template, $db, $user, $auth, $module;
-	global $phpbb_dispatcher;
+	global $phpbb_dispatcher, $request;
 
 	// Latest 5 unapproved
 	if ($module->loaded('queue'))
@@ -35,7 +35,7 @@ function mcp_front_view($id, $mode, $action)
 		$post_list = array();
 		$forum_names = array();
 
-		$forum_id = request_var('f', 0);
+		$forum_id = $request->variable('f', 0);
 
 		$template->assign_var('S_SHOW_UNAPPROVED', (!empty($forum_list)) ? true : false);
 
@@ -54,8 +54,8 @@ function mcp_front_view($id, $mode, $action)
 			* Allow altering the query to get the number of unapproved posts
 			*
 			* @event core.mcp_front_queue_unapproved_total_before
-			* @var	int		sql_ary						Query to get the total number of unapproved posts
-			* @var	array	forum_list					List of forums to look for unapproved posts
+			* @var	array	sql_ary			Query array to get the total number of unapproved posts
+			* @var	array	forum_list		List of forums to look for unapproved posts
 			* @since 3.1.5-RC1
 			*/
 			$vars = array('sql_ary', 'forum_list');
@@ -179,7 +179,7 @@ function mcp_front_view($id, $mode, $action)
 			* Alter sql query to count the number of reported posts
 			*
 			* @event core.mcp_front_reports_count_query_before
-			* @var	int		sql				The query string used to get the number of reports that exist
+			* @var	string	sql				The query string used to get the number of reports that exist
 			* @var	array	forum_list		List of forums that contain the posts
 			* @since 3.1.5-RC1
 			*/
@@ -226,8 +226,8 @@ function mcp_front_view($id, $mode, $action)
 				* Alter sql query to get latest reported posts
 				*
 				* @event core.mcp_front_reports_listing_query_before
-				* @var	int		sql_ary						Associative array with the query to be executed
-				* @var	array	forum_list					List of forums that contain the posts
+				* @var	array	sql_ary			Associative array with the query to be executed
+				* @var	array	forum_list		List of forums that contain the posts
 				* @since 3.1.0-RC3
 				*/
 				$vars = array('sql_ary', 'forum_list');
@@ -274,7 +274,7 @@ function mcp_front_view($id, $mode, $action)
 	}
 
 	// Latest 5 reported PMs
-	if ($module->loaded('pm_reports') && $auth->acl_getf_global('m_report'))
+	if ($module->loaded('pm_reports') && $auth->acl_get('m_pm_report'))
 	{
 		$template->assign_var('S_SHOW_PM_REPORTS', true);
 		$user->add_lang(array('ucp'));
