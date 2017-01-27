@@ -13,6 +13,8 @@
 
 namespace phpbb;
 
+use phpbb\exception\version_check_exception;
+
 /**
  * Class to handle version checking and comparison
  */
@@ -34,6 +36,11 @@ class version_helper
 	protected $file = 'versions.json';
 
 	/**
+	 * @var bool Use SSL or not
+	 */
+	protected $use_ssl = false;
+
+	/**
 	 * @var string Current version installed
 	 */
 	protected $current_version;
@@ -53,23 +60,18 @@ class version_helper
 	/** @var \phpbb\file_downloader */
 	protected $file_downloader;
 
-	/** @var \phpbb\user */
-	protected $user;
-
 	/**
 	 * Constructor
 	 *
 	 * @param \phpbb\cache\service $cache
 	 * @param \phpbb\config\config $config
 	 * @param \phpbb\file_downloader $file_downloader
-	 * @param \phpbb\user $user
 	 */
-	public function __construct(\phpbb\cache\service $cache, \phpbb\config\config $config, \phpbb\file_downloader $file_downloader, \phpbb\user $user)
+	public function __construct(\phpbb\cache\service $cache, \phpbb\config\config $config, \phpbb\file_downloader $file_downloader)
 	{
 		$this->cache = $cache;
 		$this->config = $config;
 		$this->file_downloader = $file_downloader;
-		$this->user = $user;
 
 		if (defined('PHPBB_QA'))
 		{
@@ -85,13 +87,15 @@ class version_helper
 	 * @param string $host Host (e.g. version.phpbb.com)
 	 * @param string $path Path to file (e.g. /phpbb)
 	 * @param string $file File name (Default: versions.json)
+	 * @param bool $use_ssl Use SSL or not (Default: false)
 	 * @return version_helper
 	 */
-	public function set_file_location($host, $path, $file = 'versions.json')
+	public function set_file_location($host, $path, $file = 'versions.json', $use_ssl = false)
 	{
 		$this->host = $host;
 		$this->path = $path;
 		$this->file = $file;
+		$this->use_ssl = $use_ssl;
 
 		return $this;
 	}
@@ -168,7 +172,7 @@ class version_helper
 	* @param bool $force_update Ignores cached data. Defaults to false.
 	* @param bool $force_cache Force the use of the cache. Override $force_update.
 	* @return string
-	* @throws \RuntimeException
+	* @throws version_check_exception
 	*/
 	public function get_latest_on_current_branch($force_update = false, $force_cache = false)
 	{
@@ -199,7 +203,7 @@ class version_helper
 	* @param bool $force_update Ignores cached data. Defaults to false.
 	* @param bool $force_cache Force the use of the cache. Override $force_update.
 	* @return string
-	* @throws \RuntimeException
+	* @throws version_check_exception
 	*/
 	public function get_suggested_updates($force_update = false, $force_cache = false)
 	{
@@ -220,7 +224,7 @@ class version_helper
 	* @param bool $force_update Ignores cached data. Defaults to false.
 	* @param bool $force_cache Force the use of the cache. Override $force_update.
 	* @return string Version info
-	* @throws \RuntimeException
+	* @throws version_check_exception
 	*/
 	public function get_versions_matching_stability($force_update = false, $force_cache = false)
 	{
@@ -240,33 +244,26 @@ class version_helper
 	* @param bool $force_update Ignores cached data. Defaults to false.
 	* @param bool $force_cache Force the use of the cache. Override $force_update.
 	* @return string Version info, includes stable and unstable data
-	* @throws \RuntimeException
+	* @throws version_check_exception
 	*/
 	public function get_versions($force_update = false, $force_cache = false)
 	{
-		$cache_file = '_versioncheck_' . $this->host . $this->path . $this->file;
+		$cache_file = '_versioncheck_' . $this->host . $this->path . $this->file . $this->use_ssl;
 
 		$info = $this->cache->get($cache_file);
 
 		if ($info === false && $force_cache)
 		{
-			throw new \RuntimeException($this->user->lang('VERSIONCHECK_FAIL'));
+			throw new version_check_exception('VERSIONCHECK_FAIL');
 		}
 		else if ($info === false || $force_update)
 		{
-			try {
-				$info = $this->file_downloader->get($this->host, $this->path, $this->file);
-			}
-			catch (\phpbb\exception\runtime_exception $exception)
-			{
-				$prepare_parameters = array_merge(array($exception->getMessage()), $exception->get_parameters());
-				throw new \RuntimeException(call_user_func_array(array($this->user, 'lang'), $prepare_parameters));
-			}
+			$info = $this->file_downloader->get($this->host, $this->path, $this->file, $this->use_ssl ? 443 : 80);
 			$error_string = $this->file_downloader->get_error_string();
 
 			if (!empty($error_string))
 			{
-				throw new \RuntimeException($error_string);
+				throw new version_check_exception($error_string);
 			}
 
 			$info = json_decode($info, true);
@@ -283,9 +280,7 @@ class version_helper
 
 			if (empty($info['stable']) && empty($info['unstable']))
 			{
-				$this->user->add_lang('acp/common');
-
-				throw new \RuntimeException($this->user->lang('VERSIONCHECK_FAIL'));
+				throw new version_check_exception('VERSIONCHECK_FAIL');
 			}
 
 			$info['stable'] = (empty($info['stable'])) ? array() : $info['stable'];

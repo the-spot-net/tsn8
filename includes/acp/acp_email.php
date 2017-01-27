@@ -25,8 +25,8 @@ class acp_email
 
 	function main($id, $mode)
 	{
-		global $config, $db, $user, $auth, $template, $cache;
-		global $phpbb_root_path, $phpbb_admin_path, $phpEx, $table_prefix, $phpbb_dispatcher;
+		global $config, $db, $user, $template, $phpbb_log, $request;
+		global $phpbb_root_path, $phpbb_admin_path, $phpEx, $phpbb_dispatcher;
 
 		$user->add_lang('acp/email');
 		$this->tpl_name = 'acp_email';
@@ -39,11 +39,11 @@ class acp_email
 		$submit = (isset($_POST['submit'])) ? true : false;
 		$error = array();
 
-		$usernames	= request_var('usernames', '', true);
+		$usernames	= $request->variable('usernames', '', true);
 		$usernames	= (!empty($usernames)) ? explode("\n", $usernames) : array();
-		$group_id	= request_var('g', 0);
-		$subject	= utf8_normalize_nfc(request_var('subject', '', true));
-		$message	= utf8_normalize_nfc(request_var('message', '', true));
+		$group_id	= $request->variable('g', 0);
+		$subject	= $request->variable('subject', '', true);
+		$message	= $request->variable('message', '', true);
 
 		// Do the job ...
 		if ($submit)
@@ -51,7 +51,7 @@ class acp_email
 			// Error checking needs to go here ... if no subject and/or no message then skip
 			// over the send and return to the form
 			$use_queue		= (isset($_POST['send_immediately'])) ? false : true;
-			$priority		= request_var('mail_priority_flag', MAIL_NORMAL_PRIORITY);
+			$priority		= $request->variable('mail_priority_flag', MAIL_NORMAL_PRIORITY);
 
 			if (!check_form_key($form_key))
 			{
@@ -189,8 +189,15 @@ class acp_email
 				$db->sql_freeresult($result);
 
 				// Send the messages
-				include_once($phpbb_root_path . 'includes/functions_messenger.' . $phpEx);
-				include_once($phpbb_root_path . 'includes/functions_user.' . $phpEx);
+				if (!class_exists('messenger'))
+				{
+					include($phpbb_root_path . 'includes/functions_messenger.' . $phpEx);
+				}
+
+				if (!function_exists('get_group_name'))
+				{
+					include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
+				}
 				$messenger = new messenger($use_queue);
 
 				$errored = false;
@@ -263,7 +270,7 @@ class acp_email
 				{
 					if (!empty($usernames))
 					{
-						add_log('admin', 'LOG_MASS_EMAIL', implode(', ', utf8_normalize_nfc($usernames)));
+						$phpbb_log->add('admin', $user->data['user_id'], $user->ip, 'LOG_MASS_EMAIL', false, array(implode(', ', utf8_normalize_nfc($usernames))));
 					}
 					else
 					{
@@ -277,7 +284,7 @@ class acp_email
 							$group_name = $user->lang['ALL_USERS'];
 						}
 
-						add_log('admin', 'LOG_MASS_EMAIL', $group_name);
+						$phpbb_log->add('admin', $user->data['user_id'], $user->ip, 'LOG_MASS_EMAIL', false, array($group_name));
 					}
 				}
 

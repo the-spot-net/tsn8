@@ -341,7 +341,7 @@ class fulltext_postgres extends \phpbb\search\base
 		}
 
 		// generate a search_key from all the options to identify the results
-		$search_key = md5(implode('#', array(
+		$search_key_array = array(
 			implode(', ', $this->split_words),
 			$type,
 			$fields,
@@ -352,7 +352,39 @@ class fulltext_postgres extends \phpbb\search\base
 			implode(',', $ex_fid_ary),
 			$post_visibility,
 			implode(',', $author_ary)
-		)));
+		);
+
+		/**
+		* Allow changing the search_key for cached results
+		*
+		* @event core.search_postgres_by_keyword_modify_search_key
+		* @var	array	search_key_array	Array with search parameters to generate the search_key
+		* @var	string	type				Searching type ('posts', 'topics')
+		* @var	string	fields				Searching fields ('titleonly', 'msgonly', 'firstpost', 'all')
+		* @var	string	terms				Searching terms ('all', 'any')
+		* @var	int		sort_days			Time, in days, of the oldest possible post to list
+		* @var	string	sort_key			The sort type used from the possible sort types
+		* @var	int		topic_id			Limit the search to this topic_id only
+		* @var	array	ex_fid_ary			Which forums not to search on
+		* @var	string	post_visibility		Post visibility data
+		* @var	array	author_ary			Array of user_id containing the users to filter the results to
+		* @since 3.1.7-RC1
+		*/
+		$vars = array(
+			'search_key_array',
+			'type',
+			'fields',
+			'terms',
+			'sort_days',
+			'sort_key',
+			'topic_id',
+			'ex_fid_ary',
+			'post_visibility',
+			'author_ary',
+		);
+		extract($this->phpbb_dispatcher->trigger_event('core.search_postgres_by_keyword_modify_search_key', compact($vars)));
+
+		$search_key = md5(implode('#', $search_key_array));
 
 		if ($start < 0)
 		{
@@ -469,7 +501,6 @@ class fulltext_postgres extends \phpbb\search\base
 		$sql_select			= ($type == 'posts') ? 'p.post_id' : 'DISTINCT t.topic_id';
 		$sql_from			= ($join_topic) ? TOPICS_TABLE . ' t, ' : '';
 		$field				= ($type == 'posts') ? 'post_id' : 'topic_id';
-		$sql_author			= (sizeof($author_ary) == 1) ? ' = ' . $author_ary[0] : 'IN (' . implode(', ', $author_ary) . ')';
 
 		if (sizeof($author_ary) && $author_name)
 		{
@@ -494,7 +525,6 @@ class fulltext_postgres extends \phpbb\search\base
 		$sql_where_options .= ($sort_days) ? ' AND p.post_time >= ' . (time() - ($sort_days * 86400)) : '';
 		$sql_where_options .= $sql_match_where;
 
-		$tmp_sql_match = array();
 		$sql_match = str_replace(',', " || ' ' ||", $sql_match);
 		$tmp_sql_match = "to_tsvector ('" . $this->db->sql_escape($this->config['fulltext_postgres_ts_name']) . "', " . $sql_match . ") @@ to_tsquery ('" . $this->db->sql_escape($this->config['fulltext_postgres_ts_name']) . "', '" . $this->db->sql_escape($this->tsearch_query) . "')";
 
@@ -585,7 +615,7 @@ class fulltext_postgres extends \phpbb\search\base
 		}
 
 		// generate a search_key from all the options to identify the results
-		$search_key = md5(implode('#', array(
+		$search_key_array = array(
 			'',
 			$type,
 			($firstpost_only) ? 'firstpost' : '',
@@ -598,7 +628,39 @@ class fulltext_postgres extends \phpbb\search\base
 			$post_visibility,
 			implode(',', $author_ary),
 			$author_name,
-		)));
+		);
+
+		/**
+		* Allow changing the search_key for cached results
+		*
+		* @event core.search_postgres_by_author_modify_search_key
+		* @var	array	search_key_array	Array with search parameters to generate the search_key
+		* @var	string	type				Searching type ('posts', 'topics')
+		* @var	boolean	firstpost_only		Flag indicating if only topic starting posts are considered
+		* @var	int		sort_days			Time, in days, of the oldest possible post to list
+		* @var	string	sort_key			The sort type used from the possible sort types
+		* @var	int		topic_id			Limit the search to this topic_id only
+		* @var	array	ex_fid_ary			Which forums not to search on
+		* @var	string	post_visibility		Post visibility data
+		* @var	array	author_ary			Array of user_id containing the users to filter the results to
+		* @var	string	author_name			The username to search on
+		* @since 3.1.7-RC1
+		*/
+		$vars = array(
+			'search_key_array',
+			'type',
+			'firstpost_only',
+			'sort_days',
+			'sort_key',
+			'topic_id',
+			'ex_fid_ary',
+			'post_visibility',
+			'author_ary',
+			'author_name',
+		);
+		extract($this->phpbb_dispatcher->trigger_event('core.search_postgres_by_author_modify_search_key', compact($vars)));
+
+		$search_key = md5(implode('#', $search_key_array));
 
 		if ($start < 0)
 		{
@@ -774,7 +836,7 @@ class fulltext_postgres extends \phpbb\search\base
 					GROUP BY t.topic_id, $sort_by_sql[$sort_key]";
 			}
 
-			$result = $this->db->sql_query($sql_count);
+			$this->db->sql_query($sql_count);
 			$result_count = (int) $this->db->sql_fetchfield('result_count');
 
 			if (!$result_count)
@@ -852,7 +914,7 @@ class fulltext_postgres extends \phpbb\search\base
 		// destroy too old cached search results
 		$this->destroy_cache(array());
 
-		set_config('search_last_gc', time(), true);
+		$this->config->set('search_last_gc', time(), false);
 	}
 
 	/**
@@ -1025,11 +1087,11 @@ class fulltext_postgres extends \phpbb\search\base
 		</dl>
                 <dl>
                         <dt><label for="fulltext_postgres_min_word_len">' . $this->user->lang['FULLTEXT_POSTGRES_MIN_WORD_LEN'] . $this->user->lang['COLON'] . '</label><br /><span>' . $this->user->lang['FULLTEXT_POSTGRES_MIN_WORD_LEN_EXPLAIN'] . '</span></dt>
-                        <dd><input id="fulltext_postgres_min_word_len" type="number" size="3" maxlength="3" min="0" max="255" name="config[fulltext_postgres_min_word_len]" value="' . (int) $this->config['fulltext_postgres_min_word_len'] . '" /></dd>
+                        <dd><input id="fulltext_postgres_min_word_len" type="number" min="0" max="255" name="config[fulltext_postgres_min_word_len]" value="' . (int) $this->config['fulltext_postgres_min_word_len'] . '" /></dd>
                 </dl>
                 <dl>
                         <dt><label for="fulltext_postgres_max_word_len">' . $this->user->lang['FULLTEXT_POSTGRES_MAX_WORD_LEN'] . $this->user->lang['COLON'] . '</label><br /><span>' . $this->user->lang['FULLTEXT_POSTGRES_MAX_WORD_LEN_EXPLAIN'] . '</span></dt>
-                        <dd><input id="fulltext_postgres_max_word_len" type="number" size="3" maxlength="3" min="0" max="255" name="config[fulltext_postgres_max_word_len]" value="' . (int) $this->config['fulltext_postgres_max_word_len'] . '" /></dd>
+                        <dd><input id="fulltext_postgres_max_word_len" type="number" min="0" max="255" name="config[fulltext_postgres_max_word_len]" value="' . (int) $this->config['fulltext_postgres_max_word_len'] . '" /></dd>
                 </dl>
 		';
 
