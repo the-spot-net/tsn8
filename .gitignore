@@ -44,6 +44,7 @@ Temporary Items
 
 store/*
 .idea/*
+/vendor
 
 config.php
 error_log
