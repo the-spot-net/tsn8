@@ -27,6 +27,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @var manager                            $cp
  * @var dispatcher                         $phpbb_dispatcher
  * @var string                             $phpbb_admin_path
+ * @var \phpbb\group\helper                $group_helper
  */
 define('IN_PHPBB', true);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
@@ -125,6 +126,7 @@ while ($row = $db->sql_fetchrow($result)) {
 $db->sql_freeresult($result);
 
 // Filter out hidden groups and sort groups by name
+$group_helper = $phpbb_container->get('group_helper');
 $group_data = $group_sort = array();
 foreach ($profile_groups as $row) {
     if (!$auth_hidden_groups && $row['group_type'] == GROUP_HIDDEN && !isset($user_groups[$row['group_id']])) {
