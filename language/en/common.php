@@ -48,7 +48,7 @@ $lang = array_merge($lang, array(
 	'USER_LANG'			=> 'en-gb',
 
 	// You can define different rules for the determination of plural forms here.
-	// See http://wiki.phpbb.com/Plural_Rules for more information
+	// See https://area51.phpbb.com/docs/dev/32x/language/plurals.html for more information
 	// or ask the translation manager for help.
 	'PLURAL_RULE'		=> 1,
 
@@ -62,7 +62,6 @@ $lang = array_merge($lang, array(
 
 	'ACCOUNT_ALREADY_ACTIVATED'		=> 'Your account has already been activated.',
 	'ACCOUNT_DEACTIVATED'			=> 'Your account has been manually deactivated and is only able to be reactivated by an administrator.',
-	'ACCOUNT_NOT_ACTIVATED'			=> 'Your account has not been activated yet.',
 	'ACP'							=> 'Administration Control Panel',
 	'ACP_SHORT'						=> 'ACP',
 	'ACTIVE'						=> 'active',
@@ -138,8 +137,10 @@ $lang = array_merge($lang, array(
 		1	=> 'Users browsing this forum: %2$s and %1$d guest',
 		2	=> 'Users browsing this forum: %2$s and %1$d guests',
 	),
+	'BUTTON_DELETE'         => 'Delete',
 	'BUTTON_EDIT'			=> 'Edit',
 	'BUTTON_FORUM_LOCKED'	=> 'Locked',
+	'BUTTON_INFORMATION'    => 'Information',
 	'BUTTON_NEW_TOPIC'		=> 'New Topic',
 	'BUTTON_PM'				=> 'PM',
 	'BUTTON_PM_FORWARD'		=> 'Forward',
@@ -148,7 +149,9 @@ $lang = array_merge($lang, array(
 	'BUTTON_PM_REPLY_ALL'	=> 'Reply All',
 	'BUTTON_POST_REPLY'		=> 'Post Reply',
 	'BUTTON_QUOTE'			=> 'Quote',
+	'BUTTON_REPORT'         => 'Report',
 	'BUTTON_TOPIC_LOCKED'	=> 'Locked',
+	'BUTTON_WARN'           => 'Warn',
 	'BYTES'					=> 'Bytes',
 	'BYTES_SHORT'			=> 'B',
 
@@ -181,6 +184,7 @@ $lang = array_merge($lang, array(
 	'COOKIE_CONSENT_INFO'	=> 'Learn more',
 	'COOKIE_CONSENT_MSG'	=> 'This website uses cookies to ensure you get the best experience on our website.',
 	'COOKIE_CONSENT_OK'		=> 'Got it!',
+	'COOKIE_CONSENT_HREF'	=> 'http://cookiesandyou.com',
 	'COOKIES_DELETED'		=> 'All board cookies successfully deleted.',
 	'CURRENT_TIME'			=> 'It is currently %s',
 
@@ -188,7 +192,7 @@ $lang = array_merge($lang, array(
 	'DAYS'					=> 'Days',
 	'DELETE'				=> 'Delete',
 	'DELETE_ALL'			=> 'Delete all',
-	'DELETE_COOKIES'		=> 'Delete all board cookies',
+	'DELETE_COOKIES'		=> 'Delete cookies',
 	'DELETE_MARKED'			=> 'Delete marked',
 	'DELETE_POST'			=> 'Delete post',
 	'DELIMITER'				=> 'Delimiter',
@@ -555,6 +559,7 @@ $lang = array_merge($lang, array(
 	),
 	'OPTIONS'					=> 'Options',
 
+	'PAGE_NOT_FOUND'		=> 'The requested page could not be found.',
 	'PAGE_OF'				=> 'Page <strong>%1$d</strong> of <strong>%2$d</strong>',
 	'PAGE_TITLE_NUMBER'		=> 'Page %s',
 	'PASSWORD'				=> 'Password',
@@ -602,6 +607,7 @@ $lang = array_merge($lang, array(
 	'PREVIOUS'				=> 'Previous',		// Used in pagination
 	'PREVIOUS_STEP'			=> 'Previous',
 	'PRIVACY'				=> 'Privacy policy',
+	'PRIVACY_LINK'			=> 'Privacy',
 	'PRIVATE_MESSAGE'		=> 'Private message',
 	'PRIVATE_MESSAGES'		=> 'Private messages',
 	'PRIVATE_MESSAGING'		=> 'Private messaging',
@@ -726,6 +732,7 @@ $lang = array_merge($lang, array(
 	'SUBMIT'					=> 'Submit',
 
 	'TB'				=> 'TB',
+	'TERMS_LINK'		=> 'Terms',
 	'TERMS_USE'			=> 'Terms of use',
 	'TEST_CONNECTION'	=> 'Test connection',
 	'THE_TEAM'			=> 'The team',
