@@ -59,7 +59,7 @@ class acp_database
 						$format	= $request->variable('method', '');
 						$where	= $request->variable('where', '');
 
-						if (!sizeof($table))
+						if (!count($table))
 						{
 							trigger_error($user->lang['TABLE_SELECT_ERROR'] . adm_back_link($this->u_action), E_USER_WARNING);
 						}
@@ -203,7 +203,7 @@ class acp_database
 						$file = $request->variable('file', '');
 						$download = $request->variable('download', '');
 
-						if (!preg_match('#^backup_\d{10,}_[a-z\d]{16}\.(sql(?:\.(?:gz|bz2))?)$#', $file, $matches))
+						if (!preg_match('#^backup_\d{10,}_(?:[a-z\d]{16}|[a-z\d]{32})\.(sql(?:\.(?:gz|bz2))?)$#i', $file, $matches))
 						{
 							trigger_error($user->lang['BACKUP_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
 						}
@@ -402,7 +402,7 @@ class acp_database
 						{
 							while (($file = readdir($dh)) !== false)
 							{
-								if (preg_match('#^backup_(\d{10,})_[a-z\d]{16}\.(sql(?:\.(?:gz|bz2))?)$#', $file, $matches))
+								if (preg_match('#^backup_(\d{10,})_(?:[a-z\d]{16}|[a-z\d]{32})\.(sql(?:\.(?:gz|bz2))?)$#i', $file, $matches))
 								{
 									if (in_array($matches[2], $methods))
 									{
@@ -495,7 +495,7 @@ function sanitize_data_mssql($text)
 		{
 			$val[] = "'" . $value . "'";
 		}
-		if (sizeof($matches[0]))
+		if (count($matches[0]))
 		{
 			$val[] = 'char(' . ord(array_shift($matches[0])) . ')';
 		}
@@ -519,7 +519,7 @@ function sanitize_data_oracle($text)
 		{
 			$val[] = "'" . $value . "'";
 		}
-		if (sizeof($matches[0]))
+		if (count($matches[0]))
 		{
 			$val[] = 'chr(' . ord(array_shift($matches[0])) . ')';
 		}
@@ -541,7 +541,7 @@ function sanitize_data_generic($text)
 		{
 			$val[] = "'" . $value . "'";
 		}
-		if (sizeof($matches[0]))
+		if (count($matches[0]))
 		{
 			$val[] = "'" . array_shift($matches[0]) . "'";
 		}
@@ -583,7 +583,7 @@ function fgetd_seekless(&$fp, $delim, $read, $seek, $eof, $buffer = 8192)
 	static $array = array();
 	static $record = '';
 
-	if (!sizeof($array))
+	if (!count($array))
 	{
 		while (!$eof($fp))
 		{
@@ -605,7 +605,7 @@ function fgetd_seekless(&$fp, $delim, $read, $seek, $eof, $buffer = 8192)
 		}
 	}
 
-	if (sizeof($array))
+	if (count($array))
 	{
 		return array_shift($array);
 	}
