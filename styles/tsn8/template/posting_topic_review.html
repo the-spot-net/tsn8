@@ -35,7 +35,9 @@
 														<div class="gm-columns gm-full gt-columns gt-two-thirds gd-columns gd-three-quarters">
 															<h3><a href="#pr{topic_review_row.POST_ID}">{topic_review_row.POST_SUBJECT}</a></h3>
 
-															<p class="author"><!-- IF S_IS_BOT -->{topic_review_row.MINI_POST_IMG}<!-- ELSE --><a href="{topic_review_row.U_MINI_POST}">{topic_review_row.MINI_POST_IMG}</a><!-- ENDIF --> {L_POST_BY_AUTHOR} <strong>{topic_review_row.POST_AUTHOR_FULL}</strong> &raquo; {topic_review_row.POST_DATE} </p>
+															<p class="author"><!-- IF S_IS_BOT -->{topic_review_row.MINI_POST_IMG}<!-- ELSE --><a href="{topic_review_row.U_MINI_POST}">{topic_review_row.MINI_POST_IMG}</a><!-- ENDIF -->
+																{L_POST_BY_AUTHOR} <!-- EVENT posting_topic_review_row_post_author_username_prepend --><strong>{topic_review_row.POST_AUTHOR_FULL}</strong><!-- EVENT posting_topic_review_row_post_author_username_append --> &raquo; {topic_review_row.POST_DATE}
+															</p>
 														</div>
 														<div class="gm-columns gm-full gt-columns gt-third gd-columns gd-quarter align_center">
 															<!-- IF (topic_review_row.POSTER_QUOTE and topic_review_row.DECODED_MESSAGE) or topic_review_row.U_MCP_DETAILS -->

@@ -228,15 +228,16 @@
 
 						<ul id="nav-breadcrumbs" class="linklist navlinks" role="menubar">
 							<!-- DEFINE $MICRODATA = ' itemtype="http://data-vocabulary.org/Breadcrumb" itemscope=""' -->
+							{% set navlink_position = 1 %}
 							<!-- EVENT overall_header_breadcrumbs_before -->
-							<li class="breadcrumbs"><span class="crumb"{$MICRODATA}><a href="{BOARD_URL}myspot.php" data-navbar-reference="myspot" itemprop="url"><span class="tsn8_icon_mini_nohover tsn8_icon_tsn"></span><span itemprop="title">{L_MYSPOT}</span></a>&nbsp;&nbsp;&bull;</span></li>
+							<li class="breadcrumbs"><span class="crumb"{$MICRODATA}><a href="{BOARD_URL}myspot.php" data-navbar-reference="myspot" itemtype="https://schema.org/Thing" itemprop="item"><span class="tsn8_icon_mini_nohover tsn8_icon_tsn"></span><span itemprop="name">{L_MYSPOT}</span></a>&nbsp;&nbsp;&bull;<meta itemprop="position" content="{{ navlink_position }}{% set navlink_position = navlink_position + 1 %}" /></span></li>
 							<li class="breadcrumbs tsn8_breadcrumb_flush">
-								<!-- IF U_SITE_HOME --><span class="crumb"{$MICRODATA}><a href="{U_SITE_HOME}" data-navbar-reference="home" itemprop="url"><span itemprop="title">{L_SITE_HOME}</span></a></span><!-- ENDIF -->
+								<!-- IF U_SITE_HOME --><span class="crumb"{$MICRODATA}><a href="{U_SITE_HOME}" data-navbar-reference="home" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">{L_SITE_HOME}</span></a><meta itemprop="position" content="{{ navlink_position }}{% set navlink_position = navlink_position + 1 %}" /></span><!-- ENDIF -->
 								<!-- EVENT overall_header_breadcrumb_prepend -->
-								<span class="crumb"{$MICRODATA}><a href="{U_INDEX}" accesskey="h" data-navbar-reference="index" itemprop="url"><span itemprop="title">{L_INDEX}</span></a></span>
+								<span class="crumb"{$MICRODATA}><a href="{U_INDEX}" accesskey="h" data-navbar-reference="index" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">{L_INDEX}</span></a></span>
 								<!-- BEGIN navlinks -->
 								<!-- EVENT overall_header_navlink_prepend -->
-								<span class="crumb"{$MICRODATA}<!-- IF navlinks.MICRODATA --> {navlinks.MICRODATA}<!-- ENDIF -->><a href="{navlinks.U_VIEW_FORUM}" itemprop="url"><span itemprop="title">{navlinks.FORUM_NAME}</span></a></span>
+								<span class="crumb"{$MICRODATA}<!-- IF navlinks.MICRODATA --> {navlinks.MICRODATA}<!-- ENDIF -->><a href="{navlinks.U_VIEW_FORUM}"  itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">{navlinks.FORUM_NAME}</span></a><meta itemprop="position" content="{{ navlink_position }}{% set navlink_position = navlink_position + 1 %}" /></span>
 								<!-- EVENT overall_header_navlink_append -->
 								<!-- END navlinks -->
 								<!-- EVENT overall_header_breadcrumb_append -->

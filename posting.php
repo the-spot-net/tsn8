@@ -222,6 +222,25 @@ if (!$post_data)
 	trigger_error(($mode == 'post' || $mode == 'bump' || $mode == 'reply') ? 'NO_TOPIC' : 'NO_POST');
 }
 
+/**
+* This event allows you to bypass reply/quote test of an unapproved post.
+*
+* @event core.posting_modify_row_data
+* @var	array	post_data	All post data from database
+* @var	string	mode		What action to take if the form has been submitted
+*							post|reply|quote|edit|delete|bump|smilies|popup
+* @var	int		topic_id	ID of the topic
+* @var	int		forum_id	ID of the forum
+* @since 3.2.8-RC1
+*/
+$vars = array(
+	'post_data',
+	'mode',
+	'topic_id',
+	'forum_id',
+);
+extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact($vars)));
+
 // Not able to reply to unapproved posts/topics
 // TODO: add more descriptive language key
 if ($auth->acl_get('m_approve', $forum_id) && ((($mode == 'reply' || $mode == 'bump') && $post_data['topic_visibility'] != ITEM_APPROVED) || ($mode == 'quote' && $post_data['post_visibility'] != ITEM_APPROVED)))
@@ -955,7 +974,10 @@ if ($submit || $preview || $refresh)
 	}
 
 	// Parse Attachments - before checksum is calculated
+	if ($message_parser->check_attachment_form_token($language, $request, 'posting'))
+	{
 	$message_parser->parse_attachments('fileupload', $mode, $forum_id, $submit, $preview, $refresh);
+	}
 
 	/**
 	* This event allows you to modify message text before parsing
@@ -1102,8 +1124,8 @@ if ($submit || $preview || $refresh)
 	if (($post_data['username'] && !$user->data['is_registered']) || ($mode == 'edit' && $post_data['poster_id'] == ANONYMOUS && $post_data['username'] && $post_data['post_username'] && $post_data['post_username'] != $post_data['username']))
 	{
 		if (!function_exists('validate_username'))
-	{
-		include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
+		{
+			include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 		}
 
 		$user->add_lang('ucp');
@@ -1643,11 +1665,25 @@ if ($generate_quote)
 	$message_parser->message = preg_replace('#\[attachment=([0-9]+)\](.*?)\[\/attachment\]#uis', '\\2', $message_parser->message);
 
 	$quote_attributes = array(
-				'author'  => $post_data['quote_username'],
-				'post_id' => $post_data['post_id'],
-				'time'    => $post_data['post_time'],
-				'user_id' => $post_data['poster_id'],
-		);
+						'author'  => $post_data['quote_username'],
+						'post_id' => $post_data['post_id'],
+						'time'    => $post_data['post_time'],
+						'user_id' => $post_data['poster_id'],
+	);
+
+	/**
+	* This event allows you to modify the quote attributes of the post being quoted
+	*
+	* @event core.posting_modify_quote_attributes
+	* @var	array	quote_attributes	Array with quote attributes
+	* @var	array	post_data			Array with post data
+	* @since 3.2.6-RC1
+	*/
+	$vars = array(
+		'quote_attributes',
+		'post_data',
+	);
+	extract($phpbb_dispatcher->trigger_event('core.posting_modify_quote_attributes', compact($vars)));
 
 	/** @var \phpbb\language\language $language */
 	$language = $phpbb_container->get('language');
@@ -1657,6 +1693,20 @@ if ($generate_quote)
 if (($mode == 'reply' || $mode == 'quote') && !$submit && !$preview && !$refresh)
 {
 	$post_data['post_subject'] = ((strpos($post_data['post_subject'], 'Re: ') !== 0) ? 'Re: ' : '') . censor_text($post_data['post_subject']);
+
+	$post_subject = $post_data['post_subject'];
+
+	/**
+	* This event allows you to modify the post subject of the post being quoted
+	*
+	* @event core.posting_modify_post_subject
+	* @var	string		post_subject	String with the post subject already censored.
+	* @since 3.2.8-RC1
+	*/
+	$vars = array('post_subject');
+	extract($phpbb_dispatcher->trigger_event('core.posting_modify_post_subject', compact($vars)));
+
+	$post_data['post_subject'] = $post_subject;
 }
 
 $attachment_data = $message_parser->attachment_data;

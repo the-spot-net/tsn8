@@ -26,10 +26,10 @@
 				<!-- IF S_SHOW_POLL_BOX -->
 				<div class="gm-row gt-row gd-row">
 					<div class="gm-columns gt-columns gd-columns gm-full gt-third gd-quarter">
-						<span class="tsn8_options_label">{L_POLL_QUESTION}{L_COLON}</span>
+						<span class="tsn8_options_label">{{ lang('POLL_QUESTION') ~ lang('COLON') }}</span>
 					</div>
 					<div class="gm-columns gt-columns gd-columns gm-full gt-two-thirds gd-three-quarters">
-						<input type="text" name="poll_title" id="poll_title" maxlength="255" value="{POLL_TITLE}" class="inputbox"/>
+						<input type="text" name="poll_title" id="poll_title" maxlength="100" value="{{ POLL_TITLE }}" class="inputbox"/>
 					</div>
 				</div>
 				<div class="gm-row gt-row gd-row">
