@@ -2,7 +2,7 @@
 <form method="post" action="{S_PROFILE_ACTION}" id="viewprofile">
 
 	<div class="group">
-		<!-- EVENT memberlist_view_content_prepend -->
+<!-- EVENT memberlist_view_content_prepend -->
 		<div class="gm-row gt-row gd-row">
 			<div class="gm-hide gt-columns gd-columns gt-1of8 gd-1of6">&nbsp;</div>
 			<div class="gm-columns gt-columns gd-columns gm-full gt-three-quarters gd-two-thirds">
@@ -74,7 +74,7 @@
 								<!-- ELSEIF USER_JABBER -->
 								<!--<dt>{L_JABBER}{L_COLON}</dt>-->
 								<!--<dd>{USER_JABBER}</dd>-->
-								<!-- ENDIF -->
+	<!-- ENDIF -->
 								<!-- IF S_PROFILE_FIELD1 -->
 								<!-- NOTE: Use a construct like this to include admin defined profile fields. Replace FIELD1 with the name of your field. -->
 								<!--<dt>{PROFILE_FIELD1_NAME}{L_COLON}</dt>-->
@@ -90,14 +90,14 @@
 						<div class="gt-columns gd-columns gm-hide gt-quarter gd-third">&nbsp;</div>
 						<div class="gm-columns gt-columns gd-columns gm-full gt-three-quarters gd-two-thirds align_center">
 							<div class="tsn8_profile_admin_controls">
-								<!-- IF U_EDIT_SELF --> [ <a href="{U_EDIT_SELF}">{L_EDIT_PROFILE}</a> ]<!-- ENDIF -->
-								<!-- IF U_USER_ADMIN --> [ <a href="{U_USER_ADMIN}">{L_USER_ADMIN}</a> ]<!-- ENDIF -->
-								<!-- IF U_USER_BAN --> [ <a href="{U_USER_BAN}">{L_USER_BAN}</a> ]<!-- ENDIF -->
-								<!-- IF U_SWITCH_PERMISSIONS --> [ <a href="{U_SWITCH_PERMISSIONS}">{L_USE_PERMISSIONS}</a> ]<!-- ENDIF -->
+			<!-- IF U_EDIT_SELF --> [ <a href="{U_EDIT_SELF}">{L_EDIT_PROFILE}</a> ]<!-- ENDIF -->
+			<!-- IF U_USER_ADMIN --> [ <a href="{U_USER_ADMIN}">{L_USER_ADMIN}</a> ]<!-- ENDIF -->
+			<!-- IF U_USER_BAN --> [ <a href="{U_USER_BAN}">{L_USER_BAN}</a> ]<!-- ENDIF -->
+			<!-- IF U_SWITCH_PERMISSIONS --> [ <a href="{U_SWITCH_PERMISSIONS}">{L_USE_PERMISSIONS}</a> ]<!-- ENDIF -->
 							</div>
 						</div>
 					</div>
-					<!-- ENDIF -->
+		<!-- ENDIF -->
 				</div>
 			</div>
 			<div class="gm-columns gt-columns gd-columns gm-full gt-1of8 gd-1of6">&nbsp;</div>
@@ -139,60 +139,60 @@
 								</div>
 							</div>
 							<!-- ENDIF -->
-							<!-- BEGIN custom_fields -->
-							<!-- IF not custom_fields.S_PROFILE_CONTACT -->
+		<!-- BEGIN custom_fields -->
+			<!-- IF not custom_fields.S_PROFILE_CONTACT -->
 							<div class="gm-columns gt-columns gd-columns gm-full gt-half gd-half">
 								<div class="tsn8_profile_data_container">
 									<div class="tsn8_profile_data_icon tsn8_profile_icon_{custom_fields.PROFILE_FIELD_IDENT}" title="{custom_fields.PROFILE_FIELD_NAME}"></div>
 									<div class="tsn8_profile_data">{custom_fields.PROFILE_FIELD_VALUE}</div>
 								</div>
 							</div>
-							<!-- ENDIF -->
-							<!-- END custom_fields -->
-							<!-- IF S_USER_LOGGED_IN and S_ZEBRA -->
+			<!-- ENDIF -->
+		<!-- END custom_fields -->
+		<!-- IF S_USER_LOGGED_IN and S_ZEBRA -->
 						</div>
 						<hr class="dashed"/>
 						<div class="gm-row gt-row gd-row">
-							<!-- IF U_REMOVE_FRIEND -->
+			<!-- IF U_REMOVE_FRIEND -->
 							<div class="gm-columns gt-columns gd-columns gm-full gt-half gd-half">
 								<div class="tsn8_profile_data_container">
 									<a href="{U_REMOVE_FRIEND}" data-ajax="zebra" class="tsn8_profile_data_icon tsn8_profile_icon_phpbb_remove_friend" title="{L_REMOVE_FRIEND}"></a>
 									<span class="tsn8_profile_data"><a href="{U_REMOVE_FRIEND}" data-ajax="zebra">{L_REMOVE_FRIEND}</a></span>
 								</div>
 							</div>
-							<!-- ELSEIF U_REMOVE_FOE -->
+			<!-- ELSEIF U_REMOVE_FOE -->
 							<div class="gm-columns gt-columns gd-columns gm-full gt-half gd-half">
 								<div class="tsn8_profile_data_container">
 									<a href="{U_REMOVE_FOE}" data-ajax="zebra" class="tsn8_profile_data_icon tsn8_profile_icon_phpbb_remove_foe" title="{L_REMOVE_FOE}"></a>
 									<span class="tsn8_profile_data"><a href="{U_REMOVE_FOE}" data-ajax="zebra">{L_REMOVE_FOE}</a></span>
 								</div>
 							</div>
-							<!-- ELSE -->
-							<!-- IF U_ADD_FRIEND -->
+			<!-- ELSE -->
+				<!-- IF U_ADD_FRIEND -->
 							<div class="gm-columns gt-columns gd-columns gm-full gt-half gd-half">
 								<div class="tsn8_profile_data_container">
 									<a href="{U_ADD_FRIEND}" data-ajax="zebra" class="tsn8_profile_data_icon tsn8_profile_icon_phpbb_add_friend" title="{L_ADD_FRIEND}"></a>
 									<span class="tsn8_profile_data"><a href="{U_ADD_FRIEND}" data-ajax="zebra">{L_ADD_FRIEND}</a></span>
 								</div>
 							</div>
-							<!-- ENDIF -->
-							<!-- IF U_ADD_FOE -->
+				<!-- ENDIF -->
+				<!-- IF U_ADD_FOE -->
 							<div class="gm-columns gt-columns gd-columns gm-full gt-half gd-half">
 								<div class="tsn8_profile_data_container">
 									<a href="{U_ADD_FOE}" data-ajax="zebra" class="tsn8_profile_data_icon tsn8_profile_icon_phpbb_add_foe" title="{L_ADD_FOE}"></a>
 									<span class="tsn8_profile_data"><a href="{U_ADD_FOE}" data-ajax="zebra">{L_ADD_FOE}</a></span>
-								</div>
-							</div>
-							<!-- ENDIF -->
-							<!-- ENDIF -->
-							<!-- ENDIF -->
+	</div>
+</div>
+				<!-- ENDIF -->
+			<!-- ENDIF -->
+		<!-- ENDIF -->
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="gm-hide gt-columns gt-1of8 gd-columns gd-1of6">&nbsp;</div>
-		</div>
-		<!-- EVENT memberlist_view_user_statistics_before -->
+	</div>
+			<!-- EVENT memberlist_view_user_statistics_before -->
 		<div class="gm-row gt-row gd-row">
 			<div class="gm-hide gt-columns gt-1of8 gd-columns gd-1of6">&nbsp;</div>
 			<div class="gm-columns gt-columns gd-columns gm-full gt-three-quarters gd-two-thirds">
@@ -218,7 +218,7 @@
 							</div>
 						</div>
 						<div class="gm-row gt-row gd-row">
-							<!-- IF S_WARNINGS -->
+			<!-- IF S_WARNINGS -->
 							<div class="gm-columns gt-columns gd-columns gm-full gt-half gd-half">
 								<div class="tsn8_profile_data_container">
 									<div class="tsn8_profile_data_icon tsn8_profile_icon_phpbb_warning" title="{L_WARNINGS}"></div>
@@ -228,7 +228,7 @@
 									</div>
 								</div>
 							</div>
-							<!-- ENDIF -->
+			<!-- ENDIF -->
 							<div class="gm-columns gt-columns gd-columns gm-full gt-half gd-half">
 								<div class="tsn8_profile_data_container">
 									<a href="{U_SEARCH_USER}" class="tsn8_profile_data_icon tsn8_profile_icon_phpbb_posts" title="{L_TOTAL_POSTS}"></a>
@@ -245,7 +245,7 @@
 								</div>
 							</div>
 						</div>
-						<!-- IF S_SHOW_ACTIVITY and POSTS -->
+			<!-- IF S_SHOW_ACTIVITY and POSTS -->
 						<hr class="dashed"/>
 						<div class="gm-row gt-row gd-row">
 							<div class="gm-columns gt-columns gd-columns gm-full gt-half gd-half">
@@ -273,14 +273,15 @@
 								</div>
 							</div>
 						</div>
-						<!-- ENDIF -->
+			<!-- ENDIF -->
 					</div>
-				</div>
-			</div>
+	</div>
+
+	</div>
 			<div class="gm-hide gt-columns gt-1of8 gd-columns gd-1of6">&nbsp;</div>
-		</div>
+</div>
 		<!-- EVENT memberlist_view_user_statistics_after -->
-		<!-- IF SIGNATURE -->
+<!-- IF SIGNATURE -->
 		<div class="gm-row gt-row gd-row">
 			<div class="gm-hide gt-columns gt-1of8 gd-columns gd-1of6">&nbsp;</div>
 			<div class="gm-columns gt-columns gd-columns gm-full gt-three-quarters gd-two-thirds">
@@ -290,11 +291,11 @@
 					<div class="postbody">
 						<div class="signature standalone">{SIGNATURE}</div>
 					</div>
-				</div>
-			</div>
+	</div>
+</div>
 			<div class="gm-hide gt-columns gt-1of8 gd-columns gd-1of6">&nbsp;</div>
 		</div>
-		<!-- ENDIF -->
+<!-- ENDIF -->
 	</div>
 
 </form>

@@ -73,23 +73,23 @@
 						<a href="{forumrow.U_LAST_POSTER_LINK}" class="tsn8_last_post_author_avatar">{forumrow.LAST_POSTER_AVATAR}</a>
 						<!-- ENDIF -->
 						<span class="tsn8_last_post_author_info">
-						<!-- IF forumrow.U_UNAPPROVED_TOPICS -->
+							<!-- IF forumrow.U_UNAPPROVED_TOPICS -->
 							<a href="{forumrow.U_UNAPPROVED_TOPICS}">{UNAPPROVED_IMG}</a>
-						<!-- ELSEIF forumrow.U_UNAPPROVED_POSTS -->
+							<!-- ELSEIF forumrow.U_UNAPPROVED_POSTS -->
 							<a href="{forumrow.U_UNAPPROVED_POSTS}">{UNAPPROVED_POST_IMG}</a>
-						<!-- ENDIF -->
-						<!-- IF forumrow.LAST_POST_TIME -->
-							<dfn>{L_LAST_POST}</dfn>
-							<!-- IF forumrow.S_DISPLAY_SUBJECT -->
-								<!-- EVENT forumlist_body_last_post_title_prepend -->
+							<!-- ENDIF -->
+							<!-- IF forumrow.LAST_POST_TIME -->
+								<dfn>{L_LAST_POST}</dfn>
+								<!-- IF forumrow.S_DISPLAY_SUBJECT -->
+									<!-- EVENT forumlist_body_last_post_title_prepend -->
 								&nbsp;<a href="{forumrow.U_LAST_POST}" title="{forumrow.LAST_POST_SUBJECT}" class="lastsubject">{forumrow.LAST_POST_SUBJECT_TRUNCATED}</a> <br />
-							<!-- ENDIF -->
-							<!-- IF not S_IS_BOT -->
+								<!-- ENDIF -->
+								<!-- IF not S_IS_BOT -->
 							&nbsp;<a href="{forumrow.U_LAST_POST}">{forumrow.LAST_POST_TIME} {LAST_POST_IMG}</a>
+								<!-- ENDIF -->
+							<!-- ELSE -->
+								{L_NO_POSTS}<br />&nbsp;
 							<!-- ENDIF -->
-						<!-- ELSE -->
-							{L_NO_POSTS}<br />&nbsp;
-						<!-- ENDIF -->
 						</span>
 					</dd>
 				<!-- ELSE -->

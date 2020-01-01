@@ -1,14 +1,12 @@
-
 <script>
-// <![CDATA[
 	var form_name = 'postform';
 	var text_name = <!-- IF $SIG_EDIT -->'signature'<!-- ELSE -->'message'<!-- ENDIF -->;
 	var load_draft = false;
 	var upload = false;
 
 	// Define the bbCode tags
-	var bbcode = [];
-	var bbtags = ['[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote]','[code]','[/code]','[list]','[/list]','[list=]','[/list]','[img]','[/img]','[url]','[/url]','[flash=]', '[/flash]','[size=]','[/size]'<!-- BEGIN custom_tags -->, {custom_tags.BBCODE_NAME}<!-- END custom_tags -->];
+	var bbcode = new Array();
+	var bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote]','[code]','[/code]','[list]','[/list]','[list=]','[/list]','[img]','[/img]','[url]','[/url]','[flash=]', '[/flash]','[size=]','[/size]'<!-- BEGIN custom_tags -->, {custom_tags.BBCODE_NAME}<!-- END custom_tags -->);
 	var imageTag = false;
 
 	// Helpline messages
@@ -28,26 +26,33 @@
 		y: '{LA_BBCODE_Y_HELP}',
 		d: '{LA_BBCODE_D_HELP}'
 		<!-- BEGIN custom_tags -->
-			,cb_{custom_tags.BBCODE_ID}: '{custom_tags.A_BBCODE_HELPLINE}'
-		<!-- END custom_tags -->
+		,cb_{custom_tags.BBCODE_ID}: '{custom_tags.A_BBCODE_HELPLINE}'
+	<!-- END custom_tags -->
 	}
 
-	function change_palette() {
+	function change_palette()
+	{
 		phpbb.toggleDisplay('colour_palette');
 		e = document.getElementById('colour_palette');
-		document.getElementById('bbpalette').value = (e.style.display == 'block') ? '{LA_FONT_COLOR_HIDE}' : '{LA_FONT_COLOR}';
-	}
 
-// ]]>
+		if (e.style.display == 'block')
+		{
+			document.getElementById('bbpalette').value = '{LA_FONT_COLOR_HIDE}';
+		}
+		else
+		{
+			document.getElementById('bbpalette').value = '{LA_FONT_COLOR}';
+		}
+	}
 </script>
 <!-- INCLUDEJS {T_ASSETS_PATH}/javascript/editor.js -->
 
 <!-- IF S_BBCODE_ALLOWED -->
 <div id="colour_palette" style="display: none;">
-	<dl style="clear: left;">
-		<dt><label>{L_FONT_COLOR}{L_COLON}</label></dt>
-		<dd id="color_palette_placeholder" data-orientation="h" data-height="12" data-width="15" data-bbcode="true"></dd>
-	</dl>
+    <dl style="clear: left;">
+        <dt><label>{L_FONT_COLOR}{L_COLON}</label></dt>
+        <dd id="color_palette_placeholder" class="color_palette_placeholder" data-orientation="h" data-height="12" data-width="15" data-bbcode="true"></dd>
+    </dl>
 </div>
 
 <!-- EVENT posting_editor_buttons_before -->
@@ -69,58 +74,56 @@
 		<!-- ENDIF -->
 		<!-- ENDIF -->
 	</select>
-	<!-- IF S_BBCODE_QUOTE -->
+    <!-- IF S_BBCODE_QUOTE -->
 	<span class="buttonset">
 		<input type="button" class="button2 bbcode-quote" accesskey="q" name="addbbcode6" value="Quote" style="width: 50px" onclick="bbstyle(6)" title="{L_BBCODE_Q_HELP}" />
 	</span>
-	<!-- ENDIF -->
+    <!-- ENDIF -->
 	<span class="buttonset">
 		<input type="button" class="button2 bbcode-code" accesskey="c" name="addbbcode8" value="Code" style="width: 40px" onclick="bbstyle(8)" title="{L_BBCODE_C_HELP}" />
 		<input type="button" class="button2 bbcode-list" accesskey="l" name="addbbcode10" value="List" style="width: 40px" onclick="bbstyle(10)" title="{L_BBCODE_L_HELP}" />
 		<input type="button" class="button2 bbcode-list-" accesskey="o" name="addbbcode12" value="List=" style="width: 40px" onclick="bbstyle(12)" title="{L_BBCODE_O_HELP}" />
 		<input type="button" class="button2 bbcode-asterisk" accesskey="y" name="addlistitem" value="[*]" style="width: 40px" onclick="bbstyle(-1)" title="{L_BBCODE_LISTITEM_HELP}" />
 
-	<!-- IF S_BBCODE_IMG -->
+    <!-- IF S_BBCODE_IMG -->
 		<input type="button" class="button2 bbcode-img" accesskey="p" name="addbbcode14" value="Img" style="width: 40px" onclick="bbstyle(14)" title="{L_BBCODE_P_HELP}" />
-	<!-- ENDIF -->
-	<!-- IF S_LINKS_ALLOWED -->
+    <!-- ENDIF -->
+    <!-- IF S_LINKS_ALLOWED -->
 		<input type="button" class="button2 bbcode-url" accesskey="w" name="addbbcode16" value="URL" style="text-decoration: underline; width: 40px" onclick="bbstyle(16)" title="{L_BBCODE_W_HELP}" />
-	<!-- ENDIF -->
-	<!-- IF S_BBCODE_FLASH -->
+    <!-- ENDIF -->
+    <!-- IF S_BBCODE_FLASH -->
 		<input type="button" class="button2 bbcode-flash" accesskey="d" name="addbbcode18" value="Flash" onclick="bbstyle(18)" title="{L_BBCODE_D_HELP}" />
-	<!-- ENDIF -->
+    <!-- ENDIF -->
 	</span>
 	<!-- IF S_SMILIES_ALLOWED and .smiley -->
 	<span class="buttonset">
 		<button class="button1" id="smiley_menu" accesskey="m" name="showsmileymenu">
 			<!--<img src="./images/smilies/icon_smile.gif" width="15" height="15" />-->
 			<span class="tsn8_icon_mini_nohover tsn8_icon_emoticon"></span>
-		</button>
+    </button>
 	</span>
 	<span class="tsn8_smiley_toolbar_container">
 		<div id="tsn8_newpost_smiley_wrapper" class="tsn8_newpost_smiley_wrapper" style="display: none;">
 			<!-- BEGIN smiley -->
-			<span class="tsn8_icon_smiley" data-code="{smiley.A_SMILEY_CODE}">
-				<img src="{smiley.SMILEY_IMG}" width="{smiley.SMILEY_WIDTH}" height="{smiley.SMILEY_HEIGHT}" alt="{smiley.SMILEY_CODE}" title="{smiley.SMILEY_DESC}"/>
-			</span>
+				<a href="#" onclick="insert_text('{smiley.A_SMILEY_CODE}', true); return false;"><img src="{smiley.SMILEY_IMG}" width="{smiley.SMILEY_WIDTH}" height="{smiley.SMILEY_HEIGHT}" alt="{smiley.SMILEY_CODE}" title="{smiley.SMILEY_DESC}" /></a>
 			<!-- END smiley -->
-			<!-- IF S_SHOW_SMILEY_LINK and S_SMILIES_ALLOWED-->
-			<br/><a href="{U_MORE_SMILIES}" onclick="popup(this.href, 750, 350, '_phpbbsmilies'); return false;">{L_MORE_SMILIES}</a>
+			<!-- END smiley -->
+			<!-- IF S_SHOW_SMILEY_LINK and S_SMILIES_ALLOWED -->
+			<br /><a href="{U_MORE_SMILIES}" onclick="popup(this.href, 750, 350, '_phpbbsmilies'); return false;">{L_MORE_SMILIES}</a>
 			<!-- ENDIF -->
 		</div>
 	</span>
-	<!-- ENDIF -->
+        <!-- ENDIF -->
 	<span class="buttonset">
 		<input type="button" class="button2 bbcode-color" name="bbpalette" id="foreground" value="{L_FONT_COLOR}"  title="{L_BBCODE_S_HELP}" />
 	</span>
-	<!-- EVENT posting_editor_buttons_custom_tags_before -->
+    <!-- EVENT posting_editor_buttons_custom_tags_before -->
 
 	<span class="buttonset">
-	<!-- BEGIN custom_tags -->
+    <!-- BEGIN custom_tags -->
 		<input type="button" class="button2 bbcode-{custom_tags.BBCODE_TAG_CLEAN}" name="addbbcode{custom_tags.BBCODE_ID}" value="{custom_tags.BBCODE_TAG}" onclick="bbstyle({custom_tags.BBCODE_ID})" title="{custom_tags.BBCODE_HELPLINE}" />
-	<!-- END custom_tags -->
+    <!-- END custom_tags -->
 	</span>
 </div>
 <!-- EVENT posting_editor_buttons_after -->
 <!-- ENDIF -->
-

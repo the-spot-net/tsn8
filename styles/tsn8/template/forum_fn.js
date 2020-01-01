@@ -57,7 +57,7 @@ function marklist(id, name, state) {
 
 	jQuery('#' + id + ' input[type=checkbox][name]').each(function() {
 		var $this = jQuery(this);
-		if ($this.attr('name').substr(0, name.length) === name) {
+		if ($this.attr('name').substr(0, name.length) === name && !$this.prop('disabled')) {
 			$this.prop('checked', state);
 		}
 	});
@@ -159,7 +159,10 @@ function selectCode(a) {
 			try {
 				s.setBaseAndExtent(e, 0, e, l);
 			} catch (error) {
-				s.setBaseAndExtent(e, 0, e, 1);
+				r = document.createRange();
+				r.selectNodeContents(e);
+				s.removeAllRanges();
+				s.addRange(r);
 			}
 		}
 		// Firefox and Opera
@@ -189,37 +192,6 @@ function selectCode(a) {
 		r.moveToElementText(e);
 		r.select();
 	}
-}
-
-/**
-* Play quicktime file by determining it's width/height
-* from the displayed rectangle area
-*/
-function play_qt_file(obj) {
-	'use strict';
-
-	var rectangle = obj.GetRectangle();
-	var width, height;
-
-	if (rectangle) {
-		rectangle = rectangle.split(',');
-		var x1 = parseInt(rectangle[0], 10);
-		var x2 = parseInt(rectangle[2], 10);
-		var y1 = parseInt(rectangle[1], 10);
-		var y2 = parseInt(rectangle[3], 10);
-
-		width = (x1 < 0) ? (x1 * -1) + x2 : x2 - x1;
-		height = (y1 < 0) ? (y1 * -1) + y2 : y2 - y1;
-	} else {
-		width = 200;
-		height = 0;
-	}
-
-	obj.width = width;
-	obj.height = height + 16;
-
-	obj.SetControllerVisible(true);
-	obj.Play();
 }
 
 var inAutocomplete = false;
@@ -301,11 +273,9 @@ function insertUser(formId, value) {
 function insert_marked_users(formId, users) {
 	'use strict';
 
-	for (var i = 0; i < users.length; i++) {
-		if (users[i].checked) {
-			insertUser(formId, users[i].value);
-		}
-	}
+	$(users).filter(':checked').each(function() {
+		insertUser(formId, this.value);
+	});
 
 	window.close();
 }
@@ -362,13 +332,13 @@ function parseDocument($container) {
 	/**
 	* Adjust HTML code for IE8 and older versions
 	*/
-	if (oldBrowser) {
-		// Fix .linklist.bulletin lists
-		$container
-			.find('ul.linklist.bulletin > li')
-			.filter(':first-child, .rightside:last-child')
-			.addClass('no-bulletin');
-	}
+	// if (oldBrowser) {
+	// 	// Fix .linklist.bulletin lists
+	// 	$container
+	// 		.find('ul.linklist.bulletin > li')
+	// 		.filter(':first-child, .rightside:last-child')
+	// 		.addClass('no-bulletin');
+	// }
 
 	/**
 	* Resize navigation (breadcrumbs) block to keep all links on same line
@@ -384,12 +354,19 @@ function parseDocument($container) {
 
 		function resize() {
 			var width = 0,
-				diff = $left.outerWidth(true) - $left.width();
+				diff = $left.outerWidth(true) - $left.width(),
+				minWidth = Math.max($this.width() / 3, 240),
+				maxWidth;
 
 			$right.each(function() {
-				width += $(this).outerWidth(true);
+				var $this = $(this);
+				if ($this.is(':visible')) {
+					width += $this.outerWidth(true);
+				}
 			});
-			$left.css('max-width', Math.floor($this.width() - width - diff) + 'px');
+
+			maxWidth = $this.width() - width - diff;
+			$left.css('max-width', Math.floor(Math.max(maxWidth, minWidth)) + 'px');
 		}
 
 		resize();
@@ -471,8 +448,8 @@ function parseDocument($container) {
 	/**
 	* Responsive link lists
 	*/
-	//var selector = '.linklist:not(.navlinks, [data-skip-responsive]), .postbody .post-buttons:not([data-skip-responsive])';
-	var selector = '.linklist:not(.navlinks, [data-skip-responsive])';
+	var selector = '.linklist:not(.navlinks, [data-skip-responsive]),' +
+		'.postbody .post-buttons:not([data-skip-responsive])';
 	$container.find(selector).each(function() {
 		var $this = $(this),
 			filterSkip = '.breadcrumbs, [data-skip-responsive]',
@@ -482,8 +459,7 @@ function parseDocument($container) {
 			$linksFirst = $linksNotSkip.not(filterLast), // The items that will be hidden first
 			$linksLast = $linksNotSkip.filter(filterLast), // The items that will be hidden last
 			persistent = $this.attr('id') === 'nav-main', // Does this list already have a menu (such as quick-links)?
-			html = '<li class="responsive-menu hidden"><a href="javascript:void(0);" class="responsive-menu-link">&nbsp;</a><div class="dropdown hidden"><div class="pointer"><div class="pointer-inner" /></div><ul class="dropdown-contents" /></div></li>',
-			slack = 3; // Vertical slack space (in pixels). Determines how sensitive the script is in determining whether a line-break has occured.
+			html = '<li class="responsive-menu hidden"><a href="javascript:void(0);" class="responsive-menu-link">&nbsp;</a><div class="dropdown hidden"><div class="pointer"><div class="pointer-inner" /></div><ul class="dropdown-contents" /></div></li>',			slack = 3; // Vertical slack space (in pixels). Determines how sensitive the script is in determining whether a line-break has occured.
 
 		// Add a hidden drop-down menu to each links list (except those that already have one)
 		if (!persistent) {
@@ -571,8 +547,10 @@ function parseDocument($container) {
 				$menuContents.prepend($clones1.addClass('clone clone-first').removeClass('leftside rightside'));
 
 				if ($this.hasClass('post-buttons')) {
-					$('.button', $menuContents).removeClass('button icon-button');
-					$('.responsive-menu-link', $menu).addClass('button icon-button').prepend('<span></span>');
+					$('.button', $menuContents).removeClass('button');
+					$('.sr-only', $menuContents).removeClass('sr-only');
+					$('.js-responsive-menu-link').addClass('button').addClass('button-icon-only');
+					$('.js-responsive-menu-link .icon').removeClass('fa-bars').addClass('fa-ellipsis-h');
 				}
 				copied1 = true;
 			}
@@ -626,12 +604,12 @@ function parseDocument($container) {
 		}
 
 		if (!persistent) {
-			phpbb.registerDropdown($menu.find('a.responsive-menu-link'), $menu.find('.dropdown'), false);
+			phpbb.registerDropdown($menu.find('a.js-responsive-menu-link'), $menu.find('.dropdown'), false);
 		}
 
 		// If there are any images in the links list, run the check again after they have loaded
 		$linksAll.find('img').each(function() {
-			$(this).load(function() {
+			$(this).on('load', function() {
 				check();
 			});
 		});

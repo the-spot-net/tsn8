@@ -1,80 +1,84 @@
 <div class="panel bg3" id="poll-panel">
-	<div class="inner">
+    <div class="inner">
 
-		<div class="group">
-			<!-- IF S_SHOW_POLL_BOX -->
-			<div class="gm-row gt-row gd-row">
-				<div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
-					<div class="inner align_center">
-						<p>{L_ADD_POLL_EXPLAIN}</p>
-					</div>
-				</div>
-			</div>
-			<!-- ENDIF -->
-			<fieldset class="fields2">
-				<!-- IF S_POLL_DELETE -->
-				<div class="gm-row gt-row gd-row">
-					<div class="gm-columns gt-columns gd-columns gm-full gt-third gd-quarter">
-						<span class="tsn8_options_label">{L_POLL_DELETE}{L_COLON}</span>
-					</div>
-					<div class="gm-columns gt-columns gd-columns gm-full gt-two-thirds gd-three-quarters">
-						<input type="checkbox" name="poll_delete" id="poll_delete"<!-- IF S_POLL_DELETE_CHECKED --> checked="checked"<!-- ENDIF --> />
-						<label for="poll_delete">{L_CLICK_TO_CONFIRM}</label>
-					</div>
-				</div>
-				<!-- ENDIF -->
-				<!-- IF S_SHOW_POLL_BOX -->
-				<div class="gm-row gt-row gd-row">
-					<div class="gm-columns gt-columns gd-columns gm-full gt-third gd-quarter">
-						<span class="tsn8_options_label">{L_POLL_QUESTION}{L_COLON}</span>
-					</div>
-					<div class="gm-columns gt-columns gd-columns gm-full gt-two-thirds gd-three-quarters">
-						<input type="text" name="poll_title" id="poll_title" maxlength="255" value="{POLL_TITLE}" class="inputbox"/>
-					</div>
-				</div>
-				<div class="gm-row gt-row gd-row">
-					<div class="gm-columns gt-columns gd-columns gm-full gt-third gd-quarter">
-						<span class="tsn8_options_label">{L_POLL_OPTIONS}{L_COLON}</span>
-						<span>{L_POLL_OPTIONS_EXPLAIN}</span>
-					</div>
-					<div class="gm-columns gt-columns gd-columns gm-full gt-two-thirds gd-three-quarters">
-						<textarea name="poll_option_text" id="poll_option_text" rows="5" cols="35" class="inputbox">{POLL_OPTIONS}</textarea>
-					</div>
-				</div>
-				<hr class="dashed"/>
-				<div class="gm-row gt-row gd-row">
-					<div class="gm-columns gt-columns gd-columns gm-full gt-third gd-quarter">
-						<span class="tsn8_options_label">{L_POLL_MAX_OPTIONS}{L_COLON}</span>
-					</div>
-					<div class="gm-columns gt-columns gd-columns gm-full gt-two-thirds gd-three-quarters">
-						<input type="number" min="0" max="999" name="poll_max_options" id="poll_max_options" size="3" maxlength="3" value="{POLL_MAX_OPTIONS}" class="inputbox autowidth"/>
-						<span>{L_POLL_MAX_OPTIONS_EXPLAIN}</span>
-					</div>
-				</div>
-				<div class="gm-row gt-row gd-row">
-					<div class="gm-columns gt-columns gd-columns gm-full gt-third gd-quarter">
-						<span class="tsn8_options_label">{L_POLL_FOR}{L_COLON}</span>
-					</div>
-					<div class="gm-columns gt-columns gd-columns gm-full gt-two-thirds gd-three-quarters">
-						<label for="poll_length"><input type="number" min="0" max="999" name="poll_length" id="poll_length" size="3" maxlength="3" value="{POLL_LENGTH}" class="inputbox autowidth"/> {L_DAYS}</label>
-						<span>{L_POLL_FOR_EXPLAIN}</span>
-					</div>
-				</div>
-				<!-- IF S_POLL_VOTE_CHANGE -->
-				<hr class="dashed"/>
+        <div class="group">
+            <!-- IF S_SHOW_POLL_BOX -->
+            <div class="gm-row gt-row gd-row">
+                <div class="gm-columns gt-columns gd-columns gm-full gt-full gd-full">
+                    <div class="inner align_center">
+                        <p>{L_ADD_POLL_EXPLAIN}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- ENDIF -->
 
-				<div class="gm-row gt-row gd-row">
-					<div class="gm-columns gt-columns gd-columns gm-full gt-third gd-quarter">
-						<span class="tsn8_options_label">{L_POLL_VOTE_CHANGE}{L_COLON}</span>
-					</div>
-					<div class="gm-columns gt-columns gd-columns gm-full gt-two-thirds gd-three-quarters">
-						<input type="checkbox" data-mod="tsn8_checkbox" id="poll_vote_change" name="poll_vote_change" {VOTE_CHANGE_CHECKED}/><label for="poll_vote_change">{L_ALLOW_VOTE_CHANGE}</label>
-					</div>
-				</div>
-				<!-- ENDIF -->
-				<!-- ENDIF -->
-				<!-- EVENT posting_poll_body_options_after -->
-			</fieldset>
-		</div>
-	</div>
+            <fieldset class="fields2">
+                <!-- IF S_POLL_DELETE -->
+                <div class="gm-row gt-row gd-row">
+                    <div class="gm-columns gt-columns gd-columns gm-full gt-third gd-quarter">
+                        <span class="tsn8_options_label">{L_POLL_DELETE}{L_COLON}</span>
+                    </div>
+                    <div class="gm-columns gt-columns gd-columns gm-full gt-two-thirds gd-three-quarters">
+                        <input type="checkbox" name="poll_delete" id="poll_delete"<!-- IF S_POLL_DELETE_CHECKED --> checked="checked"<!-- ENDIF --> />
+                        <label for="poll_delete">{L_CLICK_TO_CONFIRM}</label>
+                    </div>
+                </div>
+                <!-- ENDIF -->
+
+                <!-- IF S_SHOW_POLL_BOX -->
+                <div class="gm-row gt-row gd-row">
+                    <div class="gm-columns gt-columns gd-columns gm-full gt-third gd-quarter">
+                        <span class="tsn8_options_label">{L_POLL_QUESTION}{L_COLON}</span>
+                    </div>
+                    <div class="gm-columns gt-columns gd-columns gm-full gt-two-thirds gd-three-quarters">
+                        <input type="text" name="poll_title" id="poll_title" maxlength="255" value="{POLL_TITLE}" class="inputbox"/>
+                    </div>
+                </div>
+                <div class="gm-row gt-row gd-row">
+                    <div class="gm-columns gt-columns gd-columns gm-full gt-third gd-quarter">
+                        <span class="tsn8_options_label">{L_POLL_OPTIONS}{L_COLON}</span>
+                        <span>{L_POLL_OPTIONS_EXPLAIN}</span>
+                    </div>
+                    <div class="gm-columns gt-columns gd-columns gm-full gt-two-thirds gd-three-quarters">
+                        <textarea name="poll_option_text" id="poll_option_text" rows="5" cols="35" class="inputbox">{POLL_OPTIONS}</textarea>
+                    </div>
+                </div>
+                <hr class="dashed"/>
+                <div class="gm-row gt-row gd-row">
+                    <div class="gm-columns gt-columns gd-columns gm-full gt-third gd-quarter">
+                        <span class="tsn8_options_label">{L_POLL_MAX_OPTIONS}{L_COLON}</span>
+                    </div>
+                    <div class="gm-columns gt-columns gd-columns gm-full gt-two-thirds gd-three-quarters">
+                        <input type="number" min="0" max="999" name="poll_max_options" id="poll_max_options" size="3" maxlength="3" value="{POLL_MAX_OPTIONS}" class="inputbox autowidth"/>
+                        <span>{L_POLL_MAX_OPTIONS_EXPLAIN}</span>
+                    </div>
+                </div>
+                <div class="gm-row gt-row gd-row">
+                    <div class="gm-columns gt-columns gd-columns gm-full gt-third gd-quarter">
+                        <span class="tsn8_options_label">{L_POLL_FOR}{L_COLON}</span>
+                    </div>
+                    <div class="gm-columns gt-columns gd-columns gm-full gt-two-thirds gd-three-quarters">
+                        <label for="poll_length"><input type="number" min="0" max="999" name="poll_length" id="poll_length" size="3" maxlength="3" value="{POLL_LENGTH}" class="inputbox autowidth"/> {L_DAYS}</label>
+                        <span>{L_POLL_FOR_EXPLAIN}</span>
+                    </div>
+                </div>
+                <!-- IF S_POLL_VOTE_CHANGE -->
+                <hr class="dashed"/>
+
+                <div class="gm-row gt-row gd-row">
+                    <div class="gm-columns gt-columns gd-columns gm-full gt-third gd-quarter">
+                        <span class="tsn8_options_label">{L_POLL_VOTE_CHANGE}{L_COLON}</span>
+                    </div>
+                    <div class="gm-columns gt-columns gd-columns gm-full gt-two-thirds gd-three-quarters">
+                        <input type="checkbox" data-mod="tsn8_checkbox" id="poll_vote_change" name="poll_vote_change" {VOTE_CHANGE_CHECKED}/><label for="poll_vote_change">{L_ALLOW_VOTE_CHANGE}</label>
+                    </div>
+                </div>
+                <!-- ENDIF -->
+                <!-- ENDIF -->
+
+                <!-- EVENT posting_poll_body_options_after -->
+            </fieldset>
+
+        </div>
+    </div>
 </div>

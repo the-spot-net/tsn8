@@ -26,7 +26,7 @@ phpbb.addAjaxCallback('mark_forums_read', function(res) {
 	});
 
 	// Mark subforums read
-	$('a.subforum[class*="unread"]').removeClass('unread').addClass('read');
+	$('a.subforum[class*="unread"]').removeClass('unread').addClass('read').children('.icon.icon-red').removeClass('icon-red').addClass('icon-blue');
 
 	// Mark topics read if we are watching a category and showing active topics
 	if ($('#active_topics').length) {
@@ -40,11 +40,11 @@ phpbb.addAjaxCallback('mark_forums_read', function(res) {
 });
 
 /**
- * This callback will mark all topic icons read
- *
- * @param {bool} [update_topic_links=true] Whether "Mark topics read" links
- * 	should be updated. Defaults to true.
- */
+* This callback will mark all topic icons read
+*
+* @param {bool} [update_topic_links=true] Whether "Mark topics read" links
+* 	should be updated. Defaults to true.
+*/
 phpbb.addAjaxCallback('mark_topics_read', function(res, updateTopicLinks) {
 	var readTitle = res.NO_UNREAD_POSTS;
 	var unreadTitle = res.UNREAD_POSTS;
@@ -87,7 +87,7 @@ phpbb.addAjaxCallback('mark_topics_read', function(res, updateTopicLinks) {
 	});
 
 	// Remove link to first unread post
-	$('a').has('span.icon_topic_newest').remove();
+	$('a.unread').has('.icon-red').remove();
 
 	// Update mark topics read links
 	if (updateTopicLinks) {
@@ -136,9 +136,10 @@ phpbb.markNotifications = function($popup, unreadCount) {
 
 	// Update the unread count.
 	$('strong', '#notification_list_button').html(unreadCount);
-	// Remove the Mark all read link if there are no unread notifications.
+	// Remove the Mark all read link and hide notification count if there are no unread notifications.
 	if (!unreadCount) {
 		$('#mark_all_notifications').remove();
+		$('#notification_list_button > strong').addClass('hidden');
 	}
 
 	// Update page title
@@ -202,7 +203,7 @@ phpbb.addAjaxCallback('zebra', function(res) {
  */
 phpbb.addAjaxCallback('vote_poll', function(res) {
 	if (typeof res.success !== 'undefined') {
-		var poll = $('.topic_poll');
+		var poll = $(this).closest('.topic_poll');
 		var panel = poll.find('.panel');
 		var resultsVisible = poll.find('dl:first-child .resultbar').is(':visible');
 		var mostVotes = 0;
@@ -246,7 +247,14 @@ phpbb.addAjaxCallback('vote_poll', function(res) {
 			var mostVoted = (res.vote_counts[optionId] === mostVotes);
 			var percent = (!res.total_votes) ? 0 : Math.round((res.vote_counts[optionId] / res.total_votes) * 100);
 			var percentRel = (mostVotes === 0) ? 0 : Math.round((res.vote_counts[optionId] / mostVotes) * 100);
+			var altText;
 
+			altText = $this.attr('data-alt-text');
+			if (voted) {
+				$this.attr('title', $.trim(altText));
+			} else {
+				$this.attr('title', '');
+			};
 			$this.toggleClass('voted', voted);
 			$this.toggleClass('most-votes', mostVoted);
 
@@ -380,11 +388,11 @@ $('#member_search').click(function () {
 /**
 * Automatically resize textarea
 */
-//$(function() {
-//	var $textarea = $('textarea:not(#message-box textarea, .no-auto-resize)');
-//	phpbb.resizeTextArea($textarea, { minHeight: 75, maxHeight: 250 });
-//	phpbb.resizeTextArea($('textarea', '#message-box'));
-//});
+$(function() {
+	var $textarea = $('textarea:not(#message-box textarea, .no-auto-resize)');
+	phpbb.resizeTextArea($textarea, { minHeight: 75, maxHeight: 250 });
+	phpbb.resizeTextArea($('textarea', '#message-box'));
+});
 
 
 })(jQuery); // Avoid conflicts with other libraries

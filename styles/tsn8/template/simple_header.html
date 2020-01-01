@@ -1,34 +1,47 @@
 <!DOCTYPE html>
 <html dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}">
 <head>
-	<meta charset="utf-8"/>
-	<meta name="viewport" content="width=device-width"/>
-	{META}
-	<title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+{META}
+<title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>
 
-	<link href="{T_THEME_PATH}/print.css?assets_version={T_ASSETS_VERSION}" rel="stylesheet" type="text/css" media="print" title="printonly"/>
-	<!-- IF S_ALLOW_CDN -->
-	<script> WebFontConfig = { google: { families: ['Open+Sans:600:cyrillic-ext,latin,greek-ext,greek,vietnamese,latin-ext,cyrillic'] } }; (function(d) { var wf = d.createElement('script'), s = d.scripts[0]; wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js'; wf.async = true; s.parentNode.insertBefore(wf, s); })(document); </script>
-	<!-- ENDIF -->
-	<link href="{T_STYLESHEET_LINK}" rel="stylesheet">
-	<link href="{T_STYLESHEET_LANG_LINK}" rel="stylesheet">
-	<link href="{T_THEME_PATH}/responsive.css?assets_version={T_ASSETS_VERSION}" rel="stylesheet" media="only screen and (max-width: 700px), only screen and (max-device-width: 700px)">
+<!-- IF S_ALLOW_CDN -->
+<script>
+	WebFontConfig = {
+		google: {
+			families: ['Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese']
+		}
+	};
 
-	<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->
+	(function(d) {
+		var wf = d.createElement('script'), s = d.scripts[0];
+		wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+		wf.async = true;
+		s.parentNode.insertBefore(wf, s);
+	})(document);
+</script>
+<!-- ENDIF -->
+<link href="{T_FONT_AWESOME_LINK}" rel="stylesheet">
+<link href="{T_STYLESHEET_LINK}" rel="stylesheet">
+<link href="{T_STYLESHEET_LANG_LINK}" rel="stylesheet">
+
+<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->
 	<link href="{T_THEME_PATH}/bidi.css?assets_version={T_ASSETS_VERSION}" rel="stylesheet">
-	<!-- ENDIF -->
+<!-- ENDIF -->
 
-	<!--[if lte IE 8]>
+<!--[if lte IE 8]>
 	<link href="{T_THEME_PATH}/tweaks.css?assets_version={T_ASSETS_VERSION}" rel="stylesheet">
-	<![endif]-->
-	<link rel="icon" type="image/png" href="/phorums/images/logos/tsn-13-logo-75x75.png"/>
-	<!-- DEFINE $POPUP = 1 -->
+<![endif]-->
 
-	<!-- EVENT simple_header_head_append -->
+<!-- DEFINE $POPUP = 1 -->
 
-	{$STYLESHEETS}
+<!-- EVENT simple_header_head_append -->
 
-	<!-- EVENT simple_header_stylesheets_after -->
+{$STYLESHEETS}
+
+<!-- EVENT simple_header_stylesheets_after -->
 
 </head>
 
@@ -36,7 +49,6 @@
 
 <!-- EVENT simple_header_body_before -->
 
-<div id="wrap">
-	<a id="top" class="anchor" accesskey="t"></a>
-
-	<div id="page-body" role="main">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-body" class="page-body" role="main">
