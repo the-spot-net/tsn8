@@ -70,7 +70,7 @@
 				{S_DATEFORMAT_OPTIONS}
 			</select>
 		</dd>
-		<dd id="custom_date" style="display:none;"><input type="text" name="dateformat" id="dateformat" value="{DATE_FORMAT}" maxlength="30" class="inputbox narrow" style="margin-top: 3px;" /></dd>
+		<dd id="custom_date" style="display:none;"><input type="text" name="dateformat" id="dateformat" value="{DATE_FORMAT}" maxlength="64" class="inputbox narrow" style="margin-top: 3px;" /></dd>
 	</dl>
 	<!-- EVENT ucp_prefs_personal_append -->
 	</fieldset>
@@ -85,8 +85,7 @@
 </fieldset>
 </form>
 
-<script type="text/javascript">
-// <![CDATA[
+<script>
 	var date_format = '{A_DATE_FORMAT}';
 	var default_dateformat = '{A_DEFAULT_DATEFORMAT}';
 
@@ -118,7 +117,6 @@
 	}
 
 	window.onload = customDates;
-// ]]>
 </script>
 
 <!-- INCLUDE ucp_footer.html -->
