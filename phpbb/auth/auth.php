@@ -72,8 +72,8 @@ class auth
 
 		// Verify bitstring length with options provided...
 		$renew = false;
-		$global_length = count($this->acl_options['global']);
-		$local_length = count($this->acl_options['local']);
+		$global_length = sizeof($this->acl_options['global']);
+		$local_length = sizeof($this->acl_options['local']);
 
 		// Specify comparing length (bitstring is padded to 31 bits)
 		$global_length = ($global_length % 31) ? ($global_length - ($global_length % 31) + 31) : $global_length;
@@ -236,7 +236,7 @@ class auth
 				$sql = 'SELECT forum_id
 					FROM ' . FORUMS_TABLE;
 
-				if (count($this->acl))
+				if (sizeof($this->acl))
 				{
 					$sql .= ' WHERE ' . $db->sql_in_set('forum_id', array_keys($this->acl), true);
 				}
@@ -278,7 +278,7 @@ class auth
 		}
 
 		// If we get forum_ids not having this permission, we need to fill the remaining parts
-		if ($negate && count($this->acl_forum_ids))
+		if ($negate && sizeof($this->acl_forum_ids))
 		{
 			foreach ($this->acl_forum_ids as $f)
 			{
@@ -455,7 +455,7 @@ class auth
 	{
 		$hold_str = '';
 
-		if (count($hold_ary))
+		if (sizeof($hold_ary))
 		{
 			ksort($hold_ary);
 
@@ -514,7 +514,7 @@ class auth
 	*/
 	function acl_clear_prefetch($user_id = false)
 	{
-		global $db, $cache, $phpbb_dispatcher;
+		global $db, $cache;
 
 		// Rebuild options cache
 		$cache->destroy('_role_cache');
@@ -552,16 +552,6 @@ class auth
 				user_perm_from = 0
 			$where_sql";
 		$db->sql_query($sql);
-
-		/**
-		* Event is triggered after user(s) permission settings cache has been cleared
-		*
-		* @event core.acl_clear_prefetch_after
-		* @var	mixed	user_id	User ID(s)
-		* @since 3.1.11-RC1
-		*/
-		$vars = array('user_id');
-		extract($phpbb_dispatcher->trigger_event('core.acl_clear_prefetch_after', compact($vars)));
 
 		return;
 	}

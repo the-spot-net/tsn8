@@ -521,7 +521,7 @@ function message_options($id, $mode, $global_privmsgs_rules, $global_rule_condit
 	$action_option	= $request->variable('action_option', '');
 	$back = (isset($_REQUEST['back'])) ? $request->variable('back', array('' => 0)) : array();
 
-	if (count($back))
+	if (sizeof($back))
 	{
 		if ($action_option)
 		{

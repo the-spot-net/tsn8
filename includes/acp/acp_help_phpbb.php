@@ -48,7 +48,7 @@ class acp_help_phpbb
 			$error[] = $user->lang['FORM_INVALID'];
 		}
 		// Do not write values if there is an error
-		if (count($error))
+		if (sizeof($error))
 		{
 			$submit = false;
 		}

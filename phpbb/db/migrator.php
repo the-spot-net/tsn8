@@ -503,14 +503,11 @@ class migrator
 			return;
 		}
 
-		foreach ($this->migrations as $name)
+		foreach ($this->migration_state as $name => $state)
 		{
-			$state = $this->migration_state($name);
-
-			if ($state && in_array($migration, $state['migration_depends_on']) && ($state['migration_schema_done'] || $state['migration_data_done']))
+			if (!empty($state['migration_depends_on']) && in_array($migration, $state['migration_depends_on']))
 			{
 				$this->revert_do($name);
-				return;
 			}
 		}
 
@@ -632,7 +629,7 @@ class migrator
 	*/
 	protected function process_data_step($steps, $state, $revert = false)
 	{
-		if (count($steps) === 0)
+		if (sizeof($steps) === 0)
 		{
 			return true;
 		}
@@ -659,7 +656,7 @@ class migrator
 			// Result will be null or true if everything completed correctly
 			// Stop after each update step, to let the updater control the script runtime
 			$result = $this->run_step($steps[$step], $last_result, $revert);
-			if (($result !== null && $result !== true) || $step + 1 < count($steps))
+			if (($result !== null && $result !== true) || $step + 1 < sizeof($steps))
 			{
 				return array(
 					'result'	=> $result,
@@ -760,7 +757,7 @@ class migrator
 
 				$condition = $parameters[0];
 
-				if (!$condition || (is_array($condition) && !$this->run_step($condition, $last_result, $reverse)))
+				if (!$condition)
 				{
 					return false;
 				}

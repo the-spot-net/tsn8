@@ -28,7 +28,7 @@ class mcp_queue
 	var $p_master;
 	var $u_action;
 
-	public function __construct(&$p_master)
+	public function mcp_queue(&$p_master)
 	{
 		$this->p_master = &$p_master;
 	}
@@ -179,7 +179,7 @@ class mcp_queue
 
 				$post_info = phpbb_get_post_data(array($post_id), 'm_approve', true);
 
-				if (!count($post_info))
+				if (!sizeof($post_info))
 				{
 					trigger_error('NO_POST_SELECTED');
 				}
@@ -230,7 +230,7 @@ class mcp_queue
 					}
 					$db->sql_freeresult($result);
 
-					if (count($attachments))
+					if (sizeof($attachments))
 					{
 						$update_count = array();
 						parse_attachments($post_info['forum_id'], $message, $attachments, $update_count);
@@ -280,7 +280,7 @@ class mcp_queue
 				$post_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $post_info['forum_id'] . '&amp;p=' . $post_info['post_id'] . '#p' . $post_info['post_id']);
 				$topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $post_info['forum_id'] . '&amp;t=' . $post_info['topic_id']);
 
-				$post_data = array(
+				$template->assign_vars(array(
 					'S_MCP_QUEUE'			=> true,
 					'U_APPROVE_ACTION'		=> append_sid("{$phpbb_root_path}mcp.$phpEx", "i=queue&amp;p=$post_id&amp;f=$forum_id"),
 					'S_CAN_DELETE_POST'		=> $auth->acl_get('m_delete', $post_info['forum_id']),
@@ -324,35 +324,7 @@ class mcp_queue
 					'S_FIRST_POST'			=> ($post_info['topic_first_post_id'] == $post_id),
 
 					'U_LOOKUP_IP'			=> ($auth->acl_get('m_info', $post_info['forum_id'])) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=queue&amp;mode=approve_details&amp;f=' . $post_info['forum_id'] . '&amp;p=' . $post_id . '&amp;lookup=' . $post_info['poster_ip']) . '#ip' : '',
-				);
-
-				/**
-				* Alter post awaiting approval template before it is rendered
-				*
-				* @event core.mcp_queue_approve_details_template
-				* @var	int		post_id		Post ID
-				* @var	int		topic_id	Topic ID
-				* @var	array	topic_info	Topic data
-				* @var	array	post_info	Post data
-				* @var array	post_data	Post template data
-				* @var	string	message		Post message
-				* @var	string	post_url	Post URL
-				* @var	string	topic_url	Topic URL
-				* @since 3.2.2-RC1
-				*/
-				$vars = array(
-					'post_id',
-					'topic_id',
-					'topic_info',
-					'post_info',
-					'post_data',
-					'message',
-					'post_url',
-					'topic_url',
-				);
-				extract($phpbb_dispatcher->trigger_event('core.mcp_queue_approve_details_template', compact($vars)));
-
-				$template->assign_vars($post_data);
+				));
 
 			break;
 
@@ -377,7 +349,7 @@ class mcp_queue
 				{
 					$topic_info = phpbb_get_topic_data(array($topic_id));
 
-					if (!count($topic_info))
+					if (!sizeof($topic_info))
 					{
 						trigger_error('TOPIC_NOT_EXIST');
 					}
@@ -407,7 +379,7 @@ class mcp_queue
 						$forum_list[] = $row['forum_id'];
 					}
 
-					if (!count($forum_list))
+					if (!sizeof($forum_list))
 					{
 						trigger_error('NOT_MODERATOR');
 					}
@@ -423,7 +395,7 @@ class mcp_queue
 				{
 					$forum_info = phpbb_get_forum_data(array($forum_id), $m_perm);
 
-					if (!count($forum_info))
+					if (!sizeof($forum_info))
 					{
 						trigger_error('NOT_MODERATOR');
 					}
@@ -493,7 +465,7 @@ class mcp_queue
 					}
 					$db->sql_freeresult($result);
 
-					if (count($post_ids))
+					if (sizeof($post_ids))
 					{
 						$sql = 'SELECT t.topic_id, t.topic_title, t.forum_id, p.post_id, p.post_subject, p.post_username, p.poster_id, p.post_time, p.post_attachment, u.username, u.username_clean, u.user_colour
 							FROM ' . POSTS_TABLE . ' p, ' . TOPICS_TABLE . ' t, ' . USERS_TABLE . ' u
@@ -501,29 +473,6 @@ class mcp_queue
 								AND t.topic_id = p.topic_id
 								AND u.user_id = p.poster_id
 							ORDER BY ' . $sort_order_sql;
-
-						/**
-						* Alter sql query to get information on all posts in queue
-						*
-						* @event core.mcp_queue_get_posts_for_posts_query_before
-						* @var	string	sql						String with the query to be executed
-						* @var	array	forum_list				List of forums that contain the posts
-						* @var	int		visibility_const		Integer with one of the possible ITEM_* constant values
-						* @var	int		topic_id				topic_id in the page request
-						* @var	string	limit_time_sql			String with the SQL code to limit the time interval of the post (Note: May be empty string)
-						* @var	string	sort_order_sql			String with the ORDER BY SQL code used in this query
-						* @since 3.2.3-RC2
-						*/
-						$vars = array(
-							'sql',
-							'forum_list',
-							'visibility_const',
-							'topic_id',
-							'limit_time_sql',
-							'sort_order_sql',
-						);
-						extract($phpbb_dispatcher->trigger_event('core.mcp_queue_get_posts_for_posts_query_before', compact($vars)));
-
 						$result = $db->sql_query($sql);
 
 						$post_data = $rowset = array();
@@ -588,7 +537,7 @@ class mcp_queue
 					$db->sql_freeresult($result);
 				}
 
-				if (count($forum_names))
+				if (sizeof($forum_names))
 				{
 					// Select the names for the forum_ids
 					$sql = 'SELECT forum_id, forum_name
@@ -611,7 +560,7 @@ class mcp_queue
 						$row['post_username'] = $row['username'] ?: $user->lang['GUEST'];
 					}
 
-					$post_row = array(
+					$template->assign_block_vars('postrow', array(
 						'U_TOPIC'			=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $row['forum_id'] . '&amp;t=' . $row['topic_id']),
 						'U_VIEWFORUM'		=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $row['forum_id']),
 						'U_VIEWPOST'		=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $row['forum_id'] . '&amp;p=' . $row['post_id']) . (($mode == 'unapproved_posts') ? '#p' . $row['post_id'] : ''),
@@ -629,25 +578,7 @@ class mcp_queue
 						'TOPIC_TITLE'	=> $row['topic_title'],
 						'POST_TIME'		=> $user->format_date($row['post_time']),
 						'S_HAS_ATTACHMENTS'	=> $auth->acl_get('u_download') && $auth->acl_get('f_download', $row['forum_id']) && $row['post_attachment'],
-					);
-
-					/**
-					* Alter sql query to get information on all topics in the list of forums provided.
-					*
-					* @event core.mcp_queue_get_posts_modify_post_row
-					* @var	array	post_row	Template variables for current post
-					* @var	array	row			Post data
-					* @var	array	forum_names	Forum names
-					* @since 3.2.3-RC2
-					*/
-					$vars = array(
-						'post_row',
-						'row',
-						'forum_names',
-					);
-					extract($phpbb_dispatcher->trigger_event('core.mcp_queue_get_posts_modify_post_row', compact($vars)));
-
-					$template->assign_block_vars('postrow', $post_row);
+					));
 				}
 				unset($rowset, $forum_names);
 
@@ -840,7 +771,7 @@ class mcp_queue
 			}
 			else
 			{
-				$success_msg = (count($post_info) == 1) ? 'POST_' . strtoupper($action) . 'D_SUCCESS' : 'POSTS_' . strtoupper($action) . 'D_SUCCESS';
+				$success_msg = (sizeof($post_info) == 1) ? 'POST_' . strtoupper($action) . 'D_SUCCESS' : 'POSTS_' . strtoupper($action) . 'D_SUCCESS';
 			}
 
 			/**
@@ -883,7 +814,7 @@ class mcp_queue
 			$message .= '<br /><br />' . $user->lang('RETURN_PAGE', '<a href="' . $redirect . '">', '</a>');
 
 			// If approving one post, also give links back to post...
-			if (count($post_info) == 1 && $post_url)
+			if (sizeof($post_info) == 1 && $post_url)
 			{
 				$message .= '<br /><br />' . $user->lang('RETURN_POST', '<a href="' . $post_url . '">', '</a>');
 			}
@@ -916,14 +847,14 @@ class mcp_queue
 
 			// Create the confirm box message
 			$action_msg = strtoupper($action);
-			$num_posts = count($post_id_list) - $num_topics;
+			$num_posts = sizeof($post_id_list) - $num_topics;
 			if ($num_topics > 0 && $num_posts <= 0)
 			{
 				$action_msg .= '_TOPIC' . (($num_topics == 1) ? '' : 'S');
 			}
 			else
 			{
-				$action_msg .= '_POST' . ((count($post_id_list) == 1) ? '' : 'S');
+				$action_msg .= '_POST' . ((sizeof($post_id_list) == 1) ? '' : 'S');
 			}
 			confirm_box(false, $action_msg, $s_hidden_fields, 'mcp_approve.html');
 		}
@@ -988,9 +919,9 @@ class mcp_queue
 				);
 			}
 
-			if (count($topic_info) >= 1)
+			if (sizeof($topic_info) >= 1)
 			{
-				$success_msg = (count($topic_info) == 1) ? 'TOPIC_' . strtoupper($action) . 'D_SUCCESS' : 'TOPICS_' . strtoupper($action) . 'D_SUCCESS';
+				$success_msg = (sizeof($topic_info) == 1) ? 'TOPIC_' . strtoupper($action) . 'D_SUCCESS' : 'TOPICS_' . strtoupper($action) . 'D_SUCCESS';
 			}
 
 			foreach ($approve_log as $log_data)
@@ -1093,7 +1024,7 @@ class mcp_queue
 			$message .= '<br /><br />' . $user->lang('RETURN_PAGE', '<a href="' . $redirect . '">', '</a>');
 
 			// If approving one topic, also give links back to topic...
-			if (count($topic_info) == 1 && $topic_url)
+			if (sizeof($topic_info) == 1 && $topic_url)
 			{
 				$message .= '<br /><br />' . $user->lang('RETURN_TOPIC', '<a href="' . $topic_url . '">', '</a>');
 			}
@@ -1124,7 +1055,7 @@ class mcp_queue
 				'S_' . strtoupper($action)	=> true,
 			));
 
-			confirm_box(false, strtoupper($action) . '_TOPIC' . ((count($topic_id_list) == 1) ? '' : 'S'), $s_hidden_fields, 'mcp_approve.html');
+			confirm_box(false, strtoupper($action) . '_TOPIC' . ((sizeof($topic_id_list) == 1) ? '' : 'S'), $s_hidden_fields, 'mcp_approve.html');
 		}
 
 		redirect($redirect);
@@ -1275,8 +1206,8 @@ class mcp_queue
 			}
 
 			// Get disapproved posts/topics counts separately
-			$num_disapproved_topics = count($disapprove_log_topics);
-			$num_disapproved_posts = count($disapprove_log_posts);
+			$num_disapproved_topics = sizeof($disapprove_log_topics);
+			$num_disapproved_posts = sizeof($disapprove_log_posts);
 
 			// Build the whole log
 			$disapprove_log = array_merge($disapprove_log_topics, $disapprove_log_posts);
@@ -1285,7 +1216,7 @@ class mcp_queue
 			unset($post_data, $disapprove_log_topics, $disapprove_log_posts);
 
 			// Let's do the job - delete disapproved posts
-			if (count($post_disapprove_list))
+			if (sizeof($post_disapprove_list))
 			{
 				if (!function_exists('delete_posts'))
 				{
@@ -1513,7 +1444,7 @@ class mcp_queue
 				$l_confirm_msg = 'DELETE_POST_PERMANENTLY';
 				$confirm_template = 'confirm_delete_body.html';
 			}
-			$l_confirm_msg .= ((count($post_id_list) == 1) ? '' : 'S');
+			$l_confirm_msg .= ((sizeof($post_id_list) == 1) ? '' : 'S');
 
 			$template->assign_vars(array(
 				'S_NOTIFY_POSTER'	=> $show_notify,

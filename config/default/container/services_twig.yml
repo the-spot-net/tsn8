@@ -11,7 +11,6 @@ services:
             - '%core.template.cache_path%'
             - '@ext.manager'
             - '@template.twig.loader'
-            - '@dispatcher'
             - []
         calls:
             - [setLexer, ['@template.twig.lexer']]

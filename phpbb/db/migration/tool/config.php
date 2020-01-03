@@ -134,7 +134,7 @@ class config implements \phpbb\db\migration\tool\tool_interface
 
 			case 'remove':
 				$call = 'add';
-				if (count($arguments) == 1)
+				if (sizeof($arguments) == 1)
 				{
 					$arguments[] = '';
 				}

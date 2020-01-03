@@ -35,18 +35,9 @@ class bbcode
 
 	/**
 	* Constructor
-	*/
-	function __construct($bitfield = '')
-	{
-		$this->bbcode_set_bitfield($bitfield);
-	}
-
-	/**
 	* Init bbcode cache entries if bitfield is specified
-	*
-	* @param	string	$bbcode_bitfield	The bbcode bitfield
 	*/
-	function bbcode_set_bitfield($bitfield = '')
+	function bbcode($bitfield = '')
 	{
 		if ($bitfield)
 		{
@@ -103,13 +94,13 @@ class bbcode
 						${$type}['replace'][] = $replace;
 					}
 
-					if (count($str['search']))
+					if (sizeof($str['search']))
 					{
 						$message = str_replace($str['search'], $str['replace'], $message);
 						$str = array('search' => array(), 'replace' => array());
 					}
 
-					if (count($preg['search']))
+					if (sizeof($preg['search']))
 					{
 						// we need to turn the entities back into their original form to allow the
 						// search patterns to work properly
@@ -200,7 +191,7 @@ class bbcode
 			}
 		}
 
-		if (count($sql))
+		if (sizeof($sql))
 		{
 			global $db;
 
@@ -510,10 +501,7 @@ class bbcode
 			// Turn template blocks into PHP assignment statements for the values of $bbcode_tpl..
 			$this->bbcode_template = array();
 
-			// Capture the BBCode template matches
-			// Allow phpBB template or the Twig syntax
-			$matches = (preg_match_all('#<!-- BEGIN (.*?) -->(.*?)<!-- END (?:.*?) -->#', $tpl, $match)) ?:
-							preg_match_all('#{% for (.*?) in .*? %}(.*?){% endfor %}#s', $tpl, $match);
+			$matches = preg_match_all('#<!-- BEGIN (.*?) -->(.*?)<!-- END (?:.*?) -->#', $tpl, $match);
 
 			for ($i = 0; $i < $matches; $i++)
 			{

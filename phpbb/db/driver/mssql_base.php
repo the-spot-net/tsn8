@@ -61,14 +61,6 @@ abstract class mssql_base extends \phpbb\db\driver\driver
 	}
 
 	/**
-	* {@inheritDoc}
-	*/
-	function cast_expr_to_bigint($expression)
-	{
-		return 'CONVERT(BIGINT, ' . $expression . ')';
-	}
-
-	/**
 	* Build db-specific query data
 	* @access private
 	*/
