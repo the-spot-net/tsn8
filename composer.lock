@@ -342,7 +342,7 @@
                 "oauth",
                 "security"
             ],
-            "time": "2018-02-14T22:37:14+00:00"
+            "time": "2016-07-12T22:15:00+00:00"
         },
         {
             "name": "marc1706/fast-image-size",
@@ -1988,6 +1988,7 @@
                 "code",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-code",
             "time": "2015-06-03T15:31:59+00:00"
         },
         {
@@ -2033,6 +2034,7 @@
                 "eventmanager",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-eventmanager",
             "time": "2015-06-03T15:32:01+00:00"
         },
         {
@@ -2089,6 +2091,7 @@
                 "stdlib",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-stdlib",
             "time": "2015-06-03T15:32:03+00:00"
         }
     ],
