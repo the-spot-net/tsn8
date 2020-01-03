@@ -27,7 +27,7 @@ services:
     phpbb.viglink.helper:
         class: phpbb\viglink\acp\viglink_helper
         arguments:
-            - '@cache.driver'
+            - '@cache'
             - '@config'
             - '@file_downloader'
             - '@language'

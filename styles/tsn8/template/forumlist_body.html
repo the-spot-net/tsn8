@@ -88,11 +88,7 @@
 							&nbsp;<a href="{forumrow.U_LAST_POST}">{forumrow.LAST_POST_TIME} {LAST_POST_IMG}</a>
 							<!-- ENDIF -->
 						<!-- ELSE -->
-							{% if forumrow.U_UNAPPROVED_TOPICS %}
-								{{ lang('TOPIC_UNAPPROVED_FORUM', forumrow.TOPICS) }}
-							{% else %}
-								{{ lang('NO_POSTS') }}
-							{% endif %}
+							{L_NO_POSTS}<br />&nbsp;
 						<!-- ENDIF -->
 						</span>
 					</dd>

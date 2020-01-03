@@ -99,7 +99,7 @@ class pm extends \phpbb\notification\type\base
 			'ignore_users'		=> array(),
 		), $options);
 
-		if (!count($pm['recipients']))
+		if (!sizeof($pm['recipients']))
 		{
 			return array();
 		}

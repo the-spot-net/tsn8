@@ -125,9 +125,7 @@ class dev extends \phpbb\db\migration\container_aware_migration
 				'ACP_GROUPS',
 				array(
 					'module_basename'	=> 'acp_groups',
-					'module_langname'	=> 'ACP_GROUPS_POSITION',
-					'module_mode'		=> 'position',
-					'module_auth'		=> 'acl_a_group',
+					'modes'				=> array('position'),
 				),
 			)),
 			array('module.add', array(
@@ -135,9 +133,7 @@ class dev extends \phpbb\db\migration\container_aware_migration
 				'ACP_ATTACHMENTS',
 				array(
 					'module_basename'	=> 'acp_attachments',
-					'module_langname'	=> 'ACP_MANAGE_ATTACHMENTS',
-					'module_mode'		=> 'manage',
-					'module_auth'		=> 'acl_a_attach',
+					'modes'				=> array('manage'),
 				),
 			)),
 			array('module.add', array(
@@ -145,19 +141,7 @@ class dev extends \phpbb\db\migration\container_aware_migration
 				'ACP_STYLE_MANAGEMENT',
 				array(
 					'module_basename'	=> 'acp_styles',
-					'module_langname'	=> 'ACP_STYLES_INSTALL',
-					'module_mode'		=> 'install',
-					'module_auth'		=> 'acl_a_styles',
-				),
-			)),
-			array('module.add', array(
-				'acp',
-				'ACP_STYLE_MANAGEMENT',
-				array(
-					'module_basename'	=> 'acp_styles',
-					'module_langname'	=> 'ACP_STYLES_CACHE',
-					'module_mode'		=> 'cache',
-					'module_auth'		=> 'acl_a_styles',
+					'modes'				=> array('install', 'cache'),
 				),
 			)),
 			array('module.add', array(
@@ -165,8 +149,7 @@ class dev extends \phpbb\db\migration\container_aware_migration
 				'UCP_PROFILE',
 				array(
 					'module_basename'	=> 'ucp_profile',
-					'module_langname'	=> 'UCP_PROFILE_AUTOLOGIN_KEYS',
-					'module_mode'		=> 'autologin_keys',
+					'modes'				=> array('autologin_keys'),
 				),
 			)),
 			// Module will be renamed later

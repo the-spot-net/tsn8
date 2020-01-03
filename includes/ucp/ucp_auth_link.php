@@ -55,14 +55,14 @@ class ucp_auth_link
 		$submit	= $request->variable('submit', false, false, \phpbb\request\request_interface::POST);
 
 		// This path is only for primary actions
-		if (!count($error) && $submit)
+		if (!sizeof($error) && $submit)
 		{
 			if (!check_form_key('ucp_auth_link'))
 			{
 				$error[] = 'FORM_INVALID';
 			}
 
-			if (!count($error))
+			if (!sizeof($error))
 			{
 				// Any post data could be necessary for auth (un)linking
 				$link_data = $request->get_super_global(\phpbb\request\request_interface::POST);

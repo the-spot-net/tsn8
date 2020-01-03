@@ -38,7 +38,7 @@ class transfer
 	/**
 	* Constructor - init some basic values
 	*/
-	function __construct()
+	function transfer()
 	{
 		global $phpbb_root_path;
 
@@ -112,7 +112,7 @@ class transfer
 		$dir = explode('/', $dir);
 		$dirs = '';
 
-		for ($i = 0, $total = count($dir); $i < $total; $i++)
+		for ($i = 0, $total = sizeof($dir); $i < $total; $i++)
 		{
 			$result = true;
 
@@ -264,7 +264,7 @@ class ftp extends transfer
 	/**
 	* Standard parameters for FTP session
 	*/
-	function __construct($host, $username, $password, $root_path, $port = 21, $timeout = 10)
+	function ftp($host, $username, $password, $root_path, $port = 21, $timeout = 10)
 	{
 		$this->host			= $host;
 		$this->port			= $port;
@@ -512,7 +512,7 @@ class ftp_fsock extends transfer
 	/**
 	* Standard parameters for FTP session
 	*/
-	function __construct($host, $username, $password, $root_path, $port = 21, $timeout = 10)
+	function ftp_fsock($host, $username, $password, $root_path, $port = 21, $timeout = 10)
 	{
 		$this->host			= $host;
 		$this->port			= $port;
@@ -529,7 +529,7 @@ class ftp_fsock extends transfer
 		}
 
 		// Init some needed values
-		parent::__construct();
+		$this->transfer();
 
 		return;
 	}

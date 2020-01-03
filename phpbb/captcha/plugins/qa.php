@@ -21,7 +21,7 @@ class qa
 {
 	var $confirm_id;
 	var $answer;
-	var $question_ids = [];
+	var $question_ids;
 	var $question_text;
 	var $question_lang;
 	var $question_strict;
@@ -84,7 +84,7 @@ class qa
 		$db->sql_freeresult($result);
 
 		// fallback to the board default lang
-		if (!count($this->question_ids))
+		if (!sizeof($this->question_ids))
 		{
 			$this->question_lang = $config['default_lang'];
 
@@ -101,13 +101,14 @@ class qa
 		}
 
 		// final fallback to any language
-		if (!count($this->question_ids))
+		if (!sizeof($this->question_ids))
 		{
 			$this->question_lang = '';
 
 			$sql = 'SELECT q.question_id, q.lang_iso
 				FROM ' . $this->table_captcha_questions . ' q, ' . $this->table_captcha_answers . ' a
-				WHERE q.question_id = a.question_id';
+				WHERE q.question_id = a.question_id
+				GROUP BY lang_iso';
 			$result = $db->sql_query($sql, 7200);
 
 			while ($row = $db->sql_fetchrow($result))
@@ -310,7 +311,7 @@ class qa
 			}
 			while ($row = $db->sql_fetchrow($result));
 
-			if (count($sql_in))
+			if (sizeof($sql_in))
 			{
 				$sql = 'DELETE FROM ' . $this->table_qa_confirm . '
 					WHERE ' . $db->sql_in_set('confirm_id', $sql_in);
@@ -394,7 +395,7 @@ class qa
 
 		$error = '';
 
-		if (!count($this->question_ids))
+		if (!sizeof($this->question_ids))
 		{
 			/** @var \phpbb\log\log_interface $phpbb_log */
 			$phpbb_log->add('critical', $user->data['user_id'], $user->ip, 'LOG_ERROR_CAPTCHA', time(), array($user->lang('CONFIRM_QUESTION_MISSING')));
@@ -438,7 +439,7 @@ class qa
 	{
 		global $db, $user;
 
-		if (!count($this->question_ids))
+		if (!sizeof($this->question_ids))
 		{
 			return;
 		}
@@ -464,7 +465,7 @@ class qa
 	{
 		global $db, $user;
 
-		if (!count($this->question_ids))
+		if (!sizeof($this->question_ids))
 		{
 			return;
 		}
@@ -535,7 +536,7 @@ class qa
 	{
 		global $db, $user;
 
-		if (!strlen($this->confirm_id) || !count($this->question_ids))
+		if (!strlen($this->confirm_id) || !sizeof($this->question_ids))
 		{
 			return false;
 		}
@@ -637,7 +638,7 @@ class qa
 	/**
 	*  API function - The ACP backend, this marks the end of the easy methods
 	*/
-	function acp_page($id, $module)
+	function acp_page($id, &$module)
 	{
 		global $config, $request, $phpbb_log, $template, $user;
 
@@ -775,7 +776,7 @@ class qa
 	/**
 	*  This handles the list overview
 	*/
-	function acp_question_list($module)
+	function acp_question_list(&$module)
 	{
 		global $db, $template;
 
@@ -978,7 +979,7 @@ class qa
 
 		if (!isset($langs[$question_data['lang_iso']]) ||
 			!strlen($question_data['question_text']) ||
-			!count($question_data['answers']) ||
+			!sizeof($question_data['answers']) ||
 			!is_array($question_data['answers']))
 		{
 			return false;

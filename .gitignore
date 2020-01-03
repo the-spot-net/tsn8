@@ -46,8 +46,8 @@ store/*
 .idea/*
 /vendor
 
-/config.php
+config.php
 error_log
 images/resources
 /.htaccess
-/cache/
+cache

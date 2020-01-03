@@ -1,5 +1,4 @@
 Subject: Topic reply notification - "{TOPIC_TITLE}"
-List-Unsubscribe: <{U_STOP_WATCHING_TOPIC}>
 
 Hello {USERNAME},
 

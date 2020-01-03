@@ -169,7 +169,7 @@ abstract class captcha_abstract
 			}
 			while ($row = $db->sql_fetchrow($result));
 
-			if (count($sql_in))
+			if (sizeof($sql_in))
 			{
 				$sql = 'DELETE FROM ' . CONFIRM_TABLE . '
 					WHERE ' . $db->sql_in_set('session_id', $sql_in);

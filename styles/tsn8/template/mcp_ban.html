@@ -1,6 +1,8 @@
 <!-- INCLUDE mcp_header.html -->
 
-<script>
+<script type="text/javascript">
+// <![CDATA[
+
 	var ban_length = new Array();
 		ban_length[-1] = '';
 	var ban_reason = new Array();
@@ -9,12 +11,12 @@
 		ban_give_reason[-1] = '';
 
 	<!-- BEGIN bans -->
-		ban_length['{bans.BAN_ID}'] = '{{ bans.A_LENGTH }}';
+		ban_length['{bans.BAN_ID}'] = '{bans.A_LENGTH}';
 		<!-- IF bans.A_REASON -->
-			ban_reason['{bans.BAN_ID}'] = '{{ bans.REASON | e('js') }}';
+			ban_reason['{bans.BAN_ID}'] = '{bans.A_REASON}';
 		<!-- ENDIF -->
 		<!-- IF bans.A_GIVE_REASON -->
-			ban_give_reason['{bans.BAN_ID}'] = '{{ bans.GIVE_REASON | e('js') }}';
+			ban_give_reason['{bans.BAN_ID}'] = '{bans.A_GIVE_REASON}';
 		<!-- ENDIF -->
 	<!-- END bans -->
 
@@ -32,6 +34,8 @@
 			document.getElementById('unbangivereason').innerHTML = '';
 		}
 	}
+
+// ]]>
 </script>
 
 <form id="mcp_ban" method="post" action="{U_ACTION}">
@@ -70,7 +74,7 @@
 	<dl>
 		<dt><label for="banexclude0">{L_BAN_EXCLUDE}{L_COLON}</label><br /><span>{L_BAN_EXCLUDE_EXPLAIN}</span></dt>
 		<dd>
-			<label for="banexclude1"><input type="radio" name="banexclude" id="banexclude1" value="1" /> {L_YES}</label>
+			<label for="banexclude1"><input type="radio" name="banexclude" id="banexclude1" value="1" /> {L_YES}</label> 
 			<label for="banexclude0"><input type="radio" name="banexclude" id="banexclude0" value="0" checked="checked" /> {L_NO}</label>
 		</dd>
 	</dl>
@@ -81,7 +85,7 @@
 </div>
 
 <fieldset class="submit-buttons">
-	{S_HIDDEN_FIELDS}<input type="reset" value="{L_RESET}" name="reset" class="button2" />&nbsp;
+	{S_HIDDEN_FIELDS}<input type="reset" value="{L_RESET}" name="reset" class="button2" />&nbsp; 
 	<input type="submit" name="bansubmit" value="{L_SUBMIT}" class="button1" />
 	{S_FORM_TOKEN}
 </fieldset>
@@ -118,7 +122,7 @@
 	</div>
 
 	<fieldset class="submit-buttons">
-		{S_HIDDEN_FIELDS}<input type="reset" value="{L_RESET}" name="reset" class="button2" />&nbsp;
+		{S_HIDDEN_FIELDS}<input type="reset" value="{L_RESET}" name="reset" class="button2" />&nbsp; 
 		<input type="submit" name="unbansubmit" value="{L_SUBMIT}" class="button1" />
 	</fieldset>
 

@@ -50,8 +50,7 @@ class mssqlnative extends \phpbb\db\driver\mssql_base
 		$this->db_connect_id = sqlsrv_connect($this->server, array(
 			'Database' => $this->dbname,
 			'UID' => $this->user,
-			'PWD' => $sqlpassword,
-			'CharacterSet' => 'UTF-8'
+			'PWD' => $sqlpassword
 		));
 
 		return ($this->db_connect_id) ? $this->db_connect_id : $this->sql_error('');
@@ -268,7 +267,7 @@ class mssqlnative extends \phpbb\db\driver\mssql_base
 				unset($row['line2'], $row['line3']);
 			}
 		}
-		return ($row !== null) ? $row : false;
+		return (sizeof($row)) ? $row : false;
 	}
 
 	/**

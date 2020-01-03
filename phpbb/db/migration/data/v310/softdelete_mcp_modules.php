@@ -45,9 +45,7 @@ class softdelete_mcp_modules extends \phpbb\db\migration\migration
 				'MCP_QUEUE',
 				array(
 					'module_basename'	=> 'mcp_queue',
-					'module_langname'	=> 'MCP_QUEUE_DELETED_TOPICS',
-					'module_mode'		=> 'deleted_topics',
-					'module_auth'		=> 'aclf_m_approve',
+					'modes'				=> array('deleted_topics'),
 				),
 			)),
 			array('module.add', array(
@@ -55,9 +53,7 @@ class softdelete_mcp_modules extends \phpbb\db\migration\migration
 				'MCP_QUEUE',
 				array(
 					'module_basename'	=> 'mcp_queue',
-					'module_langname'	=> 'MCP_QUEUE_DELETED_POSTS',
-					'module_mode'		=> 'deleted_posts',
-					'module_auth'		=> 'aclf_m_approve',
+					'modes'				=> array('deleted_posts'),
 				),
 			)),
 		);

@@ -13,52 +13,41 @@
 
 namespace phpbb\feed;
 
-use phpbb\config\config;
-use phpbb\path_helper;
-use phpbb\textformatter\s9e\renderer;
-use phpbb\user;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
 /**
  * Class with some helpful functions used in feeds
  */
 class helper
 {
-	/** @var config */
+	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var ContainerInterface */
-	protected $container;
-
-	/** @var path_helper */
-	protected $path_helper;
-
-	/** @var renderer */
-	protected $renderer;
-
-	/** @var user */
+	/** @var \phpbb\user */
 	protected $user;
+
+	/** @var string */
+	protected $phpbb_root_path;
+
+	/** @var string */
+	protected $phpEx;
 
 	/**
 	 * Constructor
 	 *
-	 * @param	config				$config			Config object
-	 * @param	ContainerInterface	$container		Service container object
-	 * @param	path_helper			$path_helper 	Path helper object
-	 * @param	renderer			$renderer		TextFormatter renderer object
-	 * @param	user				$user			User object
+	 * @param	\phpbb\config\config	$config		Config object
+	 * @param	\phpbb\user		$user		User object
+	 * @param	string	$phpbb_root_path	Root path
+	 * @param	string	$phpEx				PHP file extension
 	 */
-	public function __construct(config $config, ContainerInterface $container, path_helper $path_helper, renderer $renderer, user $user)
+	public function __construct(\phpbb\config\config $config, \phpbb\user $user, $phpbb_root_path, $phpEx)
 	{
 		$this->config = $config;
-		$this->container = $container;
-		$this->path_helper = $path_helper;
-		$this->renderer = $renderer;
 		$this->user = $user;
+		$this->phpbb_root_path = $phpbb_root_path;
+		$this->phpEx = $phpEx;
 	}
 
 	/**
-	 * Returns the board url (and caches it in the function)
+	 * Run links through append_sid(), prepend generate_board_url() and remove session id
 	 */
 	public function get_board_url()
 	{
@@ -115,12 +104,16 @@ class helper
 			return '';
 		}
 
-		// Setup our own quote_helper to remove all attributes from quotes
-		$this->renderer->configure_quote_helper($this->container->get('feed.quote_helper'));
-
-		$this->renderer->set_smilies_path($this->get_board_url() . '/' . $this->config['smilies_path']);
+		// Prepare some bbcodes for better parsing
+		$content	= preg_replace("#\[quote(=&quot;.*?&quot;)?:$uid\]\s*(.*?)\s*\[/quote:$uid\]#si", "[quote$1:$uid]<br />$2<br />[/quote:$uid]", $content);
 
 		$content = generate_text_for_display($content, $uid, $bitfield, $options);
+
+		// Add newlines
+		$content = str_replace('<br />', '<br />' . "\n", $content);
+
+		// Convert smiley Relative paths to Absolute path, Windows style
+		$content = str_replace($this->phpbb_root_path . $this->config['smilies_path'], $this->get_board_url() . '/' . $this->config['smilies_path'], $content);
 
 		// Remove "Select all" link and mouse events
 		$content = str_replace('<a href="#" onclick="selectCode(this); return false;">' . $this->user->lang['SELECT_ALL_CODE'] . '</a>', '', $content);
@@ -159,7 +152,7 @@ class helper
 			$content .= implode('<br />', $post_attachments);
 
 			// Convert attachments' relative path to absolute path
-			$content = str_replace($this->path_helper->get_web_root_path() . 'download/file.' . $this->path_helper->get_php_ext(), $this->get_board_url() . '/download/file.' . $this->path_helper->get_php_ext(), $content);
+			$content = str_replace($this->phpbb_root_path . 'download/file.' . $this->phpEx, $this->get_board_url() . '/download/file.' . $this->phpEx, $content);
 		}
 
 		// Remove Comments from inline attachments [ia]

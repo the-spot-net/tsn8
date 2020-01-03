@@ -20,13 +20,6 @@ var phpbbAlertTimer = null;
 
 phpbb.isTouch = (window && typeof window.ontouchstart !== 'undefined');
 
-// Add ajax pre-filter to prevent cross-domain script execution
-$.ajaxPrefilter(function(s) {
-	if (s.crossDomain) {
-		s.contents.script = false;
-	}
-});
-
 /**
  * Display a loading screen
  *
@@ -34,34 +27,27 @@ $.ajaxPrefilter(function(s) {
  */
 phpbb.loadingIndicator = function() {
 	if (!$loadingIndicator) {
-		$loadingIndicator = $('<div />', {
-			'id': 'loading_indicator',
-			'class': 'loading_indicator'
+		$loadingIndicator = $('<div />', { 
+			id: 'loading_indicator', 
+			class: 'loading_indicator', 
 		});
 		$loadingIndicator.appendTo('#page-footer');
 	}
 
 	if (!$loadingIndicator.is(':visible')) {
 		$loadingIndicator.fadeIn(phpbb.alertTime);
-		// Wait 60 seconds and display an error if nothing has been returned by then.
+		// Wait fifteen seconds and display an error if nothing has been returned by then.
 		phpbb.clearLoadingTimeout();
 		phpbbAlertTimer = setTimeout(function() {
-			phpbb.showTimeoutMessage();
-		}, 60000);
+			var $alert = $('#phpbb_alert');
+
+			if ($loadingIndicator.is(':visible')) {
+				phpbb.alert($alert.attr('data-l-err'), $alert.attr('data-l-timeout-processing-req'));
+			}
+		}, 15000);
 	}
 
 	return $loadingIndicator;
-};
-
-/**
- * Show timeout message
- */
-phpbb.showTimeoutMessage = function () {
-	var $alert = $('#phpbb_alert');
-
-	if ($loadingIndicator.is(':visible')) {
-		phpbb.alert($alert.attr('data-l-err'), $alert.attr('data-l-timeout-processing-req'));
-	}
 };
 
 /**
@@ -186,7 +172,7 @@ phpbb.alert.close = function($alert, fadedark) {
 phpbb.confirm = function(msg, callback, fadedark) {
 	var $confirmDiv = $('#phpbb_confirm');
 	$confirmDiv.find('.alert_text').html(msg);
-	fadedark = typeof fadedark !== 'undefined' ? fadedark : true;
+	fadedark = fadedark || true;
 
 	$(document).on('keydown.phpbb.alert', function(e) {
 		if (e.keyCode === keymap.ENTER || e.keyCode === keymap.ESC) {
@@ -201,7 +187,9 @@ phpbb.confirm = function(msg, callback, fadedark) {
 	$confirmDiv.find('input[type="button"]').one('click.phpbb.confirmbox', function(e) {
 		var confirmed = this.name === 'confirm';
 
-		callback(confirmed);
+		if (confirmed) {
+			callback(true);
+		}
 		$confirmDiv.find('input[type="button"]').off('click.phpbb.confirmbox');
 		phpbb.alert.close($confirmDiv, fadedark || !confirmed);
 
@@ -942,9 +930,9 @@ phpbb.addAjaxCallback('alt_text', function() {
 	$anchor.each(function() {
 		var $this = $(this);
 		altText = $this.attr('data-alt-text');
-		$this.attr('data-alt-text', $.trim($this.text()));
-		$this.attr('title', altText);
-		$this.children('span').text(altText);
+		$this.attr('data-alt-text', $this.text());
+		$this.attr('title', $.trim(altText));
+		$this.text(altText);
 	});
 });
 
@@ -1338,7 +1326,6 @@ phpbb.toggleDropdown = function() {
 			$this.css({
 				marginLeft: 0,
 				left: 0,
-				marginRight: 0,
 				maxWidth: (windowWidth - 4) + 'px'
 			});
 
@@ -1650,7 +1637,7 @@ phpbb.lazyLoadAvatars = function loadAvatars() {
 	});
 };
 
-$(window).on('load', phpbb.lazyLoadAvatars);
+$(window).load(phpbb.lazyLoadAvatars);
 
 /**
 * Apply code editor to all textarea elements with data-bbcode attribute
@@ -1662,7 +1649,7 @@ $(function() {
 
 	phpbb.registerPageDropdowns();
 
-	$('[data-orientation]').each(function() {
+	$('#color_palette_placeholder').each(function() {
 		phpbb.registerPalette($(this));
 	});
 

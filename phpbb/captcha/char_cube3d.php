@@ -220,7 +220,7 @@ class char_cube3d
 	*/
 	function scale($vector, $length)
 	{
-		if (count($vector) == 2)
+		if (sizeof($vector) == 2)
 		{
 			return array($vector[0] * $length, $vector[1] * $length);
 		}

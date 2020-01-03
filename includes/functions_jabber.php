@@ -41,9 +41,6 @@ class jabber
 	var $username;
 	var $password;
 	var $use_ssl;
-	var $verify_peer;
-	var $verify_peer_name;
-	var $allow_self_signed;
 	var $resource = 'functions_jabber.phpbb.php';
 
 	var $enable_logging;
@@ -52,18 +49,8 @@ class jabber
 	var $features = array();
 
 	/**
-	* Constructor
-	*
-	* @param string $server Jabber server
-	* @param int $port Jabber server port
-	* @param string $username Jabber username or JID
-	* @param string $password Jabber password
-	* @param boold $use_ssl Use ssl
-	* @param bool $verify_peer Verify SSL certificate
-	* @param bool $verify_peer_name Verify Jabber peer name
-	* @param bool $allow_self_signed Allow self signed certificates
 	*/
-	function __construct($server, $port, $username, $password, $use_ssl = false, $verify_peer = true, $verify_peer_name = true, $allow_self_signed = false)
+	function jabber($server, $port, $username, $password, $use_ssl = false)
 	{
 		$this->connect_server		= ($server) ? $server : 'localhost';
 		$this->port					= ($port) ? $port : 5222;
@@ -84,9 +71,6 @@ class jabber
 
 		$this->password				= $password;
 		$this->use_ssl				= ($use_ssl && self::can_use_ssl()) ? true : false;
-		$this->verify_peer			= $verify_peer;
-		$this->verify_peer_name		= $verify_peer_name;
-		$this->allow_self_signed	= $allow_self_signed;
 
 		// Change port if we use SSL
 		if ($this->port == 5222 && $this->use_ssl)
@@ -111,7 +95,7 @@ class jabber
 	*/
 	static public function can_use_tls()
 	{
-		if (!@extension_loaded('openssl') || !function_exists('stream_socket_enable_crypto') || !function_exists('stream_get_meta_data') || !function_exists('stream_set_blocking') || !function_exists('stream_get_wrappers'))
+		if (!@extension_loaded('openssl') || !function_exists('stream_socket_enable_crypto') || !function_exists('stream_get_meta_data') || !function_exists('socket_set_blocking') || !function_exists('stream_get_wrappers'))
 		{
 			return false;
 		}
@@ -154,7 +138,7 @@ class jabber
 
 		$this->session['ssl'] = $this->use_ssl;
 
-		if ($this->open_socket($this->connect_server, $this->port, $this->use_ssl, $this->verify_peer, $this->verify_peer_name, $this->allow_self_signed))
+		if ($this->open_socket($this->connect_server, $this->port, $this->use_ssl))
 		{
 			$this->send("<?xml version='1.0' encoding='UTF-8' ?" . ">\n");
 			$this->send("<stream:stream to='{$this->server}' xmlns='jabber:client' xmlns:stream='http://etherx.jabber.org/streams' version='1.0'>\n");
@@ -207,7 +191,7 @@ class jabber
 	*/
 	function login()
 	{
-		if (!count($this->features))
+		if (!sizeof($this->features))
 		{
 			$this->add_to_log('Error: No feature information from server available.');
 			return false;
@@ -242,13 +226,10 @@ class jabber
 	* @param string $server host to connect to
 	* @param int $port port number
 	* @param bool $use_ssl use ssl or not
-	* @param bool $verify_peer verify ssl certificate
-	* @param bool $verify_peer_name verify peer name
-	* @param bool $allow_self_signed allow self-signed ssl certificates
 	* @access public
 	* @return bool
 	*/
-	function open_socket($server, $port, $use_ssl, $verify_peer, $verify_peer_name, $allow_self_signed)
+	function open_socket($server, $port, $use_ssl = false)
 	{
 		if (@function_exists('dns_get_record'))
 		{
@@ -259,26 +240,12 @@ class jabber
 			}
 		}
 
-		$options = array();
+		$server = $use_ssl ? 'ssl://' . $server : $server;
 
-		if ($use_ssl)
+		if ($this->connection = @fsockopen($server, $port, $errorno, $errorstr, $this->timeout))
 		{
-			$remote_socket = 'ssl://' . $server . ':' . $port;
-
-			// Set ssl context options, see http://php.net/manual/en/context.ssl.php
-			$options['ssl'] = array('verify_peer' => $verify_peer, 'verify_peer_name' => $verify_peer_name, 'allow_self_signed' => $allow_self_signed);
-		}
-		else
-		{
-			$remote_socket = $server . ':' . $port;
-		}
-
-		$socket_context = stream_context_create($options);
-
-		if ($this->connection = @stream_socket_client($remote_socket, $errorno, $errorstr, $this->timeout, STREAM_CLIENT_CONNECT, $socket_context))
-		{
-			stream_set_blocking($this->connection, 0);
-			stream_set_timeout($this->connection, 60);
+			socket_set_blocking($this->connection, 0);
+			socket_set_timeout($this->connection, 60);
 
 			return true;
 		}
@@ -293,7 +260,7 @@ class jabber
 	*/
 	function get_log()
 	{
-		if ($this->enable_logging && count($this->log_array))
+		if ($this->enable_logging && sizeof($this->log_array))
 		{
 			return implode("<br /><br />", $this->log_array);
 		}
@@ -400,14 +367,14 @@ class jabber
 	*/
 	function response($xml)
 	{
-		if (!is_array($xml) || !count($xml))
+		if (!is_array($xml) || !sizeof($xml))
 		{
 			return false;
 		}
 
 		// did we get multiple elements? do one after another
 		// array('message' => ..., 'presence' => ...)
-		if (count($xml) > 1)
+		if (sizeof($xml) > 1)
 		{
 			foreach ($xml as $key => $value)
 			{
@@ -419,7 +386,7 @@ class jabber
 		{
 			// or even multiple elements of the same type?
 			// array('message' => array(0 => ..., 1 => ...))
-			if (count(reset($xml)) > 1)
+			if (sizeof(reset($xml)) > 1)
 			{
 				foreach (reset($xml) as $value)
 				{
@@ -595,7 +562,7 @@ class jabber
 			case 'proceed':
 				// continue switching to TLS
 				$meta = stream_get_meta_data($this->connection);
-				stream_set_blocking($this->connection, 1);
+				socket_set_blocking($this->connection, 1);
 
 				if (!stream_socket_enable_crypto($this->connection, true, STREAM_CRYPTO_METHOD_TLS_CLIENT))
 				{
@@ -603,7 +570,7 @@ class jabber
 					return false;
 				}
 
-				stream_set_blocking($this->connection, $meta['blocked']);
+				socket_set_blocking($this->connection, $meta['blocked']);
 				$this->session['tls'] = true;
 
 				// new stream
@@ -858,14 +825,14 @@ class jabber
 			array_push($children, $vals[$i]['value']);
 		}
 
-		while (++$i < count($vals))
+		while (++$i < sizeof($vals))
 		{
 			switch ($vals[$i]['type'])
 			{
 				case 'open':
 
 					$tagname = (isset($vals[$i]['tag'])) ? $vals[$i]['tag'] : '';
-					$size = (isset($children[$tagname])) ? count($children[$tagname]) : 0;
+					$size = (isset($children[$tagname])) ? sizeof($children[$tagname]) : 0;
 
 					if (isset($vals[$i]['attributes']))
 					{
@@ -883,7 +850,7 @@ class jabber
 				case 'complete':
 
 					$tagname = $vals[$i]['tag'];
-					$size = (isset($children[$tagname])) ? count($children[$tagname]) : 0;
+					$size = (isset($children[$tagname])) ? sizeof($children[$tagname]) : 0;
 					$children[$tagname][$size]['#'] = (isset($vals[$i]['value'])) ? $vals[$i]['value'] : array();
 
 					if (isset($vals[$i]['attributes']))

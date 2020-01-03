@@ -1,13 +1,9 @@
-.attach-panel-multi {
+#attach-panel-multi {
 	display: none;
 	margin-bottom: 1em;
 }
 
-.attach-row-tpl {
-	display: none;
-}
-
-.file-list td {
+#file-list td {
 	vertical-align: middle;
 }
 
@@ -17,11 +13,6 @@
 
 .attach-comment {
 	width: 30%;
-}
-
-.attach-comment .inputbox {
-	resize: vertical;
-	width: 100%;
 }
 
 .attach-filesize {
@@ -41,11 +32,11 @@
 	float: right;
 }
 
-.nojs .file-inline-bbcode {
+#attach-row-tpl, .nojs .file-inline-bbcode {
 	display: none;
 }
 
-.file-total-progress {
+#file-total-progress {
 	height: 2px;
 	display: block;
 	position: relative;
@@ -59,7 +50,7 @@
 	width: 50px;
 }
 
-.file-progress-bar, .file-total-progress-bar {
+.file-progress-bar, #file-total-progress-bar {
 	background-color: green;
 	display: block;
 	height: 100%;
