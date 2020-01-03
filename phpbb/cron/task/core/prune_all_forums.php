@@ -55,26 +55,21 @@ class prune_all_forums extends \phpbb\cron\task\base
 			include($this->phpbb_root_path . 'includes/functions_admin.' . $this->php_ext);
 		}
 
-		$sql = 'SELECT forum_id, prune_next, enable_prune, prune_days, prune_viewed, enable_shadow_prune, prune_shadow_days, prune_shadow_freq, prune_shadow_next, forum_flags, prune_freq
-			FROM ' . FORUMS_TABLE;
+		$sql = 'SELECT forum_id, prune_next, enable_prune, prune_days, prune_viewed, forum_flags, prune_freq
+			FROM ' . FORUMS_TABLE . "
+			WHERE enable_prune = 1
+				AND prune_next < " . time();
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			if ($row['enable_prune'] && $row['prune_next'] < time())
+			if ($row['prune_days'])
 			{
-				if ($row['prune_days'])
-				{
-					auto_prune($row['forum_id'], 'posted', $row['forum_flags'], $row['prune_days'], $row['prune_freq']);
-				}
-
-				if ($row['prune_viewed'])
-				{
-					auto_prune($row['forum_id'], 'viewed', $row['forum_flags'], $row['prune_viewed'], $row['prune_freq']);
-				}
+				auto_prune($row['forum_id'], 'posted', $row['forum_flags'], $row['prune_days'], $row['prune_freq']);
 			}
-			if ($row['enable_shadow_prune'] && $row['prune_shadow_next'] < time() && $row['prune_shadow_days'])
+
+			if ($row['prune_viewed'])
 			{
-				auto_prune($row['forum_id'], 'shadow', $row['forum_flags'], $row['prune_shadow_days'], $row['prune_shadow_freq']);
+				auto_prune($row['forum_id'], 'viewed', $row['forum_flags'], $row['prune_viewed'], $row['prune_freq']);
 			}
 		}
 		$this->db->sql_freeresult($result);

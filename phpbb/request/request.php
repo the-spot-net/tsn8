@@ -150,6 +150,8 @@ class request implements \phpbb\request\request_interface
 			return;
 		}
 
+		$this->type_cast_helper->add_magic_quotes($value);
+
 		// setting to null means unsetting
 		if ($value === null)
 		{
@@ -166,6 +168,12 @@ class request implements \phpbb\request\request_interface
 			{
 				$GLOBALS[$this->super_globals[$super_global]][$var_name] = $value;
 			}
+		}
+
+		if (!$this->super_globals_disabled())
+		{
+			unset($GLOBALS[$this->super_globals[$super_global]][$var_name]);
+			$GLOBALS[$this->super_globals[$super_global]][$var_name] = $value;
 		}
 	}
 

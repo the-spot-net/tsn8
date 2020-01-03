@@ -175,7 +175,7 @@ class admin_activate_user extends \phpbb\notification\type\base
 	/**
 	* {@inheritdoc}
 	*/
-	public function create_insert_array($user, $pre_create_data = array())
+	public function create_insert_array($user, $pre_create_data)
 	{
 		$this->set_data('user_actkey', $user['user_actkey']);
 		$this->notification_time = $user['user_regdate'];

@@ -442,7 +442,7 @@ class permission implements \phpbb\db\migration\tool\tool_interface
 						}
 					);
 
-					if (count($auth_option))
+					if (sizeof($auth_option))
 					{
 						return $this->permission_set($role_name, $auth_option, 'role', $has_permission);
 					}

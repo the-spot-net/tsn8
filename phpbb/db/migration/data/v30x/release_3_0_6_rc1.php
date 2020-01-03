@@ -153,10 +153,7 @@ class release_3_0_6_rc1 extends \phpbb\db\migration\migration
 				'ACP_BOARD_CONFIGURATION',
 				array(
 					'module_basename'	=> 'acp_board',
-					'module_langname'	=> 'ACP_FEED_SETTINGS',
-					'module_mode'		=> 'feed',
-					'module_auth'		=> 'acl_a_board',
-					'after'				=> array('signature', 'ACP_SIGNATURE_SETTINGS'),
+					'modes'				=> array('feed'),
 				),
 			)),
 			array('module.add', array(
@@ -164,11 +161,7 @@ class release_3_0_6_rc1 extends \phpbb\db\migration\migration
 				'ACP_CAT_USERS',
 				array(
 					'module_basename'	=> 'acp_users',
-					'module_langname'	=> 'ACP_USER_WARNINGS',
-					'module_mode'		=> 'warnings',
-					'module_auth'		=> 'acl_a_user',
-					'module_display'	=> false,
-					'after'				=> array('feedback', 'ACP_USER_FEEDBACK'),
+					'modes'				=> array('warnings'),
 				),
 			)),
 			array('module.add', array(
@@ -176,9 +169,7 @@ class release_3_0_6_rc1 extends \phpbb\db\migration\migration
 				'ACP_SERVER_CONFIGURATION',
 				array(
 					'module_basename'	=> 'acp_send_statistics',
-					'module_langname'	=> 'ACP_SEND_STATISTICS',
-					'module_mode'		=> 'send_statistics',
-					'module_auth'		=> 'acl_a_server',
+					'modes'				=> array('send_statistics'),
 				),
 			)),
 			array('module.add', array(
@@ -186,10 +177,7 @@ class release_3_0_6_rc1 extends \phpbb\db\migration\migration
 				'ACP_FORUM_BASED_PERMISSIONS',
 				array(
 					'module_basename'	=> 'acp_permissions',
-					'module_langname'	=> 'ACP_FORUM_PERMISSIONS_COPY',
-					'module_mode'		=> 'setting_forum_copy',
-					'module_auth'		=> 'acl_a_fauth && acl_a_authusers && acl_a_authgroups && acl_a_mauth',
-					'after'				=> array('setting_forum_local', 'ACP_FORUM_PERMISSIONS'),
+					'modes'				=> array('setting_forum_copy'),
 				),
 			)),
 			array('module.add', array(
@@ -197,29 +185,7 @@ class release_3_0_6_rc1 extends \phpbb\db\migration\migration
 				'MCP_REPORTS',
 				array(
 					'module_basename'	=> 'mcp_pm_reports',
-					'module_langname'	=> 'MCP_PM_REPORTS_OPEN',
-					'module_mode'		=> 'pm_reports',
-					'module_auth'		=> 'acl_m_pm_report',
-				),
-			)),
-			array('module.add', array(
-				'mcp',
-				'MCP_REPORTS',
-				array(
-					'module_basename'	=> 'mcp_pm_reports',
-					'module_langname'	=> 'MCP_PM_REPORTS_CLOSED',
-					'module_mode'		=> 'pm_reports_closed',
-					'module_auth'		=> 'acl_m_pm_report',
-				),
-			)),
-			array('module.add', array(
-				'mcp',
-				'MCP_REPORTS',
-				array(
-					'module_basename'	=> 'mcp_pm_reports',
-					'module_langname'	=> 'MCP_PM_REPORT_DETAILS',
-					'module_mode'		=> 'pm_report_details',
-					'module_auth'		=> 'acl_m_pm_report',
+					'modes'				=> array('pm_reports','pm_reports_closed','pm_report_details'),
 				),
 			)),
 			array('custom', array(array(&$this, 'add_newly_registered_group'))),

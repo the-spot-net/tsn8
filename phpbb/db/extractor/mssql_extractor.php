@@ -132,14 +132,14 @@ class mssql_extractor extends base_extractor
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			if (!count($rows))
+			if (!sizeof($rows))
 			{
 				$sql_data .= "ALTER TABLE [$table_name] WITH NOCHECK ADD\n";
 				$sql_data .= "\tCONSTRAINT [{$row['CONSTRAINT_NAME']}] PRIMARY KEY  CLUSTERED \n\t(\n";
 			}
 			$rows[] = "\t\t[{$row['COLUMN_NAME']}]";
 		}
-		if (count($rows))
+		if (sizeof($rows))
 		{
 			$sql_data .= implode(",\n", $rows);
 			$sql_data .= "\n\t)  ON [PRIMARY] \nGO\n";

@@ -44,7 +44,7 @@ class phpbb_hook
 	*
 	* @param array $valid_hooks array containing the hookable functions/methods
 	*/
-	function __construct($valid_hooks)
+	function phpbb_hook($valid_hooks)
 	{
 		foreach ($valid_hooks as $_null => $method)
 		{

@@ -13,7 +13,7 @@
 
 namespace phpbb\textformatter\s9e;
 
-use s9e\TextFormatter\Parser\AttributeFilters\UrlFilter;
+use s9e\TextFormatter\Parser\BuiltInFilters;
 use s9e\TextFormatter\Parser\Logger;
 
 /**
@@ -142,7 +142,6 @@ class parser implements \phpbb\textformatter\parser_interface
 	public function disable_smilies()
 	{
 		$this->parser->disablePlugin('Emoticons');
-		$this->parser->disablePlugin('Emoji');
 	}
 
 	/**
@@ -184,7 +183,6 @@ class parser implements \phpbb\textformatter\parser_interface
 	public function enable_smilies()
 	{
 		$this->parser->enablePlugin('Emoticons');
-		$this->parser->enablePlugin('Emoji');
 	}
 
 	/**
@@ -196,7 +194,7 @@ class parser implements \phpbb\textformatter\parser_interface
 	public function get_errors()
 	{
 		$errors = array();
-		foreach ($this->parser->getLogger()->getLogs() as $entry)
+		foreach ($this->parser->getLogger()->get() as $entry)
 		{
 			list(, $msg, $context) = $entry;
 
@@ -365,7 +363,7 @@ class parser implements \phpbb\textformatter\parser_interface
 	static public function filter_img_url($url, array $url_config, Logger $logger, $max_height, $max_width)
 	{
 		// Validate the URL
-		$url = UrlFilter::filter($url, $url_config, $logger);
+		$url = BuiltInFilters::filterUrl($url, $url_config, $logger);
 		if ($url === false)
 		{
 			return false;

@@ -130,17 +130,10 @@ phpbb.positionTooltip = function ($element) {
 	$element = $element.parent();
 	offset = $element.offset();
 
-	if ($('body').hasClass('rtl')) {
-		$('#_tooltip_container').css({
-			top: offset.top + 30,
-			left: offset.left + 255
-		});
-	} else {
-		$('#_tooltip_container').css({
-			top: offset.top + 30,
-			left: offset.left - 205
-		});
-	}
+	$('#_tooltip_container').css({
+		top: offset.top + 30,
+		left: offset.left - 205
+	});
 };
 
 /**

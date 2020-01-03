@@ -227,22 +227,6 @@ class oauth extends \phpbb\auth\provider\base
 			$row = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
 
-			/**
-			* Event is triggered before check if provider is already associated with an account
-			*
-			* @event core.oauth_login_after_check_if_provider_id_has_match
-			* @var	array									row		User row
-			* @var	array									data	Provider data
-			* @var	\OAuth\Common\Service\ServiceInterface	service	OAuth service
-			* @since 3.2.3-RC1
-			*/
-			$vars = array(
-				'row',
-				'data',
-				'service',
-			);
-			extract($this->dispatcher->trigger_event('core.oauth_login_after_check_if_provider_id_has_match', compact($vars)));
-
 			if (!$row)
 			{
 				// The user does not yet exist, ask to link or create profile
@@ -651,7 +635,7 @@ class oauth extends \phpbb\auth\provider\base
 
 		$oauth_user_ids = array();
 
-		if ($rows !== false && count($rows))
+		if ($rows !== false && sizeof($rows))
 		{
 			foreach ($rows as $row)
 			{

@@ -17,12 +17,7 @@ class auth_provider_oauth extends \phpbb\db\migration\migration
 {
 	public function effectively_installed()
 	{
-		return $this->db_tools->sql_table_exists($this->table_prefix . 'oauth_tokens');
-	}
-
-	static public function depends_on()
-	{
-		return array('\phpbb\db\migration\data\v30x\release_3_0_0');
+		return $this->db_tools->sql_table_exists($this->table_prefix . 'auth_provider_oauth');
 	}
 
 	public function update_schema()
@@ -74,9 +69,7 @@ class auth_provider_oauth extends \phpbb\db\migration\migration
 				'UCP_PROFILE',
 				array(
 					'module_basename'	=> 'ucp_auth_link',
-					'module_langname'	=> 'UCP_AUTH_LINK_MANAGE',
-					'module_mode'		=> 'auth_link',
-					'module_auth'		=> 'authmethod_oauth',
+					'modes'				=> array('auth_link'),
 				),
 			)),
 		);

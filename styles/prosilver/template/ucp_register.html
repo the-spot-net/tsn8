@@ -1,6 +1,7 @@
 <!-- INCLUDE overall_header.html -->
 
-<script>
+<script type="text/javascript">
+// <![CDATA[
 	/**
 	* Change language
 	*/
@@ -10,6 +11,7 @@
 		document.forms['register'].change_lang.value = lang_iso;
 		document.forms['register'].submit.click();
 	}
+// ]]>
 </script>
 
 <form id="register" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>

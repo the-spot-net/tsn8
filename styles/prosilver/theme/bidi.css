@@ -13,10 +13,6 @@
 	text-align: left;
 }
 
-.rtl p.jumpbox-return {
-	float: right;
-}
-
 .rtl div.rules ul {
 	margin-left: 0;
 	margin-right: 20px;
@@ -120,11 +116,6 @@
 
 .rtl .dropdown-extended .header .header_settings, .rtl .dropdown-container-right {
 	float: left;
-}
-
-.rtl .jumpbox .dropdown-contents a {
-	margin-right: 0;
-	margin-left: 20px;
 }
 
 /* Notifications
@@ -239,10 +230,6 @@
 
 /* Pagination
 ---------------------------------------- */
-.rtl .page-number {
-	float: left;
-}
-
 .rtl .pagination {
 	text-align: left;
 	float: left;
@@ -272,6 +259,11 @@
 .pagination li.page-jump {
 	margin-left: 5px;
 	margin-right: 0;
+}
+
+.rtl .topic-poster {
+	float: right;
+	padding-left: 0.5em;
 }
 
 /* Action Bar styles
@@ -455,10 +447,6 @@ li.breadcrumbs span:first-child > a {
 
 /* Post body styles
 ----------------------------------------*/
-.rtl .date {
-	float: left;
-}
-
 .rtl .postbody, .rtl .postbody h3 {
 	float: right;
 }
@@ -509,6 +497,7 @@ li.breadcrumbs span:first-child > a {
 /* Quote block */
 .rtl blockquote {
 	margin: 0.5em 25px 0 1px;
+	background-position: 99% 8px;
 }
 
 .rtl blockquote blockquote {
@@ -518,11 +507,8 @@ li.breadcrumbs span:first-child > a {
 
 .rtl blockquote cite {
 	/* Username/source of quoter */
+	margin-right: 20px;
 	margin-left: 0;
-}
-
-.rtl blockquote cite:before, .rtl .uncited:before {
-	padding-left: 5px;
 }
 
 .rtl blockquote .codebox {
@@ -614,11 +600,10 @@ li.breadcrumbs span:first-child > a {
 */
 
 .rtl .caret {
-	border-right: 1px solid;
-	border-right-color: inherit;
-	border-left: none;
-	right: 6px;
+	float: right;
 }
+
+
 
 /* Post control buttons
 --------------------------------------------- */
@@ -934,8 +919,7 @@ li.breadcrumbs span:first-child > a {
 	float: right;
 }
 
-.rtl .button-search-end {
-	border-radius: 4px 0 0 4px;
+.button-search-end {
 	border-left-width: 1px;
 	border-right-width: 0;
 }
@@ -1080,11 +1064,5 @@ li.breadcrumbs span:first-child > a {
 
 	.captcha-panel dd.captcha {
 		margin-right: 0;
-	}
-	
-	.rtl p.responsive-center {
-		float: none;
-		text-align: center;
-		margin-bottom: 5px;
 	}
 }

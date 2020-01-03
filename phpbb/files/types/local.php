@@ -86,7 +86,7 @@ class local extends base
 
 		// PHP Upload file size check
 		$file = $this->check_upload_size($file);
-		if (count($file->error))
+		if (sizeof($file->error))
 		{
 			return $file;
 		}
