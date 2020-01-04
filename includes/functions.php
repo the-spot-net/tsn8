@@ -4196,7 +4196,6 @@ function phpbb_get_group_avatar($group_row, $alt = 'GROUP_AVATAR', $ignore_confi
 *
 * @return string Avatar html
 */
-// TODO - tsn8 - Refactor this into the extension: core.get_avatar_after
 function phpbb_get_avatar($row, $alt, $ignore_config = false, $lazy = false, $add_link = false)
 {
 	global $user, $config;
@@ -4228,40 +4227,6 @@ function phpbb_get_avatar($row, $alt, $ignore_config = false, $lazy = false, $ad
 		$avatar_data['src'] = '';
 	}
 
-	// tsn8 add [[ BEGIN ]]
-	$imgArray = array();
-	// check for remote file...
-	if ($row['avatar_type'] == 'avatar.driver.remote') {
-		// Test for image existance
-		$imgArray = @getimagesize($avatar_data['src']);
-	}
-
-	// If remote doesn't exist, or no avatar for user, get default
-	if (($row['avatar_type'] == 'avatar.driver.remote' && empty($imgArray[0])) || empty($avatar_data['src'])) {
-		// Set default image info; TODO Put this info in the database via extension
-		$row['avatar_type'] = 'avatar.driver.local';
-		$row['avatar'] = 'novelties/tsn_icon_avatar.png';
-		$row['avatar_width'] = $row['avatar_width'] ?: 100;
-		$row['avatar_height'] = $row['avatar_height'] ?: 100;
-
-		// Run through the proper channels again with local file...
-		$driver = $phpbb_avatar_manager->get_driver($row['avatar_type'], $ignore_config);
-		if ($driver) {
-			$avatar_data = $driver->get_data($row, $ignore_config);
-		} else {
-			$avatar_data['src'] = '';
-		}
-
-		// Set all dimensions to the largest side;
-		// if via tsn8 extension it will have been scaled/resized to the max for the feature
-		// if otherwise, it will be default image size - for avatars that is 100x100
-		$avatar_data['width'] = $avatar_data['height'] = ($row['avatar_width'] >= $row['avatar_height']) ? $row['avatar_width'] : $row['avatar_height'];
-	}
-
-	// Set the title text...
-	$avatar_data['title'] = (!empty($row['avatar_title'])) ? $row['avatar_title'] : '';
-	// tsn8 add [[ END ]]
-
 	if (empty($html) && !empty($avatar_data['src']))
 	{
 		if ($lazy)
@@ -4288,9 +4253,6 @@ function phpbb_get_avatar($row, $alt, $ignore_config = false, $lazy = false, $ad
 		$html = '<img class="avatar" ' . $src . ' ' .
 			($avatar_data['width'] ? ('width="' . $avatar_data['width'] . '" ') : '') .
 			($avatar_data['height'] ? ('height="' . $avatar_data['height'] . '" ') : '') .
-			// tsn8 add [[ BEGIN ]]
-			'title="' . (!empty($avatar_data['title']) ? $avatar_data['title'] : '') . '" ' .
-			// tsn8 add [[ END ]]
 			'alt="' . ((!empty($user->lang[$alt])) ? $user->lang[$alt] : $alt) . '" />';
 	}
 
