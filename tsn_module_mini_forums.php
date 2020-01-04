@@ -48,7 +48,7 @@ if ($auth->acl_gets('a_group', 'a_groupadd', 'a_groupdel')) {
 }
 $result = $db->sql_query($sql);
 
-$legend = array();
+$legend = [];
 while ($row = $db->sql_fetchrow($result)) {
     $colour_text = ($row['group_colour']) ? ' style="color:#' . $row['group_colour'] . '"' : '';
     $group_name = ($row['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $row['group_name']] : $row['group_name'];
@@ -65,10 +65,8 @@ $db->sql_freeresult($result);
 $legend = implode($user->lang['COMMA_SEPARATOR'], $legend);
 
 // Generate birthday list if required ...
-$birthday_list = array();
-if ($config['load_birthdays'] && $config['allow_birthdays'] && $auth->acl_gets('u_viewprofile', 'a_user', 'a_useradd',
-        'a_userdel')
-) {
+$birthday_list = [];
+if ($config['load_birthdays'] && $config['allow_birthdays'] && $auth->acl_gets('u_viewprofile', 'a_user', 'a_useradd', 'a_userdel')) {
     $time = $user->create_datetime();
     $now = phpbb_gmgetdate($time->getTimestamp() + $time->getOffset());
 
@@ -92,10 +90,10 @@ if ($config['load_birthdays'] && $config['allow_birthdays'] && $auth->acl_gets('
         $birthday_year = (int)substr($row['user_birthday'], -4);
         $birthday_age = ($birthday_year) ? max(0, $now['year'] - $birthday_year) : '';
 
-        $template->assign_block_vars('birthdays', array(
+        $template->assign_block_vars('birthdays', [
             'USERNAME' => $birthday_username,
             'AGE'      => $birthday_age,
-        ));
+        ]);
 
         // For 3.0 compatibility
         if ($age = (int)substr($row['user_birthday'], -4)) {
@@ -108,17 +106,17 @@ if ($config['load_birthdays'] && $config['allow_birthdays'] && $auth->acl_gets('
 $online_users = obtain_users_online();
 
 // Assign index specific vars
-$template->assign_vars(array(
+$template->assign_vars([
         'TOTAL_POSTS'             => $user->lang('TOTAL_POSTS_COUNT', (int)$config['num_posts']),
         'TOTAL_FORUM_POSTS'       => (int)$config['num_posts'],
         'TOTAL_TOPICS'            => $user->lang('TOTAL_TOPICS', (int)$config['num_topics']),
         'TOTAL_FORUM_TOPICS'      => (int)$config['num_topics'],
         'TOTAL_USERS'             => $user->lang('TOTAL_USERS', (int)$config['num_users']),
         'TOTAL_FORUM_USERS'       => (int)$config['num_users'],
-        'TOTAL_USERS_VALUE'       => $online_users['total_online'],
-        'VISIBLE_USERS_VALUE'     => $online_users['visible_online'],
-        'HIDDEN_USERS_VALUE'      => $online_users['hidden_online'],
-        'GUEST_USERS_VALUE'       => $online_users['guests_online'],
+        'TOTAL_USERS_VALUE'       => $online_users['total_online'],// DONE
+        'VISIBLE_USERS_VALUE'     => $online_users['visible_online'],// DONE
+        'HIDDEN_USERS_VALUE'      => $online_users['hidden_online'],// DONE
+        'GUEST_USERS_VALUE'       => $online_users['guests_online'],// DONE
         'NEWEST_USER'             => $user->lang('NEWEST_USER',
             get_username_string('full', $config['newest_user_id'], $config['newest_username'],
                 $config['newest_user_colour'])),
@@ -139,29 +137,28 @@ $template->assign_vars(array(
         'U_MARK_FORUMS'           => ($user->data['is_registered'] || $config['load_anon_lastread']) ? append_sid("{$phpbb_root_path}index.$phpEx",
             'hash=' . generate_link_hash('global') . '&amp;mark=forums&amp;mark_time=' . time()) : '',
         'U_MCP'                   => ($auth->acl_get('m_') || $auth->acl_getf_global('m_')) ? append_sid("{$phpbb_root_path}mcp.$phpEx",
-            'i=main&amp;mode=front', true, $user->session_id) : ''
-    )
+            'i=main&amp;mode=front', true, $user->session_id) : '',
+    ]
 );
 
 $page_title = ($config['board_index_text'] !== '') ? $config['board_index_text'] : $user->lang['INDEX'];
 
 /**
  * You can use this event to modify the page title and load data for the index
- *
  * @event core.index_modify_page_title
  * @var    string    page_title        Title of the index page
  * @since 3.1.0-a1
  */
-$vars = array('page_title');
+$vars = ['page_title'];
 extract($phpbb_dispatcher->trigger_event('core.index_modify_page_title', compact($vars)));
 
 // Output page
 if ($showOutput) {
     page_header($page_title, true);
 
-    $template->set_filenames(array(
-            'body' => 'modules/mini_forums.html'
-        )
+    $template->set_filenames([
+            'body' => 'modules/mini_forums.html',
+        ]
     );
 
     page_footer();
