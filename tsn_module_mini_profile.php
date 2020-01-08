@@ -47,7 +47,7 @@ $template->assign_var('S_IN_MEMBERLIST', true);
 // Grab data
 $user_id = $request->variable('u', ANONYMOUS);
 $username = $request->variable('un', '', true);
-
+/*
 // Can this user view profiles/memberlist?
 if (!$auth->acl_gets('u_viewprofile', 'a_user', 'a_useradd', 'a_userdel')) {
 
@@ -59,7 +59,7 @@ if (!$auth->acl_gets('u_viewprofile', 'a_user', 'a_useradd', 'a_userdel')) {
     }
 
     login_box('', ((isset($user->lang['LOGIN_EXPLAIN_' . strtoupper($mode)])) ? $user->lang['LOGIN_EXPLAIN_' . strtoupper($mode)] : $user->lang['LOGIN_EXPLAIN_MEMBERLIST']));
-}
+}*/
 
 // Display a profile
 if ($user_id == ANONYMOUS && !$username) {
