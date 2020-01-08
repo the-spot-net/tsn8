@@ -46,7 +46,7 @@ $return_chars = request_var('ch', ($topic_id) ? -1 : 300);
 $search_forum = request_var('fid', array(0));
 
 // Start off checking if this feature is enabled...
-if(!$config['tsn8_activate_newposts']) {
+if(!$config['tsn_enable_newposts']) {
 	echo '';
 	exit;
 }
