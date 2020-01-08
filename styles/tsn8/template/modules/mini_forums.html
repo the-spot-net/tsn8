@@ -18,7 +18,7 @@
 							<div class="gm-row gt-row gd-row">
 								<div class="gm-columns gt-columns gd-columns gm-1of5 gt-1of5 gd-1of5">&nbsp;</div>
 								<div class="gm-columns gt-columns gd-columns gm-3of5 gt-3of5 gd-3of5 align_center">
-									<input type="text" name="username" id="username" size="10" class="inputbox" title="{L_USERNAME}"/>
+									<input type="text" tabindex="1" name="username" id="username" size="25" value="{USERNAME}" class="inputbox autowidth" />
 								</div>
 								<div class="gm-columns gt-columns gd-columns gm-1of5 gt-1of5 gd-1of5">&nbsp;</div>
 							</div>
@@ -32,12 +32,13 @@
 							<div class="gm-row gt-row gd-row">
 								<div class="gm-columns gt-columns gd-columns gm-1of5 gt-1of5 gd-1of5">&nbsp;</div>
 								<div class="gm-columns gt-columns gd-columns gm-3of5 gt-3of5 gd-3of5 align_center">
-									<input type="password" name="password" id="password" size="10" class="inputbox" title="{L_PASSWORD}"/>
+									<input type="password" tabindex="2" id="password" name="password" size="25" class="inputbox autowidth" autocomplete="off" />
 								</div>
 								<div class="gm-columns gt-columns gd-columns gm-1of5 gt-1of5 gd-1of5">
 									<input type="submit" name="login" value="" role="button" class="tsn8_icon tsn8_icon_right_round_blue" style="border:0 transparent;"/>
 									{S_MYSPOT_LOGIN_REDIRECT}
 									{S_FORM_TOKEN_LOGIN}
+									{S_HIDDEN_FIELDS}
 								</div>
 							</div>
 							<!-- IF S_AUTOLOGIN_ENABLED -->
